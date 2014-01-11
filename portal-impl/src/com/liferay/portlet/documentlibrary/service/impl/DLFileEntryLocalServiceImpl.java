@@ -244,7 +244,7 @@ public class DLFileEntryLocalServiceImpl
 		// Folder
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			dlFolderLocalService.setLastPostDate(
+			dlFolderLocalService.updateLastPostDate(
 				dlFileEntry.getFolderId(), dlFileEntry.getModifiedDate());
 		}
 
@@ -385,7 +385,7 @@ public class DLFileEntryLocalServiceImpl
 			if (dlFileEntry.getFolderId() !=
 					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-				dlFolderLocalService.setLastPostDate(
+				dlFolderLocalService.updateLastPostDate(
 					dlFileEntry.getFolderId(),
 					latestDLFileVersion.getModifiedDate());
 			}
@@ -2272,7 +2272,7 @@ public class DLFileEntryLocalServiceImpl
 				(dlFileEntry.getFolderId() !=
 					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 
-				dlFolderLocalService.setLastPostDate(
+				dlFolderLocalService.updateLastPostDate(
 					dlFileEntry.getFolderId(),
 					serviceContext.getModifiedDate(now));
 			}
