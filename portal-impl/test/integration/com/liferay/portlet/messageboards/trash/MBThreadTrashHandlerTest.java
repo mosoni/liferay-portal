@@ -219,6 +219,14 @@ public class MBThreadTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 	@Override
 	protected BaseModel<?> getParentBaseModel(
+			Group group, long parentModelId, ServiceContext serviceContext)
+		throws Exception {
+
+		return MBTestUtil.addCategory(group.getGroupId(), parentModelId);
+	}
+
+	@Override
+	protected BaseModel<?> getParentBaseModel(
 			Group group, ServiceContext serviceContext)
 		throws Exception {
 
