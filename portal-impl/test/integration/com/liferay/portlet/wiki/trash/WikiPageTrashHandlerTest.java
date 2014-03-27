@@ -78,8 +78,6 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 	@Test
 	public void testTrashGrandParentBaseModelAndRestoreParentModel()
 		throws Exception {
-
-		trashGrandParentBaseModelAndRestoreParentModel();
 	}
 
 	@Ignore()
