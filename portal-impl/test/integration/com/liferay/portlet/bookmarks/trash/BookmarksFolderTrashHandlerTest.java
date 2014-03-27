@@ -76,15 +76,6 @@ public class BookmarksFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 	@Ignore()
 	@Override
 	@Test
-	public void testTrashGrandParentBaseModelAndRestoreParentModel()
-		throws Exception {
-
-		trashGrandParentBaseModelAndRestoreParentModel();
-	}
-
-	@Ignore()
-	@Override
-	@Test
 	public void testTrashMyBaseModel() throws Exception {
 	}
 
@@ -186,13 +177,22 @@ public class BookmarksFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 	@Override
 	protected BaseModel<?> getParentBaseModel(
-			Group group, ServiceContext serviceContext)
+			Group group, long parentBaseModelId, ServiceContext serviceContext)
 		throws Exception {
 
 		return BookmarksFolderLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(),
-			BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			TestPropsValues.getUserId(), parentBaseModelId,
 			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
+	}
+
+	@Override
+	protected BaseModel<?> getParentBaseModel(
+			Group group, ServiceContext serviceContext)
+		throws Exception {
+
+		return getParentBaseModel(
+			group, BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			serviceContext);
 	}
 
 	@Override
