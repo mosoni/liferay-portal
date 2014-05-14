@@ -703,7 +703,11 @@ public class LayoutImporter {
 
 				Layout layout = newLayoutsMap.get(layoutId);
 
-				long plid = layout.getPlid();
+				long plid = LayoutConstants.DEFAULT_PLID;
+
+				if (layout != null) {
+					plid = layout.getPlid();
+				}
 
 				portletDataContext.setPlid(plid);
 
