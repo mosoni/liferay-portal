@@ -701,9 +701,9 @@ public class LayoutImporter {
 				long layoutId = GetterUtil.getLong(
 					portletElement.attributeValue("layout-id"));
 
-				Layout layout = newLayoutsMap.get(layoutId);
-
 				long plid = LayoutConstants.DEFAULT_PLID;
+
+				Layout layout = newLayoutsMap.get(layoutId);
 
 				if (layout != null) {
 					plid = layout.getPlid();
