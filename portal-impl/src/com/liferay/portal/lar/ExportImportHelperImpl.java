@@ -1083,7 +1083,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 				importGroupId = portletDataContext.getGroupId();
 			}
 
-			FileEntry importedFileEntry;
+			FileEntry importedFileEntry = null;
 
 			try {
 				importedFileEntry =
