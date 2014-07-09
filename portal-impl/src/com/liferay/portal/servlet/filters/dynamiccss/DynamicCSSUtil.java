@@ -232,6 +232,8 @@ public class DynamicCSSUtil {
 				break;
 			}
 
+			sb.append(content.substring(pos, importX));
+
 			sb.append(_CSS_IMPORT_BEGIN);
 
 			String url = content.substring(
