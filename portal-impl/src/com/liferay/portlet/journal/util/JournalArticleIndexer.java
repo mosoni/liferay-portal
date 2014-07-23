@@ -364,6 +364,8 @@ public class JournalArticleIndexer extends BaseIndexer {
 		String[] languageIds = getLanguageIds(
 			defaultLanguageId, article.getContent());
 
+		document.addKeyword("availableLanguageIds", languageIds);
+
 		for (String languageId : languageIds) {
 			String content = extractContent(article, languageId);
 
