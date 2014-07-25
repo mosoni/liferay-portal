@@ -451,7 +451,8 @@ public class JournalArticleIndexer extends BaseIndexer {
 		}
 
 		String title = document.get(
-			snippetLocale, Field.SNIPPET + StringPool.UNDERLINE + Field.TITLE);
+			snippetLocale, Field.SNIPPET + StringPool.UNDERLINE + Field.TITLE,
+			Field.TITLE);
 
 		String content = StringPool.BLANK;
 
