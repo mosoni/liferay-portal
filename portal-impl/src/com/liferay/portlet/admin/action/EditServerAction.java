@@ -517,7 +517,7 @@ public class EditServerAction extends PortletAction {
 			SessionErrors.add(
 				actionRequest, ScriptingException.class.getName(), se);
 
-			_log.error(se.getMessage());
+			SanitizerLogWrapper.allowCRLF(_log).error(se.getMessage());
 		}
 	}
 
