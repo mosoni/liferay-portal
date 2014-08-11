@@ -34,12 +34,12 @@ public class SanitizerLogWrapper extends LogWrapper {
 			return log;
 		}
 
-		SanitizerLogWrapper result = new SanitizerLogWrapper(
+		SanitizerLogWrapper sanitizerLog = new SanitizerLogWrapper(
 			((SanitizerLogWrapper)log).getWrappedLog());
 
-		result._allowCRLF = true;
+		sanitizerLog._allowCRLF = true;
 
-		return result;
+		return sanitizerLog;
 	}
 
 	public static void init() {
@@ -192,9 +192,9 @@ public class SanitizerLogWrapper extends LogWrapper {
 		}
 
 		char[] chars = message.toCharArray();
+		boolean hasCRLF = false;
 		boolean hasLessThanCharacter = false;
 		boolean sanitized = false;
-		boolean hasCRLF = false;
 
 		for (int i = 0; i < chars.length; i++) {
 			int c = chars[i];
@@ -203,6 +203,7 @@ public class SanitizerLogWrapper extends LogWrapper {
 				((c == CharPool.NEW_LINE) || (c == CharPool.RETURN))) {
 
 				hasCRLF = true;
+
 				continue;
 			}
 
