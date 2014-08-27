@@ -224,8 +224,8 @@ public class SearchEngineUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #deleteDocuments(String, long,
-	 *             Collection, boolean)}
+	 * @deprecated As of 7.0.0, replaced by {@link #deleteDocuments(String,
+	 *             long, Collection, boolean)}
 	 */
 	@Deprecated
 	public static void deleteDocuments(
@@ -270,8 +270,8 @@ public class SearchEngineUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #deletePortletDocuments(String, long,
-	 *             String, boolean)}
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #deletePortletDocuments(String, long, String, boolean)}
 	 */
 	@Deprecated
 	public static void deletePortletDocuments(
@@ -856,8 +856,8 @@ public class SearchEngineUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #updateDocuments(String, long,
-	 *             Collection, boolean)}
+	 * @deprecated As of 7.0.0, replaced by {@link #updateDocuments(String,
+	 *             long, Collection, boolean)}
 	 */
 	@Deprecated
 	public static void updateDocuments(
