@@ -54,6 +54,10 @@ public class AssetVocabularyIndexer extends BaseIndexer {
 
 	public static final String PORTLET_ID = PortletKeys.ASSET_CATEGORIES_ADMIN;
 
+	public AssetVocabularyIndexer() {
+		setCommitImmediately(true);
+	}
+
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
@@ -150,7 +154,8 @@ public class AssetVocabularyIndexer extends BaseIndexer {
 
 		if (document != null) {
 			SearchEngineUtil.updateDocument(
-				getSearchEngineId(), vocabulary.getCompanyId(), document);
+				getSearchEngineId(), vocabulary.getCompanyId(), document,
+				isCommitImmediately());
 		}
 	}
 
