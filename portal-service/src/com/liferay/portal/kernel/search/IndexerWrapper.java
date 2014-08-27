@@ -117,6 +117,11 @@ public class IndexerWrapper implements Indexer {
 	}
 
 	@Override
+	public boolean isCommitImmediately() {
+		return _indexer.isCommitImmediately();
+	}
+
+	@Override
 	public boolean isFilterSearch() {
 		return _indexer.isFilterSearch();
 	}
