@@ -68,6 +68,8 @@ public interface Indexer {
 			long entryClassPK, String actionId)
 		throws Exception;
 
+	public boolean isCommitImmediately();
+
 	public boolean isFilterSearch();
 
 	public boolean isPermissionAware();
