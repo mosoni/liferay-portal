@@ -937,7 +937,7 @@ public class ShoppingUtil {
 	}
 
 	public static boolean isInStock(ShoppingItem item) {
-		if (item.hasInfiniteStock()) {
+		if (item.isInfiniteStock()) {
 			return true;
 		}
 
@@ -966,7 +966,7 @@ public class ShoppingUtil {
 		ShoppingItem item, ShoppingItemField[] itemFields, String[] fieldsArray,
 		Integer orderedQuantity) {
 
-		if (item.hasInfiniteStock()) {
+		if (item.isInfiniteStock()) {
 			return true;
 		}
 
