@@ -29,6 +29,7 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.awt.AlphaComposite;
 import java.awt.Graphics;
@@ -682,6 +683,10 @@ public class ImageToolImpl implements ImageTool {
 		}
 
 		return multiBytes;
+	}
+
+	private ImageToolImpl() {
+		ImageIO.setUseCache(PropsValues.IMAGE_USE_DISK_CACHE);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ImageToolImpl.class);
