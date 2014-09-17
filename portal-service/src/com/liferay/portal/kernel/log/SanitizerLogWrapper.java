@@ -240,7 +240,7 @@ public class SanitizerLogWrapper extends LogWrapper {
 			}
 
 			if (hasCRLF) {
-				sanitizedMessage = _CRLF_WARNING.concat(sanitizedMessage);
+				sanitizedMessage = CRLF_WARNING.concat(sanitizedMessage);
 			}
 
 			return sanitizedMessage;
@@ -291,7 +291,7 @@ public class SanitizerLogWrapper extends LogWrapper {
 		return resultThrowable;
 	}
 
-	private static final String _CRLF_WARNING =
+	protected static final String CRLF_WARNING =
 		"SanitizerLogWrapper warning: Following message contains CRLF " +
 			"characters\n";
 
