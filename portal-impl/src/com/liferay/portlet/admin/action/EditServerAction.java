@@ -518,7 +518,9 @@ public class EditServerAction extends PortletAction {
 			SessionErrors.add(
 				actionRequest, ScriptingException.class.getName(), se);
 
-			SanitizerLogWrapper.allowCRLF(_log).error(se.getMessage());
+			Log log = SanitizerLogWrapper.allowCRLF(_log);
+
+			log.error(se.getMessage());
 		}
 	}
 
@@ -609,7 +611,9 @@ public class EditServerAction extends PortletAction {
 
 	protected void threadDump() throws Exception {
 		if (_log.isInfoEnabled()) {
-			SanitizerLogWrapper.allowCRLF(_log).info(ThreadUtil.threadDump());
+			Log log = SanitizerLogWrapper.allowCRLF(_log);
+
+			log.info(ThreadUtil.threadDump());
 		}
 		else {
 			_log.error(
