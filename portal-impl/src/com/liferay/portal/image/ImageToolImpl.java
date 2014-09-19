@@ -431,21 +431,18 @@ public class ImageToolImpl implements ImageTool {
 	@Override
 	public ImageBag read(byte[] bytes) throws IOException {
 		String formatName = null;
-
 		ImageInputStream imageInputStream = null;
-
 		Queue<ImageReader> imageReaders = new LinkedList<ImageReader>();
-
 		RenderedImage renderedImage = null;
 
 		try {
+			boolean firstImageReader = true;
+
 			imageInputStream = ImageIO.createImageInputStream(
 				new ByteArrayInputStream(bytes));
 
 			Iterator<ImageReader> iterator = ImageIO.getImageReaders(
 				imageInputStream);
-
-			boolean firstImageReader = true;
 
 			while (iterator.hasNext()) {
 				ImageReader imageReader = iterator.next();
