@@ -624,39 +624,6 @@ public class ImageToolImpl implements ImageTool {
 		return _imageMagick;
 	}
 
-	protected RenderedImage read(byte[] bytes, String type) {
-		RenderedImage renderedImage = null;
-
-		try {
-			if (type.equals(TYPE_JPEG)) {
-				type = "jpeg";
-			}
-
-			InputStream inputStream = new ByteArrayInputStream(bytes);
-
-			ImageInputStream imageInputStream = ImageIO.createImageInputStream(
-				inputStream);
-
-			Iterator<ImageReader> iterator = ImageIO.getImageReaders(
-				imageInputStream);
-
-			if (iterator.hasNext()) {
-				ImageReader imageReader = iterator.next();
-
-				imageReader.setInput(imageInputStream);
-
-				renderedImage = imageReader.read(0);
-			}
-		}
-		catch (IOException ioe) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(type + ": " + ioe.getMessage());
-			}
-		}
-
-		return renderedImage;
-	}
-
 	protected byte[] toMultiByte(int intValue) {
 		int numBits = 32;
 		int mask = 0x80000000;
@@ -735,7 +702,18 @@ public class ImageToolImpl implements ImageTool {
 				throw new ExecutionException(ioe);
 			}
 
-			return read(bytes, _type);
+			ImageBag imageBag = null;
+
+			try {
+				imageBag = read(bytes);
+			}
+			catch (IOException ioe) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(_type + ": " + ioe.getMessage());
+				}
+			}
+
+			return imageBag.getRenderedImage();
 		}
 
 		@Override
@@ -753,7 +731,18 @@ public class ImageToolImpl implements ImageTool {
 				throw new ExecutionException(ioe);
 			}
 
-			return read(bytes, _type);
+			ImageBag imageBag = null;
+
+			try {
+				imageBag = read(bytes);
+			}
+			catch (IOException ioe) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(_type + ": " + ioe.getMessage());
+				}
+			}
+
+			return imageBag.getRenderedImage();
 		}
 
 		@Override
