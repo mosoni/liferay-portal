@@ -588,6 +588,27 @@ AUI.add(
 							if (focusManager) {
 								focusManager.refresh();
 							}
+
+							var listRoot = A.one('.lfr-menu-list');
+							var listItems = listRoot.all('li');
+							var numListItems = listItems.size();
+							var numHidden = 0;
+
+							listItems.each(
+								function(node) {
+									if (node.getAttribute('hidden')) {
+										++numHidden;
+									}
+								}
+							);
+
+							if (numHidden >= numListItems) {
+								listRoot.hide();
+							}
+
+							else {
+								listRoot.show();
+							}
 						}
 					);
 
