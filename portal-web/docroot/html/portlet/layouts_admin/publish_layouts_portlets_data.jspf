@@ -216,7 +216,26 @@ ManifestSummary manifestSummary = portletDataContext.getManifestSummary();
 
 						PortletDataHandler portletDataHandler = portlet.getPortletDataHandlerInstance();
 
-						portletDataHandler.prepareManifestSummary(portletDataContext);
+						DateRange originalDateRange = portletDataContext.getDateRange();
+
+						try {
+							dateRange = ExportImportHelperUtil.getDateRange(renderRequest, stagingGroupId, privateLayout, 0, portlet.getPortletId(), "fromLastPublishDate");
+
+							portletDataContext.setStartDate(dateRange.getStartDate());
+							portletDataContext.setEndDate(dateRange.getEndDate());
+
+							portletDataHandler.prepareManifestSummary(portletDataContext);
+						}
+						finally {
+							if (originalDateRange != null) {
+								portletDataContext.setStartDate(originalDateRange.getStartDate());
+								portletDataContext.setEndDate(originalDateRange.getEndDate());
+							}
+							else {
+								portletDataContext.setStartDate(null);
+								portletDataContext.setEndDate(null);
+							}
+						}
 
 						long exportModelCount = portletDataHandler.getExportModelCount(manifestSummary);
 
