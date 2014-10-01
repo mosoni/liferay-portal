@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
@@ -86,6 +87,7 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.model.SystemEventConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.xml.SecureXMLFactoryProviderUtil;
 import com.liferay.portal.service.BackgroundTaskLocalServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -254,31 +256,38 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			endDate = endCalendar.getTime();
 		}
 		else if (range.equals("fromLastPublishDate")) {
-			long lastPublishDate = 0;
+			Date lastPublishDate = null;
 
-			if (Validator.isNotNull(portletId) && (plid > 0)) {
-				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+			if (Validator.isNotNull(portletId)) {
+				Layout layout = LayoutLocalServiceUtil.fetchLayout(plid);
 
-				PortletPreferences preferences =
+				if (layout == null) {
+					Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+					layout = new LayoutImpl();
+
+					layout.setGroupId(group.getGroupId());
+					layout.setCompanyId(group.getCompanyId());
+				}
+
+				PortletPreferences jxPortletPreferences =
 					PortletPreferencesFactoryUtil.getStrictPortletSetup(
 						layout, portletId);
 
-				lastPublishDate = GetterUtil.getLong(
-					preferences.getValue(
-						"last-publish-date", StringPool.BLANK));
+				lastPublishDate = StagingUtil.getLastPublishDate(
+					jxPortletPreferences);
 			}
 			else {
 				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 					groupId, privateLayout);
 
-				lastPublishDate = GetterUtil.getLong(
-					layoutSet.getSettingsProperty("last-publish-date"));
+				lastPublishDate = StagingUtil.getLastPublishDate(layoutSet);
 			}
 
-			if (lastPublishDate > 0) {
+			if (lastPublishDate != null) {
 				endDate = new Date();
 
-				startDate = new Date(lastPublishDate);
+				startDate = lastPublishDate;
 			}
 		}
 		else if (range.equals("last")) {
