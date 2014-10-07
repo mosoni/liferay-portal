@@ -2068,6 +2068,8 @@ public class PropsValues {
 
 	public static final int WIKI_RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(PropsUtil.get(PropsKeys.WIKI_RSS_ABSTRACT_LENGTH));
 
+	public static final boolean XML_SECURITY_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XML_SECURITY_ENABLED));
+
 	public static final boolean XML_VALIDATION_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XML_VALIDATION_ENABLED));
 
 	public static final boolean XSL_CONTENT_XML_DOCTYPE_DECLARATION_ALLOWED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XSL_CONTENT_XML_DOCTYPE_DECLARATION_ALLOWED));

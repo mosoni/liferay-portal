@@ -2743,6 +2743,8 @@ public interface PropsKeys {
 
 	public static final String WIKI_RSS_ABSTRACT_LENGTH = "wiki.rss.abstract.length";
 
+	public static final String XML_SECURITY_ENABLED = "xml.security.enabled";
+
 	public static final String XML_VALIDATION_ENABLED = "xml.validation.enabled";
 
 	public static final String XSL_CONTENT_XML_DOCTYPE_DECLARATION_ALLOWED = "xsl.content.xml.doctype.declaration.allowed";
