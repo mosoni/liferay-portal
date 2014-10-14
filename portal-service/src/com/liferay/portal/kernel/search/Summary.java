@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -40,6 +41,7 @@ public class Summary {
 	public Summary(String title, String content, PortletURL portletURL) {
 		_title = title;
 		_content = content;
+		_locale = LocaleThreadLocal.getThemeDisplayLocale();
 		_portletURL = portletURL;
 	}
 
