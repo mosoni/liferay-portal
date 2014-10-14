@@ -190,6 +190,12 @@ PortletURL portletURL = (PortletURL)request.getAttribute("search.jsp-portletURL"
 				<div class="asset-entry-categories">
 
 					<%
+					Locale assetCategoryLocale = locale;
+
+					if (locale != summary.getLocale()) {
+						assetCategoryLocale = summary.getLocale();
+					}
+
 					for (int i = 0; i < assetCategoryIds.length; i++) {
 						long assetCategoryId = GetterUtil.getLong(assetCategoryIds[i]);
 
@@ -215,12 +221,12 @@ PortletURL portletURL = (PortletURL)request.getAttribute("search.jsp-portletURL"
 						<c:if test="<%= i == 0 %>">
 							<div class="taglib-asset-categories-summary">
 								<span class="asset-vocabulary">
-									<%= HtmlUtil.escape(assetVocabulary.getTitle(locale)) %>:
+									<%= HtmlUtil.escape(assetVocabulary.getTitle(assetCategoryLocale)) %>:
 								</span>
 						</c:if>
 
 						<a class="asset-category" href="<%= categoryURL.toString() %>">
-							<%= _buildAssetCategoryPath(assetCategory, locale) %>
+							<%= _buildAssetCategoryPath(assetCategory, assetCategoryLocale) %>
 						</a>
 
 						<c:if test="<%= (i + 1) == assetCategoryIds.length %>">
