@@ -97,10 +97,12 @@ else {
 
 Indexer indexer = IndexerRegistryUtil.getIndexer(className);
 
+Summary summary = null;
+
 if (indexer != null) {
 	String snippet = document.get(Field.SNIPPET);
 
-	Summary summary = indexer.getSummary(document, locale, snippet, viewFullContentURL);
+	summary = indexer.getSummary(document, locale, snippet, viewFullContentURL);
 
 	entryTitle = summary.getTitle();
 	entrySummary = summary.getContent();
