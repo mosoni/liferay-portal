@@ -957,7 +957,8 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		return false;
 	}
 
-	protected boolean hasThumbnails(FileVersion fileVersion) {
+	protected boolean hasThumbnails(FileVersion fileVersion)
+		throws SystemException {
 		if ((isThumbnailEnabled(THUMBNAIL_INDEX_DEFAULT) &&
 			 !hasThumbnail(fileVersion, THUMBNAIL_INDEX_DEFAULT)) ||
 			(isThumbnailEnabled(THUMBNAIL_INDEX_CUSTOM_1) &&
@@ -1177,7 +1178,7 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 			THUMBNAIL_INDEX_CUSTOM_2);
 	}
 
-	protected boolean isThumbnailEnabled(int index) {
+	protected boolean isThumbnailEnabled(int index) throws SystemException {
 		if ((index == THUMBNAIL_INDEX_DEFAULT) &&
 			GetterUtil.getBoolean(
 				PropsUtil.get(PropsKeys.DL_FILE_ENTRY_THUMBNAIL_ENABLED))) {
