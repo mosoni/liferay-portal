@@ -42,7 +42,8 @@ public abstract class BaseBackgroundTaskExecutor
 	}
 
 	@Override
-	public String handleException(BackgroundTask backgroundTask, Exception e) throws SystemException {
+	public String handleException(BackgroundTask backgroundTask, Exception e)
+		throws SystemException {
 		return "Unable to execute background task: " + e.getMessage();
 	}
 
