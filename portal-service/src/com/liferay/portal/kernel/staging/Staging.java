@@ -162,10 +162,12 @@ public interface Staging {
 
 	public JSONArray getErrorMessagesJSONArray(
 		Locale locale, Map<String, MissingReference> missingReferences,
-		Map<String, Serializable> contextMap);
+		Map<String, Serializable> contextMap)
+		throws SystemException;
 
 	public JSONObject getExceptionMessagesJSONObject(
-		Locale locale, Exception e, Map<String, Serializable> contextMap);
+		Locale locale, Exception e, Map<String, Serializable> contextMap)
+		throws SystemException;
 
 	public Date getLastPublishDate(LayoutSet layoutSet) throws PortalException;
 
