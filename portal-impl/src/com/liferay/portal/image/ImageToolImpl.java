@@ -307,7 +307,7 @@ public class ImageToolImpl implements ImageTool {
 			colorModel.createCompatibleWritableRaster(
 				renderedImage.getWidth(), renderedImage.getHeight());
 
-		Hashtable<String, Object> properties = new Hashtable<String, Object>();
+		Hashtable properties = new Hashtable();
 
 		String[] keys = renderedImage.getPropertyNames();
 
@@ -430,6 +430,8 @@ public class ImageToolImpl implements ImageTool {
 
 	@Override
 	public ImageBag read(byte[] bytes) throws IOException {
+		BufferedImage bufferedImage = null;
+
 		String formatName = null;
 		ImageInputStream imageInputStream = null;
 		Queue<ImageReader> imageReaders = new LinkedList<ImageReader>();
@@ -495,7 +497,7 @@ public class ImageToolImpl implements ImageTool {
 			throw new IllegalArgumentException(type + " is not supported");
 		}
 
-		return new ImageBag(renderedImage, type);
+		return new ImageBag(bufferedImage, type);
 	}
 
 	@Override
