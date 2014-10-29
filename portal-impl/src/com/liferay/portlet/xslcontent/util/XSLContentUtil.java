@@ -17,6 +17,7 @@ package com.liferay.portlet.xslcontent.util;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 
@@ -24,6 +25,7 @@ import java.net.URL;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
@@ -52,9 +54,13 @@ public class XSLContentUtil {
 		TransformerFactory transformerFactory =
 			TransformerFactory.newInstance();
 
-		transformerFactory.setFeature(
-			XMLConstants.FEATURE_SECURE_PROCESSING,
-			XSLContentConfigurationValues.XSL_SECURE_PROCESSING_ENABLED);
+		try {
+			transformerFactory.setFeature(
+				XMLConstants.FEATURE_SECURE_PROCESSING,
+				PropsValues.XSL_SECURE_PROCESSING_ENABLED);
+		}
+		catch (TransformerConfigurationException tce) {
+		}
 
 		Transformer transformer = transformerFactory.newTransformer(xslSource);
 
