@@ -86,6 +86,7 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.model.SystemEventConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.xml.SecureXMLFactoryProviderUtil;
 import com.liferay.portal.service.BackgroundTaskLocalServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -144,9 +145,8 @@ import java.util.regex.Pattern;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
-import org.apache.xerces.parsers.SAXParser;
-
 import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
 
 /**
  * @author Zsolt Berentey
@@ -392,13 +392,13 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 
 		final ManifestSummary manifestSummary = new ManifestSummary();
 
-		SAXParser saxParser = new SAXParser();
+		XMLReader xmlReader = SecureXMLFactoryProviderUtil.newXMLReader();
 
 		ElementHandler elementHandler = new ElementHandler(
 			new ManifestSummaryElementProcessor(group, manifestSummary),
 			new String[] {"header", "portlet", "staged-model"});
 
-		saxParser.setContentHandler(elementHandler);
+		xmlReader.setContentHandler(elementHandler);
 
 		InputStream is = portletDataContext.getZipEntryAsInputStream(
 			"/manifest.xml");
@@ -409,7 +409,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 
 		String manifestXMLContent = StringUtil.read(is);
 
-		saxParser.parse(new InputSource(new StringReader(manifestXMLContent)));
+		xmlReader.parse(new InputSource(new StringReader(manifestXMLContent)));
 
 		return manifestSummary;
 	}
@@ -1594,7 +1594,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 				group.getCompanyId(), groupId, parameterMap,
 				getUserIdStrategy(userId, userIdStrategy), zipReader);
 
-		SAXParser saxParser = new SAXParser();
+		XMLReader xmlReader = SecureXMLFactoryProviderUtil.newXMLReader();
 
 		ElementHandler elementHandler = new ElementHandler(
 			new ElementProcessor() {
@@ -1612,9 +1612,9 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			},
 			new String[] {"missing-reference"});
 
-		saxParser.setContentHandler(elementHandler);
+		xmlReader.setContentHandler(elementHandler);
 
-		saxParser.parse(
+		xmlReader.parse(
 			new InputSource(
 				portletDataContext.getZipEntryAsInputStream("/manifest.xml")));
 
