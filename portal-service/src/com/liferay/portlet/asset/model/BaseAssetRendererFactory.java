@@ -198,6 +198,11 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 	}
 
 	@Override
+	public boolean isListable(long classPK) throws SystemException {
+		return true;
+	}
+
+	@Override
 	public boolean isSelectable() {
 		return _SELECTABLE;
 	}

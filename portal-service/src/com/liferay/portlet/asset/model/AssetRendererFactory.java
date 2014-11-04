@@ -102,6 +102,9 @@ public interface AssetRendererFactory {
 
 	public boolean isLinkable();
 
+	public boolean isListable(long classPK)
+		throws SystemException;
+
 	public boolean isSelectable();
 
 	public void setClassName(String className);

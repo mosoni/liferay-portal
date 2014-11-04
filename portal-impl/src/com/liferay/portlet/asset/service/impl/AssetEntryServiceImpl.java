@@ -250,10 +250,12 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		}
 
 		if (returnEntriesCountOnly && !entryQuery.isEnablePermissions()) {
-			int entriesCount = assetEntryLocalService.getEntriesCount(
+			List<AssetEntry> entries = assetEntryLocalService.getEntries(
 				entryQuery);
 
-			results = new Object[] {null, entriesCount};
+			entries = getListableEntries(entries);
+
+			results = new Object[] {null, entries.size()};
 
 			threadLocalCache.put(key, results);
 
@@ -289,7 +291,8 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
 				try {
 					if (assetRendererFactory.hasPermission(
-							permissionChecker, classPK, ActionKeys.VIEW)) {
+							permissionChecker, classPK, ActionKeys.VIEW) &&
+						assetRendererFactory.isListable(classPK)) {
 
 						filteredEntries.add(entry);
 					}
@@ -322,7 +325,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			entryQuery.setStart(start);
 		}
 		else {
-			filteredEntries = entries;
+			filteredEntries = getListableEntries(entries);
 			filteredEntriesCount = filteredEntries.size();
 		}
 
@@ -379,6 +382,28 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		}
 
 		return false;
+	}
+
+	protected List<AssetEntry> getListableEntries(
+			List<AssetEntry> assetEntries)
+		throws SystemException {
+
+		List<AssetEntry> listableEntries = new ArrayList<AssetEntry>();
+
+		for (AssetEntry entry: assetEntries) {
+			String className = entry.getClassName();
+			long classPK = entry.getClassPK();
+
+			AssetRendererFactory assetRendererFactory =
+				AssetRendererFactoryRegistryUtil.
+					getAssetRendererFactoryByClassName(className);
+
+			if (assetRendererFactory.isListable(classPK)) {
+				listableEntries.add(entry);
+			}
+		}
+
+		return listableEntries;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
