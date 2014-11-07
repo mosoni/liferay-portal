@@ -111,9 +111,7 @@
 
 	<aui:input name="preferences--enableFlags--" type="checkbox" value="<%= enableFlags %>" />
 
-	<c:if test="<%= PropsValues.ASSET_PUBLISHER_PERMISSION_CHECKING_CONFIGURABLE && !PropsValues.ASSET_PUBLISHER_SEARCH_WITH_INDEX %>">
-		<aui:input name="preferences--enablePermissions--" type="checkbox" value="<%= enablePermissions %>" />
-	</c:if>
+	<aui:input disabled="<%= !(PropsValues.ASSET_PUBLISHER_PERMISSION_CHECKING_CONFIGURABLE && !PropsValues.ASSET_PUBLISHER_SEARCH_WITH_INDEX) %>" name="preferences--enablePermissions--" type="checkbox" value="<%= enablePermissions %>" />
 
 	<c:choose>
 		<c:when test="<%= rootPortletId.equals(PortletKeys.RELATED_ASSETS) %>">
