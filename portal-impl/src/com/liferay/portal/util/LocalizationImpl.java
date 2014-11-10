@@ -483,11 +483,10 @@ public class LocalizationImpl implements Localization {
 		for (Locale locale : locales) {
 			String languageId = LocaleUtil.toLanguageId(locale);
 
-			String localParameter =
-				parameter + StringPool.UNDERLINE + languageId;
+			String localizedKey = getPreferencesKey(parameter, languageId);
 
 			String value = PrefsParamUtil.getString(
-				preferences, portletRequest, localParameter);
+				preferences, portletRequest, localizedKey);
 
 			if (Validator.isNotNull(value)) {
 				xml = updateLocalization(xml, parameter, value, languageId);
