@@ -287,7 +287,7 @@
 		</execute>
 
 		<execute macro="AssetPublisherPortlet#rate4StarsPG">
-			<var name="assetTitle" value="WC WebContent Title" />
+			<var name="assetDescription" value="WC WebContent Content" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -295,7 +295,7 @@
 		</execute>
 
 		<execute macro="AssetPublisherPortlet#viewRate4StarsPG">
-			<var name="assetTitle" value="WC WebContent Title" />
+			<var name="assetDescription" value="WC WebContent Content" />
 		</execute>
 	</command>
 
