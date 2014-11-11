@@ -331,7 +331,7 @@
 	</command>
 
 	<command name="rate4StarsPG">
-		<var name="key_assetTitle" value="${assetTitle}" />
+		<var name="key_assetDescription" value="${assetDescription}" />
 
 		<execute action="PGAssetpublisher#mouseOver" locator-key1="YOUR_RATING" />
 		<execute action="PGAssetpublisher#click" locator-key1="YOUR_RATING_STAR_EMPTY_4" />
@@ -650,7 +650,7 @@
 	<command name="viewRate4StarsPG">
 		<execute action="PGAssetpublisher#assertTextEquals" locator-key1="AVERAGE" value1="Average (1 Vote)" />
 
-		<var name="key_assetTitle" value="${assetTitle}" />
+		<var name="key_assetDescription" value="${assetDescription}" />
 
 		<execute action="PGAssetpublisher#mouseOver" locator-key1="YOUR_RATING" />
 		<execute action="PGAssetpublisher#assertElementPresent" locator-key1="YOUR_RATING_STAR_1" />
