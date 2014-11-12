@@ -15,24 +15,28 @@
 package com.liferay.portlet.xslcontent.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
-import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
 
 import java.net.URL;
 
 import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
+
+import org.w3c.dom.Document;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Samuel Kong
  */
 public class XSLContentUtil {
 
@@ -42,14 +46,35 @@ public class XSLContentUtil {
 	public static final String DEFAULT_XSL_URL =
 		"@portal_url@/html/portlet/xsl_content/example.xsl";
 
-	public static String transform(URL xmlUrl, URL xslUrl)
-		throws IOException, TransformerException {
-
+	public static String transform(URL xmlUrl, URL xslUrl) throws Exception {
 		String xml = HttpUtil.URLtoString(xmlUrl);
 		String xsl = HttpUtil.URLtoString(xslUrl);
 
-		StreamSource xmlSource = new StreamSource(new UnsyncStringReader(xml));
-		StreamSource xslSource = new StreamSource(new UnsyncStringReader(xsl));
+		DocumentBuilderFactory documentBuilderFactory =
+			DocumentBuilderFactory.newInstance();
+
+		documentBuilderFactory.setFeature(
+			_FEATURE_DISALLOW_DOCTYPE_DECLARATION,
+			PropsValues.XML_DOCTYPE_DECLARATION_ALLOWED);
+		documentBuilderFactory.setFeature(
+			_FEATURE_EXTERNAL_GENERAL_ENTITIES,
+			PropsValues.XML_EXTERNAL_GENERAL_ENTITIES_ALLOWED);
+		documentBuilderFactory.setFeature(
+			_FEATURE_EXTERNAL_PARAMETER_ENTITIES,
+			PropsValues.XML_EXTERNAL_PARAMETER_ENTITIES_ALLOWED);
+
+		documentBuilderFactory.setNamespaceAware(true);
+
+		DocumentBuilder documentBuilder =
+			documentBuilderFactory.newDocumentBuilder();
+
+		Document xmlDocument = documentBuilder.parse(
+			new ByteArrayInputStream(xml.getBytes()));
+		Document xslDocument = documentBuilder.parse(
+			new ByteArrayInputStream(xsl.getBytes()));
+
+		Source xmlSource = new DOMSource(xmlDocument);
+		Source xslSource = new DOMSource(xslDocument);
 
 		TransformerFactory transformerFactory =
 			TransformerFactory.newInstance();
@@ -72,5 +97,14 @@ public class XSLContentUtil {
 
 		return unsyncByteArrayOutputStream.toString();
 	}
+
+	private static final String _FEATURE_DISALLOW_DOCTYPE_DECLARATION =
+		"http://apache.org/xml/features/disallow-doctype-decl";
+
+	private static final String _FEATURE_EXTERNAL_GENERAL_ENTITIES =
+		"http://xml.org/sax/features/external-general-entities";
+
+	private static final String _FEATURE_EXTERNAL_PARAMETER_ENTITIES =
+		"http://xml.org/sax/features/external-parameter-entities";
 
 }

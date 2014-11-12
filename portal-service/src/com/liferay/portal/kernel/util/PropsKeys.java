@@ -2733,6 +2733,12 @@ public interface PropsKeys {
 
 	public static final String WIKI_RSS_ABSTRACT_LENGTH = "wiki.rss.abstract.length";
 
+	public static final String XML_DOCTYPE_DECLARATION_ALLOWED = "xml.doctype.declaration.allowed";
+
+	public static final String XML_EXTERNAL_GENERAL_ENTITIES_ALLOWED = "xml.external.general.entities.allowed";
+
+	public static final String XML_EXTERNAL_PARAMETER_ENTITIES_ALLOWED = "xml.external.parameter.entities.allowed";
+
 	public static final String XML_VALIDATION_ENABLED = "xml.validation.enabled";
 
 	public static final String XSL_SECURE_PROCESSING_ENABLED = "xsl.secure.processing.enabled";
