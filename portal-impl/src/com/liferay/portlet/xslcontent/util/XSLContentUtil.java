@@ -47,34 +47,23 @@ public class XSLContentUtil {
 		"@portal_url@/html/portlet/xsl_content/example.xsl";
 
 	public static String transform(URL xmlUrl, URL xslUrl) throws Exception {
-		String xml = HttpUtil.URLtoString(xmlUrl);
-		String xsl = HttpUtil.URLtoString(xslUrl);
-
 		DocumentBuilderFactory documentBuilderFactory =
 			DocumentBuilderFactory.newInstance();
 
 		documentBuilderFactory.setFeature(
-			_FEATURE_DISALLOW_DOCTYPE_DECLARATION,
+			"http://apache.org/xml/features/disallow-doctype-decl",
 			PropsValues.XML_DOCTYPE_DECLARATION_ALLOWED);
 		documentBuilderFactory.setFeature(
-			_FEATURE_EXTERNAL_GENERAL_ENTITIES,
+			"http://xml.org/sax/features/external-general-entities",
 			PropsValues.XML_EXTERNAL_GENERAL_ENTITIES_ALLOWED);
 		documentBuilderFactory.setFeature(
-			_FEATURE_EXTERNAL_PARAMETER_ENTITIES,
+			"http://xml.org/sax/features/external-parameter-entities",
 			PropsValues.XML_EXTERNAL_PARAMETER_ENTITIES_ALLOWED);
 
 		documentBuilderFactory.setNamespaceAware(true);
 
 		DocumentBuilder documentBuilder =
 			documentBuilderFactory.newDocumentBuilder();
-
-		Document xmlDocument = documentBuilder.parse(
-			new ByteArrayInputStream(xml.getBytes()));
-		Document xslDocument = documentBuilder.parse(
-			new ByteArrayInputStream(xsl.getBytes()));
-
-		Source xmlSource = new DOMSource(xmlDocument);
-		Source xslSource = new DOMSource(xslDocument);
 
 		TransformerFactory transformerFactory =
 			TransformerFactory.newInstance();
@@ -87,24 +76,41 @@ public class XSLContentUtil {
 		catch (TransformerConfigurationException tce) {
 		}
 
-		Transformer transformer = transformerFactory.newTransformer(xslSource);
+		Transformer transformer = transformerFactory.newTransformer(
+			getXslSource(documentBuilder, xslUrl));
 
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
 
 		transformer.transform(
-			xmlSource, new StreamResult(unsyncByteArrayOutputStream));
+			getXmlSource(documentBuilder, xmlUrl),
+			new StreamResult(unsyncByteArrayOutputStream));
 
 		return unsyncByteArrayOutputStream.toString();
 	}
 
-	private static final String _FEATURE_DISALLOW_DOCTYPE_DECLARATION =
-		"http://apache.org/xml/features/disallow-doctype-decl";
+	protected static Source getXmlSource(
+			DocumentBuilder documentBuilder, URL xmlUrl)
+		throws Exception {
 
-	private static final String _FEATURE_EXTERNAL_GENERAL_ENTITIES =
-		"http://xml.org/sax/features/external-general-entities";
+		String xml = HttpUtil.URLtoString(xmlUrl);
 
-	private static final String _FEATURE_EXTERNAL_PARAMETER_ENTITIES =
-		"http://xml.org/sax/features/external-parameter-entities";
+		Document xmlDocument = documentBuilder.parse(
+			new ByteArrayInputStream(xml.getBytes()));
+
+		return new DOMSource(xmlDocument);
+	}
+
+	protected static Source getXslSource(
+			DocumentBuilder documentBuilder, URL xslUrl)
+		throws Exception {
+
+		String xsl = HttpUtil.URLtoString(xslUrl);
+
+		Document xslDocument = documentBuilder.parse(
+			new ByteArrayInputStream(xsl.getBytes()));
+
+		return new DOMSource(xslDocument);
+	}
 
 }
