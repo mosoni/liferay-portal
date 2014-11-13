@@ -18,12 +18,10 @@ import com.liferay.portal.kernel.backgroundtask.BackgroundTaskResult;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.ExportImportThreadLocal;
 import com.liferay.portal.kernel.lar.MissingReferences;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
-import com.liferay.portal.kernel.util.DateRange;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -209,26 +207,6 @@ public class LayoutStagingBackgroundTaskExecutor
 					_userId, _targetGroupId, privateLayout, parameterMap, file);
 
 				initLayoutSetBranches(_userId, _sourceGroupId, _targetGroupId);
-
-				boolean updateLastPublishDate = MapUtil.getBoolean(
-					parameterMap,
-					PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE);
-
-				if (updateLastPublishDate) {
-					Group sourceGroup = GroupLocalServiceUtil.getGroup(
-						_sourceGroupId);
-
-					DateRange dateRange = new DateRange(startDate, endDate);
-
-					if (!sourceGroup.hasStagingGroup()) {
-						StagingUtil.updateLastPublishDate(
-							_sourceGroupId, privateLayout, dateRange, endDate);
-					}
-					else {
-						StagingUtil.updateLastPublishDate(
-							_targetGroupId, privateLayout, dateRange, endDate);
-					}
-				}
 			}
 			finally {
 				FileUtil.delete(file);

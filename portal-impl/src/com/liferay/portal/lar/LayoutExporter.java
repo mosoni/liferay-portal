@@ -31,8 +31,11 @@ import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.staging.LayoutStagingUtil;
+import com.liferay.portal.kernel.staging.StagingUtil;
+import com.liferay.portal.kernel.transaction.TransactionCommitCallbackRegistryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.DateRange;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -90,6 +93,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 import org.apache.commons.lang.time.StopWatch;
 
@@ -728,6 +732,16 @@ public class LayoutExporter {
 			_log.info("Exporting layouts takes " + stopWatch.getTime() + " ms");
 		}
 
+		boolean updateLastPublishDate = MapUtil.getBoolean(
+			portletDataContext.getParameterMap(),
+			PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE);
+
+		if (updateLastPublishDate) {
+			TransactionCommitCallbackRegistryUtil.registerCallback(
+				new UpdateLayoutSetLastPublishDateCallable(
+					portletDataContext.getDateRange(), groupId, privateLayout));
+		}
+
 		portletDataContext.addZipEntry(
 			"/manifest.xml", document.formattedString());
 
@@ -905,5 +919,49 @@ public class LayoutExporter {
 	private PermissionExporter _permissionExporter = new PermissionExporter();
 	private PortletExporter _portletExporter = new PortletExporter();
 	private ThemeExporter _themeExporter = new ThemeExporter();
+
+	private class UpdateLayoutSetLastPublishDateCallable
+		implements Callable<Void> {
+
+		@Override
+		public Void call() throws Exception {
+			Group group = GroupLocalServiceUtil.getGroup(_groupId);
+
+			Date endDate = null;
+
+			if (_dateRange != null) {
+				endDate = _dateRange.getEndDate();
+			}
+
+			if (ExportImportThreadLocal.isStagingInProcess() &&
+				group.hasStagingGroup()) {
+
+				Group stagingGroup = group.getStagingGroup();
+
+				StagingUtil.updateLastPublishDate(
+					stagingGroup.getGroupId(), _privateLayout, _dateRange,
+					endDate);
+			}
+			else {
+				StagingUtil.updateLastPublishDate(
+					_groupId, _privateLayout, _dateRange, endDate);
+			}
+
+			return null;
+		}
+
+		private UpdateLayoutSetLastPublishDateCallable(
+			DateRange dateRange, long groupId, boolean privateLayout) {
+
+			_dateRange = dateRange;
+			_groupId = groupId;
+			_privateLayout = privateLayout;
+		}
+
+		private final DateRange _dateRange;
+		private final long _groupId;
+		private final boolean _privateLayout;
+
+	}
 
 }
