@@ -73,13 +73,13 @@ public class LayoutStagingBackgroundTaskExecutor
 		try {
 			ExportImportThreadLocal.setLayoutStagingInProcess(true);
 
-			Callable<MissingReferences> layoutStagingCallable =
+			Callable<MissingReferences> callable =
 				new LayoutStagingCallable(
 					backgroundTask, sourceGroupId, targetGroupId,
 					taskContextMap, userId);
 
 			missingReferences = TransactionalCallableUtil.call(
-				transactionAttribute, layoutStagingCallable);
+				transactionAttribute, callable);
 		}
 		catch (Throwable t) {
 			if (_log.isDebugEnabled()) {
@@ -153,18 +153,6 @@ public class LayoutStagingBackgroundTaskExecutor
 
 	private class LayoutStagingCallable implements Callable<MissingReferences> {
 
-		private LayoutStagingCallable(
-			BackgroundTask backgroundTask, long sourceGroupId,
-			long targetGroupId, Map<String, Serializable> taskContextMap,
-			long userId) {
-
-			_backgroundTask = backgroundTask;
-			_sourceGroupId = sourceGroupId;
-			_targetGroupId = targetGroupId;
-			_taskContextMap = taskContextMap;
-			_userId = userId;
-		}
-
 		@Override
 		public MissingReferences call() throws Exception {
 			File file = null;
@@ -205,6 +193,18 @@ public class LayoutStagingBackgroundTaskExecutor
 			}
 
 			return missingReferences;
+		}
+
+		public LayoutStagingCallable(
+			BackgroundTask backgroundTask, long sourceGroupId,
+			long targetGroupId, Map<String, Serializable> taskContextMap,
+			long userId) {
+
+			_backgroundTask = backgroundTask;
+			_sourceGroupId = sourceGroupId;
+			_targetGroupId = targetGroupId;
+			_taskContextMap = taskContextMap;
+			_userId = userId;
 		}
 
 		private BackgroundTask _backgroundTask;

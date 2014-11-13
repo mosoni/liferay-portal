@@ -53,11 +53,11 @@ public class PortletStagingBackgroundTaskExecutor
 		try {
 			ExportImportThreadLocal.setPortletStagingInProcess(true);
 
-			Callable<MissingReferences> portletStagingCallable =
-				new PortletStagingCallable(backgroundTask);
+			Callable<MissingReferences> callable = new PortletStagingCallable(
+				backgroundTask);
 
 			missingReferences = TransactionalCallableUtil.call(
-				transactionAttribute, portletStagingCallable);
+				transactionAttribute, callable);
 		}
 		catch (Throwable t) {
 			if (_log.isDebugEnabled()) {
@@ -79,8 +79,7 @@ public class PortletStagingBackgroundTaskExecutor
 	private static Log _log = LogFactoryUtil.getLog(
 		PortletStagingBackgroundTaskExecutor.class);
 
-	private class PortletStagingCallable
-		implements Callable<MissingReferences> {
+	private class PortletStagingCallable implements Callable<MissingReferences> {
 
 		@Override
 		public MissingReferences call() throws Exception {
@@ -131,7 +130,7 @@ public class PortletStagingBackgroundTaskExecutor
 			return missingReferences;
 		}
 
-		private PortletStagingCallable(BackgroundTask backgroundTask) {
+		public PortletStagingCallable(BackgroundTask backgroundTask) {
 			_backgroundTask = backgroundTask;
 		}
 
