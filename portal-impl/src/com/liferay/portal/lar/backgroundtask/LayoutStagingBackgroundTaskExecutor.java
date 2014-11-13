@@ -73,13 +73,11 @@ public class LayoutStagingBackgroundTaskExecutor
 		try {
 			ExportImportThreadLocal.setLayoutStagingInProcess(true);
 
-			Callable<MissingReferences> callable =
+			missingReferences = TransactionalCallableUtil.call(
+				transactionAttribute,
 				new LayoutStagingCallable(
 					backgroundTask, sourceGroupId, targetGroupId,
-					taskContextMap, userId);
-
-			missingReferences = TransactionalCallableUtil.call(
-				transactionAttribute, callable);
+					taskContextMap, userId));
 		}
 		catch (Throwable t) {
 			if (_log.isDebugEnabled()) {

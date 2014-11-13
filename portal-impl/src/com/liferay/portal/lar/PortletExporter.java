@@ -1614,7 +1614,7 @@ public class PortletExporter {
 			return null;
 		}
 
-		private UpdatePortletLastPublishDateCallable(
+		public UpdatePortletLastPublishDateCallable(
 			DateRange dateRange, Date endDate, long groupId, long plid,
 			String portletId) {
 

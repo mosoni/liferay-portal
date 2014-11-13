@@ -954,7 +954,7 @@ public class LayoutExporter {
 			return null;
 		}
 
-		private UpdateLayoutSetLastPublishDateCallable(
+		public UpdateLayoutSetLastPublishDateCallable(
 			DateRange dateRange, long groupId, boolean privateLayout) {
 
 			_dateRange = dateRange;
