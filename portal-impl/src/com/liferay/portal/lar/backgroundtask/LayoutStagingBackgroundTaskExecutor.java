@@ -151,6 +151,18 @@ public class LayoutStagingBackgroundTaskExecutor
 
 	private class LayoutStagingCallable implements Callable<MissingReferences> {
 
+		public LayoutStagingCallable(
+			BackgroundTask backgroundTask, long sourceGroupId,
+			long targetGroupId, Map<String, Serializable> taskContextMap,
+			long userId) {
+
+			_backgroundTask = backgroundTask;
+			_sourceGroupId = sourceGroupId;
+			_targetGroupId = targetGroupId;
+			_taskContextMap = taskContextMap;
+			_userId = userId;
+		}
+
 		@Override
 		public MissingReferences call() throws Exception {
 			File file = null;
@@ -191,18 +203,6 @@ public class LayoutStagingBackgroundTaskExecutor
 			}
 
 			return missingReferences;
-		}
-
-		public LayoutStagingCallable(
-			BackgroundTask backgroundTask, long sourceGroupId,
-			long targetGroupId, Map<String, Serializable> taskContextMap,
-			long userId) {
-
-			_backgroundTask = backgroundTask;
-			_sourceGroupId = sourceGroupId;
-			_targetGroupId = targetGroupId;
-			_taskContextMap = taskContextMap;
-			_userId = userId;
 		}
 
 		private BackgroundTask _backgroundTask;

@@ -80,6 +80,10 @@ public class PortletStagingBackgroundTaskExecutor
 	private class PortletStagingCallable
 		implements Callable<MissingReferences> {
 
+		public PortletStagingCallable(BackgroundTask backgroundTask) {
+			_backgroundTask = backgroundTask;
+		}
+
 		@Override
 		public MissingReferences call() throws Exception {
 			Map<String, Serializable> taskContextMap =
@@ -127,10 +131,6 @@ public class PortletStagingBackgroundTaskExecutor
 			}
 
 			return missingReferences;
-		}
-
-		public PortletStagingCallable(BackgroundTask backgroundTask) {
-			_backgroundTask = backgroundTask;
 		}
 
 		private BackgroundTask _backgroundTask;
