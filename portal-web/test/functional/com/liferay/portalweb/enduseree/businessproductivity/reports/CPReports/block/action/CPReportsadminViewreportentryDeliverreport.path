@@ -20,7 +20,7 @@
 </tr>
 <tr>
 	<td>REPORT_NAME</td>
-	<td>//span[contains(.,'Report Name')]/../../div[contains(.,'Report Name') and contains(.,'${key_reportsFileName}')]</td>
+	<td>//label[contains(.,'Report Name')]/../../div[contains(.,'Report Name') and contains(.,'${key_reportsFileName}')] | //span[contains(.,'Report Name')]/../../div[contains(.,'Report Name') and contains(.,'${key_reportsFileName}')]</td>
 	<td></td>
 </tr>
 <tr>
