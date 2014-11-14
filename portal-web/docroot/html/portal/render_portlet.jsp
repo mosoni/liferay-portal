@@ -230,7 +230,7 @@ if (portlet.hasPortletMode(responseContentType, PortletMode.EDIT)) {
 }
 
 if (portlet.hasPortletMode(responseContentType, LiferayPortletMode.EDIT_DEFAULTS)) {
-	if (showEditIcon && !layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon()) {
+	if (showEditIcon && themeDisplay.isShowAddContentIcon()) {
 		showEditDefaultsIcon = true;
 	}
 }
