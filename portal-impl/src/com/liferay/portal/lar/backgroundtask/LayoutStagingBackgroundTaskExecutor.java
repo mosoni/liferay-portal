@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
+import com.liferay.portal.kernel.util.DateRange;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -81,7 +82,7 @@ public class LayoutStagingBackgroundTaskExecutor
 					taskContextMap, userId);
 
 			missingReferences = TransactionalCallableUtil.call(
-					_transactionAttribute, layoutStagingCallable);
+				_transactionAttribute, layoutStagingCallable);
 		}
 		catch (Throwable t) {
 			if (_log.isDebugEnabled()) {
@@ -212,13 +213,15 @@ public class LayoutStagingBackgroundTaskExecutor
 					Group sourceGroup = GroupLocalServiceUtil.getGroup(
 						_sourceGroupId);
 
+					DateRange dateRange = new DateRange(startDate, endDate);
+
 					if (!sourceGroup.hasStagingGroup()) {
 						StagingUtil.updateLastPublishDate(
-							_sourceGroupId, privateLayout, endDate);
+							_sourceGroupId, privateLayout, dateRange, endDate);
 					}
 					else {
 						StagingUtil.updateLastPublishDate(
-							_targetGroupId, privateLayout, endDate);
+							_targetGroupId, privateLayout, dateRange, endDate);
 					}
 				}
 			}
