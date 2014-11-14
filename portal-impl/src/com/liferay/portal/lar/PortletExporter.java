@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.DateRange;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -181,13 +182,34 @@ public class PortletExporter {
 			return;
 		}
 
-		String data = null;
+		Date originalStartDate = portletDataContext.getStartDate();
+
+		String range = MapUtil.getString(
+			portletDataContext.getParameterMap(), "range");
+
+		Date startDate = originalStartDate;
+
+		if (range.equals("last-publish-date")) {
+			Date lastPublishDate = StagingUtil.getLastPublishDate(
+				jxPortletPreferences);
+
+			if (lastPublishDate == null) {
+				startDate = null;
+			}
+			else if (lastPublishDate.before(startDate)) {
+				startDate = lastPublishDate;
+			}
+		}
+
+		portletDataContext.setStartDate(startDate);
 
 		long groupId = portletDataContext.getGroupId();
 
 		portletDataContext.setGroupId(portletDataContext.getScopeGroupId());
 
 		portletDataContext.clearScopedPrimaryKeys();
+
+		String data = null;
 
 		try {
 			data = portletDataHandler.exportData(
@@ -201,6 +223,7 @@ public class PortletExporter {
 		}
 		finally {
 			portletDataContext.setGroupId(groupId);
+			portletDataContext.setStartDate(originalStartDate);
 		}
 
 		if (Validator.isNull(data)) {
@@ -226,8 +249,12 @@ public class PortletExporter {
 			PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE);
 
 		if (updateLastPublishDate) {
+			DateRange adjustedDateRange = new DateRange(
+				startDate, portletDataContext.getEndDate());
+
 			StagingUtil.updateLastPublishDate(
-				portletId, jxPortletPreferences, endDate);
+				portletId, jxPortletPreferences, adjustedDateRange,
+				portletDataContext.getEndDate());
 		}
 	}
 
