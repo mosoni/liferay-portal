@@ -974,6 +974,11 @@ $dockbarOpenGradientStart: #0EA6F9;
 			border-top-width: 0;
 			margin-top: 0;
 			padding: 0;
+
+			.nav-header {
+				box-sizing: border-box;
+				width: 100%;
+			}
 		}
 	}
 
@@ -1090,6 +1095,10 @@ $dockbarOpenGradientStart: #0EA6F9;
 				float: left;
 				width: 45%;
 			}
+		}
+
+		.panel-manage-apps, .panel-manage-configuration, .panel-manage-sites, .panel-manage-users {
+			padding: 0;
 		}
 	}
 }
