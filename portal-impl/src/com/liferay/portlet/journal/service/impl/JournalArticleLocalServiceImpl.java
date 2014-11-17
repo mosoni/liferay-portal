@@ -6464,6 +6464,15 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		try {
+			DDMStructure ddmStructure =
+				ddmStructureLocalService.fetchDDMStructure(ddmStructureId);
+
+			if (ddmStructure == null) {
+				return;
+			}
+
+			Document documentXSD = SAXReaderUtil.read(ddmStructure.getXsd());
+
 			Document document = SAXReaderUtil.read(content);
 
 			Element rootElement = document.getRootElement();
@@ -6480,15 +6489,57 @@ public class JournalArticleLocalServiceImpl
 				for (Element dynamicContentElement : dynamicContentElements) {
 					String value = dynamicContentElement.getText();
 
-					ddmStructureLocalService.updateXSDFieldMetadata(
-						ddmStructureId, fieldName,
-						FieldConstants.PREDEFINED_VALUE, value, serviceContext);
+					documentXSD = updateDDMStructureXSDFieldMetadata(
+						documentXSD, fieldName, FieldConstants.PREDEFINED_VALUE,
+						value);
 				}
 			}
+
+			ddmStructureLocalService.updateXSD(
+				ddmStructureId, documentXSD.asXML(), serviceContext);
 		}
 		catch (DocumentException de) {
 			throw new SystemException(de);
 		}
+	}
+
+	protected Document updateDDMStructureXSDFieldMetadata(
+				Document document, String fieldName, String metadataEntryName,
+				String metadataEntryValue)
+			throws DocumentException {
+
+		Element rootElement = document.getRootElement();
+
+		List<Element> dynamicElementElements = rootElement.elements(
+			"dynamic-element");
+
+		for (Element dynamicElementElement : dynamicElementElements) {
+			String dynamicElementElementFieldName = GetterUtil.getString(
+				dynamicElementElement.attributeValue("name"));
+
+			if (!dynamicElementElementFieldName.equals(fieldName)) {
+				continue;
+			}
+
+			List<Element> metadataElements = dynamicElementElement.elements(
+				"meta-data");
+
+			for (Element metadataElement : metadataElements) {
+				List<Element> metadataEntryElements =
+					metadataElement.elements();
+
+				for (Element metadataEntryElement : metadataEntryElements) {
+					String metadataEntryElementName = GetterUtil.getString(
+						metadataEntryElement.attributeValue("name"));
+
+					if (metadataEntryElementName.equals(metadataEntryName)) {
+						metadataEntryElement.setText(metadataEntryValue);
+					}
+				}
+			}
+		}
+
+		return document;
 	}
 
 	protected void updatePreviousApprovedArticle(JournalArticle article)
