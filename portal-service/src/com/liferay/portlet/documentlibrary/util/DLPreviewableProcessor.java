@@ -959,6 +959,7 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 
 	protected boolean hasThumbnails(FileVersion fileVersion)
 		throws SystemException {
+
 		if ((isThumbnailEnabled(THUMBNAIL_INDEX_DEFAULT) &&
 			 !hasThumbnail(fileVersion, THUMBNAIL_INDEX_DEFAULT)) ||
 			(isThumbnailEnabled(THUMBNAIL_INDEX_CUSTOM_1) &&
