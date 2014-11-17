@@ -52,13 +52,13 @@ public class XSLContentUtil {
 
 		documentBuilderFactory.setFeature(
 			"http://apache.org/xml/features/disallow-doctype-decl",
-			PropsValues.XML_DOCTYPE_DECLARATION_ALLOWED);
+			PropsValues.XSL_CONTENT_XML_DOCTYPE_DECLARATION_ALLOWED);
 		documentBuilderFactory.setFeature(
 			"http://xml.org/sax/features/external-general-entities",
-			PropsValues.XML_EXTERNAL_GENERAL_ENTITIES_ALLOWED);
+			PropsValues.XSL_CONTENT_XML_EXTERNAL_GENERAL_ENTITIES_ALLOWED);
 		documentBuilderFactory.setFeature(
 			"http://xml.org/sax/features/external-parameter-entities",
-			PropsValues.XML_EXTERNAL_PARAMETER_ENTITIES_ALLOWED);
+			PropsValues.XSL_CONTENT_XML_EXTERNAL_PARAMETER_ENTITIES_ALLOWED);
 
 		documentBuilderFactory.setNamespaceAware(true);
 
@@ -71,7 +71,7 @@ public class XSLContentUtil {
 		try {
 			transformerFactory.setFeature(
 				XMLConstants.FEATURE_SECURE_PROCESSING,
-				PropsValues.XSL_SECURE_PROCESSING_ENABLED);
+				PropsValues.XSL_CONTENT_XSL_SECURE_PROCESSING_ENABLED);
 		}
 		catch (TransformerConfigurationException tce) {
 		}

@@ -2060,15 +2060,15 @@ public class PropsValues {
 
 	public static final int WIKI_RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(PropsUtil.get(PropsKeys.WIKI_RSS_ABSTRACT_LENGTH));
 
-	public static final boolean XML_DOCTYPE_DECLARATION_ALLOWED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XML_DOCTYPE_DECLARATION_ALLOWED));
-
-	public static final boolean XML_EXTERNAL_GENERAL_ENTITIES_ALLOWED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XML_EXTERNAL_GENERAL_ENTITIES_ALLOWED));
-
-	public static final boolean XML_EXTERNAL_PARAMETER_ENTITIES_ALLOWED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XML_EXTERNAL_PARAMETER_ENTITIES_ALLOWED));
-
 	public static final boolean XML_VALIDATION_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XML_VALIDATION_ENABLED));
 
-	public static final boolean XSL_SECURE_PROCESSING_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XSL_SECURE_PROCESSING_ENABLED));
+	public static final boolean XSL_CONTENT_XML_DOCTYPE_DECLARATION_ALLOWED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XSL_CONTENT_XML_DOCTYPE_DECLARATION_ALLOWED));
+
+	public static final boolean XSL_CONTENT_XML_EXTERNAL_GENERAL_ENTITIES_ALLOWED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XSL_CONTENT_XML_EXTERNAL_GENERAL_ENTITIES_ALLOWED));
+
+	public static final boolean XSL_CONTENT_XML_EXTERNAL_PARAMETER_ENTITIES_ALLOWED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XSL_CONTENT_XML_EXTERNAL_PARAMETER_ENTITIES_ALLOWED));
+
+	public static final boolean XSL_CONTENT_XSL_SECURE_PROCESSING_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XSL_CONTENT_XSL_SECURE_PROCESSING_ENABLED));
 
 	public static final boolean XSL_TEMPLATE_SECURE_PROCESSING_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XSL_TEMPLATE_SECURE_PROCESSING_ENABLED));
 
