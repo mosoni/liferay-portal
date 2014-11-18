@@ -103,11 +103,6 @@ public class DummyIndexer implements Indexer {
 	}
 
 	@Override
-	public boolean isCommitImmediately() {
-		return false;
-	}
-
-	@Override
 	public boolean isFilterSearch() {
 		return false;
 	}
