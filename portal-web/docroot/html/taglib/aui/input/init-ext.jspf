@@ -39,7 +39,7 @@ else if (Validator.isNotNull(title)) {
 }
 
 boolean checkboxField = baseType.equals("checkbox") || baseType.equals("boolean");
-boolean choiceField = baseType.equals("radio");
+boolean radioField = baseType.equals("radio");
 
 boolean showForLabel = true;
 
@@ -47,7 +47,7 @@ if (type.equals("assetCategories") || baseType.equals(Date.class.getName())) {
 	showForLabel = false;
 }
 
-if ((choiceField || checkboxField) && Validator.isNull(inlineLabel)) {
+if ((radioField || checkboxField) && Validator.isNull(inlineLabel)) {
 	inlineLabel = "right";
 }
 
