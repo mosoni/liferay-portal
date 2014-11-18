@@ -936,9 +936,9 @@
 			</library>
 			<library>
 				<file-name>lib/portal/alloy-taglib.jar</file-name>
-				<version>74065</version>
+				<version>1.0.0</version>
 				<project-name>Alloy</project-name>
-				<project-url>http://alloy.liferay.com</project-url>
+				<project-url>http://github.com/liferay/alloy-taglibs</project-url>
 				<licenses>
 					<license>
 						<license-name>LGPL 2.1</license-name>
