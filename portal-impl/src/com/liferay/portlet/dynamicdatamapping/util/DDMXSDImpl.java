@@ -161,11 +161,14 @@ public class DDMXSDImpl implements DDMXSD {
 		StringBundler sb = new StringBundler(fieldRepetition);
 
 		while (fieldRepetition > 0) {
+			offset = getFieldOffset(
+				fieldsDisplayValues, name, ddmFieldsCounter.get(name));
+
 			String fieldNamespace = StringUtil.randomId();
 
 			if (fieldDisplayable) {
 				fieldNamespace = getFieldNamespace(
-					fieldDisplayValue, ddmFieldsCounter);
+					fieldDisplayValue, ddmFieldsCounter, offset);
 			}
 
 			fieldStructure.put("fieldNamespace", fieldNamespace);
@@ -705,11 +708,10 @@ public class DDMXSDImpl implements DDMXSD {
 	}
 
 	protected String getFieldNamespace(
-		String fieldDisplayValue, DDMFieldsCounter ddmFieldsCounter) {
+		String fieldDisplayValue, DDMFieldsCounter ddmFieldsCounter,
+		int offset) {
 
 		String[] fieldsDisplayValues = StringUtil.split(fieldDisplayValue);
-
-		int offset = ddmFieldsCounter.get(DDMImpl.FIELDS_DISPLAY_NAME);
 
 		String fieldsDisplayValue = fieldsDisplayValues[offset];
 
