@@ -14,7 +14,6 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.NoSuchResourcePermissionException;
 import com.liferay.portal.kernel.concurrent.ThrowableAwareRunnable;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
@@ -109,15 +108,12 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			long companyId, String name, long primKey, Role role, long ownerId)
 		throws Exception {
 
-		ResourcePermission resourcePermission = null;
+		ResourcePermission resourcePermission =
+			ResourcePermissionLocalServiceUtil.fetchResourcePermission(
+				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
+				String.valueOf(primKey), role.getRoleId());
 
-		try {
-			resourcePermission =
-				ResourcePermissionLocalServiceUtil.getResourcePermission(
-					companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
-					String.valueOf(primKey), role.getRoleId());
-		}
-		catch (NoSuchResourcePermissionException nsrpe) {
+		if (resourcePermission == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"No resource found for {" + companyId + ", " + name + ", " +
@@ -131,13 +127,12 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		}
 
 		if (resourcePermission == null) {
-			try {
-				resourcePermission =
-					ResourcePermissionLocalServiceUtil.getResourcePermission(
-						companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
-						String.valueOf(primKey), role.getRoleId());
-			}
-			catch (NoSuchResourcePermissionException nsrpe) {
+			resourcePermission =
+				ResourcePermissionLocalServiceUtil.fetchResourcePermission(
+					companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
+					String.valueOf(primKey), role.getRoleId());
+
+			if (resourcePermission == null) {
 				return;
 			}
 		}
