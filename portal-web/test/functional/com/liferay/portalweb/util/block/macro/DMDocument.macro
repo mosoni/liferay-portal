@@ -57,6 +57,11 @@
 		<execute action="CPDocumentsandmedia#assertTextEquals" locator-key1="DOCUMENT_CONTAINER_DOCUMENT_TITLE" value1="${dmDocumentTitle}" />
 	</command>
 
+	<command name="addMultipleDocumentsPG">
+		<execute action="PGDocumentsandmedia#assertClick" locator-key1="TOOLBAR_ADD" value1="Add" />
+		<execute action="PGDocumentsandmedia#assertClick" locator-key1="ADD_MENULIST_MULTIPLE_DOCUMENTS" value1="Multiple Documents" />
+	</command>
+
 	<command name="addPG">
 		<if>
 			<equals arg1="${stagingActivated}" arg2="true" />
@@ -145,8 +150,8 @@
 						</else>
 					</if>
 
-					<execute action="PGDocumentsandmediaAddmultipledocuments#assertChecked" locator-key1="ALL_FILES_READY_TO_BE_SAVED_CHECKBOX" />
-					<execute action="PGDocumentsandmediaAddmultipledocuments#assertTextEquals" locator-key1="ALL_FILES_READY_TO_BE_SAVED_TITLE" value1="${dmDocumentFile}" />
+		<!--			<execute action="PGDocumentsandmediaAddmultipledocuments#assertChecked" locator-key1="ALL_FILES_READY_TO_BE_SAVED_SPECIFIC_CHECKBOX" />
+					<execute action="PGDocumentsandmediaAddmultipledocuments#assertTextEquals" locator-key1="ALL_FILES_READY_TO_BE_SAVED_TITLE" value1="${dmDocumentFile}" /> -->
 				</for>
 			</then>
 			<else>
@@ -164,13 +169,41 @@
 					</else>
 				</if>
 
-				<execute action="PGDocumentsandmediaAddmultipledocuments#assertChecked" locator-key1="ALL_FILES_READY_TO_BE_SAVED_CHECKBOX" />
+				<execute action="PGDocumentsandmediaAddmultipledocuments#assertChecked" locator-key1="ALL_FILES_READY_TO_BE_SAVED_SELECT_ALL_CHECKBOX" />
 				<execute action="PGDocumentsandmediaAddmultipledocuments#assertTextEquals" locator-key1="ALL_FILES_READY_TO_BE_SAVED_TITLE" value1="${dmDocumentFile}" />
 			</else>
 		</if>
 
+		<if>
+			<isset var="categoryName" />
+			<then>
+				<var name="key_categoryName" value="${categoryName}" />
+				<if>
+					<condition action="PGDocumentsandmediaAddmultipledocuments#isVisible" locator-key1="CATEGORIZATION_DROPDOWN_COLLAPSED" />
+					<then>
+						<execute action="PGDocumentsandmediaAddmultipledocuments#assertClick" locator-key1="CATEGORIZATION_DROPDOWN_COLLAPSED" value1="Categorization" />
+					</then>
+				</if>
+
+				<execute action="PGDocumentsandmediaAddmultipledocuments#assertClick" locator-key1="CATEGORIZATION_TOPIC_SELECT_BUTTON" value1="Select" />
+				<execute action="PGDocumentsandmediaAddmultipledocumentsCategoriesDialogBox#assertClick" locator-key1="CATEGORY_TOPIC" value1="${categoryName}" />
+				<execute action="PGDocumentsandmediaAddmultipledocumentsCategoriesDialogBox#assertClick" locator-key1="CLOSE_BUTTON" value1="×" />
+				<execute action="PGDocumentsandmediaAddmultipledocuments#assertTextEquals" locator-key1="CATEGORIZATION_VOCABULARY_TAG" value1="${categoryName}" />
+			</then>
+		</if>
+
+		<if>
+			<isset var="categoryTag" />
+			<then>
+				<execute action="PGDocumentsandmediaAddmultipledocuments#assertClick" locator-key1="TAGS_ENTRY_BOX" />
+				<execute action="PGDocumentsandmediaAddmultipledocuments#type" locator-key1="TAGS_ENTRY_BOX" value1="${categoryTag}" />
+				<execute action="PGDocumentsandmediaAddmultipledocuments#assertClick" locator-key1="TAGS_ADD_BUTTON" value1="Add" />
+				<execute action="PGDocumentsandmediaAddmultipledocuments#assertTextEquals" locator-key1="CATEGORIZATION_TAG" value1="${categoryTag}" />
+			</then>
+		</if>
+
 		<execute action="PGDocumentsandmediaAddmultipledocuments#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
-		<execute action="PGDocumentsandmediaAddmultipledocuments#assertTextEquals" locator-key1="ALL_FILES_READY_TO_BE_SAVED_SUCCESS_MESSAGE" value1="Successfully saved." />
+<!--		<execute action="PGDocumentsandmediaAddmultipledocuments#assertTextEquals" locator-key1="ALL_FILES_READY_TO_BE_SAVED_SUCCESS_MESSAGE" value1="Successfully saved." /> -->
 	</command>
 
 	<command name="addPGViaMG">

@@ -6,7 +6,7 @@
 
 		<var name="key_categoryName" value="${categoryName}" />
 
-		<execute action="CPCategories#assertClick" locator-key1="VOCABULARY_CATEGORY" value1="${categoryName}" />
+		<execute action="CPCategories#assertClick" locator-key1="VOCABULARY_CATEGORY_LABEL" value1="${categoryName}" />
 		<execute action="CPCategories#assertClick" locator-key1="CATEGORY_DETAILS_ADD_SUBCATEGORY_BUTTON" value1="Add Subcategory" />
 		<execute action="CPCategoriesAddSubcategory#type" locator-key1="NAME_FIELD" value1="${subcategoryName}" />
 		<execute action="CPCategoriesAddSubcategory#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
@@ -20,7 +20,7 @@
 
 		<var name="key_categoryName" value="${categoryName}" />
 
-		<execute action="CPCategories#assertClick" locator-key1="VOCABULARY_CATEGORY" value1="${categoryName}" />
+		<execute action="CPCategories#assertClick" locator-key1="VOCABULARY_CATEGORY_LABEL" value1="${categoryName}" />
 
 		<if>
 			<condition action="CPCategories#isElementPresent" locator-key1="CATEGORY_DETAILS_DROPDOWN_TREE" />
@@ -46,7 +46,7 @@
 
 		<var name="key_categoryName" value="${categoryName}" />
 
-		<execute action="CPCategories#assertClick" locator-key1="VOCABULARY_CATEGORY" value1="${categoryName}" />
+		<execute action="CPCategories#assertClick" locator-key1="VOCABULARY_CATEGORY_LABEL" value1="${categoryName}" />
 
 		<if>
 			<condition action="CPCategories#isElementPresent" locator-key1="CATEGORY_DETAILS_DROPDOWN_TREE" />
@@ -71,7 +71,7 @@
 
 		<var name="key_categoryName" value="${categoryName}" />
 
-		<execute action="CPCategories#assertClick" locator-key1="VOCABULARY_CATEGORY" value1="${categoryName}" />
+		<execute action="CPCategories#assertClick" locator-key1="VOCABULARY_CATEGORY_LABEL" value1="${categoryName}" />
 
 		<if>
 			<condition action="CPCategories#isElementPresent" locator-key1="CATEGORY_DETAILS_DROPDOWN_TREE" />
@@ -102,7 +102,7 @@
 
 		<var name="key_categoryName" value="${categoryName}" />
 
-		<execute action="CPCategories#assertClick" locator-key1="VOCABULARY_CATEGORY" value1="${categoryName}" />
+		<execute action="CPCategories#assertClick" locator-key1="VOCABULARY_CATEGORY_LABEL" value1="${categoryName}" />
 
 		<if>
 			<condition action="CPCategories#isElementPresent" locator-key1="CATEGORY_DETAILS_DROPDOWN_TREE" />
