@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>PGDocumentlibraryConfiguration</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGDocumentlibraryConfiguration</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGDocumentlibraryConfiguration</td>
+</tr>
+<tr>
+	<td>DOCUMENT_LIBRARY_IFRAME</td>
+	<td>//iframe[contains(@class,'dialog-iframe-node')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SAVE_BUTTON</td>
+	<td>//button[contains(.,'Save')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[contains(@class,'portlet-body')]/div[contains(.,'You have successfully updated the setup.')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CLOSE_BUTTON</td>
+	<td>//button[contains(.,'×')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--DISPLAY_SETTINGS-->
+<tr>
+	<td>MAX_ENTRIES_DISPLAY_DROPDOWN</td>
+	<td>//select[contains(@name,'entriesPerPage')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DROPDOWN_SELECT_OPTION</td>
+	<td>//select[contains(.,'${key_documentsPerPage}')]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
