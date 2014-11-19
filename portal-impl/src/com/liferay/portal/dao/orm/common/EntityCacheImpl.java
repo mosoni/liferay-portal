@@ -93,7 +93,7 @@ public class EntityCacheImpl
 	public PortalCache<Serializable, Serializable> getPortalCache(
 		Class<?> clazz) {
 
-		return _getPortalCache(clazz.toString(), true);
+		return _getPortalCache(clazz.getName(), true);
 	}
 
 	@Override
