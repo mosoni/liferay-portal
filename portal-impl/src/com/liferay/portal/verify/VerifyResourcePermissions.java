@@ -15,6 +15,7 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.NoSuchResourcePermissionException;
+import com.liferay.portal.kernel.concurrent.ThrowableAwareRunnable;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,6 +62,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,8 +79,15 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			Role role = RoleLocalServiceUtil.getRole(
 				companyId, RoleConstants.OWNER);
 
+			List<VerifyResourcedModelRunnable> verifyResourcedModelRunnables =
+				new ArrayList<VerifyResourcedModelRunnable>(_MODELS.length);
+
 			for (String[] model : _MODELS) {
-				verifyModel(role, model[0], model[1], model[2]);
+				VerifyResourcedModelRunnable verifyResourcedModelRunnable =
+					new VerifyResourcedModelRunnable(
+						role, model[0], model[1], model[2]);
+
+				verifyResourcedModelRunnables.add(verifyResourcedModelRunnable);
 			}
 
 			verifyLayout(role);
@@ -271,5 +280,28 @@ public class VerifyResourcePermissions extends VerifyProcess {
 
 	private static Log _log = LogFactoryUtil.getLog(
 		VerifyResourcePermissions.class);
+
+	private class VerifyResourcedModelRunnable extends ThrowableAwareRunnable {
+
+		private VerifyResourcedModelRunnable(
+			Role role, String name, String modelName, String pkColumnName) {
+
+			_modelName = modelName;
+			_name = name;
+			_pkColumnName = pkColumnName;
+			_role = role;
+		}
+
+		@Override
+		protected void doRun() throws Exception {
+			verifyModel(_role, _name, _modelName, _pkColumnName);
+		}
+
+		private final String _modelName;
+		private final String _name;
+		private final String _pkColumnName;
+		private final Role _role;
+
+	}
 
 }

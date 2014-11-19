@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,8 +82,7 @@ public class VerifyUUID extends VerifyProcess {
 		}
 	}
 
-	protected void doVerify(
-			String modelName, String pkColumnName, long pk)
+	protected void doVerify(String modelName, String pkColumnName, long pk)
 		throws Exception {
 
 		String uuid = PortalUUIDUtil.generate();
