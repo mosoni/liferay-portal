@@ -329,4 +329,135 @@
 			<var name="dmDocumentTitle" value="Zero Document File" />
 		</execute>
 	</command>
+
+	<command name="ViewPaginationCategoriesAndTags" priority="4">
+		<var name="categoryDescription" value="Category Description" />
+		<var name="dmDocumentFileList" value="Document_1.doc,Document_2.doc,Document_1.txt,Document_2.docx,Document_1.xlsx,Document_1.jpg,Document_1.mp3,Document_1.odt,Document_1.xls,Document_1.pdf" />
+		<var name="pageName" value="Documents and Media Page" />
+		<var name="portletName" value="Tags Navigation" />
+		<var name="portletOption" value="Configuration" />
+		<var name="stagingActivated" value="false" />
+		<var name="uploadCommonFile" value="true" />
+
+		<execute macro="Page#gotoContentCP">
+			<var name="portletName" value="Categories" />
+		</execute>
+
+		<execute macro="Category#addCategoryDescriptionCP">
+			<var name="categoryDescription" value="${categoryDescription}" />
+			<var name="categoryName" value="Category Name" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Welcome" />
+		</execute>
+
+		<execute macro="Page#addPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Documents and Media Display" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Documents and Media" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Categories Navigation" />
+		</execute>
+
+		<execute macro="Portlet#dragAndDropPortletToColumnPG">
+			<var name="columnNumberFrom" value="1" />
+			<var name="columnNumberTo" value="2" />
+			<var name="portletName" value="Categories Navigation" />
+			<var name="stagingActivated" value="{$stagingActivated}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Tags Navigation" />
+		</execute>
+
+		<execute macro="Portlet#dragAndDropPortletToColumnPG">
+			<var name="columnNumberFrom" value="1" />
+			<var name="columnNumberTo" value="2" />
+			<var name="portletName" value="Tags Navigation" />
+			<var name="stagingActivated" value="{$stagingActivated}" />
+		</execute>
+
+		<execute macro="DMDocument#addPGViaFlashUploader">
+			<var name="categoryName" value="Category Name" />
+			<var name="categoryTag" value="Category Tag" />
+			<var name="dmDocumentFileList" value="${dmDocumentFileList}" />
+			<var name="uploadCommonFile" value="${uploadCommonFile}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPGViaFlashUploader">
+			<var name="dmDocumentFileList" value="${dmDocumentFileList}" />
+			<var name="uploadCommonFile" value="${uploadCommonFile}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletName" value="Documents and Media" />
+			<var name="portletOption" value="${portletOption}" />
+		</execute>
+
+		<execute macro="DMPortlet#configureDisplaySettingsMaximumEntriesToDisplay">
+			<var name="documentsPerPage" value="5" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletName" value="Documents and Media Display" />
+			<var name="portletOption" value="${portletOption}" />
+		</execute>
+
+		<execute macro="DMDisplayPortlet#configureDocumentListingsDocumentsPerPage">
+			<var name="documentsPerPage" value="5" />
+		</execute>
+
+		<execute macro="DMPortlet#viewPaginationControlsPG" />
+
+		<execute macro="DMDisplayPortlet#viewPaginationControlsPG" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Category#gotoCategoryPG">
+			<var name="categoryName" value="Category Name" />
+		</execute>
+
+		<execute macro="DMPortlet#viewPaginationControlsPG" />
+
+		<execute macro="DMDisplayPortlet#viewPaginationControlsPG" />
+	</command>
 </definition>
