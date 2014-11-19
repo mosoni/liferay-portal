@@ -372,6 +372,12 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.ResourcePermission fetchResourcePermission(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, long roleId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the intersection of action IDs the role has permission at the
 	* scope to perform on resources of the type.
