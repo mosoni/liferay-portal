@@ -317,6 +317,9 @@ public abstract class BaseSearchTestCase {
 		return false;
 	}
 
+	protected void moveBaseModelToTrash(long primaryKey) throws Exception {
+	}
+
 	protected void moveParentBaseModelToTrash(long primaryKey)
 		throws Exception {
 	}
@@ -349,6 +352,13 @@ public abstract class BaseSearchTestCase {
 
 		Assert.assertEquals(
 			initialBaseModelsSearchCount + 2,
+			searchBaseModelsCount(
+				getBaseModelClass(), group.getGroupId(), searchContext));
+
+		moveBaseModelToTrash((Long)baseModel.getPrimaryKeyObj());
+
+		Assert.assertEquals(
+			initialBaseModelsSearchCount,
 			searchBaseModelsCount(
 				getBaseModelClass(), group.getGroupId(), searchContext));
 	}
@@ -525,6 +535,13 @@ public abstract class BaseSearchTestCase {
 
 		Assert.assertEquals(
 			initialBaseModelsSearchCount + 2,
+			searchBaseModelsCount(
+				getBaseModelClass(), group.getGroupId(), searchContext));
+
+		moveBaseModelToTrash((Long)baseModel.getPrimaryKeyObj());
+
+		Assert.assertEquals(
+			initialBaseModelsSearchCount,
 			searchBaseModelsCount(
 				getBaseModelClass(), group.getGroupId(), searchContext));
 	}
