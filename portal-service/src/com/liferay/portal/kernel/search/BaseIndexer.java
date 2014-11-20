@@ -108,6 +108,9 @@ import javax.portlet.PortletURL;
  */
 public abstract class BaseIndexer implements Indexer {
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
 	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
 
@@ -490,30 +493,22 @@ public abstract class BaseIndexer implements Indexer {
 	@Override
 	public Hits search(SearchContext searchContext) throws SearchException {
 		try {
-			searchContext.setSearchEngineId(getSearchEngineId());
-
-			BooleanQuery fullQuery = getFullQuery(searchContext);
-
-			fullQuery.setQueryConfig(searchContext.getQueryConfig());
+			Hits hits = null;
 
 			PermissionChecker permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
-			int end = searchContext.getEnd();
-			int start = searchContext.getStart();
+			if ((permissionChecker != null) &&
+				isUseSearchResultPermissionFilter(searchContext)) {
 
-			if (isFilterSearch() && (permissionChecker != null)) {
-				searchContext.setEnd(end + INDEX_FILTER_SEARCH_LIMIT);
-				searchContext.setStart(0);
+				SearchResultPermissionFilter searchResultPermissionFilter =
+					new DefaultSearchResultPermissionFilter(
+						this, permissionChecker);
+
+				hits = searchResultPermissionFilter.search(searchContext);
 			}
-
-			Hits hits = SearchEngineUtil.search(searchContext, fullQuery);
-
-			searchContext.setEnd(end);
-			searchContext.setStart(start);
-
-			if (isFilterSearch() && (permissionChecker != null)) {
-				hits = filterSearch(hits, permissionChecker, searchContext);
+			else {
+				hits = doSearch(searchContext);
 			}
 
 			processHits(searchContext, hits);
@@ -1331,6 +1326,23 @@ public abstract class BaseIndexer implements Indexer {
 		throws Exception {
 	}
 
+	protected Hits doSearch(SearchContext searchContext)
+		throws SearchException {
+
+		searchContext.setSearchEngineId(getSearchEngineId());
+
+		BooleanQuery fullQuery = getFullQuery(searchContext);
+
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		fullQuery.setQueryConfig(queryConfig);
+
+		return SearchEngineUtil.search(searchContext, fullQuery);
+	}
+
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
 	protected Hits filterSearch(
 		Hits hits, PermissionChecker permissionChecker,
 		SearchContext searchContext) {
@@ -1607,6 +1619,12 @@ public abstract class BaseIndexer implements Indexer {
 		}
 
 		return null;
+	}
+
+	protected boolean isUseSearchResultPermissionFilter(
+		SearchContext searchContext) {
+
+		return isFilterSearch();
 	}
 
 	protected Document newDocument() {
