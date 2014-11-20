@@ -96,6 +96,7 @@
 		<execute action="SOPage#selectWindow" locator-key1="PAGE_TITLE" />
 
 		<execute action="SOUserBar#assertVisible" locator-key1="USER_BAR" />
+
 		<execute action="Dockbar#click" locator-key1="ADD" />
 		<execute action="Dockbar#assertElementPresent" locator-key1="ADD_CONTENT_LINK" />
 		<execute action="Dockbar#click" locator-key1="EDIT" />
