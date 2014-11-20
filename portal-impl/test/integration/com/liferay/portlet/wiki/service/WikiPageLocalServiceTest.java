@@ -85,7 +85,6 @@ public class WikiPageLocalServiceTest {
 	}
 
 	private Group _group;
-
 	private WikiNode _node;
 
 }
