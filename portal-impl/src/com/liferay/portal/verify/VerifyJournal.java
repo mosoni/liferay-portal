@@ -44,10 +44,13 @@ import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
+import com.liferay.portlet.dynamicdatamapping.util.DDMFieldsCounter;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
+import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.model.JournalFolder;
+import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
@@ -75,12 +78,37 @@ public class VerifyJournal extends VerifyProcess {
 	@Override
 	protected void doVerify() throws Exception {
 		verifyContent();
+		verifyDynamicElements();
 		updateFolderAssets();
 		verifyOracleNewLine();
 		verifyPermissionsAndAssets();
 		verifySearch();
 		verifyTree();
 		verifyURLTitle();
+	}
+
+	protected void updateDynamicElements(List<Element> dynamicElements)
+			throws PortalException, SystemException {
+
+		DDMFieldsCounter ddmFieldsCounter = new DDMFieldsCounter();
+
+		for (Element dynamicElement : dynamicElements) {
+			updateDynamicElements(dynamicElement.elements("dynamic-element"));
+
+			String name = dynamicElement.attributeValue("name");
+
+			int index = ddmFieldsCounter.get(name);
+
+			dynamicElement.addAttribute("index", String.valueOf(index));
+
+			String type = dynamicElement.attributeValue("type");
+
+			if (type.equals("image")) {
+				updateImageElement(dynamicElement, name, index);
+			}
+
+			ddmFieldsCounter.incrementKey(name);
+		}
 	}
 
 	protected void updateElements(List<Element> elements) throws Exception {
@@ -163,6 +191,23 @@ public class VerifyJournal extends VerifyProcess {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Assets verified for folders");
 		}
+	}
+
+	protected void updateImageElement(Element element, String name, int index)
+			throws PortalException, SystemException {
+
+		Element dynamicContentElement = element.element("dynamic-content");
+
+		long articleImageId = GetterUtil.getLong(
+				dynamicContentElement.attributeValue("id"));
+
+		JournalArticleImage articleImage =
+				JournalArticleImageLocalServiceUtil.getArticleImage(articleImageId);
+
+		articleImage.setElName(name + StringPool.UNDERLINE + index);
+
+		JournalArticleImageLocalServiceUtil.updateJournalArticleImage(
+				articleImage);
 	}
 
 	protected void updateURLTitle(
@@ -282,6 +327,48 @@ public class VerifyJournal extends VerifyProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+
+	protected void verifyDynamicElements() throws PortalException, SystemException {
+		ActionableDynamicQuery actionableDynamicQuery =
+			new JournalArticleActionableDynamicQuery() {
+
+			@Override
+			public void performAction(Object object) {
+				JournalArticle article = (JournalArticle)object;
+
+				try {
+					verifyDynamicElements(article);
+				}
+				catch (Exception e) {
+					_log.error(
+							"Unable to update content for article " +
+									article.getId(),
+							e);
+				}
+			}
+
+		};
+
+		actionableDynamicQuery.performActions();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Dynamic elements verified for articles");
+		}
+	}
+
+	protected void verifyDynamicElements(JournalArticle article)
+			throws Exception {
+
+		Document document = SAXReaderUtil.read(article.getContent());
+
+		Element rootElement = document.getRootElement();
+
+		updateDynamicElements(rootElement.elements("dynamic-element"));
+
+		article.setContent(document.asXML());
+
+		JournalArticleLocalServiceUtil.updateJournalArticle(article);
 	}
 
 	protected void verifyOracleNewLine() throws Exception {
