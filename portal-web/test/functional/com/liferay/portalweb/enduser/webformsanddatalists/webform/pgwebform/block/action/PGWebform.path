@@ -62,17 +62,17 @@
 <!--FORM_FIELDS-->
 <tr>
 	<td>FORM_FIELDS_FIELD_HEADER</td>
-	<td>//div[contains(@class,'control') and contains(.,'${key_wfFieldName}')]/label[contains(@for,'webformportlet')]</td>
+	<td>//div/div[contains(.,'${key_wfFieldName}')]/label[contains(@for,'webformportlet')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>FORM_FIELDS_TEXT_FIELD</td>
-	<td>//div[contains(@class,'control') and contains(.,'${key_wfFieldName}')]/input[@type='text']</td>
+	<td>//div/div[contains(.,'${key_wfFieldName}')]/input[@type='text']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>FORM_FIELDS_SELECT_FIELD</td>
-	<td>//div[contains(@class,'control') and contains(.,'${key_wfFieldName}')]/select</td>
+	<td>//div/div[contains(.,'${key_wfFieldName}')]/select</td>
 	<td></td>
 </tr>
 <tr>
@@ -87,7 +87,7 @@
 </tr>
 <tr>
 	<td>FORM_FIELDS_TEXT_BOX_FIELD</td>
-	<td>//div[contains(@class,'control') and contains(.,'${key_wfFieldName}')]/textarea</td>
+	<td>//div/div[contains(.,'${key_wfFieldName}')]/textarea</td>
 	<td></td>
 </tr>
 </tbody>
