@@ -3658,7 +3658,7 @@ if (ppstate.equals("normal")) {
 			</condition>
 		</fail>
 
-		<echo>Replacing ${token} with ${value} in ${file}</echo>
+		<echo>Replacing ${token} with ${value} in ${file}.</echo>
 
 		<replace file="${file}">
 			<replacefilter
