@@ -88,7 +88,7 @@ public class VerifyJournal extends VerifyProcess {
 	}
 
 	protected void updateDynamicElements(List<Element> dynamicElements)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		DDMFieldsCounter ddmFieldsCounter = new DDMFieldsCounter();
 
@@ -194,20 +194,20 @@ public class VerifyJournal extends VerifyProcess {
 	}
 
 	protected void updateImageElement(Element element, String name, int index)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		Element dynamicContentElement = element.element("dynamic-content");
 
 		long articleImageId = GetterUtil.getLong(
-				dynamicContentElement.attributeValue("id"));
+			dynamicContentElement.attributeValue("id"));
 
 		JournalArticleImage articleImage =
-				JournalArticleImageLocalServiceUtil.getArticleImage(articleImageId);
+			JournalArticleImageLocalServiceUtil.getArticleImage(articleImageId);
 
 		articleImage.setElName(name + StringPool.UNDERLINE + index);
 
 		JournalArticleImageLocalServiceUtil.updateJournalArticleImage(
-				articleImage);
+			articleImage);
 	}
 
 	protected void updateURLTitle(
@@ -329,24 +329,26 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	protected void verifyDynamicElements() throws PortalException, SystemException {
+	protected void verifyDynamicElements()
+		throws PortalException, SystemException {
+
 		ActionableDynamicQuery actionableDynamicQuery =
 			new JournalArticleActionableDynamicQuery() {
 
-			@Override
-			public void performAction(Object object) {
-				JournalArticle article = (JournalArticle)object;
+				@Override
+				public void performAction(Object object) {
+					JournalArticle article = (JournalArticle)object;
 
-				try {
-					verifyDynamicElements(article);
-				}
-				catch (Exception e) {
-					_log.error(
+					try {
+						verifyDynamicElements(article);
+					}
+					catch (Exception e) {
+						_log.error(
 							"Unable to update content for article " +
-									article.getId(),
+								article.getId(),
 							e);
+					}
 				}
-			}
 
 		};
 
@@ -358,7 +360,7 @@ public class VerifyJournal extends VerifyProcess {
 	}
 
 	protected void verifyDynamicElements(JournalArticle article)
-			throws Exception {
+		throws Exception {
 
 		Document document = SAXReaderUtil.read(article.getContent());
 
