@@ -47,6 +47,7 @@ public class DelegatingBackgroundTaskExecutor
 	@Override
 	public String handleException(BackgroundTask backgroundTask, Exception e)
 		throws SystemException {
+
 		return _backgroundTaskExecutor.handleException(backgroundTask, e);
 	}
 

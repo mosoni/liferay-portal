@@ -70,6 +70,7 @@ public class LayoutImportBackgroundTaskExecutor
 	@Override
 	public String handleException(BackgroundTask backgroundTask, Exception e)
 		throws SystemException {
+
 		JSONObject jsonObject = StagingUtil.getExceptionMessagesJSONObject(
 			getLocale(backgroundTask), e, backgroundTask.getTaskContextMap());
 
