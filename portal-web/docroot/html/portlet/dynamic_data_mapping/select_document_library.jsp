@@ -20,7 +20,21 @@
 long groupId = ParamUtil.getLong(request, FileEntryDisplayTerms.SELECTED_GROUP_ID);
 
 if (groupId == 0) {
-	groupId = ParamUtil.getLong(request, "groupId");
+	groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);
+
+	Group group = GroupLocalServiceUtil.fetchGroup(groupId);
+
+	if (group.isStaged()) {
+		Group liveGroup = group.getLiveGroup();
+
+		UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
+
+		boolean documentLibraryStaged = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.STAGED_PORTLET + PortletKeys.DOCUMENT_LIBRARY));
+
+		if (!documentLibraryStaged) {
+			groupId = liveGroup.getGroupId();
+		}
+	}
 }
 
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);

@@ -93,7 +93,6 @@
 			function(event) {
 				var portletURL = Liferay.PortletURL.createURL('${portletURLFactory.create(request, "166", themeDisplay.getPlid(), "RENDER_PHASE")}');
 
-				portletURL.setParameter('groupId', ${scopeGroupId?c});
 				portletURL.setParameter('struts_action', '/dynamic_data_mapping/select_document_library');
 
 				portletURL.setPlid(${controlPanelPlid?c});
