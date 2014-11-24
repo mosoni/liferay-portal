@@ -5245,7 +5245,7 @@ public class PortalImpl implements Portal {
 			WebKeys.UNIQUE_ELEMENT_IDS);
 
 		if (uniqueElementIds == null) {
-			uniqueElementIds = new ConcurrentHashSet<>();
+			uniqueElementIds = new ConcurrentHashSet<String>();
 
 			request.setAttribute(WebKeys.UNIQUE_ELEMENT_IDS, uniqueElementIds);
 		}
