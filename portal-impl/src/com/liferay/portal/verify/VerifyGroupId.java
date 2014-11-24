@@ -58,6 +58,7 @@ public class VerifyGroupId extends VerifyProcess {
 						model[0], model[1], model[2], model[3]);
 
 				verifiableGroupedModelRunnables.add(verifyAuditedModelRunnable);
+
 				verifyModel(model[0], model[1], model[2], model[3]);
 
 				pendingModels.remove(model[0]);

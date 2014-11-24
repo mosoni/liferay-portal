@@ -406,6 +406,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 		private final String _relatedModelName;
 		private final String _relatedPKColumnName;
 		private final boolean _updateDates;
+
 	}
 
 }
