@@ -24,14 +24,10 @@ if (groupId == 0) {
 
 	Group group = GroupLocalServiceUtil.fetchGroup(groupId);
 
-	if (group.isStaged()) {
+	if ((group != null) && group.isStaged()) {
 		Group liveGroup = group.getLiveGroup();
 
-		UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
-
-		boolean documentLibraryStaged = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.STAGED_PORTLET + PortletKeys.DOCUMENT_LIBRARY));
-
-		if (!documentLibraryStaged) {
+		if ((liveGroup != null) && !liveGroup.isStagedPortlet(PortletKeys.DOCUMENT_LIBRARY)) {
 			groupId = liveGroup.getGroupId();
 		}
 	}
