@@ -12,6 +12,8 @@
 
 		<execute macro="DMFolder#tearDownCP" />
 
+		<execute macro="Vocabulary#tearDownCP" />
+
 		<execute macro="Page#tearDownPG" />
 
 		<execute macro="User#tearDownCP" />
@@ -332,9 +334,8 @@
 
 	<command name="ViewPaginationCategoriesAndTags" priority="4">
 		<var name="categoryDescription" value="Category Description" />
-		<var name="dmDocumentFileList" value="Document_1.doc,Document_2.doc,Document_1.txt,Document_2.docx,Document_1.xlsx,Document_1.jpg,Document_1.mp3,Document_1.odt,Document_1.xls,Document_1.pdf" />
+		<var name="dmDocumentFileList" value="Document_1.doc,Document_2.doc,Document_1.txt,Document_2.docx,Document_1.xlsx,Document_1.jpg" />
 		<var name="pageName" value="Documents and Media Page" />
-		<var name="portletName" value="Tags Navigation" />
 		<var name="portletOption" value="Configuration" />
 		<var name="stagingActivated" value="false" />
 		<var name="uploadCommonFile" value="true" />
@@ -361,6 +362,28 @@
 		</execute>
 
 		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Tags Navigation" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Categories Navigation" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Documents and Media Display" />
+		</execute>
+
+		<execute macro="Portlet#dragAndDropPortletToColumnPG">
+			<var name="columnNumberFrom" value="1" />
+			<var name="columnNumberTo" value="2" />
 			<var name="portletName" value="Documents and Media Display" />
 		</execute>
 
@@ -372,34 +395,10 @@
 			<var name="portletName" value="Documents and Media" />
 		</execute>
 
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="Portlet#addPG">
-			<var name="portletName" value="Categories Navigation" />
-		</execute>
-
 		<execute macro="Portlet#dragAndDropPortletToColumnPG">
 			<var name="columnNumberFrom" value="1" />
 			<var name="columnNumberTo" value="2" />
-			<var name="portletName" value="Categories Navigation" />
-			<var name="stagingActivated" value="{$stagingActivated}" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="Portlet#addPG">
-			<var name="portletName" value="Tags Navigation" />
-		</execute>
-
-		<execute macro="Portlet#dragAndDropPortletToColumnPG">
-			<var name="columnNumberFrom" value="1" />
-			<var name="columnNumberTo" value="2" />
-			<var name="portletName" value="Tags Navigation" />
-			<var name="stagingActivated" value="{$stagingActivated}" />
+			<var name="portletName" value="Documents and Media" />
 		</execute>
 
 		<execute macro="DMDocument#addPGViaFlashUploader">

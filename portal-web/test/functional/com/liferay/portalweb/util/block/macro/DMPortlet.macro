@@ -3,12 +3,10 @@
 		<var name="key_documentsPerPage" value="${documentsPerPage}" />
 
 		<execute action="PGDocumentlibraryConfiguration#selectFrame" locator-key1="DOCUMENT_LIBRARY_IFRAME" />
-		<execute action="PGDocumentlibraryConfiguration#click" locator-key1="MAX_ENTRIES_DISPLAY_DROPDOWN" />
 		<execute action="PGDocumentlibraryConfiguration#select" locator-key1="DROPDOWN_SELECT_OPTION" value1="${documentsPerPage}" />
 		<execute action="PGDocumentlibraryConfiguration#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
 		<execute action="PGDocumentlibraryConfiguration#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="You have successfully updated the setup." />
 		<execute action="PGDocumentlibraryConfiguration#selectFrame" value1="relative=top" />
-		<execute action="PGDocumentlibraryConfiguration#assertClick" locator-key1="CLOSE_BUTTON" value1="×" />
 	</command>
 
 	<command name="viewDefaultPG">
