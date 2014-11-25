@@ -384,17 +384,16 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		return false;
 	}
 
-	protected List<AssetEntry> getListableEntries(
-			List<AssetEntry> assetEntries)
+	protected List<AssetEntry> getListableEntries(List<AssetEntry> assetEntries)
 		throws SystemException {
 
 		if (!PropsValues.ASSET_PUBLISHER_FILTER_NONLISTABLE_ENTRIES) {
-			return  assetEntries;
+			return assetEntries;
 		}
 
 		List<AssetEntry> listableEntries = new ArrayList<AssetEntry>();
 
-		for (AssetEntry entry: assetEntries) {
+		for (AssetEntry entry : assetEntries) {
 			String className = entry.getClassName();
 			long classPK = entry.getClassPK();
 
