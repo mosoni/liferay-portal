@@ -118,6 +118,8 @@ public class PropsValues {
 
 	public static final String ASSET_PUBLISHER_EMAIL_FROM_NAME = PropsUtil.get(PropsKeys.ASSET_PUBLISHER_EMAIL_FROM_NAME);
 
+	public static final boolean ASSET_PUBLISHER_FILTER_NONLISTABLE_ENTRIES= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ASSET_PUBLISHER_FILTER_NONLISTABLE_ENTRIES));
+
 	public static final boolean ASSET_PUBLISHER_PERMISSION_CHECKING_CONFIGURABLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ASSET_PUBLISHER_PERMISSION_CHECKING_CONFIGURABLE));
 
 	public static String[] ASSET_PUBLISHER_QUERY_FORM_CONFIGURATION = PropsUtil.getArray(PropsKeys.ASSET_PUBLISHER_QUERY_FORM_CONFIGURATION);

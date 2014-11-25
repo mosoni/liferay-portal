@@ -388,6 +388,10 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			List<AssetEntry> assetEntries)
 		throws SystemException {
 
+		if (!PropsValues.ASSET_PUBLISHER_FILTER_NONLISTABLE_ENTRIES) {
+			return  assetEntries;
+		}
+
 		List<AssetEntry> listableEntries = new ArrayList<AssetEntry>();
 
 		for (AssetEntry entry: assetEntries) {

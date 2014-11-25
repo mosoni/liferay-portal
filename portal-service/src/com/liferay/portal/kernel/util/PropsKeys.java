@@ -127,6 +127,8 @@ public interface PropsKeys {
 
 	public static final String ASSET_PUBLISHER_EMAIL_FROM_NAME = "asset.publisher.email.from.name";
 
+	public static final String ASSET_PUBLISHER_FILTER_NONLISTABLE_ENTRIES = "asset.publisher.filter.nonlistable.entries";
+
 	public static final String ASSET_PUBLISHER_PERMISSION_CHECKING_CONFIGURABLE = "asset.publisher.permission.checking.configurable";
 
 	public static final String ASSET_PUBLISHER_QUERY_FORM_CONFIGURATION = "asset.publisher.query.form.configuration";
