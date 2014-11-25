@@ -250,10 +250,8 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		}
 
 		if (returnEntriesCountOnly && !entryQuery.isEnablePermissions()) {
-			List<AssetEntry> entries = assetEntryLocalService.getEntries(
-				entryQuery);
-
-			entries = getListableEntries(entries);
+			List<AssetEntry> entries = getListableEntries(
+				assetEntryLocalService.getEntries(entryQuery));
 
 			results = new Object[] {null, entries.size()};
 
@@ -393,16 +391,16 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
 		List<AssetEntry> listableEntries = new ArrayList<AssetEntry>();
 
-		for (AssetEntry entry : assetEntries) {
-			String className = entry.getClassName();
-			long classPK = entry.getClassPK();
+		for (AssetEntry assetEntry : assetEntries) {
+			String className = assetEntry.getClassName();
+			long classPK = assetEntry.getClassPK();
 
 			AssetRendererFactory assetRendererFactory =
 				AssetRendererFactoryRegistryUtil.
 					getAssetRendererFactoryByClassName(className);
 
 			if (assetRendererFactory.isListable(classPK)) {
-				listableEntries.add(entry);
+				listableEntries.add(assetEntry);
 			}
 		}
 
