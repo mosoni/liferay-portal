@@ -6504,9 +6504,9 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected Document updateDDMStructureXSDFieldMetadata(
-				Document document, String fieldName, String metadataEntryName,
-				String metadataEntryValue)
-			throws DocumentException {
+			Document document, String fieldName, String metadataEntryName,
+			String metadataEntryValue)
+		throws DocumentException {
 
 		Element rootElement = document.getRootElement();
 
