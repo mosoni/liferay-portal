@@ -230,14 +230,12 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 
 			BrowseResult browseResult = boboBrowser.browse(browseRequest);
 
-			BrowseHit[] browseHits = browseResult.getHits();
-
 			long endTime = System.currentTimeMillis();
 
 			float searchTime = (float)(endTime - startTime) / Time.SECOND;
 
 			hits = toHits(
-				indexSearcher, new HitDocs(browseHits), query, startTime,
+				indexSearcher, new HitDocs(browseResult), query, startTime,
 				searchTime, searchContext.getStart(), searchContext.getEnd());
 
 			Map<String, FacetAccessible> facetMap = browseResult.getFacetMap();
@@ -265,14 +263,12 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 
 				BrowseResult browseResult = boboBrowser.browse(browseRequest);
 
-				BrowseHit[] browseHits = browseResult.getHits();
-
 				long endTime = System.currentTimeMillis();
 
 				float searchTime = (float)(endTime - startTime) / Time.SECOND;
 
 				hits = toHits(
-					indexSearcher, new HitDocs(browseHits), query, startTime,
+					indexSearcher, new HitDocs(browseResult), query, startTime,
 					searchTime, searchContext.getStart(),
 					searchContext.getEnd());
 
@@ -711,8 +707,9 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 
 	private class HitDocs {
 
-		public HitDocs(BrowseHit[] browseHits) {
-			_browseHits = browseHits;
+		public HitDocs(BrowseResult browseResult) {
+			_browseHits = browseResult.getHits();
+			_browseResult = browseResult;
 		}
 
 		public HitDocs(TopFieldDocs topFieldDocs) {
@@ -749,14 +746,15 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 			if (_topFieldDocs != null) {
 				return _topFieldDocs.totalHits;
 			}
-			else if (_browseHits != null) {
-				return _browseHits.length;
+			else if (_browseResult != null) {
+				return _browseResult.getNumHits();
 			}
 
 			throw new IllegalStateException();
 		}
 
 		private BrowseHit[] _browseHits;
+		private BrowseResult _browseResult;
 		private TopFieldDocs _topFieldDocs;
 
 	}
