@@ -589,8 +589,13 @@ public class StagingImpl implements Staging {
 
 			errorMessageJSONObject.put("name", missingReferenceDisplayName);
 
-			Group group = GroupLocalServiceUtil.fetchGroup(
-				missingReference.getGroupId());
+			Group group = null;
+			try {
+				group = GroupLocalServiceUtil.fetchGroup(
+							missingReference.getGroupId());
+			}
+			catch (SystemException se) {
+			}
 
 			if (group != null) {
 				errorMessageJSONObject.put(
