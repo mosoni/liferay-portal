@@ -240,7 +240,7 @@ public class StagingUtil {
 	}
 
 	public static JSONObject getExceptionMessagesJSONObject(
-			Locale locale, Exception e, Map<String, Serializable> contextMap)
+		Locale locale, Exception e, Map<String, Serializable> contextMap) 
 		throws SystemException {
 
 		return getStaging().getExceptionMessagesJSONObject(

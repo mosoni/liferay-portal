@@ -87,7 +87,7 @@ public class LayoutExportBackgroundTaskExecutor
 	}
 
 	@Override
-	public String handleException(BackgroundTask backgroundTask, Exception e)
+	public String handleException(BackgroundTask backgroundTask, Exception e) 
 		throws SystemException {
 
 		JSONObject jsonObject = StagingUtil.getExceptionMessagesJSONObject(

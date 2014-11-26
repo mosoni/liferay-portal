@@ -28,8 +28,7 @@ public interface BackgroundTaskExecutor {
 	public BackgroundTaskStatusMessageTranslator
 		getBackgroundTaskStatusMessageTranslator();
 
-	public String handleException(BackgroundTask backgroundTask, Exception e)
-		throws SystemException;
+	public String handleException(BackgroundTask backgroundTask, Exception e) throws SystemException;
 
 	public boolean isSerial();
 
