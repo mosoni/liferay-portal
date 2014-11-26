@@ -233,15 +233,14 @@ public class StagingUtil {
 
 	public static JSONArray getErrorMessagesJSONArray(
 		Locale locale, Map<String, MissingReference> missingReferences,
-		Map<String, Serializable> contextMap) throws SystemException {
+		Map<String, Serializable> contextMap) {
 
 		return getStaging().getErrorMessagesJSONArray(
 			locale, missingReferences, contextMap);
 	}
 
 	public static JSONObject getExceptionMessagesJSONObject(
-		Locale locale, Exception e, Map<String, Serializable> contextMap) 
-		throws SystemException {
+		Locale locale, Exception e, Map<String, Serializable> contextMap) {
 
 		return getStaging().getExceptionMessagesJSONObject(
 			locale, e, contextMap);

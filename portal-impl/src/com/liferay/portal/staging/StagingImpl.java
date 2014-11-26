@@ -529,7 +529,7 @@ public class StagingImpl implements Staging {
 	@Override
 	public JSONArray getErrorMessagesJSONArray(
 		Locale locale, Map<String, MissingReference> missingReferences,
-		Map<String, Serializable> contextMap) throws SystemException {
+		Map<String, Serializable> contextMap) {
 
 		JSONArray errorMessagesJSONArray = JSONFactoryUtil.createJSONArray();
 
@@ -613,8 +613,7 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public JSONObject getExceptionMessagesJSONObject(
-			Locale locale, Exception e, Map<String, Serializable> contextMap)
-		throws SystemException {
+		Locale locale, Exception e, Map<String, Serializable> contextMap) {
 
 		JSONObject exceptionMessagesJSONObject =
 			JSONFactoryUtil.createJSONObject();

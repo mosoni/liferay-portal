@@ -52,9 +52,7 @@ public abstract class BaseStagingBackgroundTaskExecutor
 	}
 
 	@Override
-	public String handleException(BackgroundTask backgroundTask, Exception e)
-		throws SystemException {
-
+	public String handleException(BackgroundTask backgroundTask, Exception e) {
 		JSONObject jsonObject = StagingUtil.getExceptionMessagesJSONObject(
 			getLocale(backgroundTask), e, backgroundTask.getTaskContextMap());
 
