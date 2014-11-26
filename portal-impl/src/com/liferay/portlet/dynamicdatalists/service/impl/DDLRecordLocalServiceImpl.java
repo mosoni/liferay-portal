@@ -414,6 +414,7 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		boolean addDraftAssetEntry = false;
+		boolean visible = true;
 
 		if ((recordVersion != null) && !recordVersion.isApproved()) {
 			String version = recordVersion.getVersion();
@@ -428,11 +429,7 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 					addDraftAssetEntry = true;
 				}
 			}
-		}
 
-		boolean visible = true;
-
-		if ((recordVersion != null) && !recordVersion.isApproved()) {
 			visible = false;
 		}
 
