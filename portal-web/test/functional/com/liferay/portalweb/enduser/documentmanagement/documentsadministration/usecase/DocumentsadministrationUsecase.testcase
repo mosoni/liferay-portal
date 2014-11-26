@@ -337,7 +337,6 @@
 		<var name="dmDocumentFileList" value="Document_1.doc,Document_2.doc,Document_1.txt,Document_2.docx,Document_1.xlsx,Document_1.jpg" />
 		<var name="pageName" value="Documents and Media Page" />
 		<var name="portletOption" value="Configuration" />
-		<var name="stagingActivated" value="false" />
 		<var name="uploadCommonFile" value="true" />
 
 		<execute macro="Page#gotoContentCP">
