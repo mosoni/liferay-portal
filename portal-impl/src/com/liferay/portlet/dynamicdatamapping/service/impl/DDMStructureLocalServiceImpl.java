@@ -1364,8 +1364,7 @@ public class DDMStructureLocalServiceImpl
 	 *             occurred
 	 * @throws     SystemException if a system exception occurred
 	 *
-	 * @deprecated As of 6.2.0, with no direct replacement. See LPS-47559 and
-	 * LPS-51597
+	 * @deprecated As of 6.2.0, with no direct replacement
 	 */
 	@Override
 	public void updateXSDFieldMetadata(
