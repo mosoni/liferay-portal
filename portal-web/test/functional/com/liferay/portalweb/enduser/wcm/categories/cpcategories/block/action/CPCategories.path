@@ -185,7 +185,7 @@
 <!--VOCABULARY_CATEGORY-->
 <tr>
 	<td>VOCABULARY_CATEGORY_LABEL</td>
-	<td>//div[contains(@class,'tree-node-content')]/span[contains(.,'${key_categoryName}')]</td>
+	<td>//div[@id='categoriesTreeContainer']/ul/li[contains(.,'${key_categoryName}')]/div</td>
 	<td></td>
 </tr>
 <tr>
