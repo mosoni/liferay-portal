@@ -976,7 +976,8 @@ $dockbarOpenGradientStart: #0EA6F9;
 			padding: 0;
 
 			.nav-header {
-				box-sizing: border-box;
+				@include box-sizing(border-box);
+
 				width: 100%;
 			}
 		}
