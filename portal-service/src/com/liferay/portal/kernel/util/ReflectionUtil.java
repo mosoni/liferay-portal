@@ -311,6 +311,18 @@ public class ReflectionUtil {
 				" and parameter types " + Arrays.toString(parameterTypes));
 	}
 
+	public static <T> T throwException(Throwable throwable) {
+		return ReflectionUtil.<T, RuntimeException>_doThrowException(throwable);
+	}
+
+	@SuppressWarnings("unchecked")
+	private static <T, E extends Throwable> T _doThrowException(
+			Throwable throwable)
+		throws E {
+
+		throw (E)throwable;
+	}
+
 	private static void _getInterfaces(
 		List<Class<?>> interfaceClasses, Class<?> clazz,
 		ClassLoader classLoader) {
