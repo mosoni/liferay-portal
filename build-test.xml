@@ -3128,7 +3128,7 @@ app.server.tomcat.dir=${app.server.parent.dir}/tomcat-7.0.27</echo>
 
 		<antcall target="compile-test" inheritAll="false" />
 
-		<antcall target="record-test-package-names" inheritAll="false" />
+		<antcall target="record-test-class-file-names" inheritAll="false" />
 	</target>
 
 	<target name="prepare-test-build-tomcat-dependents">
@@ -3584,7 +3584,7 @@ if (ppstate.equals("normal")) {
 		<echo>Updated ${app.server.dir}/webapps/ROOT/html/common/themes/bottom-test.jsp.</echo>
 	</target>
 
-	<target name="record-test-package-names">
+	<target name="record-test-class-file-names">
 		<script classpathref="project.classpath" language="beanshell">
 			<![CDATA[
 				import org.apache.tools.ant.DirectoryScanner;
@@ -3665,7 +3665,7 @@ if (ppstate.equals("normal")) {
 				for (int i = 0; i < shortRunningPackageGroupsSize; i++) {
 					Set packageGroup = packageGroups.get(i);
 
-					sb.append("TEST_PACKAGE_GROUP_");
+					sb.append("TEST_CLASS_GROUP_");
 					sb.append(i);
 					sb.append("=");
 
@@ -3682,14 +3682,14 @@ if (ppstate.equals("normal")) {
 				}
 
 				for (int i = 0; i < longRunningPackageGroupsSize; i++) {
-					sb.append("TEST_PACKAGE_GROUP_");
+					sb.append("TEST_CLASS_GROUP_");
 					sb.append(shortRunningPackageGroupsSize + i);
 					sb.append("=");
 					sb.append(longRunningPackageNames[i]);
 					sb.append("\n\n");
 				}
 
-				sb.append("TEST_PACKAGE_GROUPS=");
+				sb.append("TEST_CLASS_GROUPS=");
 
 				for (int i = 0; i < allPackageGroupsSize; i++) {
 					sb.append(i);
@@ -3712,11 +3712,11 @@ if (ppstate.equals("normal")) {
 					sb.setLength(sb.length() - 1);
 				}
 
-				project.setProperty("test.package.names.properties.content", sb.toString());
+				project.setProperty("test.class.file.names.properties.content", sb.toString());
 			]]>
 		</script>
 
-		<echo file="test.package.names.properties">${test.package.names.properties.content}</echo>
+		<echo file="test.class.file.names.properties">${test.class.file.names.properties.content}</echo>
 	</target>
 
 	<target name="record-test-package-names">
