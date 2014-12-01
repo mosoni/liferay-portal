@@ -642,7 +642,7 @@
 
 				<replaceregexp file="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay/frmresourceslist.html"
 					match="(\t*)// Get the optional [^;]*?;\r?(\n).*?sFileSize \) \) ;"
-					replace="\1var sFileDesc = oNode.attributes.getNamedItem('desc').value ;\2\1var sFileErrorMessageNamedItem = oNode.attributes.getNamedItem('errorMessage');\2\1var sFileErrorMessage = null;\2\1 if (sFileErrorMessageNamedItem) {sFileErrorMessage = sFileErrorMessageNamedItem.value;}\2\1var sFileUrl = oNode.attributes.getNamedItem('url').value ;\2\2\1oHtml.Append( oListManager.GetFileRowHtml( sFileDesc, sFileUrl, sFileSize, sFileErrorMessage ) ) ;"
+					replace="\1var sFileDesc = oNode.attributes.getNamedItem('desc').value ;\2\1var sFileErrorMessageNamedItem = oNode.attributes.getNamedItem('errorMessage');\2\1var sFileErrorMessage = null;\2\1 if (sFileErrorMessageNamedItem) {sFileErrorMessage = sFileErrorMessageNamedItem.value;}\2\1var sFileUrl = oNode.attributes.getNamedItem('url').value ;\2\2\1oHtml.Append( oListManager.GetFileRowHtml( sFileName, sFileUrl, sFileSize, sFileErrorMessage ) ) ;"
 					flags="s"
 				/>
 
