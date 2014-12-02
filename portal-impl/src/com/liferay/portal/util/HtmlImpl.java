@@ -355,8 +355,9 @@ public class HtmlImpl implements Html {
 
 			if (c != CharPool.UNDERLINE) {
 				sb.append(StringUtil.toHexString(c));
-				sb.append(CharPool.UNDERLINE);
 			}
+
+			sb.append(CharPool.UNDERLINE);
 
 			lastReplacementIndex = i + 1;
 		}
