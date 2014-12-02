@@ -189,7 +189,7 @@
 		</execute>
 	</command>
 
-	<command name="AddTemplateXSL" priority="5">
+	<command known-issues="LIFERAYQA-12370" name="AddTemplateXSL" priority="5">
 		<var name="templateDescription" value="WC Template Description" />
 		<var name="templateFile" value="xsl_template.xsl" />
 		<var name="templateLanguage" value="xsl" />
