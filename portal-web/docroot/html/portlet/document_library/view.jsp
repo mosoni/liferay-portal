@@ -294,10 +294,11 @@ if (!defaultFolderView && (folder != null) && portletName.equals(PortletKeys.DOC
 		}
 	);
 
-	Liferay.on(
-		'<portlet:namespace />scopeChange',
-		function(event) {
-			documentLibrary.destroy();
-		}
-	);
+	var changeScopeHandles = function(event) {
+		documentLibrary.destroy();
+
+		Liferay.detach('changeScope', changeScopeHandles);
+	};
+
+	Liferay.on('changeScope', changeScopeHandles);
 </aui:script>
