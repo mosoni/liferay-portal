@@ -13,6 +13,10 @@
 		<case locator-key1="STRUCTURE">
 			<execute function="AssertTextEquals#assertValue" />
 		</case>
+
+		<case locator-key1="SCRIPT_CONTENT_TEXT_LAYER">
+			<execute function="AssertTextEquals#assertPartialText" />
+		</case>
 	</command>
 
 	<command name="isElementNotPresent">

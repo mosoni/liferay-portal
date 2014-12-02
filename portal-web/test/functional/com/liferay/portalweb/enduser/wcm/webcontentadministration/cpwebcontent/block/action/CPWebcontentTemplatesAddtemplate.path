@@ -101,6 +101,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SCRIPT_CONTENT_TEXT_LAYER</td>
+	<td>//div[@class='ace_layer ace_text-layer']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SCRIPT_FIELDS_1</td>
 	<td>//div[@id='_166_paletteData']/div[2]/ul/li/span</td>
 	<td></td>
