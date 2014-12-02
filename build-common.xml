@@ -1157,7 +1157,7 @@ rerun your task.
 
 	<macrodef name="test-cmd">
 		<attribute name="junit.forkmode" />
-		<attribute name="test.class" />
+		<attribute name="test.includes" />
 		<attribute name="test.type" />
 		<attribute default="" name="test.excludes" />
 
@@ -1182,7 +1182,7 @@ rerun your task.
 					<resourcecount property="test.with.security.count">
 						<fileset
 							dir="test-classes/${current.test.dir}"
-							includes="**/@{test.class}.class"
+							includes="@{test.includes}"
 						>
 							<filename regex=".*/pacl/test/[\w]+Test.class" negate="false" />
 						</fileset>
@@ -1203,7 +1203,7 @@ rerun your task.
 								</misc>
 								<test.classes>
 									<batchtest todir="test-results/@{test.type}">
-										<fileset dir="test-classes/${current.test.dir}" includes="**/@{test.class}.class">
+										<fileset dir="test-classes/${current.test.dir}" includes="@{test.includes}">
 											<exclude name="**/DLAppServiceHttpTest.class" />
 											<exclude name="**/DLAppServiceJsonTest.class" />
 											<exclude name="**/DLAppServiceSoapTest.class" />
@@ -1222,7 +1222,7 @@ rerun your task.
 					<resourcecount property="test.without.security.count">
 						<fileset
 							dir="test-classes/${current.test.dir}"
-							includes="**/@{test.class}.class"
+							includes="@{test.includes}"
 						>
 							<filename regex=".*/pacl/test/[\w]+Test.class" negate="true" />
 						</fileset>
@@ -1239,7 +1239,7 @@ rerun your task.
 							>
 								<test.classes>
 									<batchtest todir="test-results/@{test.type}">
-										<fileset dir="test-classes/${current.test.dir}" includes="**/@{test.class}.class">
+										<fileset dir="test-classes/${current.test.dir}" includes="@{test.includes}">
 											<exclude name="**/DLAppServiceHttpTest.class" />
 											<exclude name="**/DLAppServiceJsonTest.class" />
 											<exclude name="**/DLAppServiceSoapTest.class" />
@@ -1433,7 +1433,7 @@ rerun your task.
 
 		<test-cmd
 			junit.forkmode="perTest"
-			test.class="${test.class}"
+			test.includes="**/${test.class}.class"
 			test.type="${test.type}"
 		/>
 
@@ -1470,14 +1470,14 @@ rerun your task.
 
 		<test-cmd
 			junit.forkmode="once"
-			test.class="*Test"
+			test.includes="**/*Test.class"
 			test.excludes="**/*PersistenceTest.class"
 			test.type="integration"
 		/>
 
 		<test-cmd
 			junit.forkmode="once"
-			test.class="*PersistenceTest"
+			test.includes="**/*PersistenceTest.class"
 			test.type="integration"
 		/>
 
@@ -1613,8 +1613,8 @@ rerun your task.
 					<then>
 						<test-cmd
 							junit.forkmode="once"
-							test.class="**/${test.package.dir}/*Test"
 							test.excludes="**/*PersistenceTest.class"
+							test.includes="**/${test.package.dir}/*Test.class"
 							test.type="integration"
 						/>
 
@@ -1638,7 +1638,7 @@ rerun your task.
 					<then>
 						<test-cmd
 							junit.forkmode="once"
-							test.class="**/${test.package.dir}/*PersistenceTest"
+							test.includes="**/${test.package.dir}/*PersistenceTest.class"
 							test.type="integration"
 						/>
 
@@ -1667,7 +1667,7 @@ rerun your task.
 					<then>
 						<test-cmd
 							junit.forkmode="perTest"
-							test.class="**/${test.package.dir}/*Test"
+							test.includes="**/${test.package.dir}/*Test.class"
 							test.type="unit"
 						/>
 
@@ -1687,7 +1687,7 @@ rerun your task.
 
 		<test-cmd
 			junit.forkmode="perTest"
-			test.class="*Test"
+			test.includes="**/*Test.class"
 			test.type="unit"
 		/>
 
