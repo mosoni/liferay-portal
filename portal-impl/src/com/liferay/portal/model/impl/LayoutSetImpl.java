@@ -67,17 +67,22 @@ public class LayoutSetImpl extends LayoutSetBaseImpl {
 				PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME) &&
 			!isPrivateLayout()) {
 
-			Group group = GroupLocalServiceUtil.fetchGroup(
-				getCompanyId(), PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
+			try {
+				Group group =
+					GroupLocalServiceUtil.fetchGroup(getCompanyId(),
+						PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
 
-			if ((group != null) && (getGroupId() == group.getGroupId())) {
-				Company company = CompanyLocalServiceUtil.fetchCompany(
-					getCompanyId());
+				if ((group != null) && (getGroupId() == group.getGroupId())) {
+					Company company = CompanyLocalServiceUtil.fetchCompany(
+						getCompanyId());
 
-				if (company != null) {
-					_companyFallbackVirtualHostname =
-						company.getVirtualHostname();
+					if (company != null) {
+						_companyFallbackVirtualHostname =
+							company.getVirtualHostname();
+					}
 				}
+			}
+			catch (SystemException se) {
 			}
 		}
 
@@ -203,14 +208,20 @@ public class LayoutSetImpl extends LayoutSetBaseImpl {
 			return _virtualHostname;
 		}
 
-		VirtualHost virtualHost = VirtualHostLocalServiceUtil.fetchVirtualHost(
-			getCompanyId(), getLayoutSetId());
+		try {
+			VirtualHost virtualHost =
+				VirtualHostLocalServiceUtil.fetchVirtualHost(
+					getCompanyId(), getLayoutSetId());
 
-		if (virtualHost == null) {
-			_virtualHostname = StringPool.BLANK;
+			if (virtualHost == null) {
+				_virtualHostname = StringPool.BLANK;
+			}
+			else {
+				_virtualHostname = virtualHost.getHostname();
+			}
 		}
-		else {
-			_virtualHostname = virtualHost.getHostname();
+		catch (Exception e) {
+			_virtualHostname = StringPool.BLANK;
 		}
 
 		return _virtualHostname;
