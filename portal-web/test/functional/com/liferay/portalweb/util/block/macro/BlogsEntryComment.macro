@@ -18,20 +18,7 @@
 	</command>
 
 	<command name="addPG">
-		<var name="key_entryTitle" value="${entryTitle}" />
-
-		<execute action="PGBlogs#assertClick" locator-key1="ENTRY_TITLE" value1="${entryTitle}" />
-		<execute action="PGBlogs#pause" value1="1000" />
-
-		<if>
-			<condition action="PGBlogsEntry#isElementPresent" locator-key1="COMMENTS_BE_THE_FIRST" />
-			<then>
-				<execute action="PGBlogsEntry#assertClick" locator-key1="COMMENTS_BE_THE_FIRST" value1="Be the first." />
-			</then>
-			<else>
-				<execute action="PGBlogsEntry#assertClick" locator-key1="COMMENTS_ADD" value1="Add Comment" />
-			</else>
-		</if>
+		<execute macro="BlogsEntryComment#gotoPG" />
 
 		<execute action="PGBlogsEntry#type" locator-key1="COMMENTS_BODY_FIELD" value1="${entryComment}" />
 		<execute action="PGBlogsEntry#pause" value1="1000" />
@@ -61,6 +48,26 @@
 
 		<execute action="PGBlogsEntry#pause" value1="1000" />
 		<execute action="PGBlogsEntry#assertTextEquals" locator-key1="COMMENTS_SUCCESS" value1="Your request processed successfully." />
+	</command>
+
+	<command name="cancelPG">
+		<execute action="PGBlogsEntry#type" locator-key1="COMMENTS_BODY_FIELD" value1="${entryComment}" />
+		<execute action="PGBlogsEntry#pause" value1="1000" />
+		<execute action="PGBlogsEntry#assertClick" locator-key1="COMMENTS_CANCEL_BUTTON" value1="Cancel" />
+
+		<if>
+			<condition action="PGBlogsEntry#isElementPresent" locator-key1="COMMENTS_BE_THE_FIRST" />
+			<then>
+				<execute action="PGBlogsEntry#assertClick" locator-key1="COMMENTS_BE_THE_FIRST" value1="Be the first." />
+			</then>
+			<else>
+				<execute action="PGBlogsEntry#assertClick" locator-key1="COMMENTS_ADD" value1="Add Comment" />
+			</else>
+		</if>
+
+		<execute action="PGBlogsEntry#assertTextNotPresent" locator-key1="COMMENTS_BODY_FIELD" value1="${entryComment}" />
+
+		<execute action="PGBlogsEntry#assertClick" locator-key1="COMMENTS_CANCEL_BUTTON" value1="Cancel" />
 	</command>
 
 	<command name="deleteCP">
@@ -133,6 +140,23 @@
 		<var name="key_entryComment" value="${entryCommentEdit}" />
 
 		<execute action="PGBlogsEntry#assertTextEquals" locator-key1="COMMENT" value1="${entryCommentEdit}" />
+	</command>
+
+	<command name="gotoPG">
+		<var name="key_entryTitle" value="${entryTitle}" />
+
+		<execute action="PGBlogs#assertClick" locator-key1="ENTRY_TITLE" value1="${entryTitle}" />
+		<execute action="PGBlogs#pause" value1="1000" />
+
+		<if>
+			<condition action="PGBlogsEntry#isElementPresent" locator-key1="COMMENTS_BE_THE_FIRST" />
+			<then>
+				<execute action="PGBlogsEntry#assertClick" locator-key1="COMMENTS_BE_THE_FIRST" value1="Be the first." />
+			</then>
+			<else>
+				<execute action="PGBlogsEntry#assertClick" locator-key1="COMMENTS_ADD" value1="Add Comment" />
+			</else>
+		</if>
 	</command>
 
 	<command name="searchPG">
