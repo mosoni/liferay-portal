@@ -105,13 +105,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>PRIVATE_MESSAGE_USERS_DELETED_USERS</td>
+	<td>//div[@class='layout-content thread-info-content ']/span[@class='profile-link line-through']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PRIVATE_MESSAGE_USERS_DELETED_USERS_QUESTION_ICON</td>
+	<td>//div[@class='layout-content thread-info-content ']//span[contains(.,'Deleted User')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>PRIVATE_MESSAGE_SENDER</td>
 	<td>//div[@class='message' and contains(.,'${key_messageBody}')]/span/a</td>
 	<td></td>
 </tr>
 <tr>
+	<td>PRIVATE_MESSAGE_SENDER_DELETED_USER</td>
+	<td>//div[@class='message' and contains(.,'Deleted User') and contains(.,'${key_messageBody}')]/span</td>
+	<td></td>
+</tr>
+<tr>
 	<td>PRIVATE_MESSAGE_BODY</td>
 	<td>//div[@class='message' and contains(.,'${key_messageBody}')]/div[@class='body']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PRIVATE_MESSAGE_BODY_HYPERLINK</td>
+	<td>//div[@class='message' and contains(.,'${key_messageBody}')]/div[@class='body']/a</td>
 	<td></td>
 </tr>
 <tr>
