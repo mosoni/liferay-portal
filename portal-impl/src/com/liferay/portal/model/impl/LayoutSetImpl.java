@@ -68,9 +68,9 @@ public class LayoutSetImpl extends LayoutSetBaseImpl {
 			!isPrivateLayout()) {
 
 			try {
-				Group group =
-					GroupLocalServiceUtil.fetchGroup(getCompanyId(),
-						PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
+				Group group = GroupLocalServiceUtil.fetchGroup(
+					getCompanyId(),
+					PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
 
 				if ((group != null) && (getGroupId() == group.getGroupId())) {
 					Company company = CompanyLocalServiceUtil.fetchCompany(
