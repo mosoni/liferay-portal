@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.tools.DBUpgrader;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.runners.model.InitializationError;
@@ -47,7 +47,7 @@ public class LiferayPersistenceIntegrationJUnitTestRunner
 
 	@Override
 	public List<String> getExtraConfigLocations() {
-		return Arrays.asList("META-INF/test-persistence-spring.xml");
+		return Collections.emptyList();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
