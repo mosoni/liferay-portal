@@ -117,6 +117,9 @@
 		<execute action="CPDynamicdatalistsDatadefinitions#assertClick" locator-key1="DATA_DEFINITION_MENULIST_EDIT" value1="Edit" />
 
 		<execute action="CPDynamicdatalistsDatadefinitionsEdit#type" locator-key1="NAME_FIELD" value1="${ddlDataDefinitionNameEdit}" />
+
+		<execute macro="CPDynamicdatalistsDatadefinitionsAdd#showDetails" />
+
 		<execute action="CPDynamicdatalistsDatadefinitionsEdit#type" locator-key1="DETAILS_DESCRIPTION_FIELD" value1="${ddlDataDefinitionDescriptionEdit}" />
 
 		<execute action="CPDynamicdatalistsDatadefinitions#selectFrame" value1="relative=top" />
