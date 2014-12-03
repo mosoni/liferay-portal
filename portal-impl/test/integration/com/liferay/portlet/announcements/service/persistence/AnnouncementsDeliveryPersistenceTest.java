@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
-import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
+import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.announcements.NoSuchDeliveryException;
@@ -52,7 +52,7 @@ import java.util.List;
  */
 @ExecutionTestListeners(listeners =  {
 	PersistenceExecutionTestListener.class})
-@RunWith(LiferayPersistenceIntegrationJUnitTestRunner.class)
+@RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class AnnouncementsDeliveryPersistenceTest {
 	@After
 	public void tearDown() throws Exception {

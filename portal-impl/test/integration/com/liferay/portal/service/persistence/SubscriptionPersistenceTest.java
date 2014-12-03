@@ -33,7 +33,7 @@ import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.impl.SubscriptionModelImpl;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
-import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
+import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.util.PropsValues;
 
 import org.junit.After;
@@ -51,7 +51,7 @@ import java.util.List;
  */
 @ExecutionTestListeners(listeners =  {
 	PersistenceExecutionTestListener.class})
-@RunWith(LiferayPersistenceIntegrationJUnitTestRunner.class)
+@RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class SubscriptionPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
