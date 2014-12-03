@@ -2894,8 +2894,13 @@ app.server.tomcat.dir=${app.server.parent.dir}/tomcat-7.0.27</echo>
 		<antcall target="start" inheritAll="false" />
 
 		<if>
-			<equals arg1="${test.build.unit}" arg2="false" />
+			<equals arg1="${test.build.unit}" arg2="true" />
 			<then>
+				<ant antfile="build-dist.xml" target="unzip-tomcat" inheritAll="false" />
+
+				<antcall target="deploy" inheritAll="false" />
+			</then>
+			<else>
 				<if>
 					<matches pattern="http" string="${test.build.bundle.geronimo.zip.url}" />
 					<then>
@@ -3133,11 +3138,6 @@ app.server.tomcat.dir=${app.server.parent.dir}/tomcat-7.0.27</echo>
 				</if>
 
 				<ant dir="portal-impl" target="build-selenium-block" inheritAll="false" />
-			</then>
-			<else>
-				<ant antfile="build-dist.xml" target="unzip-tomcat" inheritAll="false" />
-
-				<antcall target="deploy" inheritAll="false" />
 			</else>
 		</if>
 
