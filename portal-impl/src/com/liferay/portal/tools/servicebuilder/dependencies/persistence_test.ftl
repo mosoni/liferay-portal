@@ -32,16 +32,15 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.test.AssertUtils;
-import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.util.PropsValues;
@@ -61,14 +60,34 @@ import java.util.Map;
 import java.util.Set;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 
-@ExecutionTestListeners(listeners = {PersistenceExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class ${entity.name}PersistenceTest {
+
+	@BeforeClass
+	public static void setUpClass() {
+		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = false;
+	}
+
+	@AfterClass
+	public static void tearDownClass() {
+		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = true;
+	}
+
+	@Before
+	public void setUp() {
+		_listeners = _persistence.getListeners();
+
+		for (ModelListener<${entity.name}> modelListener : _listeners) {
+			_persistence.unregisterListener(modelListener);
+		}
+	}
 
 	@After
 	public void tearDown() throws Exception {
@@ -78,6 +97,10 @@ public class ${entity.name}PersistenceTest {
 			_persistence.remove(iterator.next());
 
 			iterator.remove();
+		}
+
+		for (ModelListener<${entity.name}> modelListener : _listeners) {
+			_persistence.registerListener(modelListener);
 		}
 	}
 
@@ -885,6 +908,7 @@ public class ${entity.name}PersistenceTest {
 	private static Log _log = LogFactoryUtil.getLog(${entity.name}PersistenceTest.class);
 
 	private List<${entity.name}> _${entity.varNames} = new ArrayList<${entity.name}>();
+	private ModelListener<${entity.name}>[] _listeners;
 	private ${entity.name}Persistence _persistence = (${entity.name}Persistence)${beanLocatorUtilShortName}.locate(${entity.name}Persistence.class.getName());
 
 }
