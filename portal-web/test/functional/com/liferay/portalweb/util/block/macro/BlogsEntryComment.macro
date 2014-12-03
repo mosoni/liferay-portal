@@ -18,7 +18,7 @@
 	</command>
 
 	<command name="addPG">
-		<execute macro="BlogsEntryComment#gotoPG" />
+		<execute macro="BlogsEntryComment#gotoAddPG" />
 
 		<execute action="PGBlogsEntry#type" locator-key1="COMMENTS_BODY_FIELD" value1="${entryComment}" />
 		<execute action="PGBlogsEntry#pause" value1="1000" />
@@ -66,7 +66,6 @@
 		</if>
 
 		<execute action="PGBlogsEntry#assertTextNotPresent" locator-key1="COMMENTS_BODY_FIELD" value1="${entryComment}" />
-
 		<execute action="PGBlogsEntry#assertClick" locator-key1="COMMENTS_CANCEL_BUTTON" value1="Cancel" />
 	</command>
 
@@ -142,7 +141,7 @@
 		<execute action="PGBlogsEntry#assertTextEquals" locator-key1="COMMENT" value1="${entryCommentEdit}" />
 	</command>
 
-	<command name="gotoPG">
+	<command name="gotoAddPG">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
 		<execute action="PGBlogs#assertClick" locator-key1="ENTRY_TITLE" value1="${entryTitle}" />

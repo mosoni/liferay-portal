@@ -1152,7 +1152,7 @@
 			<var name="entryTitle" value="${entryTitle}" />
 		</execute>
 
-		<execute macro="BlogsEntryComment#gotoPG">
+		<execute macro="BlogsEntryComment#gotoAddPG">
 			<var name="entryTitle" value="${entryTitle}" />
 		</execute>
 
