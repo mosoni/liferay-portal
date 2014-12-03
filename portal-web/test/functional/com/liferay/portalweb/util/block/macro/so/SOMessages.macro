@@ -153,7 +153,16 @@
 
 		<execute macro="SOMessages#viewMessageConnectionDetailsView" />
 
-		<execute action="SOMessagesMessage#assertTextEquals" locator-key1="PRIVATE_MESSAGE_SENDER" value1="${senderName}" />
+		<if>
+			<equals arg1="${senderUserDeleted}" arg2="true" />
+			<then>
+				<execute action="SOMessagesMessage#assertTextEquals" locator-key1="PRIVATE_MESSAGE_SENDER_DELETED_USER" value1="${senderName} Deleted User" />
+			</then>
+			<else>
+				<execute action="SOMessagesMessage#assertTextEquals" locator-key1="PRIVATE_MESSAGE_SENDER" value1="${senderName}" />
+			</else>
+		</if>
+
 		<execute action="SOMessagesMessage#assertTextEquals" locator-key1="PRIVATE_MESSAGE_BODY" value1="${messageBody}" />
 
 		<if>
@@ -201,6 +210,13 @@
 					</if>
 				</for>
 			</then>
+			<elseif>
+				<equals arg1="${connectionUserDeleted}" arg2="true" />
+				<then>
+					<execute action="SOMessagesMessage#assertTextEquals" locator-key1="PRIVATE_MESSAGE_USERS_DELETED_USERS" value1="${connectionName}" />
+					<execute action="SOMessagesMessage#assertTextEquals" locator-key1="PRIVATE_MESSAGE_USERS_DELETED_USERS_QUESTION_ICON" value1="Deleted User" />
+				</then>
+			</elseif>
 			<else>
 				<execute action="SOMessagesMessage#assertTextEquals" locator-key1="PRIVATE_MESSAGE_USERS" value1="Between ${connectionName} and You" />
 			</else>
@@ -236,6 +252,12 @@
 					</if>
 				</for>
 			</then>
+			<elseif>
+				<equals arg1="${connectionUserDeleted}" arg2="true" />
+				<then>
+					<execute action="SOMessages#assertTextEquals" locator-key1="MESSAGE_SENDER" value1="${connectionName} Deleted User" />
+				</then>
+			</elseif>
 			<else>
 				<execute action="SOMessages#assertTextEquals" locator-key1="MESSAGE_SENDER" value1="${connectionName}" />
 			</else>
