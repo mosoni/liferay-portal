@@ -16,10 +16,6 @@ package com.liferay.portal.test;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.tools.DBUpgrader;
-
-import java.util.Collections;
-import java.util.List;
 
 import org.junit.runners.model.InitializationError;
 
@@ -33,21 +29,6 @@ public class LiferayPersistenceIntegrationJUnitTestRunner
 		throws InitializationError {
 
 		super(clazz);
-	}
-
-	@Override
-	public void afterApplicationContextInit() {
-		try {
-			DBUpgrader.upgrade();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	@Override
-	public List<String> getExtraConfigLocations() {
-		return Collections.emptyList();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

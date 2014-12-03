@@ -16,8 +16,6 @@ package com.liferay.portal.test;
 
 import com.liferay.portal.util.InitUtil;
 
-import java.util.List;
-
 import org.junit.runners.model.InitializationError;
 
 /**
@@ -32,15 +30,11 @@ public abstract class CustomizableSpringContextJUnitTestRunner
 		super(clazz);
 	}
 
-	public abstract void afterApplicationContextInit();
-
-	public abstract List<String> getExtraConfigLocations();
-
 	@Override
 	public void initApplicationContext() {
 		System.setProperty("catalina.base", ".");
 
-		InitUtil.initWithSpring(getExtraConfigLocations());
+		InitUtil.initWithSpring(null);
 	}
 
 }
