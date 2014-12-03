@@ -31,10 +31,8 @@ import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.asset.NoSuchEntryException;
@@ -47,11 +45,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -62,25 +58,13 @@ import java.util.Set;
 public class AssetEntryPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<AssetEntry> iterator = _assetEntries.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -166,7 +150,7 @@ public class AssetEntryPersistenceTest {
 
 		newAssetEntry.setViewCount(ServiceTestUtil.nextInt());
 
-		_persistence.update(newAssetEntry);
+		_assetEntries.add(_persistence.update(newAssetEntry));
 
 		AssetEntry existingAssetEntry = _persistence.findByPrimaryKey(newAssetEntry.getPrimaryKey());
 
@@ -463,12 +447,12 @@ public class AssetEntryPersistenceTest {
 
 		assetEntry.setViewCount(ServiceTestUtil.nextInt());
 
-		_persistence.update(assetEntry);
+		_assetEntries.add(_persistence.update(assetEntry));
 
 		return assetEntry;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AssetEntryPersistenceTest.class);
+	private List<AssetEntry> _assetEntries = new ArrayList<AssetEntry>();
 	private AssetEntryPersistence _persistence = (AssetEntryPersistence)PortalBeanLocatorUtil.locate(AssetEntryPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

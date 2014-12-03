@@ -29,10 +29,8 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.expando.NoSuchTableException;
@@ -45,11 +43,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -60,25 +56,13 @@ import java.util.Set;
 public class ExpandoTablePersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<ExpandoTable> iterator = _expandoTables.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -120,7 +104,7 @@ public class ExpandoTablePersistenceTest {
 
 		newExpandoTable.setName(ServiceTestUtil.randomString());
 
-		_persistence.update(newExpandoTable);
+		_expandoTables.add(_persistence.update(newExpandoTable));
 
 		ExpandoTable existingExpandoTable = _persistence.findByPrimaryKey(newExpandoTable.getPrimaryKey());
 
@@ -314,12 +298,12 @@ public class ExpandoTablePersistenceTest {
 
 		expandoTable.setName(ServiceTestUtil.randomString());
 
-		_persistence.update(expandoTable);
+		_expandoTables.add(_persistence.update(expandoTable));
 
 		return expandoTable;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ExpandoTablePersistenceTest.class);
+	private List<ExpandoTable> _expandoTables = new ArrayList<ExpandoTable>();
 	private ExpandoTablePersistence _persistence = (ExpandoTablePersistence)PortalBeanLocatorUtil.locate(ExpandoTablePersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

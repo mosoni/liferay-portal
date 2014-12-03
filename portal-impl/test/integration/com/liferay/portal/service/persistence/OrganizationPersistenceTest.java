@@ -33,10 +33,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.OrganizationModelImpl;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import org.junit.After;
@@ -45,11 +43,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -60,25 +56,13 @@ import java.util.Set;
 public class OrganizationPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<Organization> iterator = _organizations.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -144,7 +128,7 @@ public class OrganizationPersistenceTest {
 
 		newOrganization.setComments(ServiceTestUtil.randomString());
 
-		_persistence.update(newOrganization);
+		_organizations.add(_persistence.update(newOrganization));
 
 		Organization existingOrganization = _persistence.findByPrimaryKey(newOrganization.getPrimaryKey());
 
@@ -393,12 +377,12 @@ public class OrganizationPersistenceTest {
 
 		organization.setComments(ServiceTestUtil.randomString());
 
-		_persistence.update(organization);
+		_organizations.add(_persistence.update(organization));
 
 		return organization;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(OrganizationPersistenceTest.class);
+	private List<Organization> _organizations = new ArrayList<Organization>();
 	private OrganizationPersistence _persistence = (OrganizationPersistence)PortalBeanLocatorUtil.locate(OrganizationPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

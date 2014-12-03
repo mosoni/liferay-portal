@@ -28,10 +28,8 @@ import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 
 import com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
@@ -42,11 +40,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -57,25 +53,13 @@ import java.util.Set;
 public class SCLicensePersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<SCLicense> iterator = _scLicenses.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -121,7 +105,7 @@ public class SCLicensePersistenceTest {
 
 		newSCLicense.setRecommended(ServiceTestUtil.randomBoolean());
 
-		_persistence.update(newSCLicense);
+		_scLicenses.add(_persistence.update(newSCLicense));
 
 		SCLicense existingSCLicense = _persistence.findByPrimaryKey(newSCLicense.getPrimaryKey());
 
@@ -301,12 +285,12 @@ public class SCLicensePersistenceTest {
 
 		scLicense.setRecommended(ServiceTestUtil.randomBoolean());
 
-		_persistence.update(scLicense);
+		_scLicenses.add(_persistence.update(scLicense));
 
 		return scLicense;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SCLicensePersistenceTest.class);
+	private List<SCLicense> _scLicenses = new ArrayList<SCLicense>();
 	private SCLicensePersistence _persistence = (SCLicensePersistence)PortalBeanLocatorUtil.locate(SCLicensePersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

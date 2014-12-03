@@ -32,10 +32,8 @@ import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.documentlibrary.NoSuchContentException;
@@ -48,14 +46,12 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
 import java.sql.Blob;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -66,25 +62,13 @@ import java.util.Set;
 public class DLContentPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<DLContent> iterator = _dlContents.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -141,7 +125,7 @@ public class DLContentPersistenceTest {
 
 		newDLContent.setSize(ServiceTestUtil.nextLong());
 
-		_persistence.update(newDLContent);
+		_dlContents.add(_persistence.update(newDLContent));
 
 		DLContent existingDLContent = _persistence.findByPrimaryKey(newDLContent.getPrimaryKey());
 
@@ -363,12 +347,12 @@ public class DLContentPersistenceTest {
 
 		dlContent.setSize(ServiceTestUtil.nextLong());
 
-		_persistence.update(dlContent);
+		_dlContents.add(_persistence.update(dlContent));
 
 		return dlContent;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DLContentPersistenceTest.class);
+	private List<DLContent> _dlContents = new ArrayList<DLContent>();
 	private DLContentPersistence _persistence = (DLContentPersistence)PortalBeanLocatorUtil.locate(DLContentPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

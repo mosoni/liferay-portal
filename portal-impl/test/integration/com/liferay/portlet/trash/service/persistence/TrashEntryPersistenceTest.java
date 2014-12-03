@@ -29,10 +29,8 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.trash.NoSuchEntryException;
@@ -45,11 +43,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -60,25 +56,13 @@ import java.util.Set;
 public class TrashEntryPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<TrashEntry> iterator = _trashEntries.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -134,7 +118,7 @@ public class TrashEntryPersistenceTest {
 
 		newTrashEntry.setStatus(ServiceTestUtil.nextInt());
 
-		_persistence.update(newTrashEntry);
+		_trashEntries.add(_persistence.update(newTrashEntry));
 
 		TrashEntry existingTrashEntry = _persistence.findByPrimaryKey(newTrashEntry.getPrimaryKey());
 
@@ -357,12 +341,12 @@ public class TrashEntryPersistenceTest {
 
 		trashEntry.setStatus(ServiceTestUtil.nextInt());
 
-		_persistence.update(trashEntry);
+		_trashEntries.add(_persistence.update(trashEntry));
 
 		return trashEntry;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(TrashEntryPersistenceTest.class);
+	private List<TrashEntry> _trashEntries = new ArrayList<TrashEntry>();
 	private TrashEntryPersistence _persistence = (TrashEntryPersistence)PortalBeanLocatorUtil.locate(TrashEntryPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

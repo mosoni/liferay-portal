@@ -487,19 +487,20 @@ public interface PollsQuestionModel extends BaseModel<PollsQuestion>,
 	public Object clone();
 
 	@Override
-	public int compareTo(PollsQuestion pollsQuestion);
+	public int compareTo(
+		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<PollsQuestion> toCacheModel();
+	public CacheModel<com.liferay.portlet.polls.model.PollsQuestion> toCacheModel();
 
 	@Override
-	public PollsQuestion toEscapedModel();
+	public com.liferay.portlet.polls.model.PollsQuestion toEscapedModel();
 
 	@Override
-	public PollsQuestion toUnescapedModel();
+	public com.liferay.portlet.polls.model.PollsQuestion toUnescapedModel();
 
 	@Override
 	public String toString();

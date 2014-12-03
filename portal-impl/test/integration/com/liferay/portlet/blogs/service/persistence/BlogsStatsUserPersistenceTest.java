@@ -30,10 +30,8 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.blogs.NoSuchStatsUserException;
@@ -46,11 +44,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -61,25 +57,13 @@ import java.util.Set;
 public class BlogsStatsUserPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<BlogsStatsUser> iterator = _blogsStatsUsers.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -131,7 +115,7 @@ public class BlogsStatsUserPersistenceTest {
 
 		newBlogsStatsUser.setRatingsAverageScore(ServiceTestUtil.nextDouble());
 
-		_persistence.update(newBlogsStatsUser);
+		_blogsStatsUsers.add(_persistence.update(newBlogsStatsUser));
 
 		BlogsStatsUser existingBlogsStatsUser = _persistence.findByPrimaryKey(newBlogsStatsUser.getPrimaryKey());
 
@@ -346,12 +330,12 @@ public class BlogsStatsUserPersistenceTest {
 
 		blogsStatsUser.setRatingsAverageScore(ServiceTestUtil.nextDouble());
 
-		_persistence.update(blogsStatsUser);
+		_blogsStatsUsers.add(_persistence.update(blogsStatsUser));
 
 		return blogsStatsUser;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(BlogsStatsUserPersistenceTest.class);
+	private List<BlogsStatsUser> _blogsStatsUsers = new ArrayList<BlogsStatsUser>();
 	private BlogsStatsUserPersistence _persistence = (BlogsStatsUserPersistence)PortalBeanLocatorUtil.locate(BlogsStatsUserPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

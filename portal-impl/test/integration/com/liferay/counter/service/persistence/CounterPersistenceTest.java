@@ -29,10 +29,8 @@ import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -40,11 +38,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -55,25 +51,13 @@ import java.util.Set;
 public class CounterPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<Counter> iterator = _counters.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -111,7 +95,7 @@ public class CounterPersistenceTest {
 
 		newCounter.setCurrentId(ServiceTestUtil.nextLong());
 
-		_persistence.update(newCounter);
+		_counters.add(_persistence.update(newCounter));
 
 		Counter existingCounter = _persistence.findByPrimaryKey(newCounter.getPrimaryKey());
 
@@ -254,12 +238,12 @@ public class CounterPersistenceTest {
 
 		counter.setCurrentId(ServiceTestUtil.nextLong());
 
-		_persistence.update(counter);
+		_counters.add(_persistence.update(counter));
 
 		return counter;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CounterPersistenceTest.class);
+	private List<Counter> _counters = new ArrayList<Counter>();
 	private CounterPersistence _persistence = (CounterPersistence)PortalBeanLocatorUtil.locate(CounterPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

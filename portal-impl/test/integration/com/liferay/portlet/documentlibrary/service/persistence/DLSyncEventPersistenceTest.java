@@ -28,10 +28,8 @@ import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.documentlibrary.NoSuchSyncEventException;
@@ -44,11 +42,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -59,25 +55,13 @@ import java.util.Set;
 public class DLSyncEventPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<DLSyncEvent> iterator = _dlSyncEvents.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -121,7 +105,7 @@ public class DLSyncEventPersistenceTest {
 
 		newDLSyncEvent.setTypePK(ServiceTestUtil.nextLong());
 
-		_persistence.update(newDLSyncEvent);
+		_dlSyncEvents.add(_persistence.update(newDLSyncEvent));
 
 		DLSyncEvent existingDLSyncEvent = _persistence.findByPrimaryKey(newDLSyncEvent.getPrimaryKey());
 
@@ -315,12 +299,12 @@ public class DLSyncEventPersistenceTest {
 
 		dlSyncEvent.setTypePK(ServiceTestUtil.nextLong());
 
-		_persistence.update(dlSyncEvent);
+		_dlSyncEvents.add(_persistence.update(dlSyncEvent));
 
 		return dlSyncEvent;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DLSyncEventPersistenceTest.class);
+	private List<DLSyncEvent> _dlSyncEvents = new ArrayList<DLSyncEvent>();
 	private DLSyncEventPersistence _persistence = (DLSyncEventPersistence)PortalBeanLocatorUtil.locate(DLSyncEventPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

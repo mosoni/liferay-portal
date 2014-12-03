@@ -33,10 +33,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.impl.LockModelImpl;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import org.junit.After;
@@ -45,11 +43,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -60,25 +56,13 @@ import java.util.Set;
 public class LockPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<Lock> iterator = _locks.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -134,7 +118,7 @@ public class LockPersistenceTest {
 
 		newLock.setExpirationDate(ServiceTestUtil.nextDate());
 
-		_persistence.update(newLock);
+		_locks.add(_persistence.update(newLock));
 
 		Lock existingLock = _persistence.findByPrimaryKey(newLock.getPrimaryKey());
 
@@ -349,12 +333,12 @@ public class LockPersistenceTest {
 
 		lock.setExpirationDate(ServiceTestUtil.nextDate());
 
-		_persistence.update(lock);
+		_locks.add(_persistence.update(lock));
 
 		return lock;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LockPersistenceTest.class);
+	private List<Lock> _locks = new ArrayList<Lock>();
 	private LockPersistence _persistence = (LockPersistence)PortalBeanLocatorUtil.locate(LockPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

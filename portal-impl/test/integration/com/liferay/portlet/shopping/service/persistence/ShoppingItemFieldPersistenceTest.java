@@ -28,10 +28,8 @@ import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 
 import com.liferay.portlet.shopping.NoSuchItemFieldException;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
@@ -42,11 +40,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -57,25 +53,13 @@ import java.util.Set;
 public class ShoppingItemFieldPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<ShoppingItemField> iterator = _shoppingItemFields.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -119,7 +103,7 @@ public class ShoppingItemFieldPersistenceTest {
 
 		newShoppingItemField.setDescription(ServiceTestUtil.randomString());
 
-		_persistence.update(newShoppingItemField);
+		_shoppingItemFields.add(_persistence.update(newShoppingItemField));
 
 		ShoppingItemField existingShoppingItemField = _persistence.findByPrimaryKey(newShoppingItemField.getPrimaryKey());
 
@@ -298,12 +282,12 @@ public class ShoppingItemFieldPersistenceTest {
 
 		shoppingItemField.setDescription(ServiceTestUtil.randomString());
 
-		_persistence.update(shoppingItemField);
+		_shoppingItemFields.add(_persistence.update(shoppingItemField));
 
 		return shoppingItemField;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ShoppingItemFieldPersistenceTest.class);
+	private List<ShoppingItemField> _shoppingItemFields = new ArrayList<ShoppingItemField>();
 	private ShoppingItemFieldPersistence _persistence = (ShoppingItemFieldPersistence)PortalBeanLocatorUtil.locate(ShoppingItemFieldPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

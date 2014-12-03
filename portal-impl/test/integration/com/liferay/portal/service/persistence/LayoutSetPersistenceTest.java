@@ -32,10 +32,8 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutSetModelImpl;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import org.junit.After;
@@ -44,11 +42,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -59,25 +55,13 @@ import java.util.Set;
 public class LayoutSetPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<LayoutSet> iterator = _layoutSets.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -145,7 +129,7 @@ public class LayoutSetPersistenceTest {
 
 		newLayoutSet.setLayoutSetPrototypeLinkEnabled(ServiceTestUtil.randomBoolean());
 
-		_persistence.update(newLayoutSet);
+		_layoutSets.add(_persistence.update(newLayoutSet));
 
 		LayoutSet existingLayoutSet = _persistence.findByPrimaryKey(newLayoutSet.getPrimaryKey());
 
@@ -393,12 +377,12 @@ public class LayoutSetPersistenceTest {
 
 		layoutSet.setLayoutSetPrototypeLinkEnabled(ServiceTestUtil.randomBoolean());
 
-		_persistence.update(layoutSet);
+		_layoutSets.add(_persistence.update(layoutSet));
 
 		return layoutSet;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutSetPersistenceTest.class);
+	private List<LayoutSet> _layoutSets = new ArrayList<LayoutSet>();
 	private LayoutSetPersistence _persistence = (LayoutSetPersistence)PortalBeanLocatorUtil.locate(LayoutSetPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

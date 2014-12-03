@@ -33,10 +33,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutFriendlyURL;
 import com.liferay.portal.model.impl.LayoutFriendlyURLModelImpl;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import org.junit.After;
@@ -45,11 +43,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -60,25 +56,13 @@ import java.util.Set;
 public class LayoutFriendlyURLPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<LayoutFriendlyURL> iterator = _layoutFriendlyURLs.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -136,7 +120,7 @@ public class LayoutFriendlyURLPersistenceTest {
 
 		newLayoutFriendlyURL.setLanguageId(ServiceTestUtil.randomString());
 
-		_persistence.update(newLayoutFriendlyURL);
+		_layoutFriendlyURLs.add(_persistence.update(newLayoutFriendlyURL));
 
 		LayoutFriendlyURL existingLayoutFriendlyURL = _persistence.findByPrimaryKey(newLayoutFriendlyURL.getPrimaryKey());
 
@@ -386,12 +370,12 @@ public class LayoutFriendlyURLPersistenceTest {
 
 		layoutFriendlyURL.setLanguageId(ServiceTestUtil.randomString());
 
-		_persistence.update(layoutFriendlyURL);
+		_layoutFriendlyURLs.add(_persistence.update(layoutFriendlyURL));
 
 		return layoutFriendlyURL;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutFriendlyURLPersistenceTest.class);
+	private List<LayoutFriendlyURL> _layoutFriendlyURLs = new ArrayList<LayoutFriendlyURL>();
 	private LayoutFriendlyURLPersistence _persistence = (LayoutFriendlyURLPersistence)PortalBeanLocatorUtil.locate(LayoutFriendlyURLPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

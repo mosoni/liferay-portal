@@ -30,10 +30,8 @@ import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.mobiledevicerules.NoSuchActionException;
@@ -46,11 +44,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Edward C. Han
@@ -61,25 +57,13 @@ import java.util.Set;
 public class MDRActionPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<MDRAction> iterator = _mdrActions.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -143,7 +127,7 @@ public class MDRActionPersistenceTest {
 
 		newMDRAction.setTypeSettings(ServiceTestUtil.randomString());
 
-		_persistence.update(newMDRAction);
+		_mdrActions.add(_persistence.update(newMDRAction));
 
 		MDRAction existingMDRAction = _persistence.findByPrimaryKey(newMDRAction.getPrimaryKey());
 
@@ -382,12 +366,12 @@ public class MDRActionPersistenceTest {
 
 		mdrAction.setTypeSettings(ServiceTestUtil.randomString());
 
-		_persistence.update(mdrAction);
+		_mdrActions.add(_persistence.update(mdrAction));
 
 		return mdrAction;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MDRActionPersistenceTest.class);
+	private List<MDRAction> _mdrActions = new ArrayList<MDRAction>();
 	private MDRActionPersistence _persistence = (MDRActionPersistence)PortalBeanLocatorUtil.locate(MDRActionPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

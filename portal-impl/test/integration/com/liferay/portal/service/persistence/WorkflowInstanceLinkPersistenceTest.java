@@ -31,10 +31,8 @@ import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.WorkflowInstanceLink;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -42,11 +40,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -57,25 +53,13 @@ import java.util.Set;
 public class WorkflowInstanceLinkPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<WorkflowInstanceLink> iterator = _workflowInstanceLinks.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -129,7 +113,7 @@ public class WorkflowInstanceLinkPersistenceTest {
 
 		newWorkflowInstanceLink.setWorkflowInstanceId(ServiceTestUtil.nextLong());
 
-		_persistence.update(newWorkflowInstanceLink);
+		_workflowInstanceLinks.add(_persistence.update(newWorkflowInstanceLink));
 
 		WorkflowInstanceLink existingWorkflowInstanceLink = _persistence.findByPrimaryKey(newWorkflowInstanceLink.getPrimaryKey());
 
@@ -339,12 +323,12 @@ public class WorkflowInstanceLinkPersistenceTest {
 
 		workflowInstanceLink.setWorkflowInstanceId(ServiceTestUtil.nextLong());
 
-		_persistence.update(workflowInstanceLink);
+		_workflowInstanceLinks.add(_persistence.update(workflowInstanceLink));
 
 		return workflowInstanceLink;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(WorkflowInstanceLinkPersistenceTest.class);
+	private List<WorkflowInstanceLink> _workflowInstanceLinks = new ArrayList<WorkflowInstanceLink>();
 	private WorkflowInstanceLinkPersistence _persistence = (WorkflowInstanceLinkPersistence)PortalBeanLocatorUtil.locate(WorkflowInstanceLinkPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

@@ -672,19 +672,19 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy>,
 	public Object clone();
 
 	@Override
-	public int compareTo(PasswordPolicy passwordPolicy);
+	public int compareTo(com.liferay.portal.model.PasswordPolicy passwordPolicy);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<PasswordPolicy> toCacheModel();
+	public CacheModel<com.liferay.portal.model.PasswordPolicy> toCacheModel();
 
 	@Override
-	public PasswordPolicy toEscapedModel();
+	public com.liferay.portal.model.PasswordPolicy toEscapedModel();
 
 	@Override
-	public PasswordPolicy toUnescapedModel();
+	public com.liferay.portal.model.PasswordPolicy toUnescapedModel();
 
 	@Override
 	public String toString();

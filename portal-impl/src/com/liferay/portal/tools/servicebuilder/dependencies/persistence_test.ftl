@@ -210,8 +210,6 @@ public class ${entity.name}PersistenceTest {
 			</#if>
 		</#list>
 
-		_persistence.update(new${entity.name});
-
 		_${entity.varNames}.add(_persistence.update(new${entity.name}));
 
 		${entity.name} existing${entity.name} = _persistence.findByPrimaryKey(new${entity.name}.getPrimaryKey());
@@ -627,8 +625,6 @@ public class ${entity.name}PersistenceTest {
 				);
 			</#if>
 		</#list>
-
-		_persistence.update(${entity.varName});
 
 		_${entity.varNames}.add(_persistence.update(${entity.varName}));
 

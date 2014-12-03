@@ -28,10 +28,8 @@ import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
@@ -44,11 +42,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -59,25 +55,13 @@ import java.util.Set;
 public class SCProductScreenshotPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<SCProductScreenshot> iterator = _scProductScreenshots.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -125,7 +109,7 @@ public class SCProductScreenshotPersistenceTest {
 
 		newSCProductScreenshot.setPriority(ServiceTestUtil.nextInt());
 
-		_persistence.update(newSCProductScreenshot);
+		_scProductScreenshots.add(_persistence.update(newSCProductScreenshot));
 
 		SCProductScreenshot existingSCProductScreenshot = _persistence.findByPrimaryKey(newSCProductScreenshot.getPrimaryKey());
 
@@ -340,12 +324,12 @@ public class SCProductScreenshotPersistenceTest {
 
 		scProductScreenshot.setPriority(ServiceTestUtil.nextInt());
 
-		_persistence.update(scProductScreenshot);
+		_scProductScreenshots.add(_persistence.update(scProductScreenshot));
 
 		return scProductScreenshot;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SCProductScreenshotPersistenceTest.class);
+	private List<SCProductScreenshot> _scProductScreenshots = new ArrayList<SCProductScreenshot>();
 	private SCProductScreenshotPersistence _persistence = (SCProductScreenshotPersistence)PortalBeanLocatorUtil.locate(SCProductScreenshotPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

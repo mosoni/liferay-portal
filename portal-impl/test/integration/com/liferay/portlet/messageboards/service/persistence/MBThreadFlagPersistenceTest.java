@@ -30,10 +30,8 @@ import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.messageboards.NoSuchThreadFlagException;
@@ -46,11 +44,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -61,25 +57,13 @@ import java.util.Set;
 public class MBThreadFlagPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<MBThreadFlag> iterator = _mbThreadFlags.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -131,7 +115,7 @@ public class MBThreadFlagPersistenceTest {
 
 		newMBThreadFlag.setThreadId(ServiceTestUtil.nextLong());
 
-		_persistence.update(newMBThreadFlag);
+		_mbThreadFlags.add(_persistence.update(newMBThreadFlag));
 
 		MBThreadFlag existingMBThreadFlag = _persistence.findByPrimaryKey(newMBThreadFlag.getPrimaryKey());
 
@@ -355,12 +339,12 @@ public class MBThreadFlagPersistenceTest {
 
 		mbThreadFlag.setThreadId(ServiceTestUtil.nextLong());
 
-		_persistence.update(mbThreadFlag);
+		_mbThreadFlags.add(_persistence.update(mbThreadFlag));
 
 		return mbThreadFlag;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MBThreadFlagPersistenceTest.class);
+	private List<MBThreadFlag> _mbThreadFlags = new ArrayList<MBThreadFlag>();
 	private MBThreadFlagPersistence _persistence = (MBThreadFlagPersistence)PortalBeanLocatorUtil.locate(MBThreadFlagPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

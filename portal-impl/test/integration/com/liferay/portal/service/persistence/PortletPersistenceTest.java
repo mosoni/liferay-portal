@@ -32,10 +32,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.PortletModelImpl;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import org.junit.After;
@@ -44,11 +42,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -59,25 +55,13 @@ import java.util.Set;
 public class PortletPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<Portlet> iterator = _portlets.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -121,7 +105,7 @@ public class PortletPersistenceTest {
 
 		newPortlet.setActive(ServiceTestUtil.randomBoolean());
 
-		_persistence.update(newPortlet);
+		_portlets.add(_persistence.update(newPortlet));
 
 		Portlet existingPortlet = _persistence.findByPrimaryKey(newPortlet.getPrimaryKey());
 
@@ -312,12 +296,12 @@ public class PortletPersistenceTest {
 
 		portlet.setActive(ServiceTestUtil.randomBoolean());
 
-		_persistence.update(portlet);
+		_portlets.add(_persistence.update(portlet));
 
 		return portlet;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortletPersistenceTest.class);
+	private List<Portlet> _portlets = new ArrayList<Portlet>();
 	private PortletPersistence _persistence = (PortletPersistence)PortalBeanLocatorUtil.locate(PortletPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

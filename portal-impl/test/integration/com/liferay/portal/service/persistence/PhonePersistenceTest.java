@@ -31,10 +31,8 @@ import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -42,11 +40,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -57,25 +53,13 @@ import java.util.Set;
 public class PhonePersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<Phone> iterator = _phones.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -135,7 +119,7 @@ public class PhonePersistenceTest {
 
 		newPhone.setPrimary(ServiceTestUtil.randomBoolean());
 
-		_persistence.update(newPhone);
+		_phones.add(_persistence.update(newPhone));
 
 		Phone existingPhone = _persistence.findByPrimaryKey(newPhone.getPrimaryKey());
 
@@ -341,12 +325,12 @@ public class PhonePersistenceTest {
 
 		phone.setPrimary(ServiceTestUtil.randomBoolean());
 
-		_persistence.update(phone);
+		_phones.add(_persistence.update(phone));
 
 		return phone;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PhonePersistenceTest.class);
+	private List<Phone> _phones = new ArrayList<Phone>();
 	private PhonePersistence _persistence = (PhonePersistence)PortalBeanLocatorUtil.locate(PhonePersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

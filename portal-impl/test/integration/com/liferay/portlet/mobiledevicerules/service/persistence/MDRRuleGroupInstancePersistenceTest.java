@@ -30,10 +30,8 @@ import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.mobiledevicerules.NoSuchRuleGroupInstanceException;
@@ -46,11 +44,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Edward C. Han
@@ -61,25 +57,13 @@ import java.util.Set;
 public class MDRRuleGroupInstancePersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<MDRRuleGroupInstance> iterator = _mdrRuleGroupInstances.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -137,7 +121,7 @@ public class MDRRuleGroupInstancePersistenceTest {
 
 		newMDRRuleGroupInstance.setPriority(ServiceTestUtil.nextInt());
 
-		_persistence.update(newMDRRuleGroupInstance);
+		_mdrRuleGroupInstances.add(_persistence.update(newMDRRuleGroupInstance));
 
 		MDRRuleGroupInstance existingMDRRuleGroupInstance = _persistence.findByPrimaryKey(newMDRRuleGroupInstance.getPrimaryKey());
 
@@ -391,12 +375,12 @@ public class MDRRuleGroupInstancePersistenceTest {
 
 		mdrRuleGroupInstance.setPriority(ServiceTestUtil.nextInt());
 
-		_persistence.update(mdrRuleGroupInstance);
+		_mdrRuleGroupInstances.add(_persistence.update(mdrRuleGroupInstance));
 
 		return mdrRuleGroupInstance;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MDRRuleGroupInstancePersistenceTest.class);
+	private List<MDRRuleGroupInstance> _mdrRuleGroupInstances = new ArrayList<MDRRuleGroupInstance>();
 	private MDRRuleGroupInstancePersistence _persistence = (MDRRuleGroupInstancePersistence)PortalBeanLocatorUtil.locate(MDRRuleGroupInstancePersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

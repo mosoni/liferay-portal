@@ -33,10 +33,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Team;
 import com.liferay.portal.model.impl.TeamModelImpl;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import org.junit.After;
@@ -45,11 +43,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -60,25 +56,13 @@ import java.util.Set;
 public class TeamPersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<Team> iterator = _teams.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -130,7 +114,7 @@ public class TeamPersistenceTest {
 
 		newTeam.setDescription(ServiceTestUtil.randomString());
 
-		_persistence.update(newTeam);
+		_teams.add(_persistence.update(newTeam));
 
 		Team existingTeam = _persistence.findByPrimaryKey(newTeam.getPrimaryKey());
 
@@ -349,12 +333,12 @@ public class TeamPersistenceTest {
 
 		team.setDescription(ServiceTestUtil.randomString());
 
-		_persistence.update(team);
+		_teams.add(_persistence.update(team));
 
 		return team;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(TeamPersistenceTest.class);
+	private List<Team> _teams = new ArrayList<Team>();
 	private TeamPersistence _persistence = (TeamPersistence)PortalBeanLocatorUtil.locate(TeamPersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

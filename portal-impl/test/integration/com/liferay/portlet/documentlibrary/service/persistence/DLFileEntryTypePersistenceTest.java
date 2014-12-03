@@ -30,10 +30,8 @@ import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException;
@@ -46,11 +44,9 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -61,25 +57,13 @@ import java.util.Set;
 public class DLFileEntryTypePersistenceTest {
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
+		Iterator<DLFileEntryType> iterator = _dlFileEntryTypes.iterator();
 
-		Set<Serializable> primaryKeys = basePersistences.keySet();
+		while (iterator.hasNext()) {
+			_persistence.remove(iterator.next());
 
-		for (Serializable primaryKey : primaryKeys) {
-			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
-
-			try {
-				basePersistence.remove(primaryKey);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("The model with primary key " + primaryKey +
-						" was already deleted");
-				}
-			}
+			iterator.remove();
 		}
-
-		_transactionalPersistenceAdvice.reset();
 	}
 
 	@Test
@@ -135,7 +119,7 @@ public class DLFileEntryTypePersistenceTest {
 
 		newDLFileEntryType.setDescription(ServiceTestUtil.randomString());
 
-		_persistence.update(newDLFileEntryType);
+		_dlFileEntryTypes.add(_persistence.update(newDLFileEntryType));
 
 		DLFileEntryType existingDLFileEntryType = _persistence.findByPrimaryKey(newDLFileEntryType.getPrimaryKey());
 
@@ -380,12 +364,12 @@ public class DLFileEntryTypePersistenceTest {
 
 		dlFileEntryType.setDescription(ServiceTestUtil.randomString());
 
-		_persistence.update(dlFileEntryType);
+		_dlFileEntryTypes.add(_persistence.update(dlFileEntryType));
 
 		return dlFileEntryType;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DLFileEntryTypePersistenceTest.class);
+	private List<DLFileEntryType> _dlFileEntryTypes = new ArrayList<DLFileEntryType>();
 	private DLFileEntryTypePersistence _persistence = (DLFileEntryTypePersistence)PortalBeanLocatorUtil.locate(DLFileEntryTypePersistence.class.getName());
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)PortalBeanLocatorUtil.locate(TransactionalPersistenceAdvice.class.getName());
 }

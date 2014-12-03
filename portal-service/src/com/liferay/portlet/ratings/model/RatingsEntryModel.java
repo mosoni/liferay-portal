@@ -271,19 +271,20 @@ public interface RatingsEntryModel extends AttachedModel, AuditedModel,
 	public Object clone();
 
 	@Override
-	public int compareTo(RatingsEntry ratingsEntry);
+	public int compareTo(
+		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<RatingsEntry> toCacheModel();
+	public CacheModel<com.liferay.portlet.ratings.model.RatingsEntry> toCacheModel();
 
 	@Override
-	public RatingsEntry toEscapedModel();
+	public com.liferay.portlet.ratings.model.RatingsEntry toEscapedModel();
 
 	@Override
-	public RatingsEntry toUnescapedModel();
+	public com.liferay.portlet.ratings.model.RatingsEntry toUnescapedModel();
 
 	@Override
 	public String toString();
