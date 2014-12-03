@@ -23,12 +23,11 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.util.PropsValues;
 
@@ -37,7 +36,10 @@ import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.impl.SocialActivityModelImpl;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
@@ -49,10 +51,27 @@ import java.util.List;
 /**
  * @author Brian Wing Shun Chan
  */
-@ExecutionTestListeners(listeners =  {
-	PersistenceExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class SocialActivityPersistenceTest {
+	@BeforeClass
+	public static void setUpClass() {
+		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = false;
+	}
+
+	@AfterClass
+	public static void tearDownClass() {
+		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = true;
+	}
+
+	@Before
+	public void setUp() {
+		_listeners = _persistence.getListeners();
+
+		for (ModelListener<SocialActivity> modelListener : _listeners) {
+			_persistence.unregisterListener(modelListener);
+		}
+	}
+
 	@After
 	public void tearDown() throws Exception {
 		Iterator<SocialActivity> iterator = _socialActivities.iterator();
@@ -61,6 +80,10 @@ public class SocialActivityPersistenceTest {
 			_persistence.remove(iterator.next());
 
 			iterator.remove();
+		}
+
+		for (ModelListener<SocialActivity> modelListener : _listeners) {
+			_persistence.registerListener(modelListener);
 		}
 	}
 
@@ -378,5 +401,6 @@ public class SocialActivityPersistenceTest {
 
 	private static Log _log = LogFactoryUtil.getLog(SocialActivityPersistenceTest.class);
 	private List<SocialActivity> _socialActivities = new ArrayList<SocialActivity>();
+	private ModelListener<SocialActivity>[] _listeners;
 	private SocialActivityPersistence _persistence = (SocialActivityPersistence)PortalBeanLocatorUtil.locate(SocialActivityPersistence.class.getName());
 }

@@ -17,10 +17,9 @@ package com.liferay.portal.kernel.dao.orm;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
-import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -33,12 +32,13 @@ import org.junit.runner.RunWith;
 /**
  * @author Sampsa Sohlman
  */
-@ExecutionTestListeners(listeners = { PersistenceExecutionTestListener.class })
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class QueryUtilTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
+		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = false;
+
 		_db = DBFactoryUtil.getDB();
 
 		_db.runSQL(_SQL_CREATE_TABLE);
@@ -47,6 +47,8 @@ public class QueryUtilTest {
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
+		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = true;
+
 		_db.runSQL(_SQL_DROP_TABLE);
 	}
 
