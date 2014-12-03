@@ -258,11 +258,11 @@ public class JournalArticleAssetRendererFactory
 
 	@Override
 	public boolean isListable(long classPK) throws SystemException {
-		JournalArticle journalArticle =
+		JournalArticle article =
 			JournalArticleLocalServiceUtil.fetchLatestArticle(
 				classPK, WorkflowConstants.STATUS_APPROVED, true);
 
-		if ((journalArticle != null) && journalArticle.isIndexable()) {
+		if ((article != null) && article.isIndexable()) {
 			return true;
 		}
 
