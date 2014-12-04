@@ -16,13 +16,10 @@ package com.liferay.portal.test;
 
 import com.liferay.portal.kernel.test.TestContext;
 import com.liferay.portal.servlet.MainServlet;
-
-import java.io.File;
+import com.liferay.portal.test.mock.AutoDeployMockServletContext;
 
 import javax.servlet.ServletException;
 
-import org.springframework.core.io.FileSystemResourceLoader;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.mock.web.MockServletConfig;
 import org.springframework.mock.web.MockServletContext;
 
@@ -37,8 +34,7 @@ public class MainServletExecutionTestListener
 		super.runBeforeClass(testContext);
 
 		MockServletContext mockServletContext =
-			new AutoDeployMockServletContext(
-				getResourceBasePath(), new FileSystemResourceLoader());
+			new AutoDeployMockServletContext();
 
 		MockServletConfig mockServletConfig = new MockServletConfig(
 			mockServletContext);
@@ -54,27 +50,6 @@ public class MainServletExecutionTestListener
 		}
 	}
 
-	protected String getResourceBasePath() {
-		File file = new File("portal-web/docroot");
-
-		return "file:" + file.getAbsolutePath();
-	}
-
 	protected MainServlet mainServlet;
-
-	protected class AutoDeployMockServletContext extends MockServletContext {
-
-		public AutoDeployMockServletContext(
-			String resourceBasePath, ResourceLoader resourceLoader) {
-
-			super(resourceBasePath, resourceLoader);
-		}
-
-		/**
-		 * @see com.liferay.portal.server.capabilities.TomcatServerCapabilities
-		 */
-		protected Boolean autoDeploy = Boolean.TRUE;
-
-	}
 
 }
