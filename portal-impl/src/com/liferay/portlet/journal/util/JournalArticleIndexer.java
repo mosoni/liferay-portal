@@ -15,6 +15,9 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.Property;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -737,6 +740,23 @@ public class JournalArticleIndexer extends BaseIndexer {
 
 		ActionableDynamicQuery actionableDynamicQuery =
 			new JournalArticleActionableDynamicQuery() {
+
+			@Override
+			protected void addCriteria(DynamicQuery dynamicQuery) {
+				if (PropsValues.JOURNAL_ARTICLE_INDEX_ALL_VERSIONS) {
+					return;
+				}
+
+				Property statusProperty = PropertyFactoryUtil.forName(
+					"status");
+
+				Integer[] statuses = {
+					WorkflowConstants.STATUS_APPROVED,
+					WorkflowConstants.STATUS_IN_TRASH
+				};
+
+				dynamicQuery.add(statusProperty.in(statuses));
+			}
 
 			@Override
 			protected void performAction(Object object) throws PortalException {
