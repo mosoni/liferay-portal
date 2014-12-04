@@ -33,7 +33,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.MainServlet;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
-import com.liferay.portal.test.MainServletExecutionTestListener;
+import com.liferay.portal.test.mock.AutoDeployMockServletContext;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsValues;
 
@@ -58,6 +58,7 @@ import javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag;
 import javax.security.auth.login.Configuration;
 import javax.security.auth.login.LoginContext;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -68,18 +69,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockServletConfig;
-import org.springframework.mock.web.MockServletContext;
 
 /**
  * @author Raymond Augé
  */
 @ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class JAASTest extends MainServletExecutionTestListener {
+public class JAASTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -329,16 +328,12 @@ public class JAASTest extends MainServletExecutionTestListener {
 			}
 		);
 
-		_mockServletContext = new AutoDeployMockServletContext(
-			getResourceBasePath(), new FileSystemResourceLoader());
+		MainServlet mainServlet = new MainServlet();
 
-		MockServletConfig mockServletConfig = new MockServletConfig(
-			_mockServletContext);
-
-		mainServlet = new MainServlet();
+		ServletContext mockServletContext = new AutoDeployMockServletContext();
 
 		try {
-			mainServlet.init(mockServletConfig);
+			mainServlet.init(new MockServletConfig(mockServletContext));
 		}
 		catch (ServletException se) {
 			throw new RuntimeException(
@@ -349,7 +344,7 @@ public class JAASTest extends MainServletExecutionTestListener {
 
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest(
-				_mockServletContext, HttpMethods.GET, StringPool.SLASH);
+				mockServletContext, HttpMethods.GET, StringPool.SLASH);
 
 		mockHttpServletRequest.setRemoteUser(String.valueOf(_user.getUserId()));
 
@@ -421,7 +416,6 @@ public class JAASTest extends MainServletExecutionTestListener {
 	private Field _jaasAuthTypeField;
 	private Boolean _jaasEnabled;
 	private Field _jaasEnabledField;
-	private MockServletContext _mockServletContext;
 	private User _user;
 
 	private class JAASAction extends Action {

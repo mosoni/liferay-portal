@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -278,6 +279,10 @@ public class ServiceTestUtil {
 
 		PortalRegisterTestUtil.registerAssetRendererFactories();
 
+		// Thread locals
+
+		_setThreadLocals();
+
 		// Company
 
 		try {
@@ -457,6 +462,17 @@ public class ServiceTestUtil {
 		MessageBus messageBus = MessageBusUtil.getMessageBus();
 
 		messageBus.replace(baseDestination);
+	}
+
+	private static void _setThreadLocals() {
+		LocaleThreadLocal.setThemeDisplayLocale(new Locale("en", "US"));
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setPathMain("path");
+		serviceContext.setPortalURL("http://tests:8080");
+
+		ServiceContextThreadLocal.pushServiceContext(serviceContext);
 	}
 
 	private static Random _random = new Random();
