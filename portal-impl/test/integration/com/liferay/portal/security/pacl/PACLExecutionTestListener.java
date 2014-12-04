@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.test.TestContext;
 import com.liferay.portal.kernel.util.PortalLifecycleUtil;
 import com.liferay.portal.spring.context.PortletContextLoaderListener;
 import com.liferay.portal.test.MainServletExecutionTestListener;
+import com.liferay.portal.test.mock.AutoDeployMockServletContext;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.HashMap;
@@ -34,7 +35,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.mock.web.MockServletContext;
@@ -80,8 +80,7 @@ public class PACLExecutionTestListener
 			PortalUtil.getServletContextName());
 
 		if (servletContext == null) {
-			servletContext = new AutoDeployMockServletContext(
-				getResourceBasePath(), new FileSystemResourceLoader());
+			servletContext = new AutoDeployMockServletContext();
 
 			servletContext.setAttribute(
 				InvokerFilterHelper.class.getName(), new InvokerFilterHelper());
