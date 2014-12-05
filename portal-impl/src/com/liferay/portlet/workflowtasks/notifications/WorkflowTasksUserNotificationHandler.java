@@ -51,6 +51,25 @@ public class WorkflowTasksUserNotificationHandler
 		return HtmlUtil.escape(jsonObject.getString("notificationMessage"));
 	}
 
+	protected String getKaleoProcessLink(
+			long workflowTaskId, ServiceContext serviceContext)
+		throws Exception {
+
+		LiferayPortletURL portletURL = PortletURLFactoryUtil.create(
+			serviceContext.getRequest(), PortletKeys.KALEO_FORMS,
+			serviceContext.getPlid(), PortletRequest.RENDER_PHASE);
+
+		String currentURL = portletURL.toString();
+
+		portletURL.setParameter("tabs2", "edit-workflow-task");
+		portletURL.setParameter("backURL", currentURL);
+		portletURL.setParameter(
+			"workflowTaskId", String.valueOf(workflowTaskId));
+		portletURL.setWindowState(WindowState.NORMAL);
+
+		return portletURL.toString();
+	}
+
 	@Override
 	protected String getLink(
 			UserNotificationEvent userNotificationEvent,
@@ -63,7 +82,8 @@ public class WorkflowTasksUserNotificationHandler
 		String entryClassName = jsonObject.getString("entryClassName");
 
 		if (Validator.equals(entryClassName, _KALEO_PROCESS_CLASS_NAME)) {
-			return null;
+			return getKaleoProcessLink(
+				jsonObject.getLong("workflowTaskId"), serviceContext);
 		}
 
 		LiferayPortletURL portletURL = PortletURLFactoryUtil.create(
