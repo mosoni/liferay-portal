@@ -187,6 +187,53 @@
 	<td>//ul[contains(@class,'dropdown-menu')]//a[contains(.,'Delete')]</td>
 	<td></td>
 </tr>
+<!--SUGGESTION-->
+<tr>
+	<td>SUGGESTION_ADD_LINK</td>
+	<td>//div[@class='kb-article-suggestion-actions']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_VIEW_LINK</td>
+	<td>//div[@class='kb-article-suggestion-actions']/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_BODY</td>
+	<td>//textarea[contains(@id,'knowledgebaseportlet_content')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_SUBMIT_BUTTON</td>
+	<td>//button[contains(.,'Submit')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_SUBMIT_CANCEL</td>
+	<td>//button[contains(.,'Cancel')]</td>
+	<td></td>
+</tr>
+<!--SUGGESTION_NAVIGATION-->
+<tr>
+	<td>SUGGESTION_NAVIGATION_BAR</td>
+	<td>//ul[contains(@id,'knowledgebaseportlet') and contains(@class,'navbar')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_NAVIGATION_NEW</td>
+	<td>//ul[contains(@class,'navbar')]//a[contains(.,'New')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_NAVIGATION_IN_PROGRESS</td>
+	<td>//ul[contains(@class,'navbar')]//a[contains(.,'In Progress')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_NAVIGATION_RESOLVED</td>
+	<td>//ul[contains(@class,'navbar')]//a[contains(.,'Resolved')]</td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>

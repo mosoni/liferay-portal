@@ -70,8 +70,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>NAVIGATION_FEEDBACK</td>
-	<td>//ul[contains(@class,'nav') and contains(@class,'nav-tabs')]/li[contains(.,'Feedback')]/a</td>
+	<td>NAVIGATION_SUGGESTIONS</td>
+	<td>//ul[contains(@class,'nav') and contains(@class,'nav-tabs')]/li[contains(.,'Suggestions')]/a</td>
 	<td></td>
 </tr>
 <tr>
