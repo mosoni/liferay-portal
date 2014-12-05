@@ -503,6 +503,22 @@
 		<execute action="SOActivities#assertElementPresent" locator-key1="ACTIVITIES_COMMENT_FIELD" />
 	</command>
 
+	<command name="viewActivityEntryTimeStamp">
+		<if>
+			<isset var="row" />
+			<then>
+				<var name="row" value="${row}" />
+			</then>
+			<else>
+				<var name="row" value="01" />
+			</else>
+		</if>
+
+		<var name="key_row" value="${row}" />
+
+		<execute action="SOActivities#assertTextEquals" locator-key1="ACTIVITIES_TIME_STAMP" value1="${timeStampValue}" />
+	</command>
+
 	<command name="viewActivityEntryUser">
 		<if>
 			<not>
@@ -717,7 +733,15 @@
 		<execute action="SOActivities#assertTextEquals" locator-key1="ACTIVITIES_TITLE" value1="${dmDocumentTitle}" />
 		<execute action="SOActivities#assertTextEquals" locator-key1="ACTIVITIES_DOCUMENT_VERSION" value1="Version ${dmDocumentVersionNumber}" />
 		<execute action="SOActivities#assertTextEquals" locator-key1="ACTIVITIES_DOCUMENT_DESCRIPTION_SINGLE" value1="${dmDocumentDescription}" />
-		<execute action="SOActivities#assertTextEquals" locator-key1="ACTIVITIES_DOWNLOAD" value1="Download" />
+
+		<if>
+			<not>
+				<equals arg1="${documentUpdateActivity}" arg2="true" />
+			</not>
+			<then>
+				<execute action="SOActivities#assertTextEquals" locator-key1="ACTIVITIES_DOWNLOAD" value1="Download" />
+			</then>
+		</if>
 
 		<if>
 			<isset var="commentCount" />
@@ -768,6 +792,7 @@
 		<execute action="SOActivities#assertTextEquals" locator-key1="ACTIVITIES_ACTION" value1="${action}" />
 		<execute action="SOActivities#assertTextEquals" locator-key1="ACTIVITIES_TITLE" value1="${threadSubject}" />
 		<execute action="SOActivities#assertTextEquals" locator-key1="ACTIVITIES_CONTENT" value1="${threadBody}" />
+		<execute action="SOActivities#assertElementNotPresent" locator-key1="ACTIVITIES_COMMENT" />
 	</command>
 
 	<command name="viewMicroblogsActivityEntry">
@@ -973,7 +998,10 @@
 
 		<if>
 			<not>
-				<equals arg1="${microblogsEntryCommentAuthorName}" arg2="${currentUser}" />
+				<or>
+					<equals arg1="${microblogsEntryCommentAuthorName}" arg2="${currentUser}" />
+					<equals arg1="${notViewableByEveryone}" arg2="true" />
+				</or>
 			</not>
 			<then>
 				<execute action="SOActivities#assertTextEquals" locator-key1="ACTIVITIES_REPOST" value1="Repost" />
@@ -1366,6 +1394,14 @@
 			<var name="key_documentTitleRow" value="${key_documentTitleRow?increment()}" />
 		</for>
 
+		<var name="key_documentTitleRow" value="1" />
+
+		<for list="${dmDocumentTitleList}" param="dmDocumentTitle">
+			<execute action="SOActivities#assertElementPresent" locator-key1="ACTIVITIES_DOCUMENT_DOWNLOAD_LINK_MULTIPLE" />
+
+			<var name="key_documentTitleRow" value="${key_documentTitleRow?increment()}" />
+		</for>
+
 		<if>
 			<isset var="commentCount" />
 			<then>
@@ -1571,6 +1607,7 @@
 				<or>
 					<contains string="${action}" substring="Commented" />
 					<contains string="${action}" substring="Created" />
+					<contains string="${action}" substring="attachment" />
 				</or>
 			</not>
 			<then>
@@ -1597,5 +1634,63 @@
 		</if>
 
 		<execute action="SOActivities#assertElementPresent" locator-key1="ACTIVITIES_COMMENT_FIELD" />
+	</command>
+
+	<command name="viewWikiChangesActivities">
+		<if>
+			<isset var="row" />
+			<then>
+				<var name="row" value="${row}" />
+			</then>
+			<else>
+				<var name="row" value="01" />
+			</else>
+		</if>
+
+		<var name="key_row" value="${row}" />
+
+		<execute action="SOActivities#assertClick" locator-key1="ACTIVITIES_VIEW_CHANGES" value1="View Changes" />
+
+		<if>
+			<equals arg1="${wikiPageCompareContentDetails}" arg2="true" />
+			<then>
+				<var name="key_wikiPageContentCompareAdded" value="${wikiPageContentCompareAdded}" />
+				<var name="key_wikiPageContentCompareFull" value="${wikiPageContentCompareFull}" />
+				<var name="key_wikiPageContentCompareRemoved" value="${wikiPageContentCompareRemoved}" />
+
+				<execute action="PGWikiWikipageHistory#assertTextEquals" locator-key1="COMPARE_VERSIONS_DIFF_ADDED" value1="${wikiPageContentCompareAdded}" />
+				<execute action="PGWikiWikipageHistory#assertTextEquals" locator-key1="COMPARE_VERSIONS_DIFF_REMOVED" value1="${wikiPageContentCompareRemoved}" />
+				<execute action="PGWikiWikipageHistory#assertTextEquals" locator-key1="COMPARE_VERSIONS_PARAGRAPH_FULL" value1="${wikiPageContentCompareFull}" />
+				<execute action="PGWikiWikipageHistory#assertClick" locator-key1="COMPARE_ACTIVITIES_NAVIGATION_TEXT_MODE_LINK" value1="Text Mode" />
+				<execute action="PGWikiWikipageHistory#assertTextEquals" locator-key1="COMPARE_VERSIONS_TEXT_MODE_TABLE_TITLE_VERSION_OLD" value1="${wikiPageTitle} ${wikiPageVersionOld}" />
+				<execute action="PGWikiWikipageHistory#assertTextEquals" locator-key1="COMPARE_VERSIONS_TEXT_MODE_TABLE_TITLE_VERSION_NEW" value1="${wikiPageTitle} ${wikiPageVersionNew}" />
+
+				<if>
+					<isset var="compareLineNumberOld" />
+					<then>
+						<execute action="PGWikiWikipageHistory#assertTextEquals" locator-key1="COMPARE_VERSIONS_TEXT_MODE_TABLE_LINE_NUMBER_OLD_1" value1="Line ${compareLineNumberOld}" />
+					</then>
+					<else>
+						<execute action="PGWikiWikipageHistory#assertTextEquals" locator-key1="COMPARE_VERSIONS_TEXT_MODE_TABLE_LINE_NUMBER_OLD_1" value1="Line 1" />
+					</else>
+				</if>
+
+				<if>
+					<isset var="compareLineNumberNew" />
+					<then>
+						<execute action="PGWikiWikipageHistory#assertTextEquals" locator-key1="COMPARE_VERSIONS_TEXT_MODE_TABLE_LINE_NUMBER_NEW_1" value1="Line ${compareLineNumberNew}" />
+					</then>
+					<else>
+						<execute action="PGWikiWikipageHistory#assertTextEquals" locator-key1="COMPARE_VERSIONS_TEXT_MODE_TABLE_LINE_NUMBER_NEW_1" value1="Line 1" />
+					</else>
+				</if>
+
+				<execute action="PGWikiWikipageHistory#assertTextEquals" locator-key1="COMPARE_VERSIONS_TEXT_MODE_TABLE_CONTENT_OLD_1" value1="${wikiPageContentCompareOld}" />
+				<execute action="PGWikiWikipageHistory#assertTextEquals" locator-key1="COMPARE_VERSIONS_TEXT_MODE_TABLE_CONTENT_NEW_1" value1="${wikiPageContentCompareNew}" />
+			</then>
+			<else>
+				<execute action="PGWikiWikipageHistory#assertTextEquals" locator-key1="COMPARE_VERSIONS_DIFF" value1="${wikiPageVersionDiff}" />
+			</else>
+		</if>
 	</command>
 </definition>
