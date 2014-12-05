@@ -107,6 +107,8 @@ public class PortletKeys {
 
 	public static final String JOURNAL_CONTENT_SEARCH = "77";
 
+	public static final String KALEO_FORMS = "1_WAR_kaleoformsportlet";
+
 	public static final String LANGUAGE = "82";
 
 	public static final String LAYOUT_PROTOTYPE = "146";
