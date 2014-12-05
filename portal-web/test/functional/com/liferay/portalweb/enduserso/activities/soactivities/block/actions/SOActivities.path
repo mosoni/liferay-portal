@@ -142,6 +142,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>ACTIVITIES_DOCUMENT_DOWNLOAD_LINK_MULTIPLE</td>
+	<td>//div[contains(@class,'activity-item')][${key_row}]//div[@class='activity-subentry'][${key_documentTitleRow}]/span[@class='activity-subentry-link']/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>ACTIVITIES_DOCUMENT_DESCRIPTION_SINGLE</td>
 	<td>//div[contains(@class,'activity-item')][${key_row}]//div[@class='document-content']</td>
 	<td></td>
@@ -248,6 +253,16 @@
 	<td></td>
 </tr>
 <!--SCREENSHOTS-->
+<tr>
+	<td>SCREENSHOTS_ACTIVITIES_DOCUMENT_IMAGE_THUMBNAIL_PNG</td>
+	<td>so/screenshots/activities/activities_document_image_thumbnail.png</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SCREENSHOTS_ACTIVITIES_MICROBLOGS_COMMENT_THUMBNAIL_PNG</td>
+	<td>so/screenshots/activities/activities_microblogs_comment_thumbnail.png</td>
+	<td></td>
+</tr>
 <tr>
 	<td>SCREENSHOTS_ACTIVITIES_TASK_ACTIVITY_PRIORITY_HIGH_PNG</td>
 	<td>so/screenshots/activities/activities_task_activity_priority_high.png</td>
