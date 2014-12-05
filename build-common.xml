@@ -1537,8 +1537,8 @@ rerun your task.
 			<then>
 				<resourcecount property="test.integration.other.count">
 					<fileset
-						dir="test/integration"
-						includes="**/${test.package.dir}/*Test.java"
+						dir="test-classes/integration"
+						includes="**/${test.package.dir}/*Test.class"
 					/>
 				</resourcecount>
 
@@ -1562,8 +1562,8 @@ rerun your task.
 
 				<resourcecount property="test.integration.persistence.count">
 					<fileset
-						dir="test/integration"
-						includes="**/${test.package.dir}/*PersistenceTest.java"
+						dir="test-classes/integration"
+						includes="**/${test.package.dir}/*PersistenceTest.class"
 					/>
 				</resourcecount>
 
@@ -1591,8 +1591,8 @@ rerun your task.
 			<then>
 				<resourcecount property="test.unit.count">
 					<fileset
-						dir="test/unit"
-						includes="**/${test.package.dir}/*Test.java"
+						dir="test-classes/unit"
+						includes="**/${test.package.dir}/*Test.class"
 					/>
 				</resourcecount>
 
