@@ -377,6 +377,201 @@
 		</execute>
 	</command>
 
+	<command name="AddDocumentCommentToEditedDocument" priority="4">
+		<var name="commentContent1" value="DM Document Comment1" />
+		<var name="commentContent2" value="DM Document Comment2" />
+		<var name="dmDocumentDescription" value="DM Folder Document Description" />
+		<var name="dmDocumentDescriptionEdit1" value="DM Folder Document Description Edit1" />
+		<var name="dmDocumentDescriptionEdit2" value="DM Folder Document Description Edit2" />
+		<var name="dmDocumentFile" value="Document_1.doc" />
+		<var name="dmDocumentFileEdit1" value="Document_2.doc" />
+		<var name="dmDocumentFileEdit2" value="Document_3.doc" />
+		<var name="dmDocumentSize1" value="22k" />
+		<var name="dmDocumentSize2" value="22k" />
+		<var name="dmDocumentSize3" value="24k" />
+		<var name="dmDocumentSizeSO1" value="21.5k" />
+		<var name="dmDocumentSizeSO2" value="22.5k" />
+		<var name="dmDocumentSizeSO3" value="23.5k" />
+		<var name="dmDocumentTitle" value="DM Folder Document Title" />
+		<var name="dmDocumentTitleEdit1" value="DM Folder Document Title Edit1" />
+		<var name="dmDocumentTitleEdit2" value="DM Folder Document Title Edit2" />
+		<var name="dmDocumentVersionNumber" value="1.0" />
+		<var name="dmDocumentVersionNumberEdit1" value="1.1" />
+		<var name="dmDocumentVersionNumberEdit2" value="1.2" />
+		<var name="siteDescription" value="Open Site Description" />
+		<var name="siteName" value="Open Site Name" />
+		<var name="siteType" value="Open" />
+		<var name="soPage" value="true" />
+
+		<execute macro="SOUserBar#addSOSite">
+			<var name="siteDescription" value="${siteDescription}" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteType" value="${siteType}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Documents" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+			<var name="dmDocumentFile" value="${dmDocumentFile}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+		</execute>
+
+		<execute macro="Page#openURL">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOActivities#addActivityEntryComment">
+			<var name="commentContent" value="${commentContent1}" />
+		</execute>
+
+		<execute macro="Page#openURL">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOActivities#viewDocumentsActivityEntry">
+			<var name="action" value="Uploaded a new document." />
+			<var name="commentCount" value="1" />
+			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+			<var name="dmDocumentSize" value="${dmDocumentSize1}" />
+			<var name="dmDocumentSizeSO" value="${dmDocumentSizeSO1}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+			<var name="dmDocumentUploader" value="${adminFirstName}" />
+			<var name="dmDocumentVersionNumber" value="1.0" />
+			<var name="userName" value="${adminFirstName}" />
+		</execute>
+
+		<execute macro="SOActivities#viewActivityEntryComment">
+			<var name="commentContent" value="${commentContent1}" />
+			<var name="commentCount" value="1" />
+			<var name="userFirstName" value="${adminFirstName}" />
+			<var name="userName" value="${adminName}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Documents" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMDocument#viewAllPG">
+			<var name="commentBody" value="${commentContent1}" />
+			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+			<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumber}" />
+		</execute>
+
+		<execute macro="SODocuments#viewPGDocumentSpecificVersionLog">
+			<var name="commentAuthor" value="${adminName}" />
+			<var name="commentBody" value="${commentContent1}" />
+			<var name="dmDocumentSizeSO" value="${dmDocumentSizeSO1}" />
+			<var name="dmDocumentUploader" value="${adminName}" />
+			<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumber}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Documents" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMDocument#editPG">
+			<var name="dmDocumentDescriptionEdit" value="${dmDocumentDescriptionEdit1}" />
+			<var name="dmDocumentFileEdit" value="${dmDocumentFileEdit1}" />
+			<var name="dmDocumentTitleEdit" value="${dmDocumentTitleEdit1}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Documents" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMDocument#editPG">
+			<var name="dmDocumentDescriptionEdit" value="${dmDocumentDescriptionEdit2}" />
+			<var name="dmDocumentFileEdit" value="${dmDocumentFileEdit2}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleEdit1}" />
+			<var name="dmDocumentTitleEdit" value="${dmDocumentTitleEdit2}" />
+		</execute>
+
+		<execute macro="Page#openURL">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOActivities#addActivityEntryComment">
+			<var name="commentContent" value="${commentContent2}" />
+		</execute>
+
+		<execute macro="Page#openURL">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOActivities#viewDocumentsActivityEntry">
+			<var name="action" value="Made 2 updates to a document." />
+			<var name="commentCount" value="1" />
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionEdit2}" />
+			<var name="dmDocumentSize" value="${dmDocumentSize2}" />
+			<var name="dmDocumentSizeSO" value="${dmDocumentSizeSO2}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleEdit2}" />
+			<var name="dmDocumentUploader" value="${adminFirstName}" />
+			<var name="dmDocumentVersionNumber" value="1.2" />
+			<var name="documentUpdateActivity" value="true" />
+			<var name="userName" value="${adminFirstName}" />
+		</execute>
+
+		<execute macro="SOActivities#viewActivityEntryComment">
+			<var name="commentContent" value="${commentContent2}" />
+			<var name="commentCount" value="1" />
+			<var name="userFirstName" value="${adminFirstName}" />
+			<var name="userName" value="${adminName}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Documents" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMDocument#viewAllPG">
+			<var name="commentBody" value="${commentContent2}" />
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionEdit2}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleEdit2}" />
+			<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumberEdit2}" />
+		</execute>
+
+		<execute macro="SODocuments#viewPGDocumentSpecificVersionLog">
+			<var name="commentAuthor" value="${adminName}" />
+			<var name="commentBody" value="${commentContent2}" />
+			<var name="dmDocumentSizeSO" value="${dmDocumentSizeSO3}" />
+			<var name="dmDocumentUploader" value="${adminName}" />
+			<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumberEdit2}" />
+		</execute>
+
+		<execute macro="SODocuments#viewPGDocumentSpecificVersionLog">
+			<var name="commentAuthor" value="${adminName}" />
+			<var name="dmDocumentSizeSO" value="${dmDocumentSizeSO2}" />
+			<var name="dmDocumentUploader" value="${adminName}" />
+			<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumberEdit1}" />
+		</execute>
+
+		<execute macro="SODocuments#viewPGDocumentSpecificVersionLog">
+			<var name="commentAuthor" value="${adminName}" />
+			<var name="commentBody" value="${commentContent1}" />
+			<var name="commentRow" value="3" />
+			<var name="dmDocumentSizeSO" value="${dmDocumentSizeSO1}" />
+			<var name="dmDocumentUploader" value="${adminName}" />
+			<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumber}" />
+		</execute>
+	</command>
+
 	<command name="AddMultipleDocumentsCommentActivities" priority="5">
 		<var name="commentContent" value="DM Document Comment" />
 		<var name="dmDocumentDescription1" value="DM Folder Document1 Description" />
@@ -1390,6 +1585,189 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="1 Comment" />
 		<execute action="SOActivities#assertTextNotPresent" value1="2 Comments" />
 		<execute action="SOActivities#assertTextNotPresent" value1="3 Comments" />
+	</command>
+
+	<command name="ViewDMFolderImageThumbnailActivities" priority="5">
+		<var name="dmDocumentDescription" value="DM Folder Image Description" />
+		<var name="dmDocumentFile" value="Document_1.jpeg" />
+		<var name="dmDocumentSize" value="16k" />
+		<var name="dmDocumentSizeSO" value="16.0k" />
+		<var name="dmDocumentTitle" value="DM Folder Image Title" />
+		<var name="dmFolderDescription" value="DM Folder Description" />
+		<var name="dmFolderName" value="DM Folder Name" />
+		<var name="siteDescription" value="Open Site Description" />
+		<var name="siteName" value="Open Site Name" />
+		<var name="siteType" value="Open" />
+		<var name="siteURL" value="true" />
+		<var name="soPage" value="true" />
+
+		<execute macro="SOUserBar#addSOSite">
+			<var name="siteDescription" value="${siteDescription}" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteType" value="${siteType}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Documents" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMFolder#addPG">
+			<var name="dmFolderDescription" value="${dmFolderDescription}" />
+			<var name="dmFolderName" value="${dmFolderName}" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Documents" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMFolder#gotoPG">
+			<var name="dmFolderName" value="${dmFolderName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+		</execute>
+
+		<execute macro="Page#openURL">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute action="SOActivities#sikuliAssertElementPresent" locator-key1="SCREENSHOTS_ACTIVITIES_DOCUMENT_IMAGE_THUMBNAIL_PNG" />
+	</command>
+
+	<command name="ViewEditedDMFolderDocumentActivities" priority="4">
+		<var name="dmDocumentDescription" value="DM Folder Document Description" />
+		<var name="dmDocumentDescriptionEdit" value="DM Folder Document Description Edit" />
+		<var name="dmDocumentFile" value="Document_1.doc" />
+		<var name="dmDocumentFileEdit" value="Document_2.doc" />
+		<var name="dmDocumentSize1" value="22k" />
+		<var name="dmDocumentSize2" value="22k" />
+		<var name="dmDocumentSizeSO1" value="21.5k" />
+		<var name="dmDocumentSizeSO2" value="22.5k" />
+		<var name="dmDocumentTitle" value="DM Folder Document Title" />
+		<var name="dmDocumentTitleEdit" value="DM Folder Document Title Edit" />
+		<var name="dmFolderDescription" value="DM Folder Description" />
+		<var name="dmFolderName" value="DM Folder Name" />
+		<var name="siteDescription" value="Open Site Description" />
+		<var name="siteName" value="Open Site Name" />
+		<var name="siteType" value="Open" />
+		<var name="soPage" value="true" />
+		<var name="userFullName" value="${adminName}" />
+
+		<execute macro="SOUserBar#addSOSite">
+			<var name="siteDescription" value="${siteDescription}" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteType" value="${siteType}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Documents" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMFolder#addPG">
+			<var name="dmFolderDescription" value="${dmFolderDescription}" />
+			<var name="dmFolderName" value="${dmFolderName}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Documents" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMFolder#gotoPG">
+			<var name="dmFolderName" value="${dmFolderName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+			<var name="dmDocumentFile" value="${dmDocumentFile}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+		</execute>
+
+		<execute macro="Page#openURL">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOActivities#viewDocumentsActivityEntry">
+			<var name="action" value="Uploaded a new document in the ${dmFolderName} folder." />
+			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+			<var name="dmDocumentSize" value="${dmDocumentSize1}" />
+			<var name="dmDocumentSizeSO" value="${dmDocumentSizeSO1}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+			<var name="dmDocumentUploader" value="${adminName}" />
+			<var name="dmDocumentVersionNumber" value="1.0" />
+			<var name="row" value="01" />
+			<var name="userName" value="Test" />
+		</execute>
+
+		<execute macro="SOActivities#viewActivityEntryTimeStamp">
+			<var name="row" value="01" />
+			<var name="timeStampValue" value="About a minute ago." />
+		</execute>
+
+		<execute action="SOActivities#pause" locator1="60000" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Documents" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMFolder#gotoPG">
+			<var name="dmFolderName" value="${dmFolderName}" />
+		</execute>
+
+		<execute macro="DMDocument#editPG">
+			<var name="dmDocumentDescriptionEdit" value="${dmDocumentDescriptionEdit}" />
+			<var name="dmDocumentFile" value="${dmDocumentFileEdit}" />
+			<var name="dmDocumentTitleEdit" value="${dmDocumentTitleEdit}" />
+		</execute>
+
+		<execute macro="Page#openURL">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOActivities#viewDocumentsActivityEntry">
+			<var name="action" value="Updated a document in the ${dmFolderName} folder." />
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionEdit}" />
+			<var name="dmDocumentSize" value="${dmDocumentSize2}" />
+			<var name="dmDocumentSizeSO" value="${dmDocumentSizeSO2}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleEdit}" />
+			<var name="dmDocumentUploader" value="${adminName}" />
+			<var name="dmDocumentVersionNumber" value="1.1" />
+			<var name="row" value="01" />
+			<var name="userName" value="Test" />
+		</execute>
+
+		<execute macro="SOActivities#viewActivityEntryTimeStamp">
+			<var name="row" value="01" />
+			<var name="timeStampValue" value="About a minute ago." />
+		</execute>
+
+		<execute macro="SOActivities#viewDocumentsActivityEntry">
+			<var name="action" value="Uploaded a new document in the ${dmFolderName} folder." />
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionEdit}" />
+			<var name="dmDocumentSize" value="${dmDocumentSize2}" />
+			<var name="dmDocumentSizeSO" value="${dmDocumentSizeSO2}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleEdit}" />
+			<var name="dmDocumentUploader" value="${adminName}" />
+			<var name="dmDocumentVersionNumber" value="1.1" />
+			<var name="row" value="02" />
+			<var name="userName" value="Test" />
+		</execute>
 	</command>
 
 	<command name="ViewMoreDMFolderDocumentsActivities" priority="5">
