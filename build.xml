@@ -816,6 +816,10 @@ ${app.server.tomcat.dir}, then run "ant -buildfile build-dist.xml unzip-tomcat".
 		<antcall target="print-current-time" />
 	</target>
 
+	<target name="test-class-group">
+		<ant antfile="build-test.xml" target="test-class-group" inheritAll="false" />
+	</target>
+
 	<target name="test-integration">
 		<ant antfile="build-test.xml" target="test-integration" inheritAll="false" />
 	</target>
