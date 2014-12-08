@@ -577,13 +577,19 @@ public class ProcessExecutor {
 						continue;
 					}
 
-					Serializable returnValue = processCallable.call();
+					try {
+						Serializable returnValue = processCallable.call();
 
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Invoked generic process callable " +
-								processCallable + " with return value " +
-									returnValue);
+						if (_log.isDebugEnabled()) {
+							_log.debug(
+								"Invoked generic process callable " +
+									processCallable + " with return value " +
+										returnValue);
+						}
+					}
+					catch (Throwable t) {
+						_log.error(
+							"Unable to invoke generic process callable", t);
 					}
 				}
 			}
@@ -608,6 +614,11 @@ public class ProcessExecutor {
 			catch (EOFException eofe) {
 				throw new ProcessException(
 					"Subprocess piping back ended prematurely", eofe);
+			}
+			catch (Throwable t) {
+				_log.error("Abort subprocess piping", t);
+
+				throw new ProcessException(t);
 			}
 			finally {
 				try {

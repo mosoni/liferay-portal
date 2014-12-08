@@ -45,6 +45,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.Serializable;
+import java.io.WriteAbortedException;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.lang.reflect.Constructor;
@@ -719,6 +720,43 @@ public class ProcessExecutorTest {
 	}
 
 	@Test
+	public void testExceptionPipingBackProcessCallable() throws Exception {
+		ExceptionPipingBackProcessCallable exceptionPipingBackProcessCallable =
+			new ExceptionPipingBackProcessCallable();
+
+		CaptureHandler captureHandler = JDKLoggerTestUtil.configureJDKLogger(
+			ProcessExecutor.class.getName(), Level.SEVERE);
+
+		try {
+			Future<Serializable> noticeableFuture = ProcessExecutor.execute(
+				_classPath, _createArguments(_JPDA_OPTIONS1),
+				exceptionPipingBackProcessCallable);
+
+			Assert.assertNull(noticeableFuture.get());
+
+			List<LogRecord> logRecords = captureHandler.getLogRecords();
+
+			Assert.assertEquals(1, logRecords.size());
+
+			LogRecord logRecord = logRecords.get(0);
+
+			Assert.assertEquals(
+				"Unable to invoke generic process callable",
+				logRecord.getMessage());
+
+			Throwable throwable = logRecord.getThrown();
+
+			Assert.assertSame(ProcessException.class, throwable.getClass());
+			Assert.assertEquals(
+				DummyExceptionProcessCallable.class.getName(),
+				throwable.getMessage());
+		}
+		finally {
+			captureHandler.close();
+		}
+	}
+
+	@Test
 	public void testExecuteOnDestroy() throws Exception {
 		ExecutorService executorService = _invokeGetExecutorService();
 
@@ -1052,6 +1090,55 @@ public class ProcessExecutorTest {
 				Throwable throwable = ee.getCause();
 
 				Assert.assertTrue(throwable instanceof ProcessException);
+			}
+		}
+		finally {
+			captureHandler.close();
+		}
+	}
+
+	@Test
+	public void testUnserializablePipingBackProcessCallable() throws Exception {
+		UnserializablePipingBackProcessCallable
+			unserializablePipingBackProcessCallable =
+				new UnserializablePipingBackProcessCallable();
+
+		CaptureHandler captureHandler = JDKLoggerTestUtil.configureJDKLogger(
+			ProcessExecutor.class.getName(), Level.SEVERE);
+
+		try {
+			Future<Serializable> noticeableFuture = ProcessExecutor.execute(
+				_classPath, _createArguments(_JPDA_OPTIONS1),
+				unserializablePipingBackProcessCallable);
+
+			try {
+				noticeableFuture.get();
+
+				Assert.fail();
+			}
+			catch (ExecutionException ee) {
+				Throwable cause = ee.getCause();
+
+				Assert.assertSame(ProcessException.class, cause.getClass());
+
+				cause = cause.getCause();
+
+				List<LogRecord> logRecords = captureHandler.getLogRecords();
+
+				Assert.assertEquals(1, logRecords.size());
+
+				LogRecord logRecord = logRecords.get(0);
+
+				Assert.assertEquals(
+					"Abort subprocess piping", logRecord.getMessage());
+				Assert.assertSame(cause, logRecord.getThrown());
+				Assert.assertSame(
+					WriteAbortedException.class, cause.getClass());
+
+				cause = cause.getCause();
+
+				Assert.assertSame(
+					NotSerializableException.class, cause.getClass());
 			}
 		}
 		finally {
@@ -1686,6 +1773,29 @@ public class ProcessExecutorTest {
 
 	}
 
+	private static class ExceptionPipingBackProcessCallable
+		implements ProcessCallable<Serializable> {
+
+		@Override
+		public Serializable call() throws ProcessException {
+			ProcessOutputStream processOutputStream =
+				ProcessContext.getProcessOutputStream();
+
+			try {
+				processOutputStream.writeProcessCallable(
+					new DummyExceptionProcessCallable());
+			}
+			catch (IOException ioe) {
+				throw new ProcessException(ioe);
+			}
+
+			return null;
+		}
+
+		private static final long serialVersionUID = 1L;
+
+	}
+
 	private static class KillJVMProcessCallable
 		implements ProcessCallable<Serializable> {
 
@@ -2142,6 +2252,29 @@ public class ProcessExecutorTest {
 
 		private boolean _failToShutdown;
 		private Thread _thread;
+
+	}
+
+	private static class UnserializablePipingBackProcessCallable
+		implements ProcessCallable<Serializable> {
+
+		@Override
+		public Serializable call() throws ProcessException {
+			ProcessOutputStream processOutputStream =
+				ProcessContext.getProcessOutputStream();
+
+			try {
+				processOutputStream.writeProcessCallable(
+					new UnserializableProcessCallable());
+			}
+			catch (IOException ioe) {
+				throw new ProcessException(ioe);
+			}
+
+			return null;
+		}
+
+		private static final long serialVersionUID = 1L;
 
 	}
 
