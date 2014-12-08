@@ -592,7 +592,7 @@ public class StagingImpl implements Staging {
 			Group group = null;
 			try {
 				group = GroupLocalServiceUtil.fetchGroup(
-							missingReference.getGroupId());
+					missingReference.getGroupId());
 			}
 			catch (SystemException se) {
 			}
