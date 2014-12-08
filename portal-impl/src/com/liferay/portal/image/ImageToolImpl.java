@@ -41,6 +41,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 import java.awt.image.DataBuffer;
 import java.awt.image.IndexColorModel;
 import java.awt.image.RenderedImage;
@@ -670,16 +671,7 @@ public class ImageToolImpl implements ImageTool {
 				throw new ExecutionException(ioe);
 			}
 
-			ImageBag imageBag = null;
-
-			try {
-				imageBag = read(bytes);
-			}
-			catch (IOException ioe) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(_type + ": " + ioe.getMessage());
-				}
-			}
+			ImageBag imageBag = read(bytes);
 
 			return imageBag.getRenderedImage();
 		}
@@ -699,16 +691,7 @@ public class ImageToolImpl implements ImageTool {
 				throw new ExecutionException(ioe);
 			}
 
-			ImageBag imageBag = null;
-
-			try {
-				imageBag = read(bytes);
-			}
-			catch (IOException ioe) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(_type + ": " + ioe.getMessage());
-				}
-			}
+			ImageBag imageBag = read(bytes);
 
 			return imageBag.getRenderedImage();
 		}
