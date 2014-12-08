@@ -59,6 +59,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SITE_NAME_PRIVATE_PAGES_LINK</td>
+	<td>//ul[@class='directory-list']/li[contains(.,'${key_siteName}')]/span[@class='name']/a[@class='private-pages']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SITE_DESCRIPTION</td>
 	<td>//ul[@class='directory-list']/li[contains(.,'${key_siteName}')]/span[@class='description']</td>
 	<td></td>
@@ -66,6 +71,11 @@
 <tr>
 	<td>DELETE_SITE_ICON</td>
 	<td>//a[@class='delete-site']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DELETE_SITE_ICON_DISABLED</td>
+	<td>//a[@class='disabled']</td>
 	<td></td>
 </tr>
 <tr>

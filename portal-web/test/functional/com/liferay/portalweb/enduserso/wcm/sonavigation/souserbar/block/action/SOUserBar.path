@@ -261,6 +261,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>GO_TO_SITE_NAME_PRIVATE_PAGES_LINK</td>
+	<td>//ul[@class='site-list']//span[contains(.,'${key_siteName}')]/a[@class='private-pages']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>GO_TO_FAVORITE_SITE_ICON</td>
 	<td>//li[contains(@class,'social-office-enabled')]/span[@class='action favorite']/a</td>
 	<td></td>
