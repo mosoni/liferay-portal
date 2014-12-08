@@ -570,6 +570,28 @@ public class ImageToolImpl implements ImageTool {
 		return _imageMagick;
 	}
 
+	protected RenderedImage read(byte[] bytes, String type) {
+		RenderedImage renderedImage = null;
+
+		try {
+			if (type.equals(TYPE_JPEG)) {
+				type = "jpeg";
+			}
+
+			ImageDecoder imageDecoder = ImageCodec.createImageDecoder(
+				type, new UnsyncByteArrayInputStream(bytes), null);
+
+			renderedImage = imageDecoder.decodeAsRenderedImage();
+		}
+		catch (IOException ioe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(type + ": " + ioe.getMessage());
+			}
+		}
+
+		return renderedImage;
+	}
+
 	protected byte[] toMultiByte(int intValue) {
 		int numBits = 32;
 		int mask = 0x80000000;
