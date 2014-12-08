@@ -1009,13 +1009,6 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[Identifies the component instance.]]></description>
-			<name>id</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[Sets the button's name.]]></description>
 			<name>name</name>
 			<required>false</required>
