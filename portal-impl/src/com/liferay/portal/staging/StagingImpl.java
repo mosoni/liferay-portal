@@ -590,6 +590,7 @@ public class StagingImpl implements Staging {
 			errorMessageJSONObject.put("name", missingReferenceDisplayName);
 
 			Group group = null;
+
 			try {
 				group = GroupLocalServiceUtil.fetchGroup(
 					missingReference.getGroupId());
