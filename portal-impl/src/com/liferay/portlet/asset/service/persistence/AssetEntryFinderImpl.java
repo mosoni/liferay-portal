@@ -445,7 +445,7 @@ public class AssetEntryFinderImpl
 			if (Validator.isNotNull(entryQuery.getTitle())) {
 				qPos.add(
 					StringUtil.quote(
-							entryQuery.getTitle(), StringPool.PERCENT));
+						entryQuery.getTitle(), StringPool.PERCENT));
 			}
 
 			if (Validator.isNotNull(entryQuery.getDescription())) {
