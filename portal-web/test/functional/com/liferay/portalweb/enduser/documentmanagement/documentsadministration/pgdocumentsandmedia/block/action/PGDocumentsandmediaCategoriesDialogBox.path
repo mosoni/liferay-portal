@@ -1,17 +1,17 @@
 <html>
 <head>
-<title>PGDocumentsandmediaAddmultipledocumentsCategoriesDialogBox</title>
+<title>PGDocumentsandmediaCategoriesDialogBox</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">PGDocumentsandmediaAddmultipledocumentsCategoriesDialogBox</td></tr>
+<tr><td rowspan="1" colspan="3">PGDocumentsandmediaCategoriesDialogBox</td></tr>
 </thead>
 <tbody>
 <tr>
 	<td>PAGE_NAME</td>
 	<td></td>
-	<td>PGDocumentsandmediaAddmultipledocumentsCategoriesDialogBox</td>
+	<td>PGDocumentsandmediaCategoriesDialogBox</td>
 </tr>
 <tr>
 	<td>CATEGORIES_DIALOG_BOX</td>
