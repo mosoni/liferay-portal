@@ -23,6 +23,10 @@
 		<execute macro="SOUser#tearDownCP" />
 
 		<execute macro="Page#tearDownPG" />
+
+		<execute macro="SOSite#tearDownCP" />
+
+		<execute macro="Organization#tearDownCP" />
 	</tear-down>
 
 	<command name="AddTaskAssignedToConnection" priority="5">
@@ -370,6 +374,106 @@
 		<execute action="SOTasksTask#assertTextEquals" locator-key1="TASK_TAG" value1="tag1" />
 		<execute action="SOTasksTask#assertTextNotPresent" value1="&lt;tag1&gt;" />
 		<execute action="SOTasksTask#selectFrame" value1="relative=top" />
+	</command>
+
+	<command name="AddTaskAssignedToOrganizationMember" priority="4">
+		<var name="orgName" value="Organization Name" />
+		<var name="orgType" value="Regular Organization" />
+		<var name="pageName" value="Tasks" />
+		<var name="portletName" value="Tasks" />
+		<var name="taskDescription" value="Task Description" />
+		<var name="userEmailAddress" value="socialoffice01@liferay.com" />
+		<var name="userFirstName" value="Social01" />
+		<var name="userLastName" value="User01" />
+		<var name="userListName" value="User01, Social01" />
+		<var name="userMiddleName" value="Office01" />
+		<var name="userName" value="Social01 Office01 User01" />
+		<var name="userScreenName" value="socialoffice01" />
+
+		<execute macro="SOUser#addUserWithSORole">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userMiddleName" value="${userMiddleName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
+		</execute>
+
+		<execute macro="Organization#addCP">
+			<var name="orgName" value="${orgName}" />
+			<var name="orgType" value="${orgType}" />
+		</execute>
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
+		</execute>
+
+		<execute macro="Organization#addMemberCP">
+			<var name="orgName" value="${orgName}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userMiddleName" value="${userMiddleName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
+		</execute>
+
+		<execute macro="Organization#addSiteCP">
+			<var name="orgName" value="${orgName}" />
+		</execute>
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
+		</execute>
+
+		<execute macro="SitePage#addCP">
+			<var name="siteName" value="${orgName}" />
+			<var name="sitePageName" value="${pageName}" />
+			<var name="sitePagePrivacy" value="Public" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+			<var name="siteName" value="${orgName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="${portletName}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+			<var name="siteName" value="${orgName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOTasks#addTask">
+			<var name="taskAssignee" value="${userName}" />
+			<var name="taskDescription" value="${taskDescription}" />
+			<var name="taskReporter" value="${adminName}" />
+		</execute>
+	</command>
+
+	<command name="AddTaskDescriptionNull" priority="4">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+			<var name="soDashboard" value="true" />
+			<var name="soPage" value="true" />
+		</execute>
+
+		<execute action="SOTasks#click" locator-key1="ADD_TASK_BUTTON" />
+
+		<execute action="SOTasksAdd#selectFrame" locator-key1="ADD_TASK_IFRAME" />
+		<execute action="SOTasksAdd#click" locator-key1="SAVE_BUTTON" />
+		<execute action="SOTasksAdd#assertTextEquals" locator-key1="TASK_DESCRIPTION_ALERT_MESSAGE" value1="This field is required." />
+
+		<execute action="SOTasksTask#assertElementNotPresent" locator-key1="TASK_DESCRIPTION" />
 	</command>
 
 	<command name="AddTaskHighPriority" priority="3">
@@ -1424,6 +1528,52 @@
 			<var name="taskDescription" value="${taskDescription}" />
 			<var name="taskReporter" value="${adminName}" />
 		</execute>
+	</command>
+
+	<command name="ViewAddTaskTagLabel" priority="4">
+		<var name="taskDescription" value="Task Description" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+			<var name="soDashboard" value="true" />
+			<var name="soPage" value="true" />
+		</execute>
+
+		<execute action="SOTasks#click" locator-key1="ADD_TASK_BUTTON" />
+
+		<execute action="SOTasksAdd#selectFrame" locator-key1="ADD_TASK_IFRAME" />
+		<execute action="SOTasksAdd#sikuliAssertElementPresent" locator-key1="SCREENSHOTS_ADD_TAG_LABEL" />
+		<execute action="SOTasksAdd#selectFrame" value1="relative=top" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+			<var name="soDashboard" value="true" />
+			<var name="soPage" value="true" />
+		</execute>
+
+		<execute macro="SOTasks#addTask">
+			<var name="numberOfTags" value="3" />
+			<var name="taskAssignee" value="${adminName}" />
+			<var name="taskDescription" value="${taskDescription}" />
+			<var name="taskReporter" value="${adminName}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+			<var name="soDashboard" value="true" />
+			<var name="soPage" value="true" />
+		</execute>
+
+		<var name="key_taskDescription" value="${taskDescription}" />
+
+		<execute action="SOTasks#assertClick" locator-key1="TASK_DESCRIPTION" value1="${taskDescription}" />
+
+		<execute action="SOTasksTask#selectFrame" locator-key1="TASK_IFRAME" />
+		<execute action="SOTasksTask#click" locator-key1="TASK_EDIT_BUTTON" />
+
+		<execute action="SOTasksAdd#sikuliAssertElementPresent" locator-key1="SCREENSHOTS_ADD_TAG_LABEL" />
+
+		<execute action="SOTasksTask#selectFrame" value1="relative=top" />
 	</command>
 
 	<command name="ViewCompleteTaskAssignedToConnection60Percent" priority="4">
