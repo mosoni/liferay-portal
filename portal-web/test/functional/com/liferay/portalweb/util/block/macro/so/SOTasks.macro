@@ -526,6 +526,7 @@
 		<var name="key_taskDescription" value="${taskDescription}" />
 
 		<execute action="SOTasks#assertClick" locator-key1="ASSIGNED_TO_ME_LINK" value1="Assigned to Me" />
+		<execute action="SOTasks#check" locator-key1="SHOW_COMPLETED_TASKS_CHECKBOX" />
 		<execute action="SOTasks#assertClick" locator-key1="TASK_DESCRIPTION_NORMAL" value1="${taskDescription}" />
 
 		<execute action="SOTasksTask#selectFrame" locator-key1="TASK_IFRAME" />
@@ -538,6 +539,9 @@
 		<execute action="SOTasksTask#click" locator-key1="TASK_RESOLVE_BUTTON" value1="Resolve" />
 		<execute action="SOTasksTask#assertTextEquals" locator-key1="TASK_STATUS" value1="Resolved" />
 		<execute action="SOTasksTask#selectFrame" value1="relative=top" />
+
+		<execute action="SOTasks#assertChecked" locator-key1="SHOW_COMPLETED_TASKS_CHECKBOX" />
+		<execute action="SOTasks#assertTextEquals" locator-key1="TASK_DESCRIPTION_NORMAL" value1="${taskDescription}" />
 	</command>
 
 	<command name="tearDownTask">
@@ -657,7 +661,9 @@
 					</else>
 				</if>
 
-				<execute macro="SOTasks#viewTaskDetails" />
+				<execute macro="SOTasks#viewTaskDetails">
+					<var name="viewTaskAssigneeDetails" value="true" />
+				</execute>
 			</then>
 			<else>
 				<execute action="SOTasks#assertTextEquals" locator-key1="INFO_MESSAGE" value1="No tasks were found." />
@@ -708,7 +714,9 @@
 					</else>
 				</if>
 
-				<execute macro="SOTasks#viewTaskDetails" />
+				<execute macro="SOTasks#viewTaskDetails">
+					<var name="viewTaskReporterDetails" value="true" />
+				</execute>
 			</then>
 			<else>
 				<execute action="SOTasks#assertTextEquals" locator-key1="INFO_MESSAGE" value1="No tasks were found." />
@@ -835,7 +843,34 @@
 			</then>
 		</if>
 
-		<execute action="SOTasksTask#selectFrame" value1="relative=top" />
+		<if>
+			<equals arg1="${viewTaskAssigneeDetails}" arg2="true" />
+			<then>
+				<if>
+					<not>
+						<equals arg1="${taskAssignee}" arg2="Unassigned" />
+					</not>
+					<then>
+						<execute action="SOTasksTask#assertClick" locator-key1="TASK_ASSIGNEE_LINK" value1="${taskAssignee}" />
+
+						<execute action="SOProfile#assertTextEquals" locator-key1="USER_NAME" value1="${taskAssignee}" />
+						<execute action="SOProfile#selectFrame" value1="relative=top" />
+					</then>
+				</if>
+			</then>
+			<elseif>
+				<equals arg1="${viewTaskReporterDetails}" arg2="true" />
+				<then>
+					<execute action="SOTasksTask#assertClick" locator-key1="TASK_REPORTER_LINK" value1="${taskReporter}" />
+
+					<execute action="SOProfile#assertTextEquals" locator-key1="USER_NAME" value1="${taskReporter}" />
+					<execute action="SOProfile#selectFrame" value1="relative=top" />
+				</then>
+			</elseif>
+			<else>
+				<execute action="SOTasksTask#selectFrame" value1="relative=top" />
+			</else>
+		</if>
 	</command>
 
 	<command name="viewTaskNotification">

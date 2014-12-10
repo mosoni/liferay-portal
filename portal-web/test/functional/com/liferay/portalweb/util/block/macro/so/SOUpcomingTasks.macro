@@ -1,4 +1,61 @@
 <definition>
+	<command name="resolveUpcomingTask">
+		<execute macro="SOUserBar#gotoDashboardPG" />
+
+		<var name="key_taskDescription" value="${taskDescription}" />
+
+		<if>
+			<equals arg1="${taskPriority}" arg2="High" />
+			<then>
+				<execute action="SOUpcomingTasks#assertClick" locator-key1="TASK_DESCRIPTION_HIGH" value1="${taskDescription}" />
+			</then>
+			<elseif>
+				<equals arg1="${taskPriority}" arg2="Low" />
+				<then>
+					<execute action="SOUpcomingTasks#assertClick" locator-key1="TASK_DESCRIPTION_LOW" value1="${taskDescription}" />
+				</then>
+			</elseif>
+			<else>
+				<execute action="SOUpcomingTasks#assertClick" locator-key1="TASK_DESCRIPTION_NORMAL" value1="${taskDescription}" />
+			</else>
+		</if>
+
+		<execute action="SOTasksTask#selectFrame" locator-key1="TASK_IFRAME" />
+		<execute action="SOTasksTask#assertTextEquals" locator-key1="TASK_DESCRIPTION" value1="${taskDescription}" />
+		<execute action="SOTasksTask#assertTextEquals" locator-key1="TASK_ASSIGNEE" value1="Assigned to ${taskAssignee}" />
+		<execute action="SOTasksTask#assertTextEquals" locator-key1="TASK_REPORTER" value1="Created by ${taskReporter}" />
+		<execute action="SOTasksTask#assertTextEquals" locator-key1="TASK_PRIORITY_NORMAL" value1="Normal" />
+		<execute action="SOTasksTask#assertTextEquals" locator-key1="TASK_STATUS" value1="Open" />
+		<execute action="SOTasksTask#assertTextNotPresent" value1="Resolved" />
+		<execute action="SOTasksTask#click" locator-key1="TASK_RESOLVE_BUTTON" value1="Resolve" />
+		<execute action="SOTasksTask#assertTextEquals" locator-key1="TASK_STATUS" value1="Resolved" />
+		<execute action="SOTasksTask#selectFrame" value1="relative=top" />
+
+		<execute macro="SOUserBar#gotoDashboardPG" />
+
+		<if>
+			<equals arg1="${taskPriority}" arg2="High" />
+			<then>
+				<execute action="SOUpcomingTasks#assertElementNotPresent" locator-key1="TASK_DESCRIPTION_HIGH" value1="${taskDescription}" />
+			</then>
+			<elseif>
+				<equals arg1="${taskPriority}" arg2="Low" />
+				<then>
+					<execute action="SOUpcomingTasks#assertElementNotPresent" locator-key1="TASK_DESCRIPTION_LOW" value1="${taskDescription}" />
+				</then>
+			</elseif>
+			<else>
+				<execute action="SOUpcomingTasks#assertElementNotPresent" locator-key1="TASK_DESCRIPTION_NORMAL" value1="${taskDescription}" />
+			</else>
+		</if>
+
+		<execute action="SOUpcomingTasks#assertClick" locator-key1="VIEW_ALL_TASKS_LINK" value1="View All Tasks" />
+
+		<execute macro="SOTasks#viewTask">
+			<var name="percentCompletion" value="100" />
+		</execute>
+	</command>
+
 	<command name="viewUpcomingTask">
 		<execute macro="SOUserBar#gotoDashboardPG" />
 
@@ -29,7 +86,9 @@
 						</else>
 					</if>
 
-					<execute macro="SOTasks#viewTaskDetails" />
+					<execute macro="SOTasks#viewTaskDetails">
+						<var name="viewTaskAssigneeDetails" value="true" />
+					</execute>
 				</then>
 			</elseif>
 			<else>
