@@ -1400,7 +1400,7 @@
 		<var name="soPage" value="true" />
 		<var name="wikiPageContent" value="Wiki FrontPage Content" />
 
-		<!--<execute macro="SOUserBar#addSOSite">
+		<execute macro="SOUserBar#addSOSite">
 			<var name="siteDescription" value="${siteDescription}" />
 			<var name="siteName" value="${siteName}" />
 			<var name="siteType" value="${siteType}" />
@@ -1423,7 +1423,7 @@
 		<execute macro="WikiPage#addAttachmentPG">
 			<var name="attachmentFileName" value="${attachmentFileName}" />
 			<var name="wikiPageTitle" value="FrontPage" />
-		</execute>-->
+		</execute>
 
 		<execute macro="Page#openURL">
 			<var name="siteName" value="${siteName}" />
