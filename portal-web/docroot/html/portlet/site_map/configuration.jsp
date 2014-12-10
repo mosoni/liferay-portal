@@ -56,7 +56,7 @@ List layoutList = layoutView.getList();
 				}
 
 				for (int j = 0; j < depth; j++) {
-					name = "-&nbsp;" + name;
+					name = "-&nbsp;" + HtmlUtil.escape(name);
 				}
 
 				Layout curRootLayout = null;
@@ -70,7 +70,7 @@ List layoutList = layoutView.getList();
 				if (curRootLayout != null) {
 			%>
 
-				<aui:option label="<%= HtmlUtil.escape(name) %>" selected="<%= curRootLayout.getUuid().equals(rootLayoutUuid) %>" value="<%= curRootLayout.getUuid() %>" />
+				<aui:option label="<%= name %>" selected="<%= curRootLayout.getUuid().equals(rootLayoutUuid) %>" value="<%= curRootLayout.getUuid() %>" />
 
 			<%
 				}
