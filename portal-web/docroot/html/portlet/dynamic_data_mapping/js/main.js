@@ -8,8 +8,6 @@ AUI.add(
 		var instanceOf = A.instanceOf;
 		var isObject = Lang.isObject;
 
-		var DEFAULTS_FORM_VALIDATOR = A.config.FormValidator;
-
 		var LOCALIZABLE_FIELD_ATTRS = ['label', 'predefinedValue', 'tip'];
 
 		var MAP_HIDDEN_FIELD_ATTRS = {
@@ -50,12 +48,6 @@ AUI.add(
 			width: 1
 		};
 
-		DEFAULTS_FORM_VALIDATOR.STRINGS.structureFieldName = Liferay.Language.get('please-enter-only-alphanumeric-characters');
-
-		DEFAULTS_FORM_VALIDATOR.RULES.structureFieldName = function(value) {
-			return (/^[\w\-]+$/).test(value);
-		};
-
 		var LiferayAvailableField = A.Component.create(
 			{
 				ATTRS: {
@@ -89,32 +81,6 @@ AUI.add(
 
 					portletResourceNamespace: {
 						value: STR_BLANK
-					},
-
-					validator: {
-						setter: function(val) {
-							var instance = this;
-
-							var config = A.merge(
-								{
-									rules: {
-										name: {
-											required: true,
-											structureFieldName: true
-										}
-									},
-									fieldStrings: {
-										name: {
-											required: Liferay.Language.get('this-field-is-required')
-										}
-									}
-								},
-								val
-							);
-
-							return config;
-						},
-						value: {}
 					},
 
 					strings: {
