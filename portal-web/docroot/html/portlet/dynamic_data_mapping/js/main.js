@@ -65,9 +65,9 @@ AUI.add(
 					}
 				},
 
-				NAME: 'availableField',
+				EXTENDS: A.FormBuilderAvailableField,
 
-				EXTENDS: A.FormBuilderAvailableField
+				NAME: 'availableField'
 			}
 		);
 
@@ -89,11 +89,6 @@ AUI.add(
 
 					portletResourceNamespace: {
 						value: STR_BLANK
-					},
-
-					translationManager: {
-						validator: isObject,
-						value: {}
 					},
 
 					validator: {
@@ -154,6 +149,11 @@ AUI.add(
 							width: Liferay.Language.get('width'),
 							yes: Liferay.Language.get('yes')
 						}
+					},
+
+					translationManager: {
+						validator: isObject,
+						value: {}
 					}
 				},
 
@@ -734,51 +734,6 @@ AUI.add(
 		LiferayFormBuilder.DEFAULT_ICON_CLASS = 'icon-fb-custom-field';
 
 		var AVAILABLE_FIELDS = {
-			DEFAULT: [
-				{
-					fieldLabel: Liferay.Language.get('button'),
-					iconClass: 'form-builder-field-icon form-builder-field-icon-button',
-					label: Liferay.Language.get('button'),
-					type: 'button'
-				},
-				{
-					fieldLabel: Liferay.Language.get('checkbox'),
-					iconClass: 'icon-fb-boolean',
-					label: Liferay.Language.get('checkbox'),
-					type: 'checkbox'
-				},
-				{
-					fieldLabel: Liferay.Language.get('fieldset'),
-					iconClass: 'form-builder-field-icon form-builder-field-icon-fieldset',
-					label: Liferay.Language.get('fieldset'),
-					type: 'fieldset'
-				},
-				{
-					fieldLabel: Liferay.Language.get('text-box'),
-					iconClass: 'icon-fb-text',
-					label: Liferay.Language.get('text-box'),
-					type: 'text'
-				},
-				{
-					fieldLabel: Liferay.Language.get('text-area'),
-					iconClass: 'icon-fb-text-box',
-					label: Liferay.Language.get('text-area'),
-					type: 'textarea'
-				},
-				{
-					fieldLabel: Liferay.Language.get('radio-buttons'),
-					iconClass: 'icon-fb-radio',
-					label: Liferay.Language.get('radio-buttons'),
-					type: 'radio'
-				},
-				{
-					fieldLabel: Liferay.Language.get('select-option'),
-					iconClass: 'icon-fb-select',
-					label: Liferay.Language.get('select-option'),
-					type: 'select'
-				}
-			],
-
 			DDM_STRUCTURE: [
 				{
 					hiddenAttributes: MAP_HIDDEN_FIELD_ATTRS.checkbox,
@@ -872,6 +827,51 @@ AUI.add(
 					iconClass: 'icon-fb-fieldset',
 					label: Liferay.Language.get('fieldset'),
 					type: 'fieldset'
+				}
+			],
+
+			DEFAULT: [
+				{
+					fieldLabel: Liferay.Language.get('button'),
+					iconClass: 'form-builder-field-icon form-builder-field-icon-button',
+					label: Liferay.Language.get('button'),
+					type: 'button'
+				},
+				{
+					fieldLabel: Liferay.Language.get('checkbox'),
+					iconClass: 'icon-fb-boolean',
+					label: Liferay.Language.get('checkbox'),
+					type: 'checkbox'
+				},
+				{
+					fieldLabel: Liferay.Language.get('fieldset'),
+					iconClass: 'form-builder-field-icon form-builder-field-icon-fieldset',
+					label: Liferay.Language.get('fieldset'),
+					type: 'fieldset'
+				},
+				{
+					fieldLabel: Liferay.Language.get('text-box'),
+					iconClass: 'icon-fb-text',
+					label: Liferay.Language.get('text-box'),
+					type: 'text'
+				},
+				{
+					fieldLabel: Liferay.Language.get('text-area'),
+					iconClass: 'icon-fb-text-box',
+					label: Liferay.Language.get('text-area'),
+					type: 'textarea'
+				},
+				{
+					fieldLabel: Liferay.Language.get('radio-buttons'),
+					iconClass: 'icon-fb-radio',
+					label: Liferay.Language.get('radio-buttons'),
+					type: 'radio'
+				},
+				{
+					fieldLabel: Liferay.Language.get('select-option'),
+					iconClass: 'icon-fb-select',
+					label: Liferay.Language.get('select-option'),
+					type: 'select'
 				}
 			],
 
