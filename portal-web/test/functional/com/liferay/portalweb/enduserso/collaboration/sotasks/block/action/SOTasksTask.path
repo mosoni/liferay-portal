@@ -34,8 +34,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>TASK_ASSIGNEE_LINK</td>
+	<td>//div[@class='task-data assignee']/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>TASK_REPORTER</td>
 	<td>//div[@class='task-data reporter']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_REPORTER_LINK</td>
+	<td>//div[@class='task-data reporter']/a</td>
 	<td></td>
 </tr>
 <tr>
