@@ -307,6 +307,7 @@ public class JSONFactoryImpl implements JSONFactory {
 		}
 	}
 
+	@Deprecated
 	@Override
 	public String serializeException(Exception exception) {
 		JSONObject jsonObject = createJSONObject();
@@ -333,19 +334,25 @@ public class JSONFactoryImpl implements JSONFactory {
 
 	@Override
 	public String serializeThrowable(Throwable throwable) {
-		if (throwable instanceof Exception) {
-			return serializeException((Exception)throwable);
-		}
-
 		JSONObject jsonObject = createJSONObject();
 
-		String message = throwable.getMessage();
+		String type = null;
+		String message = null;
+
+		if (throwable instanceof InvocationTargetException) {
+			throwable = throwable.getCause();
+		}
+
+		type = throwable.getClass().getName();
+
+		message = throwable.getMessage();
 
 		if (Validator.isNull(message)) {
 			message = throwable.toString();
 		}
 
-		jsonObject.put("throwable", message);
+		jsonObject.put("exception", type);
+		jsonObject.put("message", message);
 
 		return jsonObject.toString();
 	}
