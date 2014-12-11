@@ -655,6 +655,12 @@
 			<then>
 				<execute action="SOUserBar#assertTextEquals" locator-key1="NOTIFICATION_MENU_NOTIFICATION_ENTRY_CONTENT" value1="${microblogsEntryCommentAuthorName} also commented on ${microblogsEntryAuthorName}&apos;s post." />
 			</then>
+			<elseif>
+				<equals arg1="${mentionedInMicroblogsEntry}" arg2="true" />
+				<then>
+					<execute action="SOUserBar#assertTextEquals" locator-key1="NOTIFICATION_MENU_NOTIFICATION_ENTRY_CONTENT" value1="${microblogsEntryCommentAuthorName} commented on a post you are tagged in." />
+				</then>
+			</elseif>
 			<else>
 				<execute action="SOUserBar#assertTextEquals" locator-key1="NOTIFICATION_MENU_NOTIFICATION_ENTRY_CONTENT" value1="${microblogsEntryCommentAuthorName} commented on your post." />
 			</else>
