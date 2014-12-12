@@ -143,13 +143,13 @@ int firstDayOfWeek = localeCal.getFirstDayOfWeek() - 1;
 
 				var nameValidator = {
 					fieldStrings: {
-						name: {
+						value: {
 							required: '<liferay-ui:message key="this-field-is-required" />',
 							structureFieldName: '<liferay-ui:message key="please-enter-only-alphanumeric-characters" />'
 						}
 					},
 					rules: {
-						name: {
+						value: {
 							required: true,
 							structureFieldName: true
 						}
@@ -166,7 +166,7 @@ int firstDayOfWeek = localeCal.getFirstDayOfWeek() - 1;
 						if (foundNameAttribute && nameEditor) {
 							nameEditor.setAttrs(
 								{
-									elementName: 'name',
+									elementName: 'value',
 									validator: nameValidator
 								}
 							);
