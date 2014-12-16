@@ -2046,7 +2046,7 @@
 			<var name="userIntroduction" value="Introduction Content" />
 		</execute>
 
-		<execute macro="SOProfile#addPhoneNumbers">
+		<execute macro="SOProfile#addPhoneNumber">
 			<var name="userPhoneNumberExtension" value="123" />
 			<var name="userPhoneNumberNumber" value="123-123-1234" />
 			<var name="userPhoneNumberType" value="Business" />
@@ -2159,7 +2159,7 @@
 			<var name="userIntroduction" value="Introduction Content" />
 		</execute>
 
-		<execute macro="SOProfile#addPhoneNumbers">
+		<execute macro="SOProfile#addPhoneNumber">
 			<var name="userPhoneNumberExtension" value="123" />
 			<var name="userPhoneNumberNumber" value="123-123-1234" />
 			<var name="userPhoneNumberType" value="Business" />
@@ -3660,7 +3660,7 @@
 			<var name="userInstantMessengerYM" value="${userInstantMessengerYM}" />
 		</execute>
 
-		<execute macro="SOProfile#addPhoneNumbers">
+		<execute macro="SOProfile#addPhoneNumber">
 			<var name="userPhoneNumberExtension" value="${userPhoneNumberExtension}" />
 			<var name="userPhoneNumberNumber" value="${userPhoneNumberNumber}" />
 			<var name="userPhoneNumberType" value="${userPhoneNumberType}" />
@@ -4306,13 +4306,13 @@
 			<var name="userLoginFullName" value="${userName}" />
 		</execute>
 
-		<execute macro="SOProfile#addPhoneNumbers">
+		<execute macro="SOProfile#addPhoneNumber">
 			<var name="userPhoneNumberExtension" value="${userPhoneNumberExtension}" />
 			<var name="userPhoneNumberNumber" value="${userPhoneNumberNumber}" />
 			<var name="userPhoneNumberType" value="${userPhoneNumberType}" />
 		</execute>
 
-		<execute macro="SOProfile#editPhoneNumbers">
+		<execute macro="SOProfile#editPhoneNumber">
 			<var name="userPhoneNumberExtension" value="${userPhoneNumberExtensionEdit}" />
 			<var name="userPhoneNumberNumber" value="${userPhoneNumberNumberEdit}" />
 			<var name="userPhoneNumberType" value="${userPhoneNumberTypeEdit}" />
@@ -4340,7 +4340,7 @@
 			<var name="userLoginFullName" value="${userName}" />
 		</execute>
 
-		<execute macro="SOProfile#editPhoneNumbersNull" />
+		<execute macro="SOProfile#editPhoneNumberNull" />
 
 		<execute macro="User#logoutAndLoginPG">
 			<var name="userLoginEmailAddress" value="${adminEmailAddress}" />

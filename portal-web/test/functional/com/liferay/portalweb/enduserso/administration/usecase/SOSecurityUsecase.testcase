@@ -883,7 +883,7 @@
 
 		<execute action="SOProfile#assertAlertNotPresent" />
 
-		<execute macro="SOProfile#addPhoneNumbers">
+		<execute macro="SOProfile#addPhoneNumber">
 			<var name="userPhoneNumberExtension" value="${userPhoneNumberExtension}" />
 			<var name="userPhoneNumberNumber" value="${userPhoneNumberNumber}" />
 			<var name="userPhoneNumberType" value="${userPhoneNumberType}" />

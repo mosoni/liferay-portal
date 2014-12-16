@@ -617,7 +617,7 @@
 			<var name="userIntroduction" value="Introduction Content" />
 		</execute>
 
-		<execute macro="SOProfile#addPhoneNumbers">
+		<execute macro="SOProfile#addPhoneNumber">
 			<var name="userPhoneNumberExtension" value="123" />
 			<var name="userPhoneNumberNumber" value="123-123-1234" />
 			<var name="userPhoneNumberType" value="Business" />
@@ -672,7 +672,7 @@
 			<var name="userIntroduction" value="Introduction Content Edit" />
 		</execute>
 
-		<execute macro="SOProfile#editPhoneNumbers">
+		<execute macro="SOProfile#editPhoneNumber">
 			<var name="userPhoneNumberExtension" value="456" />
 			<var name="userPhoneNumberNumber" value="456-456-4567" />
 			<var name="userPhoneNumberType" value="Personal" />
