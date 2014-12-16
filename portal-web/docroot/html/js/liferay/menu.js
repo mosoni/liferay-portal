@@ -589,25 +589,13 @@ AUI.add(
 								focusManager.refresh();
 							}
 
-							var listRoot = A.one('.lfr-menu-list');
-							var listItems = listRoot.all('li');
-							var numListItems = listItems.size();
-							var numHidden = 0;
+							var visibleItems = listNode.all('li:not([hidden])');
 
-							listItems.each(
-								function(node) {
-									if (node.getAttribute('hidden')) {
-										++numHidden;
-									}
-								}
-							);
-
-							if (numHidden >= numListItems) {
-								listRoot.hide();
+							if (!!visibleItems.size()) {
+								listNode.show();
 							}
-
 							else {
-								listRoot.show();
+								listNode.hide();
 							}
 						}
 					);
