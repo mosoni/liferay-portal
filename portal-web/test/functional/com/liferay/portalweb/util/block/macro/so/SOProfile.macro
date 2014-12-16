@@ -6,6 +6,8 @@
 		<execute action="SOProfile#click" locator-key1="ADD_EMAIL_ADDRESS" />
 		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
 
+		<var name="key_row" value="1" />
+
 		<execute action="SOProfileAddAdditionalEmailAddress#type" locator-key1="EMAIL_ADDRESS_FIELD" value1="${userAdditionalEmailAddress}" />
 		<execute action="SOProfileAddAdditionalEmailAddress#select" locator-key1="TYPE_SELECT" value1="Email Address" />
 		<execute action="SOProfileAddAdditionalEmailAddress#click" locator-key1="PRIMARY_RADIO_BUTTON" />
@@ -16,12 +18,47 @@
 		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_EMAIL_ADDRESS_CONTENT" value1="Email Address ${userAdditionalEmailAddress}" />
 	</command>
 
+	<command name="addAdditionalEmailAddresses">
+		<execute action="Dockbar#click" locator-key1="USER_NAME" />
+		<execute action="Dockbar#click" locator-key1="USER_MY_PROFILE" value1="My Profile" />
+
+		<execute action="SOProfile#click" locator-key1="ADD_EMAIL_ADDRESS" />
+		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
+
+		<var name="key_row" value="1" />
+
+		<for list="${userAdditionalEmailAddressList}" param="userAdditionalEmailAddress">
+			<execute action="SOProfileAddAdditionalEmailAddress#type" locator-key1="EMAIL_ADDRESS_FIELD" value1="${userAdditionalEmailAddress}" />
+			<execute action="SOProfileAddAddress#click" locator-key1="ADD_ROW_BUTTON" />
+
+			<var name="key_row" value="${key_row?increment()}" />
+		</for>
+
+		<var name="key_row" value="1" />
+
+		<for list="${userAdditionalEmailTypeList}" param="userAdditionalEmailType">
+			<execute action="SOProfileAddAdditionalEmailAddress#select" locator-key1="TYPE_SELECT" value1="${userAdditionalEmailType}" />
+
+			<var name="key_row" value="${key_row?increment()}" />
+		</for>
+
+		<var name="key_row" value="1" />
+
+		<execute action="SOProfileAddAdditionalEmailAddress#click" locator-key1="PRIMARY_RADIO_BUTTON" />
+		<execute action="SOProfileAddAdditionalEmailAddress#click" locator-key1="SAVE_BUTTON" />
+
+		<execute action="SOProfile#selectFrame" value1="relative=top" />
+		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_EMAIL_ADDRESS_TITLE" value1="Additional Email Addresses:" />
+	</command>
+
 	<command name="addAddress">
 		<execute action="Dockbar#click" locator-key1="USER_NAME" />
 		<execute action="Dockbar#click" locator-key1="USER_MY_PROFILE" value1="My Profile" />
 
 		<execute action="SOProfile#click" locator-key1="ADD_ADDRESSES" />
 		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
+
+		<var name="key_row" value="1" />
 
 		<execute action="SOProfileAddAddress#type" locator-key1="STREET_1_FIELD" value1="${userAddressStreet1}" />
 
@@ -63,6 +100,86 @@
 		<execute action="SOProfile#selectFrame" value1="relative=top" />
 		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_ADDRESS_TITLE" value1="Addresses:" />
 		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_ADDRESS_CONTENT" value1="${userAddressType} ${userAddressStreet1}, ${userAddressCity}, ${userAddressPostalCode}, ${userAddressRegion}, ${userAddressCountry} (Mailing)" />
+	</command>
+
+	<command name="addAddresses">
+		<execute action="Dockbar#click" locator-key1="USER_NAME" />
+		<execute action="Dockbar#click" locator-key1="USER_MY_PROFILE" value1="My Profile" />
+
+		<execute action="SOProfile#click" locator-key1="ADD_ADDRESSES" />
+		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
+
+		<var name="key_row" value="1" />
+
+		<for list="${userAddressStreet1List}" param="userAddressStreet1">
+			<execute action="SOProfileAddAddress#type" locator-key1="STREET_1_FIELD" value1="${userAddressStreet1}" />
+			<execute action="SOProfileAddAddress#click" locator-key1="ADD_ROW_BUTTON" />
+
+			<var name="key_row" value="${key_row?increment()}" />
+		</for>
+
+		<var name="key_row" value="1" />
+
+		<for list="${userAddressPostalCodeList}" param="userAddressPostalCode">
+			<execute action="SOProfileAddAddress#type" locator-key1="POSTAL_CODE_FIELD" value1="${userAddressPostalCode}" />
+
+			<var name="key_row" value="${key_row?increment()}" />
+		</for>
+
+		<var name="key_row" value="1" />
+
+		<for list="${userAddressCityList}" param="userAddressCity">
+			<execute action="SOProfileAddAddress#type" locator-key1="CITY_FIELD" value1="${userAddressCity}" />
+
+			<var name="key_row" value="${key_row?increment()}" />
+		</for>
+
+		<var name="key_row" value="1" />
+
+		<if>
+			<isset var="userAddressTypeList" />
+			<then>
+				<for list="${userAddressTypeList}" param="userAddressType">
+					<execute action="SOProfileAddAddress#select" locator-key1="TYPE_SELECT" value1="${userAddressType}" />
+
+					<var name="key_row" value="${key_row?increment()}" />
+				</for>
+			</then>
+		</if>
+
+		<var name="key_row" value="1" />
+
+		<if>
+			<isset var="userAddressCountryList" />
+			<then>
+				<for list="${userAddressCountryList}" param="userAddressCountry">
+					<execute action="SOProfileAddAddress#select" locator-key1="COUNTRY_SELECT" value1="${userAddressCountry}" />
+
+					<var name="key_row" value="${key_row?increment()}" />
+				</for>
+			</then>
+		</if>
+
+		<var name="key_row" value="1" />
+
+		<if>
+			<isset var="userAddressRegionList" />
+			<then>
+				<for list="${userAddressRegionList}" param="userAddressRegion">
+					<execute action="SOProfileAddAddress#select" locator-key1="REGION_SELECT" value1="${userAddressRegion}" />
+
+					<var name="key_row" value="${key_row?increment()}" />
+				</for>
+			</then>
+		</if>
+
+		<var name="key_row" value="1" />
+
+		<execute action="SOProfileAddAddress#click" locator-key1="PRIMARY_RADIO_BUTTON" />
+		<execute action="SOProfileAddAddress#check" locator-key1="MAILING_CHECKBOX" />
+		<execute action="SOProfileAddAddress#click" locator-key1="SAVE_BUTTON" />
+
+		<execute action="SOProfile#selectFrame" value1="relative=top" />
 	</command>
 
 	<command name="addConnection">
@@ -160,12 +277,14 @@
 		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_INTRODUCTION_CONTENT" value1="${userIntroduction}"  />
 	</command>
 
-	<command name="addPhoneNumbers">
+	<command name="addPhoneNumber">
 		<execute action="Dockbar#click" locator-key1="USER_NAME" />
 		<execute action="Dockbar#click" locator-key1="USER_MY_PROFILE" value1="My Profile" />
 
 		<execute action="SOProfile#click" locator-key1="ADD_PHONES" />
 		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
+
+		<var name="key_row" value="1" />
 
 		<execute action="SOProfileAddPhoneNumber#type" locator-key1="NUMBER_FIELD" value1="${userPhoneNumberNumber}" />
 
@@ -192,6 +311,52 @@
 				<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_PHONE_NUMBERS_CONTENT" value1="${userPhoneNumberType} ${userPhoneNumberNumber}" />
 			</else>
 		</if>
+	</command>
+
+	<command name="addPhoneNumbers">
+		<execute action="Dockbar#click" locator-key1="USER_NAME" />
+		<execute action="Dockbar#click" locator-key1="USER_MY_PROFILE" value1="My Profile" />
+
+		<execute action="SOProfile#click" locator-key1="ADD_PHONES" />
+		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
+
+		<var name="key_row" value="1" />
+
+		<for list="${userPhoneNumberNumberList}" param="userPhoneNumberNumber">
+			<execute action="SOProfileAddPhoneNumber#type" locator-key1="NUMBER_FIELD" value1="${userPhoneNumberNumber}" />
+			<execute action="SOProfileAddPhoneNumber#click" locator-key1="ADD_ROW_BUTTON" />
+
+			<var name="key_row" value="${key_row?increment()}" />
+		</for>
+
+		<var name="key_row" value="1" />
+
+		<if>
+			<isset var="userPhoneNumberExtensionList" />
+			<then>
+				<for list="${userPhoneNumberExtensionList}" param="userPhoneNumberExtension">
+					<execute action="SOProfileAddPhoneNumber#type" locator-key1="EXTENSION_FIELD" value1="${userPhoneNumberExtension}" />
+
+					<var name="key_row" value="${key_row?increment()}" />
+				</for>
+			</then>
+		</if>
+
+		<var name="key_row" value="1" />
+
+		<for list="${userPhoneNumberTypeList}" param="userPhoneNumberType">
+			<execute action="SOProfileAddPhoneNumber#select" locator-key1="TYPE_SELECT" value1="${userPhoneNumberType}" />
+
+			<var name="key_row" value="${key_row?increment()}" />
+		</for>
+
+		<var name="key_row" value="1" />
+
+		<execute action="SOProfileAddPhoneNumber#click" locator-key1="PRIMARY_RADIO_BUTTON" />
+		<execute action="SOProfileAddPhoneNumber#click" locator-key1="SAVE_BUTTON" />
+
+		<execute action="SOProfile#selectFrame" value1="relative=top" />
+		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_PHONE_NUMBERS_TITLE" value1="Phones:" />
 	</command>
 
 	<command name="addProfilePicture">
@@ -321,6 +486,8 @@
 		<execute action="SOProfile#click" locator-key1="ADD_WEBSITES" />
 		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
 
+		<var name="key_row" value="1" />
+
 		<execute action="SOProfileAddWebsite#type" locator-key1="URL_FIELD" value1="${userWebsiteURL}" />
 		<execute action="SOProfileAddWebsite#select" locator-key1="TYPE_SELECT" value1="${userWebsiteType}" />
 		<execute action="SOProfileAddWebsite#click" locator-key1="PRIMARY_RADIO_BUTTON" />
@@ -329,6 +496,39 @@
 		<execute action="SOProfile#selectFrame" value1="relative=top" />
 		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_WEBSITES_TITLE" value1="Websites:" />
 		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_WEBSITES_CONTENT" value1="${userWebsiteType} ${userWebsiteURL}" />
+	</command>
+
+	<command name="addWebsites">
+		<execute action="Dockbar#click" locator-key1="USER_NAME" />
+		<execute action="Dockbar#click" locator-key1="USER_MY_PROFILE" value1="My Profile" />
+
+		<execute action="SOProfile#click" locator-key1="ADD_WEBSITES" />
+		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
+
+		<var name="key_row" value="1" />
+
+		<for list="${userWebsiteURLList}" param="userWebsiteURL">
+			<execute action="SOProfileAddWebsite#type" locator-key1="URL_FIELD" value1="${userWebsiteURL}" />
+			<execute action="SOProfileAddWebsite#click" locator-key1="ADD_ROW_BUTTON" />
+
+			<var name="key_row" value="${key_row?increment()}" />
+		</for>
+
+		<var name="key_row" value="1" />
+
+		<for list="${userWebsiteTypeList}" param="userWebsiteType">
+			<execute action="SOProfileAddWebsite#select" locator-key1="TYPE_SELECT" value1="${userWebsiteType}" />
+
+			<var name="key_row" value="${key_row?increment()}" />
+		</for>
+
+		<var name="key_row" value="1" />
+
+		<execute action="SOProfileAddWebsite#click" locator-key1="PRIMARY_RADIO_BUTTON" />
+		<execute action="SOProfileAddWebsite#click" locator-key1="SAVE_BUTTON" />
+
+		<execute action="SOProfile#selectFrame" value1="relative=top" />
+		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_WEBSITES_TITLE" value1="Websites:" />
 	</command>
 
 	<command name="blockCCUser">
@@ -382,6 +582,8 @@
 		<execute action="SOProfile#click" locator-key1="PROFILE_INFO_EMAIL_ADDRESS_TITLE" />
 		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
 
+		<var name="key_row" value="1" />
+
 		<execute action="SOProfileAddAdditionalEmailAddress#type" locator-key1="EMAIL_ADDRESS_FIELD" value1="${userAdditionalEmailAddress}" />
 		<execute action="SOProfileAddAdditionalEmailAddress#select" locator-key1="TYPE_SELECT" value1="Email Address" />
 		<execute action="SOProfileAddAdditionalEmailAddress#click" locator-key1="PRIMARY_RADIO_BUTTON" />
@@ -399,6 +601,8 @@
 		<execute action="SOProfile#click" locator-key1="PROFILE_INFO_EMAIL_ADDRESS_TITLE" />
 		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
 
+		<var name="key_row" value="1" />
+
 		<execute action="SOProfileAddAdditionalEmailAddress#type" locator-key1="EMAIL_ADDRESS_FIELD" value1="" />
 		<execute action="SOProfileAddAdditionalEmailAddress#click" locator-key1="SAVE_BUTTON" />
 
@@ -412,6 +616,8 @@
 
 		<execute action="SOProfile#click" locator-key1="PROFILE_INFO_ADDRESS_TITLE" />
 		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
+
+		<var name="key_row" value="1" />
 
 		<execute action="SOProfileAddAddress#type" locator-key1="STREET_1_FIELD" value1="${userAddressStreet1}" />
 
@@ -461,6 +667,8 @@
 
 		<execute action="SOProfile#click" locator-key1="PROFILE_INFO_ADDRESS_TITLE" />
 		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
+
+		<var name="key_row" value="1" />
 
 		<execute action="SOProfileAddAddress#type" locator-key1="STREET_1_FIELD" value1="" />
 		<execute action="SOProfileAddAddress#type" locator-key1="POSTAL_CODE_FIELD" value1="" />
@@ -581,12 +789,68 @@
 		<execute action="SOProfile#assertElementPresent" locator-key1="ADD_INTRODUCTION" />
 	</command>
 
-	<command name="editPhoneNumbers">
+	<command name="editPersonalDetails">
+		<execute action="Dockbar#click" locator-key1="USER_NAME" />
+		<execute action="Dockbar#click" locator-key1="USER_MY_PROFILE" value1="My Profile" />
+
+		<execute action="SOProfile#click" locator-key1="USER_DETAILS" />
+		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
+
+		<if>
+			<isset var="userScreenNameEdit" />
+			<then>
+				<execute action="SOProfileAddDetails#type" locator-key1="SCREEN_NAME_FIELD" value1="${userScreenNameEdit}" />
+			</then>
+		</if>
+
+		<if>
+			<isset var="userEmailAddressEdit" />
+			<then>
+				<execute action="SOProfileAddDetails#type" locator-key1="EMAIL_ADDRESS_FIELD" value1="${userEmailAddressEdit}" />
+			</then>
+		</if>
+
+		<if>
+			<isset var="userFirstNameEdit" />
+			<then>
+				<execute action="SOProfileAddDetails#type" locator-key1="FIRST_NAME_FIELD" value1="${userFirstNameEdit}" />
+			</then>
+		</if>
+
+		<if>
+			<isset var="userMiddleNameEdit" />
+			<then>
+				<execute action="SOProfileAddDetails#type" locator-key1="MIDDLE_NAME_FIELD" value1="${userMiddleNameEdit}" />
+			</then>
+		</if>
+
+		<if>
+			<isset var="userLastNameEdit" />
+			<then>
+				<execute action="SOProfileAddDetails#type" locator-key1="LAST_NAME_FIELD" value1="${userLastNameEdit}" />
+			</then>
+		</if>
+
+		<if>
+			<isset var="userJobTitle" />
+			<then>
+				<execute action="SOProfileAddDetails#type" locator-key1="JOB_TITLE_FIELD" value1="${userJobTitle}" />
+			</then>
+		</if>
+
+		<execute action="SOProfileAddWebsite#click" locator-key1="SAVE_BUTTON" />
+
+		<execute action="SOProfile#selectFrame" value1="relative=top" />
+	</command>
+
+	<command name="editPhoneNumber">
 		<execute action="Dockbar#click" locator-key1="USER_NAME" />
 		<execute action="Dockbar#click" locator-key1="USER_MY_PROFILE" value1="My Profile" />
 
 		<execute action="SOProfile#click" locator-key1="PROFILE_INFO_PHONE_NUMBERS_TITLE" />
 		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
+
+		<var name="key_row" value="1" />
 
 		<execute action="SOProfileAddPhoneNumber#type" locator-key1="NUMBER_FIELD" value1="${userPhoneNumberNumber}" />
 
@@ -615,12 +879,14 @@
 		</if>
 	</command>
 
-	<command name="editPhoneNumbersNull">
+	<command name="editPhoneNumberNull">
 		<execute action="Dockbar#click" locator-key1="USER_NAME" />
 		<execute action="Dockbar#click" locator-key1="USER_MY_PROFILE" value1="My Profile" />
 
 		<execute action="SOProfile#click" locator-key1="PROFILE_INFO_PHONE_NUMBERS_TITLE" />
 		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
+
+		<var name="key_row" value="1" />
 
 		<execute action="SOProfileAddPhoneNumber#type" locator-key1="NUMBER_FIELD" value1="" />
 		<execute action="SOProfileAddPhoneNumber#type" locator-key1="EXTENSION_FIELD" value1="" />
@@ -798,6 +1064,8 @@
 		<execute action="SOProfile#click" locator-key1="PROFILE_INFO_WEBSITES_TITLE" />
 		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
 
+		<var name="key_row" value="1" />
+
 		<execute action="SOProfileAddWebsite#type" locator-key1="URL_FIELD" value1="${userWebsiteURL}" />
 		<execute action="SOProfileAddWebsite#select" locator-key1="TYPE_SELECT" value1="${userWebsiteType}" />
 		<execute action="SOProfileAddWebsite#click" locator-key1="PRIMARY_RADIO_BUTTON" />
@@ -814,6 +1082,8 @@
 
 		<execute action="SOProfile#click" locator-key1="PROFILE_INFO_WEBSITES_TITLE" />
 		<execute action="SOProfile#selectFrame" locator-key1="ADD_CONTENT_IFRAME" />
+
+		<var name="key_row" value="1" />
 
 		<execute action="SOProfileAddWebsite#type" locator-key1="URL_FIELD" value1="" />
 		<execute action="SOProfileAddWebsite#click" locator-key1="SAVE_BUTTON" />
@@ -932,12 +1202,30 @@
 
 	<command name="viewAdditionalEmailAddress">
 		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_EMAIL_ADDRESS_TITLE" value1="Additional Email Addresses:" />
-		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_EMAIL_ADDRESS_CONTENT" value1="Email Address ${userAdditionalEmailAddress}" />
+
+		<if>
+			<isset var="userAdditionalEmailType" />
+			<then>
+				<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_EMAIL_ADDRESS_CONTENT" value1="${userAdditionalEmailType} ${userAdditionalEmailAddress}" />
+			</then>
+			<else>
+				<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_EMAIL_ADDRESS_CONTENT" value1="Email Address ${userAdditionalEmailAddress}" />
+			</else>
+		</if>
 	</command>
 
 	<command name="viewAddress">
 		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_ADDRESS_TITLE" value1="Addresses:" />
-		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_ADDRESS_CONTENT" value1="${userAddressType} ${userAddressStreet1}, ${userAddressCity}, ${userAddressPostalCode}, ${userAddressRegion}, ${userAddressCountry} (Mailing)" />
+
+		<if>
+			<equals arg1="${mailingAddress}" arg2="false" />
+			<then>
+				<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_ADDRESS_CONTENT" value1="${userAddressType} ${userAddressStreet1}, ${userAddressCity}, ${userAddressPostalCode}, ${userAddressRegion}, ${userAddressCountry}" />
+			</then>
+			<else>
+				<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_ADDRESS_CONTENT" value1="${userAddressType} ${userAddressStreet1}, ${userAddressCity}, ${userAddressPostalCode}, ${userAddressRegion}, ${userAddressCountry} (Mailing)" />
+			</else>
+		</if>
 	</command>
 
 	<command name="viewBlockedUser">
@@ -1156,6 +1444,18 @@
 		<execute action="SOSite#assertTextEquals" locator-key1="NAVIGATION_BLOGS" value1="Blogs" />
 		<execute action="SOSite#assertTextEquals" locator-key1="NAVIGATION_WIKI" value1="Wiki" />
 		<execute action="SOSite#assertTextEquals" locator-key1="NAVIGATION_MEMBERS" value1="Members" />
+	</command>
+
+	<command name="viewPersonalDetails">
+		<execute action="SOProfile#assertTextEquals" locator-key1="USER_NAME" value1="${userName}" />
+		<execute action="SOProfile#assertTextEquals" locator-key1="USER_EMAIL" value1="${userEmailAddress}" />
+
+		<if>
+			<isset var="userJobTitle" />
+			<then>
+				<execute action="SOProfile#assertTextEquals" locator-key1="USER_JOB_TITLE" value1="${userJobTitle}" />
+			</then>
+		</if>
 	</command>
 
 	<command name="viewPhoneNumbers">
