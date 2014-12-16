@@ -24,6 +24,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>USER_DETAILS</td>
+	<td>//div[@data-title='Details']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>USER_NAME</td>
 	<td>//div[@class='no-icon lfr-contact-info']/div/a</td>
 	<td></td>
@@ -31,6 +36,11 @@
 <tr>
 	<td>USER_EMAIL</td>
 	<td>//div[@class='lfr-contact-extra']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>USER_JOB_TITLE</td>
+	<td>//div[@class='lfr-contact-job-title']</td>
 	<td></td>
 </tr>
 <tr>
@@ -219,7 +229,7 @@
 </tr>
 <tr>
 	<td>PROFILE_INFO_ADDRESS_CONTENT</td>
-	<td>//div[@data-title='Addresses']/ul/li</td>
+	<td>//div[@data-title='Addresses']/ul</td>
 	<td></td>
 </tr>
 <tr>
@@ -229,7 +239,7 @@
 </tr>
 <tr>
 	<td>PROFILE_INFO_EMAIL_ADDRESS_CONTENT</td>
-	<td>//div[@data-title='Additional Email Addresses']/ul/li</td>
+	<td>//div[@data-title='Additional Email Addresses']/ul</td>
 	<td></td>
 </tr>
 <tr>
@@ -284,7 +294,7 @@
 </tr>
 <tr>
 	<td>PROFILE_INFO_PHONE_NUMBERS_CONTENT</td>
-	<td>//div[@data-title='Phone Numbers']/ul/li</td>
+	<td>//div[@data-title='Phone Numbers']/ul</td>
 	<td></td>
 </tr>
 <tr>
@@ -369,7 +379,7 @@
 </tr>
 <tr>
 	<td>PROFILE_INFO_WEBSITES_CONTENT</td>
-	<td>//div[@data-title='Websites']/ul/li</td>
+	<td>//div[@data-title='Websites']/ul</td>
 	<td></td>
 </tr>
 <tr>

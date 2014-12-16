@@ -20,17 +20,27 @@
 </tr>
 <tr>
 	<td>URL_FIELD</td>
-	<td>//input[contains(@id,'websiteUrl')]</td>
+	<td>xpath=(//input[contains(@id,'websiteUrl')])[${key_row}]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>TYPE_SELECT</td>
-	<td>//select[contains(@id,'websiteType')]</td>
+	<td>xpath=(//select[contains(@id,'websiteType')])[${key_row}]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>PRIMARY_RADIO_BUTTON</td>
-	<td>//input[contains(@id,'websitePrimary')]</td>
+	<td>xpath=(//input[contains(@id,'websitePrimary')])[${key_row}]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_ROW_BUTTON</td>
+	<td>xpath=(//button[contains(@class,'add-row')])[${key_row}]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DELETE_ROW_BUTTON</td>
+	<td>xpath=(//button[contains(@class,'delete-row')])[${key_row}]</td>
 	<td></td>
 </tr>
 <tr>

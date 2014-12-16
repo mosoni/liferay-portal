@@ -4,8 +4,16 @@
 			<execute function="AssertTextEquals#assertText" />
 		</case>
 
+		<case locator-key1="PROFILE_INFO_ADDRESS_CONTENT">
+			<execute function="AssertTextEquals#assertPartialText" />
+		</case>
+
 		<case locator-key1="PROFILE_INFO_EMAIL_ADDRESS_TITLE">
 			<execute function="AssertTextEquals#assertText" />
+		</case>
+
+		<case locator-key1="PROFILE_INFO_EMAIL_ADDRESS_CONTENT">
+			<execute function="AssertTextEquals#assertPartialText" />
 		</case>
 
 		<case locator-key1="PROFILE_INFO_INSTANT_MESSENGER_TITLE">
@@ -18,6 +26,10 @@
 
 		<case locator-key1="PROFILE_INFO_PHONE_NUMBERS_TITLE">
 			<execute function="AssertTextEquals#assertText" />
+		</case>
+
+		<case locator-key1="PROFILE_INFO_PHONE_NUMBERS_CONTENT">
+			<execute function="AssertTextEquals#assertPartialText" />
 		</case>
 
 		<case locator-key1="PROFILE_INFO_PROJECTS_TITLE">
@@ -38,6 +50,10 @@
 
 		<case locator-key1="PROFILE_INFO_WEBSITES_TITLE">
 			<execute function="AssertTextEquals#assertText" />
+		</case>
+
+		<case locator-key1="PROFILE_INFO_WEBSITES_CONTENT">
+			<execute function="AssertTextEquals#assertPartialText" />
 		</case>
 	</command>
 
