@@ -51,6 +51,8 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.DateRange;
+import com.liferay.portal.kernel.util.Digester;
+import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -543,7 +545,8 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		}
 
 		return TempFileUtil.getTempFile(
-			groupId, userId, tempFileEntryNames[0], folderName);
+			groupId, userId, tempFileEntryNames[0],
+			DigesterUtil.digestHex(Digester.SHA_256, folderName));
 	}
 
 	@Override
