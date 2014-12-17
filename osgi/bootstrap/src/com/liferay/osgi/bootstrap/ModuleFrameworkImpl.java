@@ -918,6 +918,16 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 	}
 
+	private String _getLiferayLibPortalDir() {
+		String liferayLibPortalDir = PropsValues.LIFERAY_LIB_PORTAL_DIR;
+
+		if (liferayLibPortalDir.startsWith(StringPool.SLASH)) {
+			liferayLibPortalDir = liferayLibPortalDir.substring(1);
+		}
+
+		return liferayLibPortalDir;
+	}
+
 	private void _processURL(
 		StringBundler sb, URL url, String[] ignoredFragments) {
 
@@ -940,7 +950,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		if (Validator.isNull(bundleSymbolicName)) {
 			String urlString = url.toString();
 
-			if (urlString.contains(PropsValues.LIFERAY_LIB_PORTAL_DIR)) {
+			if (urlString.contains(_getLiferayLibPortalDir())) {
 				manifest = _calculateManifest(url, manifest);
 
 				attributes = manifest.getMainAttributes();
