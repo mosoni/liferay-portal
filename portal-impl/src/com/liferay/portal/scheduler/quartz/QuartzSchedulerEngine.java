@@ -1143,7 +1143,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		throws Exception {
 
 		JobDetail jobDetail = scheduler.getJobDetail(jobKey);
-		
+
 		if (jobDetail == null) {
 			return;
 		}
