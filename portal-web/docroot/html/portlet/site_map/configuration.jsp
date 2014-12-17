@@ -47,7 +47,7 @@ List layoutList = layoutView.getList();
 				String[] nodeValues = StringUtil.split(layoutDesc, '|');
 
 				long objId = GetterUtil.getLong(nodeValues[3]);
-				String name = nodeValues[4];
+				String name = HtmlUtil.escape(nodeValues[4]);
 
 				int depth = 0;
 
@@ -56,7 +56,7 @@ List layoutList = layoutView.getList();
 				}
 
 				for (int j = 0; j < depth; j++) {
-					name = "-&nbsp;" + HtmlUtil.escape(name);
+					name = "-&nbsp;" + name;
 				}
 
 				Layout curRootLayout = null;
