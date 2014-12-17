@@ -747,8 +747,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 					return;
 				}
 
-				Property statusProperty = PropertyFactoryUtil.forName(
-					"status");
+				Property statusProperty = PropertyFactoryUtil.forName("status");
 
 				Integer[] statuses = {
 					WorkflowConstants.STATUS_APPROVED,
