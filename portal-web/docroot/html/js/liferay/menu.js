@@ -591,12 +591,7 @@ AUI.add(
 
 							var visibleItems = listNode.all('li:not([hidden])');
 
-							if (!!visibleItems.size()) {
-								listNode.show();
-							}
-							else {
-								listNode.hide();
-							}
+							listNode.toggle(!!visibleItems.size());
 						}
 					);
 
