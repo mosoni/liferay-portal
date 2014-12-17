@@ -274,6 +274,13 @@
 				<equals arg1="${workflow}" arg2="Locked" />
 				<then>
 					<execute action="PGDocumentsandmediaDocument#assertTextEquals" locator-key1="TOOLBAR_DOWNLOAD_BUTTON" value1="Download" />
+					<execute action="PGDocumentsandmediaDocument#assertElementNotPresent" locator-key1="TOOLBAR_EDIT_BUTTON" />
+					<execute action="PGDocumentsandmediaDocument#assertElementNotPresent" locator-key1="TOOLBAR_MOVE_BUTTON" />
+					<execute action="PGDocumentsandmediaDocument#assertElementNotPresent" locator-key1="TOOLBAR_CHECKOUT_BUTTON" />
+					<execute action="PGDocumentsandmediaDocument#assertElementNotPresent" locator-key1="TOOLBAR_CHECKIN_BUTTON" />
+					<execute action="PGDocumentsandmediaDocument#assertElementNotPresent" locator-key1="TOOLBAR_CANCEL_CHECKOUT_BUTTON" />
+					<execute action="PGDocumentsandmediaDocument#assertElementNotPresent" locator-key1="TOOLBAR_PERMISSIONS_BUTTON" />
+					<execute action="PGDocumentsandmediaDocument#assertElementNotPresent" locator-key1="TOOLBAR_MOVE_TO_RECYCLE_BIN_BUTTON" />
 				</then>
 			</elseif>
 			<else>
@@ -366,6 +373,8 @@
 	</command>
 
 	<command name="viewPGDocumentSpecificVersionDetails">
+		<var name="key_dmDocumentTitle" value="${dmDocumentTitle}" />
+
 		<execute action="PGDocumentsandmedia#click" locator-key1="ENTRY_ICON_DOCUMENT_TITLE" />
 
 		<var name="key_dmDocumentVersionNumber" value="${dmDocumentVersionNumber}" />
@@ -373,7 +382,7 @@
 		<execute action="SODocuments#assertClick" locator-key1="VERSION_HISTORY_VIEW" value1="View" />
 
 		<execute action="PGDocumentsandmediaDocument#assertTextEquals" locator-key1="DOCUMENT_HEADER_TITLE" value1="${dmDocumentTitle}" />
-
+		<execute action="PGDocumentsandmediaDocument#assertElementPresent" locator-key1="BACK_BUTTON" />
 		<execute action="PGDocumentsandmediaDocument#assertElementPresent" locator-key1="DOCUMENT_INFO_THUMBNAIL" />
 		<execute action="PGDocumentsandmediaDocument#assertTextEquals" locator-key1="DOCUMENT_INFO_UPLOADED_BY" value1="${dmDocumentUploader}" />
 		<execute action="PGDocumentsandmediaDocument#assertTextEquals" locator-key1="DOCUMENT_INFO_DESCRIPTION" value1="${dmDocumentDescription}" />
