@@ -40,7 +40,7 @@
 </tr>
 <tr>
 	<td>FIELD_LABEL</td>
-	<td>//div[@data-fieldname='${key_fieldName}']//label</td>
+	<td>//div[@data-fieldname='${key_fieldName}']//label | //div[@data-fieldname='${key_fieldName}']//span</td>
 	<td></td>
 </tr>
 <tr>
@@ -105,12 +105,12 @@
 </tr>
 <tr>
 	<td>RADIO_OPTION_LABEL</td>
-	<td>//div[@data-fieldname='${key_fieldName}']/label[contains(.,'${key_ddlRecordFieldData}')]</td>
+	<td>//div[@data-fieldname='${key_fieldName}']/label[contains(.,'${key_ddlRecordFieldData}')] | //div[@data-fieldname='${key_fieldName}']/div[contains(.,'${key_ddlRecordFieldData}')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>RADIO_OPTION_RADIO</td>
-	<td>//div[@data-fieldname='${key_fieldName}']/label[contains(.,'${key_ddlRecordFieldData}')]/input</td>
+	<td>//div[@data-fieldname='${key_fieldName}']/label[contains(.,'${key_ddlRecordFieldData}')]/input | //div[@data-fieldname='${key_fieldName}']/div[contains(.,'${key_ddlRecordFieldData}')]//input</td>
 	<td></td>
 </tr>
 <tr>
