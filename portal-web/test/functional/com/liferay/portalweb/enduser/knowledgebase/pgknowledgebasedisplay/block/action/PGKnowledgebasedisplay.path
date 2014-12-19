@@ -25,7 +25,7 @@
 </tr>
 <tr>
 	<td>INFO_MESSAGE</td>
-	<td>//section[contains(.,'Knowledge Base (Display)')]//div[contains(@class,'alert') and contains(@class,'alert-info')]</td>
+	<td>//div[contains(@class,'alert') and contains(@class,'alert-info')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -85,6 +85,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>ARTICLE_CHILD_CONTENT</td>
+	<td>//div[@class='kb-article-child']//div[@class='kb-element-body']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>ARTICLE_PREVIOUS</td>
 	<td>//div[@class='kb-article-container']//span[@class='kb-article-previous']/a</td>
 	<td></td>
@@ -110,8 +115,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>ARTICLE_SUGGESTIONS</td>
-	<td>//div[@class='kb-article-container']//div/a[contains(.,'Do you have any suggestions?')]</td>
+	<td>ARTICLE_READ_MORE</td>
+	<td>//div[@class='kb-article-child']//a[contains(.,'Read More')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ARTICLE_DO_YOU_HAVE_ANY_SUGGESTIONS_LINK</td>
+	<td>//div[@class='kb-article-suggestion-actions']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ARTICLE_THERE_ARE_SUGGESTIONS_LINK</td>
+	<td>//div[@class='kb-article-suggestion-actions']/a[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -189,17 +204,12 @@
 </tr>
 <!--SUGGESTION-->
 <tr>
-	<td>SUGGESTION_ADD_LINK</td>
-	<td>//div[@class='kb-article-suggestion-actions']/a</td>
+	<td>SUGGESTION_TITLE</td>
+	<td>//div[@class='kb-article-comment']//h4/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>SUGGESTION_VIEW_LINK</td>
-	<td>//div[@class='kb-article-suggestion-actions']/a[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>SUGGESTION_BODY</td>
+	<td>SUGGESTION_CONTENT_FIELD</td>
 	<td>//textarea[contains(@id,'knowledgebaseportlet_content')]</td>
 	<td></td>
 </tr>
@@ -209,8 +219,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>SUGGESTION_SUBMIT_CANCEL</td>
+	<td>SUGGESTION_CANCEL_BUTTON</td>
 	<td>//button[contains(.,'Cancel')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_USER_NAME</td>
+	<td>//div[@class='kb-article-comment']//td[contains(.,'${kbSuggestionBody}')]/../td[@class='kb-article-comment-user']/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_CONTENT</td>
+	<td>//div[@class='kb-article-comment']//div[contains(.,'${kbSuggestionBody}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_STATUS</td>
+	<td>//div[@class='kb-article-comment']//td[contains(.,'${kbSuggestionBody}')]/div[@class='kb-article-comment-date']/span[@class='taglib-workflow-status']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_MOVE_TO_IN_PROGRESS_BUTTON</td>
+	<td>//tr[contains(.,'${key_kbSuggestionBody}')]//button[contains(.,'Move to in Progress')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_MOVE_TO_NEW_BUTTON</td>
+	<td>//tr[contains(.,'${key_kbSuggestionBody}')]//button[contains(.,'Move to New')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_RESOLVE_BUTTON</td>
+	<td>//tr[contains(.,'${key_kbSuggestionBody}')]//button[contains(.,'Resolve')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUGGESTION_DELETE_BUTTON</td>
+	<td>//tr[contains(.,'${key_kbSuggestionBody}')]//button[contains(.,'Delete')]</td>
 	<td></td>
 </tr>
 <!--SUGGESTION_NAVIGATION-->
