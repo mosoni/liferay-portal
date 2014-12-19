@@ -2335,6 +2335,189 @@
 		<execute action="Home#open" locator1="http://localhost:8080" />
 	</command>
 
+	<command name="ViewRecentBlogsDisplayStyles" priority="4">
+		<var name="entryAbstractDescription" value="Blogs Entry Abstract" />
+		<var name="entryContent" value="Blogs Entry Content" />
+		<var name="entryQuote" value="&quot;Blogs Entry Content... &quot; Read More" />
+		<var name="entryTitle" value="Blogs Entry Title" />
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="BlogsEntry#addPG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="BlogsEntry#gotoEditPG">
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addAbstractDescriptionPG">
+			<var name="entryAbstractDescription" value="${entryAbstractDescription}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#configureRecentBlogsPortletDisplayStyle">
+			<var name="displayStyle" value="Body and Image" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#viewBlogsEntryTitleAndAuthorViaRecentBlogs">
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="SOBlogs#viewBlogsEntryContentViaRecentBlogs">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="SOBlogs#viewBlogsEntryAuthorImageViaRecentBlogs">
+			<var name="entryContent" value="${entryContent}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#configureRecentBlogsPortletDisplayStyle">
+			<var name="displayStyle" value="Body" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#viewBlogsEntryTitleAndAuthorViaRecentBlogs">
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="SOBlogs#viewBlogsEntryContentViaRecentBlogs">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#configureRecentBlogsPortletDisplayStyle">
+			<var name="displayStyle" value="Abstract" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#viewBlogsEntryTitleAndAuthorViaRecentBlogs">
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="SOBlogs#viewBlogsEntryAbstractViaRecentBlogs">
+			<var name="entryAbstractDescription" value="${entryAbstractDescription}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#configureRecentBlogsPortletDisplayStyle">
+			<var name="displayStyle" value="Abstract without Title" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#viewBlogsEntryAbstractViaRecentBlogs">
+			<var name="entryAbstractDescription" value="${entryAbstractDescription}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#configureRecentBlogsPortletDisplayStyle">
+			<var name="displayStyle" value="Quote" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#viewBlogsEntryTitleAndAuthorViaRecentBlogs">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="SOBlogs#viewBlogsEntryQuoteViaRecentBlogs">
+			<var name="entryQuote" value="${entryQuote}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#configureRecentBlogsPortletDisplayStyle">
+			<var name="displayStyle" value="Quote without Title" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#viewBlogsEntryQuoteViaRecentBlogs">
+			<var name="entryQuote" value="${entryQuote}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#configureRecentBlogsPortletDisplayStyle">
+			<var name="displayStyle" value="Title" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOBlogs#viewBlogsEntryTitleAndAuthorViaRecentBlogs">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+	</command>
+
 	<command name="ViewSOBlogsEntriesMaxItemsToDisplay5" priority="4">
 		<var name="entryContent1" value="Blogs Entry1 Content" />
 		<var name="entryContent2" value="Blogs Entry2 Content" />
