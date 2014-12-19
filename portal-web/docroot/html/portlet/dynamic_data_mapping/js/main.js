@@ -687,33 +687,33 @@ AUI.add(
 								instance._updateFieldsLocalizationMap(locale, item.get('fields'));
 							}
 						);
+					},
+
+					_updateLocalizationMaps: function(config) {
+						var instance = this;
+
+						var fields = config.fields;
+						var newVal = config.newVal;
+						var prevVal = config.prevVal;
+
+						AArray.each(
+							fields._items,
+							function(field) {
+								var childFields = field.get('fields');
+								var localizationMap = field.get('localizationMap');
+
+								var config = {
+									fields: childFields,
+									newVal: newVal,
+									prevVal: prevVal
+								};
+
+								localizationMap[newVal] = localizationMap[prevVal];
+
+								instance._updateLocalizationMaps(config);
+							}
+						);
 					}
-				},
-				
-				_updateLocalizationMaps: function(config) {
-					var instance = this;
-
-					var fields = config.fields;
-					var newVal = config.newVal;
-					var prevVal = config.prevVal;
-
-					AArray.each(
-						fields._items,
-						function(field) {
-							var childFields = field.get('fields');
-							var localizationMap = field.get('localizationMap');
-
-							var config = {
-								fields: childFields,
-								newVal: newVal,
-								prevVal: prevVal
-							};
-
-							localizationMap[newVal] = localizationMap[prevVal];
-
-							instance._updateLocalizationMaps(config);
-						}
-					);
 				},
 
 				normalizeKey: function(str) {
