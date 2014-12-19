@@ -70,8 +70,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>RECENT_BLOGS_ENTRY_ABSTRACT</td>
+	<td>//div[@class='abstract' and contains(.,'${key_entryAbstractDescription}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECENT_BLOGS_ENTRY_AUTHOR_IMAGE</td>
+	<td>//div[@class='abstract' and contains(.,'${key_entryContent}')]//img</td>
+	<td></td>
+</tr>
+<tr>
 	<td>RECENT_BLOGS_ENTRY_READ_MORE_LINK</td>
 	<td>//div[@class='comments']/a[contains(.,'About ${key_entryTitle}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECENT_BLOGS_ENTRY_COMMENTS_LINK</td>
+	<td>//div[contains(.,'${key_entryTitle}')]//div[@class='comments']/a[contains(.,'Comment')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECENT_BLOGS_ENTRY_QUOTE</td>
+	<td>//div[contains(.,'${key_entryQuote}')]//span[@class='quote']/a</td>
 	<td></td>
 </tr>
 <tr>
