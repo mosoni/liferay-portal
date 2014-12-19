@@ -441,7 +441,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 		Locale snippetLocale = getSnippetLocale(document, locale);
 
 		String localizedTitleName = DocumentImpl.getLocalizedName(
-				locale, Field.TITLE);
+			locale, Field.TITLE);
 
 		if ((snippetLocale == null) ||
 			(document.getField(localizedTitleName) == null)) {
