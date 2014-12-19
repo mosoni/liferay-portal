@@ -482,7 +482,7 @@ AUI.add(
 
 						return readOnlyAttributes;
 					},
-					
+
 					_onDefaultLocaleChange: function(event) {
 						var instance = this;
 
