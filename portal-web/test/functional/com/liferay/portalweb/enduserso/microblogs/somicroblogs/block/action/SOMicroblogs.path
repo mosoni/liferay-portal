@@ -34,6 +34,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>MICROBLOGS_CONTENT_AUTOCOMPLETE_JOB_TITLE</td>
+	<td>//div[@class='microblogs-autocomplete']//span[@class='job-title']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>MICROBLOGS_CONTENT_INPUT_FIELD</td>
 	<td>//textarea[contains(@name,'contentInput')]</td>
 	<td></td>
@@ -230,6 +235,11 @@
 <tr>
 	<td>SCREENSHOTS_MICROBLOGS_ENTRY_COMMENT_THREADING_PNG</td>
 	<td>so/screenshots/microblogs/microblogs_entry_comment_threading.png</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SCREENSHOTS_MICROBLOGS_MENTION_DROPDOWN_PNG</td>
+	<td>so/screenshots/microblogs/microblogs_mention_dropdown.png</td>
 	<td></td>
 </tr>
 </tbody>
