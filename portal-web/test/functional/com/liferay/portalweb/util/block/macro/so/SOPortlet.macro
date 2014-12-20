@@ -1,4 +1,28 @@
 <definition>
+	<command name="disablePortletBorders">
+		<execute macro="SOPortlet#gotoPortletOptions">
+			<var name="portletName" value="${portletName}" />
+			<var name="portletOption" value="Look and Feel" />
+		</execute>
+
+		<execute action="BasePortlet#select" locator-key1="PORTLET_CONFIGURATION_SHOW_BORDERS_SELECT" value1="No" />
+		<execute action="BasePortlet#assertClick" locator-key1="PORTLET_CONFIGURATION_SAVE_BUTTON" value1="Save" />
+		<execute action="BasePortlet#assertTextEquals" locator-key1="PORTLET_CONFIGURATION_SUCCESS_MESSAGE" value1="Your request processed successfully." />
+		<execute action="BasePortlet#selectFrameTop" />
+	</command>
+
+	<command name="enablePortletBorders">
+		<execute macro="SOPortlet#gotoPortletOptions">
+			<var name="portletName" value="${portletName}" />
+			<var name="portletOption" value="Look and Feel" />
+		</execute>
+
+		<execute action="BasePortlet#select" locator-key1="PORTLET_CONFIGURATION_SHOW_BORDERS_SELECT" value1="Yes" />
+		<execute action="BasePortlet#assertClick" locator-key1="PORTLET_CONFIGURATION_SAVE_BUTTON" value1="Save" />
+		<execute action="BasePortlet#assertTextEquals" locator-key1="PORTLET_CONFIGURATION_SUCCESS_MESSAGE" value1="Your request processed successfully." />
+		<execute action="BasePortlet#selectFrameTop" />
+	</command>
+
 	<command name="gotoPortletOptions">
 		<execute macro="SOUserBar#showEditControls" />
 

@@ -539,6 +539,31 @@
 		<execute action="SOAnnouncementsManage#selectFrameTop" />
 	</command>
 
+	<command name="viewAnnouncementByOtherUserPG">
+		<var name="key_entryTitle" value="${entryTitle}" />
+
+		<execute action="SOAnnouncements#assertTextEquals" locator-key1="ANNOUNCEMENTS_ENTRY_TITLE" value1="${entryTitle}" />
+		<execute action="SOAnnouncements#assertTextEquals" locator-key1="ANNOUNCEMENTS_ENTRY_ACTION" value1="${entryAuthor} to ${distributionScope}" />
+		<execute action="SOAnnouncements#assertTextEquals" locator-key1="ANNOUNCEMENTS_ENTRY_CONTENT" value1="${entryContent}" />
+
+		<if>
+			<equals arg1="${priority}" arg2="Important" />
+			<then>
+				<execute action="SOAnnouncements#sikuliAssertElementPresent" locator-key1="SCREENSHOTS_ANNOUNCEMENTS_ENTRY_IMPORTANT_PNG" />
+			</then>
+		</if>
+
+		<if>
+			<isset var="entryURL" />
+			<then>
+				<execute action="SOAnnouncements#assertClick" locator-key1="ANNOUNCEMENTS_ENTRY_TITLE_LINK" value1="${entryTitle}" />
+				<execute action="SOAnnouncements#assertElementPresent" locator-key1="ANNOUNCEMENTS_ENTRY_IMAGE_GOOGLE" />
+
+				<execute macro="Page#openURL" />
+			</then>
+		</if>
+	</command>
+
 	<command name="viewEmptyPG">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
