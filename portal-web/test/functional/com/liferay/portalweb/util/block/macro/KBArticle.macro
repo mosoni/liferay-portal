@@ -322,6 +322,7 @@
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
 
 		<execute action="PGKnowledgebasedisplay#assertTextEquals" locator-key1="ARTICLE_TITLE" value1="${kbArticleTitle}" />
+
 		<if>
 			<equals arg1="${rateUp}" arg2="true" />
 			<then>
@@ -335,7 +336,7 @@
 			</elseif>
 		</if>
 
-		<execute action="PGKnowledgebasedisplay#assertTextEquals" locator-key1="ARTICLE_VOTES" value1="+1 (1 Vote)" />
+		<execute action="PGKnowledgebasedisplay#assertTextEquals" locator-key1="ARTICLE_VOTES" value1="${articleVoteCount}" />
 	</command>
 
 	<command name="searchPGViaKBSearch">
