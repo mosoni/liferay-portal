@@ -1405,6 +1405,12 @@
 		<execute action="SOProfile#assertElementNotPresent" locator-key1="DISCONNECT_BUTTON" />
 	</command>
 
+	<command name="viewNoInfoMessages">
+		<execute action="SOProfile#assertElementNotPresent" locator-key1="PROFILE_CONTENT_INFO_MESSAGE" />
+		<execute action="SOProfile#assertTextNotPresent" value1="To complete your profile, please add:" />
+		<execute action="SOProfile#assertTextNotPresent" value1="Add Projects:" />
+	</command>
+
 	<command name="viewNotFollowing">
 		<execute action="SOContactscenter#assertClick" locator-key1="CONTACTS_LINK_FOLLOWING" value1="You are following 0 people." />
 		<execute action="SOContactscenter#assertSelectedLabel" locator-key1="CONTACTS_LIST_FILTER" value1="Following" />
