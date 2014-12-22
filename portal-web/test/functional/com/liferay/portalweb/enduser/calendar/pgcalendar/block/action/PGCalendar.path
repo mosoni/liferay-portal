@@ -81,6 +81,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>VIEW_DATE</td>
+	<td>//span[contains(@class,'scheduler-base-view-date')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>VIEW_DAY_BUTTON</td>
 	<td>//button[@data-view-name='day']</td>
 	<td></td>

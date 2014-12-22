@@ -29,6 +29,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>RECENT_DOWNLOADS_DOCUMENT_TITLE_LINK</td>
+	<td>//div[contains(@class,'portlet-body')]//ul[contains(@class,'recent-documents')]//a[contains(.,'${key_dmDocumentTitle}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>RECENT_DOWNLOADS_OPTIONS</td>
 	<td>//header[contains(.,'Recent Downloads')]//menu//a</td>
 	<td></td>
