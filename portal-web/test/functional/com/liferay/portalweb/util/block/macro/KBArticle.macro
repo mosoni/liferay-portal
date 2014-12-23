@@ -282,12 +282,12 @@
 
 	<command name="gotoViaKBDisplayHierarchyNavigationPG">
 		<var name="key_kbArticleTitle" value="${kbArticleTitle}" />
+		<var name="key_kbChildArticleTitle" value="${kbChildArticleTitle}" />
 
 		<if>
 			<isset var="kbChildArticleTitle" />
 			<then>
-				<var name="key_kbChildArticleTitle" value="${kbChildArticleTitle}" />
-
+				<execute action="PGKnowledgebasedisplay#assertClick" locator-key1="ARTICLE_NAVIGATION" value1="${kbArticleTitle}" />
 				<execute action="PGKnowledgebasedisplay#assertClick" locator-key1="ARTICLE_NAVIGATION_CHILD" value1="${kbChildArticleTitle}" />
 			</then>
 			<else>
@@ -502,6 +502,7 @@
 			<then>
 				<var name="key_kbArticleTitle" value="${kbArticleTitle2}" />
 
+				<execute action="PGKnowledgebasedisplay#click" locator-key1="ARTICLE_NAVIGATION" value1="${kbArticleTitle2}" />
 				<execute action="PGKnowledgebasedisplay#assertTextEquals" locator-key1="ARTICLE_NAVIGATION" value1="${kbArticleTitle2}" />
 
 				<if>
@@ -541,6 +542,7 @@
 			<then>
 				<var name="key_kbArticleTitle" value="${kbArticleTitle3}" />
 
+				<execute action="PGKnowledgebasedisplay#click" locator-key1="ARTICLE_NAVIGATION" value1="${kbArticleTitle3}" />
 				<execute action="PGKnowledgebasedisplay#assertTextEquals" locator-key1="ARTICLE_NAVIGATION" value1="${kbArticleTitle3}" />
 
 				<if>
