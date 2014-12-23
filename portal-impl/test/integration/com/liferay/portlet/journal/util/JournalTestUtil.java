@@ -41,6 +41,8 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.RandomTestUtil;
+import com.liferay.portal.util.ServiceContextTestUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
@@ -66,6 +68,22 @@ import java.util.Map;
  * @author Manuel de la Peña
  */
 public class JournalTestUtil {
+
+	public static JournalArticle addArticle(long groupId, long folderId)
+			throws Exception {
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
+
+		serviceContext.setCommand(Constants.ADD);
+		serviceContext.setLayoutFullURL("http://localhost");
+
+		return addArticle(
+			groupId, folderId, JournalArticleConstants.CLASSNAME_ID_DEFAULT,
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), LocaleUtil.getSiteDefault(), false,
+			false, serviceContext);
+	}
 
 	public static JournalArticle addArticle(
 			long groupId, long folderId, long classNameId,
