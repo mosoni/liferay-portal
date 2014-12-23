@@ -94,7 +94,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 		%>
 
 		if (document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value == '<%= Constants.CHECKOUT %>') {
-			if (subtotal < shoppingPrefs.getMinOrder()) {
+			if (subtotal < <%= shoppingPrefs.getMinOrder() %>) {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.UPDATE %>'
 				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= currentURL %>';
 
