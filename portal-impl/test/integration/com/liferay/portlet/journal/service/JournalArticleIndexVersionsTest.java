@@ -26,11 +26,13 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.util.GroupTestUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.ServiceContextTestUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.portlet.journal.util.JournalTestUtil;
@@ -70,7 +72,7 @@ public class JournalArticleIndexVersionsTest {
 	}
 
 	@Test
-	public void testIndexVersions() throws Exception {
+	public void testDeleteAllArticleVersions() throws Exception {
 		long initialSearchCount = searchCount();
 
 		JournalArticle article = JournalTestUtil.addArticle(
@@ -78,11 +80,41 @@ public class JournalArticleIndexVersionsTest {
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "test-title",
 			"test-content");
 
-		JournalArticle expiredArticle = JournalTestUtil.updateArticle(
-			article, "test-title");
+		Assert.assertEquals(initialSearchCount + 1, searchCount());
 
-		expiredArticle = JournalTestUtil.expireArticle(
-			_group.getGroupId(), article, expiredArticle.getVersion());
+		JournalArticle updateArticle = JournalTestUtil.updateArticle(
+			article, article.getTitle(), article.getContent(),
+			ServiceContextTestUtil.getServiceContext());
+
+		Assert.assertEquals(initialSearchCount + 1, searchCount());
+
+		JournalArticleLocalServiceUtil.deleteArticle(
+			_group.getGroupId(), updateArticle.getArticleId(),
+			ServiceContextTestUtil.getServiceContext());
+
+		Assert.assertEquals(initialSearchCount, searchCount());
+	}
+
+	@Test
+	public void testDeleteArticleVersion() throws Exception {
+		long initialSearchCount = searchCount();
+
+		JournalArticle article = JournalTestUtil.addArticle(
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+		Assert.assertEquals(initialSearchCount + 1, searchCount());
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
+
+		JournalArticle updateArticle = JournalTestUtil.updateArticle(
+			article, article.getTitle(), article.getContent(), serviceContext);
+
+		Assert.assertEquals(initialSearchCount + 1, searchCount());
+
+		JournalArticleLocalServiceUtil.deleteArticle(
+			updateArticle, updateArticle.getUrlTitle(), serviceContext);
 
 		List<JournalArticle> articles = search();
 
@@ -91,16 +123,53 @@ public class JournalArticleIndexVersionsTest {
 		JournalArticle searchArticle = articles.get(0);
 
 		Assert.assertEquals(article.getId(), searchArticle.getId());
+	}
 
-		article = JournalTestUtil.updateArticle(expiredArticle, "test-title");
+	@Test
+	public void testExpireAllArticleVersions() throws Exception {
+		long initialSearchCount = searchCount();
+
+		JournalArticle article = JournalTestUtil.addArticle(
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		Assert.assertEquals(initialSearchCount + 1, searchCount());
 
-		articles = search();
+		JournalArticle updateArticle = JournalTestUtil.updateArticle(
+			article, article.getTitle(), article.getContent(),
+			ServiceContextTestUtil.getServiceContext());
+
+		Assert.assertEquals(initialSearchCount + 1, searchCount());
+
+		JournalTestUtil.expireArticle(_group.getGroupId(), updateArticle);
+
+		Assert.assertEquals(initialSearchCount, searchCount());
+	}
+
+	@Test
+	public void testExpireArticleVersion() throws Exception {
+		long initialSearchCount = searchCount();
+
+		JournalArticle article = JournalTestUtil.addArticle(
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+		Assert.assertEquals(initialSearchCount + 1, searchCount());
+
+		JournalArticle updateArticle = JournalTestUtil.updateArticle(
+			article, article.getTitle(), article.getContent(),
+			ServiceContextTestUtil.getServiceContext());
+
+		Assert.assertEquals(initialSearchCount + 1, searchCount());
+
+		JournalTestUtil.expireArticle(
+			_group.getGroupId(), updateArticle, updateArticle.getVersion());
+
+		List<JournalArticle> articles = search();
 
 		Assert.assertEquals(initialSearchCount + 1, articles.size());
 
-		searchArticle = articles.get(0);
+		JournalArticle searchArticle = articles.get(0);
 
 		Assert.assertEquals(article.getId(), searchArticle.getId());
 	}
