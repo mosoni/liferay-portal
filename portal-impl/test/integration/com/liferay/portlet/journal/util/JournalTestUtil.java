@@ -70,7 +70,7 @@ import java.util.Map;
 public class JournalTestUtil {
 
 	public static JournalArticle addArticle(long groupId, long folderId)
-			throws Exception {
+		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
