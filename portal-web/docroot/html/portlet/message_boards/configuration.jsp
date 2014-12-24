@@ -185,7 +185,7 @@ String emailSignature = PrefsParamUtil.getString(portletPreferences, request, em
 						[$PORTLET_NAME$]
 					</dt>
 					<dd>
-						<%= PortalUtil.getPortletTitle(renderResponse) %>
+						<%= HtmlUtil.escape(PortalUtil.getPortletTitle(renderResponse)) %>
 					</dd>
 					<dt>
 						[$SITE_NAME$]
@@ -310,7 +310,7 @@ String emailSignature = PrefsParamUtil.getString(portletPreferences, request, em
 						[$PORTLET_NAME$]
 					</dt>
 					<dd>
-						<%= PortalUtil.getPortletTitle(renderResponse) %>
+						<%= HtmlUtil.escape(PortalUtil.getPortletTitle(renderResponse)) %>
 					</dd>
 					<dt>
 						[$SITE_NAME$]

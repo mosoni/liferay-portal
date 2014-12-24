@@ -171,7 +171,7 @@ String emailBody = PrefsParamUtil.getString(portletPreferences, request, emailBo
 						[$PORTLET_NAME$]
 					</dt>
 					<dd>
-						<%= PortalUtil.getPortletTitle(renderResponse) %>
+						<%= HtmlUtil.escape(PortalUtil.getPortletTitle(renderResponse)) %>
 					</dd>
 					<dt>
 						[$TO_ADDRESS$]
