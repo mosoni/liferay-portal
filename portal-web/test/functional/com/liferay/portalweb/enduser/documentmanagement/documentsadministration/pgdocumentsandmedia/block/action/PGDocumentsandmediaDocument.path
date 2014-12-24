@@ -319,7 +319,7 @@
 </tr>
 <tr>
 	<td>COMMENTS_REPLY_BUTTON</td>
-	<td>//button[contains(.,'Reply')]</td>
+	<td>//button[contains(.,'Reply')] | //div[@class='taglib-discussion']/form/fieldset/div/div[2]/div[2]/button[contains(.,'Reply')]</td>
 	<td></td>
 </tr>
 <tr>
