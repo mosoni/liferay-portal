@@ -1,6 +1,6 @@
 <definition>
 	<command name="selectWindow">
-		<execute argument1="10000" selenium="pause" />
+		<execute argument1="5000" selenium="pause" />
 
 		<execute selenium="selectWindow" />
 
