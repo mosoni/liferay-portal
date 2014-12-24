@@ -202,6 +202,30 @@
 		<execute action="SOMembersPortlet#assertNotVisible" locator-key1="CONNECT_BUTTON" value1="Connect" />
 	</command>
 
+	<command name="selectUsers">
+		<if>
+			<isset var="userListNameList" />
+			<then>
+				<for list="${userListNameList}" param="userListName">
+					<var name="key_userListName" value="${userListName}" />
+
+					<execute action="SOMembersPortlet#check" locator-key1="MEMBERS_LIST_CHECKBOX" />
+					<execute action="SOMembersPortlet#assertElementPresent" locator-key1="SELECTED_USERS_LIST_THUMB" />
+				</for>
+			</then>
+			<else>
+				<var name="userListName" value="${userListName}" />
+
+				<var name="key_userListName" value="${userListName}" />
+
+				<execute action="SOMembersPortlet#check" locator-key1="MEMBERS_LIST_CHECKBOX" />
+				<execute action="SOMembersPortlet#assertElementPresent" locator-key1="SELECTED_USERS_LIST_THUMB" />
+				<execute action="SOMembersPortlet#assertTextEquals" locator-key1="SELECTED_USERS_LIST_NAME" value1="${userListName}" />
+				<execute action="SOMembersPortlet#assertTextEquals" locator-key1="SELECTED_USERS_LIST_EMAIL" value1="${userEmailAddress}" />
+			</else>
+		</if>
+	</command>
+
 	<command name="sendMessage">
 		<var name="key_userEmailAddress" value="${userEmailAddress}" />
 
@@ -214,6 +238,28 @@
 		<execute action="SOMessagesAdd#selectFrame" locator-key1="NEW_MESSAGE_IFRAME" />
 		<execute action="SOMessagesAdd#assertTextEquals" locator-key1="TO_FIELD" value1="${userName} &lt;${userScreenName}&gt;," />
 
+		<execute action="SOMessagesAdd#type" locator-key1="SUBJECT_FIELD" value1="${messageSubject}" />
+		<execute action="SOMessagesAdd#type" locator-key1="BODY_FIELD" value1="${messageBody}" />
+
+		<if>
+			<isset var="messageAttachmentFile" />
+			<then>
+				<execute action="SOMessagesAdd#uploadCommonFile" locator-key1="ATTACHMENTS_FIELD" value1="${messageAttachmentFile}" />
+			</then>
+		</if>
+
+		<execute action="SOMessagesAdd#click" locator-key1="SEND_BUTTON" />
+		<execute action="SOMessagesAdd#pause" locator1="1000" />
+
+		<execute action="SOMessages#selectFrame" value1="relative=top" />
+	</command>
+
+	<command name="sendMessageSelectedUsersList">
+		<execute macro="SOMembersPortlet#selectUsers" />
+
+		<execute action="SOMembersPortlet#assertClick" locator-key1="MESSAGE_BUTTON" value1="Message" />
+
+		<execute action="SOMessagesAdd#selectFrame" locator-key1="NEW_MESSAGE_IFRAME" />
 		<execute action="SOMessagesAdd#type" locator-key1="SUBJECT_FIELD" value1="${messageSubject}" />
 		<execute action="SOMessagesAdd#type" locator-key1="BODY_FIELD" value1="${messageBody}" />
 
