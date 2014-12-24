@@ -103,6 +103,52 @@
 	<td>title=Members - Liferay</td>
 	<td></td>
 </tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SELECTED_USERS_LIST-->
+<tr>
+	<td>SELECTED_USERS_LIST_THUMB</td>
+	<td>//div[contains(@id,'selectedUsersView') and contains(.,'${key_userListName}')]//div[contains(@class,'lfr-contact-thumb')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SELECTED_USERS_LIST_NAME</td>
+	<td>//div[contains(@id,'selectedUsersView') and contains(.,'${key_userListName}')]//div[contains(@class,'lfr-contact-name')]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SELECTED_USERS_LIST_EMAIL</td>
+	<td>//div[contains(@id,'selectedUsersView') and contains(.,'${key_userListName}')]//div[contains(@class,'lfr-contact-extra')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SELECTED_USERS_LIST_CONNECTION_REQUESTED_MESSAGE</td>
+	<td>//div[contains(@id,'selectedUsersView') and contains(.,'${key_userListName}')]//div[contains(@class,'social-relations')]//span[contains(.,'Connection Requested')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SELECTED_USERS_LIST_CONNECTED_MESSAGE</td>
+	<td>//div[contains(@id,'selectedUsersView') and contains(.,'${key_userListName}')]//div[contains(@class,'social-relations')]//span[contains(.,'Connected')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SELECTED_USERS_LIST_FOLLOWING_MESSAGE</td>
+	<td>//div[contains(@id,'selectedUsersView') and contains(.,'${key_userListName}')]//div[contains(@class,'social-relations')]//span[contains(.,'Following')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SELECTED_USERS_LIST_BLOCKED_MESSAGE</td>
+	<td>//div[contains(@id,'selectedUsersView') and contains(.,'${key_userListName}')]//div[contains(@class,'social-relations')]//span[contains(.,'Blocked')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
 <!--MEMBERS_LIST-->
 <tr>
 	<td>MEMBERS_LIST_FILTER</td>
@@ -112,6 +158,11 @@
 <tr>
 	<td>MEMBERS_LIST_SEARCH</td>
 	<td>//input[contains(@id,'contactsportlet_name')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MEMBERS_LIST_CHECKBOX</td>
+	<td>//div[contains(.,'${key_userListName}')]/div[@class='lfr-contact-checkbox']/input</td>
 	<td></td>
 </tr>
 <tr>
