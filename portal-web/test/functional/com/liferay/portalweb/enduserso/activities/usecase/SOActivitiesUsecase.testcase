@@ -38,10 +38,6 @@
 		<var name="bookmarksEntryUrl2" value="http://www.bing.com" />
 		<var name="bookmarksEntryUrl3" value="http://www.wired.com" />
 		<var name="bookmarksEntryUrl4" value="http://www.yahoo.com" />
-		<var name="categoryName1" value="MB Category1 Name" />
-		<var name="categoryName2" value="MB Category2 Name" />
-		<var name="categoryName3" value="MB Category3 Name" />
-		<var name="categoryName4" value="MB Category4 Name" />
 		<var name="dmDocumentDescription1" value="DM Folder Image1 Description" />
 		<var name="dmDocumentDescription2" value="DM Folder Image2 Description" />
 		<var name="dmDocumentDescription3" value="DM Folder Image3 Description" />
@@ -78,6 +74,10 @@
 		<var name="eventTitle2" value="Calendar Event2 Title" />
 		<var name="eventTitle3" value="Calendar Event3 Title" />
 		<var name="eventTitle4" value="Calendar Event4 Title" />
+		<var name="mbCategoryName1" value="MB Category1 Name" />
+		<var name="mbCategoryName2" value="MB Category2 Name" />
+		<var name="mbCategoryName3" value="MB Category3 Name" />
+		<var name="mbCategoryName4" value="MB Category4 Name" />
 		<var name="siteDescription1" value="Open Site1 Description" />
 		<var name="siteDescription2" value="Public Restricted Site2 Description" />
 		<var name="siteDescription3" value="Private Site3 Description" />
@@ -136,7 +136,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription1}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName1}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl1}" />
-			<var name="categoryName" value="${categoryName1}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription1}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile1}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle1}" />
@@ -146,6 +145,7 @@
 			<var name="entryTitle" value="${entryTitle1}" />
 			<var name="eventDescription" value="${eventDescription1}" />
 			<var name="eventTitle" value="${eventTitle1}" />
+			<var name="mbCategoryName" value="${mbCategoryName1}" />
 			<var name="siteName" value="${siteName1}" />
 			<var name="threadBody" value="${threadBody1}" />
 			<var name="threadSubject" value="${threadSubject1}" />
@@ -158,7 +158,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription2}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName2}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl2}" />
-			<var name="categoryName" value="${categoryName2}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription2}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile2}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle2}" />
@@ -168,6 +167,7 @@
 			<var name="entryTitle" value="${entryTitle2}" />
 			<var name="eventDescription" value="${eventDescription2}" />
 			<var name="eventTitle" value="${eventTitle2}" />
+			<var name="mbCategoryName" value="${mbCategoryName2}" />
 			<var name="siteName" value="${siteName2}" />
 			<var name="threadBody" value="${threadBody2}" />
 			<var name="threadSubject" value="${threadSubject2}" />
@@ -180,7 +180,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription3}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName3}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl3}" />
-			<var name="categoryName" value="${categoryName3}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription3}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile3}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle3}" />
@@ -190,6 +189,7 @@
 			<var name="entryTitle" value="${entryTitle3}" />
 			<var name="eventDescription" value="${eventDescription3}" />
 			<var name="eventTitle" value="${eventTitle3}" />
+			<var name="mbCategoryName" value="${mbCategoryName3}" />
 			<var name="pageAccess" value="Private" />
 			<var name="siteName" value="${siteName3}" />
 			<var name="threadBody" value="${threadBody3}" />
@@ -203,7 +203,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription4}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName4}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl4}" />
-			<var name="categoryName" value="${categoryName4}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription4}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile4}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle4}" />
@@ -213,6 +212,7 @@
 			<var name="entryTitle" value="${entryTitle4}" />
 			<var name="eventDescription" value="${eventDescription4}" />
 			<var name="eventTitle" value="${eventTitle4}" />
+			<var name="mbCategoryName" value="${mbCategoryName4}" />
 			<var name="pageAccess" value="Private" />
 			<var name="siteName" value="${siteName4}" />
 			<var name="threadBody" value="${threadBody4}" />
@@ -233,7 +233,7 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription1}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName1}" />
 			<var name="calendarAction" value="Added a new calendar event." />
-			<var name="categoryName" value="${categoryName1}" />
+			<var name="categoryName" value="${mbCategoryName1}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription1}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle1}" />
 			<var name="dmDocumentVersionNumber" value="1.0" />
@@ -241,7 +241,7 @@
 			<var name="entryContent" value="${entryContent1}" />
 			<var name="entryTitle" value="${entryTitle1}" />
 			<var name="eventDescription" value="${eventDescription1}" />
-			<var name="forumsAction" value="Wrote a new forum post in ${categoryName1}." />
+			<var name="forumsAction" value="Wrote a new forum post in ${mbCategoryName1}." />
 			<var name="siteName" value="${siteName1}" />
 			<var name="threadBody" value="${threadBody1}" />
 			<var name="threadSubject" value="${threadSubject1}" />
@@ -254,7 +254,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl2}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName2}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle2}" />
@@ -269,7 +269,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl3}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName3}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle3}" />
@@ -284,7 +284,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl4}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName4}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle4}" />
@@ -308,7 +308,7 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription2}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName2}" />
 			<var name="calendarAction" value="Added a new calendar event." />
-			<var name="categoryName" value="${categoryName2}" />
+			<var name="categoryName" value="${mbCategoryName2}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription2}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle2}" />
 			<var name="dmDocumentVersionNumber" value="1.0" />
@@ -316,7 +316,7 @@
 			<var name="entryContent" value="${entryContent2}" />
 			<var name="entryTitle" value="${entryTitle2}" />
 			<var name="eventDescription" value="${eventDescription2}" />
-			<var name="forumsAction" value="Wrote a new forum post in ${categoryName2}." />
+			<var name="forumsAction" value="Wrote a new forum post in ${mbCategoryName2}." />
 			<var name="siteName" value="${siteName2}" />
 			<var name="threadBody" value="${threadBody2}" />
 			<var name="threadSubject" value="${threadSubject2}" />
@@ -329,7 +329,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl1}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName1}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle1}" />
@@ -344,7 +344,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl3}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName3}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle3}" />
@@ -359,7 +359,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl4}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName4}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle4}" />
@@ -384,7 +384,7 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription3}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName3}" />
 			<var name="calendarAction" value="Added a new calendar event." />
-			<var name="categoryName" value="${categoryName3}" />
+			<var name="categoryName" value="${mbCategoryName3}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription3}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle3}" />
 			<var name="dmDocumentVersionNumber" value="1.0" />
@@ -392,7 +392,7 @@
 			<var name="entryContent" value="${entryContent3}" />
 			<var name="entryTitle" value="${entryTitle3}" />
 			<var name="eventDescription" value="${eventDescription3}" />
-			<var name="forumsAction" value="Wrote a new forum post in ${categoryName3}." />
+			<var name="forumsAction" value="Wrote a new forum post in ${mbCategoryName3}." />
 			<var name="siteName" value="${siteName3}" />
 			<var name="threadBody" value="${threadBody3}" />
 			<var name="threadSubject" value="${threadSubject3}" />
@@ -405,7 +405,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl1}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName1}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle1}" />
@@ -420,7 +420,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl2}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName2}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle2}" />
@@ -435,7 +435,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl4}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName4}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle4}" />
@@ -460,7 +460,7 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription4}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName4}" />
 			<var name="calendarAction" value="Added a new calendar event." />
-			<var name="categoryName" value="${categoryName4}" />
+			<var name="categoryName" value="${mbCategoryName4}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription4}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle4}" />
 			<var name="dmDocumentVersionNumber" value="1.0" />
@@ -468,7 +468,7 @@
 			<var name="entryContent" value="${entryContent4}" />
 			<var name="entryTitle" value="${entryTitle4}" />
 			<var name="eventDescription" value="${eventDescription4}" />
-			<var name="forumsAction" value="Wrote a new forum post in ${categoryName4}." />
+			<var name="forumsAction" value="Wrote a new forum post in ${mbCategoryName4}." />
 			<var name="siteName" value="${siteName4}" />
 			<var name="threadBody" value="${threadBody4}" />
 			<var name="threadSubject" value="${threadSubject4}" />
@@ -481,7 +481,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl1}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName1}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle1}" />
@@ -496,7 +496,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl2}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName2}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle2}" />
@@ -511,7 +511,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl3}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName3}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle3}" />
@@ -538,10 +538,6 @@
 		<var name="bookmarksEntryUrl2" value="http://www.bing.com" />
 		<var name="bookmarksEntryUrl3" value="http://www.wired.com" />
 		<var name="bookmarksEntryUrl4" value="http://www.yahoo.com" />
-		<var name="categoryName1" value="MB Category1 Name" />
-		<var name="categoryName2" value="MB Category2 Name" />
-		<var name="categoryName3" value="MB Category3 Name" />
-		<var name="categoryName4" value="MB Category4 Name" />
 		<var name="dmDocumentDescription1" value="DM Folder Image1 Description" />
 		<var name="dmDocumentDescription2" value="DM Folder Image2 Description" />
 		<var name="dmDocumentDescription3" value="DM Folder Image3 Description" />
@@ -578,6 +574,10 @@
 		<var name="eventTitle2" value="Calendar Event2 Title" />
 		<var name="eventTitle3" value="Calendar Event3 Title" />
 		<var name="eventTitle4" value="Calendar Event4 Title" />
+		<var name="mbCategoryName1" value="MB Category1 Name" />
+		<var name="mbCategoryName2" value="MB Category2 Name" />
+		<var name="mbCategoryName3" value="MB Category3 Name" />
+		<var name="mbCategoryName4" value="MB Category4 Name" />
 		<var name="siteDescription1" value="Open Site1 Description" />
 		<var name="siteDescription2" value="Public Restricted Site2 Description" />
 		<var name="siteDescription3" value="Private Site3 Description" />
@@ -806,7 +806,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription1}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName1}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl1}" />
-			<var name="categoryName" value="${categoryName1}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription1}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile1}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle1}" />
@@ -816,6 +815,7 @@
 			<var name="entryTitle" value="${entryTitle1}" />
 			<var name="eventDescription" value="${eventDescription1}" />
 			<var name="eventTitle" value="${eventTitle1}" />
+			<var name="mbCategoryName" value="${mbCategoryName1}" />
 			<var name="siteName" value="${siteName1}" />
 			<var name="threadBody" value="${threadBody1}" />
 			<var name="threadSubject" value="${threadSubject1}" />
@@ -828,7 +828,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription2}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName2}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl2}" />
-			<var name="categoryName" value="${categoryName2}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription2}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile2}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle2}" />
@@ -838,6 +837,7 @@
 			<var name="entryTitle" value="${entryTitle2}" />
 			<var name="eventDescription" value="${eventDescription2}" />
 			<var name="eventTitle" value="${eventTitle2}" />
+			<var name="mbCategoryName" value="${mbCategoryName2}" />
 			<var name="siteName" value="${siteName2}" />
 			<var name="threadBody" value="${threadBody2}" />
 			<var name="threadSubject" value="${threadSubject2}" />
@@ -850,7 +850,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription3}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName3}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl3}" />
-			<var name="categoryName" value="${categoryName3}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription3}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile3}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle3}" />
@@ -860,6 +859,7 @@
 			<var name="entryTitle" value="${entryTitle3}" />
 			<var name="eventDescription" value="${eventDescription3}" />
 			<var name="eventTitle" value="${eventTitle3}" />
+			<var name="mbCategoryName" value="${mbCategoryName3}" />
 			<var name="pageAccess" value="Private" />
 			<var name="siteName" value="${siteName3}" />
 			<var name="threadBody" value="${threadBody3}" />
@@ -873,7 +873,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription4}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName4}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl4}" />
-			<var name="categoryName" value="${categoryName4}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription4}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile4}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle4}" />
@@ -883,6 +882,7 @@
 			<var name="entryTitle" value="${entryTitle4}" />
 			<var name="eventDescription" value="${eventDescription4}" />
 			<var name="eventTitle" value="${eventTitle4}" />
+			<var name="mbCategoryName" value="${mbCategoryName4}" />
 			<var name="pageAccess" value="Private" />
 			<var name="siteName" value="${siteName4}" />
 			<var name="threadBody" value="${threadBody4}" />
@@ -905,7 +905,7 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription1}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName1}" />
 			<var name="calendarAction" value="Added a new calendar event." />
-			<var name="categoryName" value="${categoryName1}" />
+			<var name="categoryName" value="${mbCategoryName1}" />
 			<var name="dashboardView" value="true" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription1}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle1}" />
@@ -914,7 +914,7 @@
 			<var name="entryContent" value="${entryContent1}" />
 			<var name="entryTitle" value="${entryTitle1}" />
 			<var name="eventDescription" value="${eventDescription1}" />
-			<var name="forumsAction" value="Wrote a new forum post in ${categoryName1}." />
+			<var name="forumsAction" value="Wrote a new forum post in ${mbCategoryName1}." />
 			<var name="siteName" value="${siteName1}" />
 			<var name="threadBody" value="${threadBody1}" />
 			<var name="threadSubject" value="${threadSubject1}" />
@@ -927,7 +927,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl2}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName2}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle2}" />
@@ -942,7 +942,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl3}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName3}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle3}" />
@@ -957,7 +957,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl4}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName4}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle4}" />
@@ -983,7 +983,7 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription2}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName2}" />
 			<var name="calendarAction" value="Added a new calendar event." />
-			<var name="categoryName" value="${categoryName2}" />
+			<var name="categoryName" value="${mbCategoryName2}" />
 			<var name="dashboardView" value="true" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription2}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle2}" />
@@ -992,7 +992,7 @@
 			<var name="entryContent" value="${entryContent2}" />
 			<var name="entryTitle" value="${entryTitle2}" />
 			<var name="eventDescription" value="${eventDescription2}" />
-			<var name="forumsAction" value="Wrote a new forum post in ${categoryName2}." />
+			<var name="forumsAction" value="Wrote a new forum post in ${mbCategoryName2}." />
 			<var name="siteName" value="${siteName2}" />
 			<var name="threadBody" value="${threadBody2}" />
 			<var name="threadSubject" value="${threadSubject2}" />
@@ -1005,7 +1005,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl1}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName1}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle1}" />
@@ -1020,7 +1020,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl3}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName3}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle3}" />
@@ -1035,7 +1035,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl4}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName4}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle4}" />
@@ -1061,7 +1061,7 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription3}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName3}" />
 			<var name="calendarAction" value="Added a new calendar event." />
-			<var name="categoryName" value="${categoryName3}" />
+			<var name="categoryName" value="${mbCategoryName3}" />
 			<var name="dashboardView" value="true" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription3}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle3}" />
@@ -1070,7 +1070,7 @@
 			<var name="entryContent" value="${entryContent3}" />
 			<var name="entryTitle" value="${entryTitle3}" />
 			<var name="eventDescription" value="${eventDescription3}" />
-			<var name="forumsAction" value="Wrote a new forum post in ${categoryName3}." />
+			<var name="forumsAction" value="Wrote a new forum post in ${mbCategoryName3}." />
 			<var name="siteName" value="${siteName3}" />
 			<var name="threadBody" value="${threadBody3}" />
 			<var name="threadSubject" value="${threadSubject3}" />
@@ -1083,7 +1083,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl1}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName1}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle1}" />
@@ -1098,7 +1098,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl2}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName2}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle2}" />
@@ -1113,7 +1113,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl4}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName4}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile4}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle4}" />
@@ -1139,7 +1139,7 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription4}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName4}" />
 			<var name="calendarAction" value="Added a new calendar event." />
-			<var name="categoryName" value="${categoryName4}" />
+			<var name="categoryName" value="${mbCategoryName4}" />
 			<var name="dashboardView" value="true" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription4}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle4}" />
@@ -1148,7 +1148,7 @@
 			<var name="entryContent" value="${entryContent4}" />
 			<var name="entryTitle" value="${entryTitle4}" />
 			<var name="eventDescription" value="${eventDescription4}" />
-			<var name="forumsAction" value="Wrote a new forum post in ${categoryName4}." />
+			<var name="forumsAction" value="Wrote a new forum post in ${mbCategoryName4}." />
 			<var name="siteName" value="${siteName4}" />
 			<var name="threadBody" value="${threadBody4}" />
 			<var name="threadSubject" value="${threadSubject4}" />
@@ -1161,7 +1161,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl1}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName1}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile1}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle1}" />
@@ -1176,7 +1176,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl2}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName2}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile2}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle2}" />
@@ -1191,7 +1191,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl3}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName3}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile3}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle3}" />
@@ -2029,7 +2029,6 @@
 		<var name="bookmarksEntryDescription" value="Bookmarks Entry Description" />
 		<var name="bookmarksEntryName" value="Bookmarks Entry Name" />
 		<var name="bookmarksEntryUrl" value="http://www.google.com" />
-		<var name="categoryName" value="MB Category Name" />
 		<var name="dmDocumentDescription" value="DM Folder Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
 		<var name="dmDocumentTitle" value="DM Folder Document Title" />
@@ -2039,6 +2038,7 @@
 		<var name="entryTitle" value="Blogs Entry Title" />
 		<var name="eventDescription" value="Calendar Event Description" />
 		<var name="eventTitle" value="Calendar Event Title" />
+		<var name="mbCategoryName" value="MB Category Name" />
 		<var name="password" value="test" />
 		<var name="roleName" value="Social Office" />
 		<var name="siteDescription" value="Open Site Description" />
@@ -2061,7 +2061,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl}" />
-			<var name="categoryName" value="${categoryName}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
@@ -2071,6 +2070,7 @@
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="eventDescription" value="${eventDescription}" />
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="mbCategoryName" value="${mbCategoryName}" />
 			<var name="siteName" value="${siteName}" />
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
@@ -2083,7 +2083,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl}" />
-			<var name="categoryName" value="${categoryName}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
@@ -2093,6 +2092,7 @@
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="eventDescription" value="${eventDescription}" />
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="mbCategoryName" value="${mbCategoryName}" />
 			<var name="siteName" value="${siteName}" />
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
@@ -2105,7 +2105,7 @@
 		<execute action="SOActivities#assertTextEquals" locator-key1="NO_ACTIVITIES" value1="There are no activities." />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle}" />
@@ -2129,7 +2129,7 @@
 		<execute action="SOActivities#assertTextEquals" locator-key1="NO_ACTIVITIES" value1="There are no activities." />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle}" />
@@ -2150,7 +2150,7 @@
 		<execute action="SOActivities#assertTextEquals" locator-key1="NO_ACTIVITIES" value1="There are no activities." />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle}" />
@@ -2174,8 +2174,6 @@
 		<var name="bookmarksEntryNameEdit" value="Bookmarks Entry Name Edit" />
 		<var name="bookmarksEntryUrl" value="http://www.google.com" />
 		<var name="bookmarksEntryUrlEdit" value="http://www.bing.com" />
-		<var name="categoryName" value="MB Category Name" />
-		<var name="categoryNameEdit" value="MB Category Name Edit" />
 		<var name="dmDocumentDescription" value="DM Folder Document Description" />
 		<var name="dmDocumentDescriptionEdit" value="DM Folder Document Description Edit" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
@@ -2194,6 +2192,8 @@
 		<var name="eventDescriptionEdit" value="Calendar Event Description Edit" />
 		<var name="eventTitle" value="Calendar Event Title" />
 		<var name="eventTitleEdit" value="Calendar Event Title Edit" />
+		<var name="mbCategoryName" value="MB Category Name" />
+		<var name="mbCategoryNameEdit" value="MB Category Name Edit" />
 		<var name="password" value="test" />
 		<var name="roleName" value="Social Office" />
 		<var name="siteDescription" value="Open Site Description" />
@@ -2219,7 +2219,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl}" />
-			<var name="categoryName" value="${categoryName}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
@@ -2229,6 +2228,7 @@
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="eventDescription" value="${eventDescription}" />
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="mbCategoryName" value="${mbCategoryName}" />
 			<var name="siteName" value="${siteName}" />
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
@@ -2242,8 +2242,6 @@
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}" />
 			<var name="bookmarksEntryNameEdit" value="${bookmarksEntryNameEdit}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl}" />
-			<var name="categoryName" value="${categoryName}" />
-			<var name="categoryNameEdit" value="${categoryNameEdit}" />
 			<var name="dmDocumentDescriptionEdit" value="${dmDocumentDescriptionEdit}" />
 			<var name="dmDocumentFileEdit" value="${dmDocumentFileEdit}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
@@ -2258,6 +2256,8 @@
 			<var name="eventDescription" value="${eventDescription}" />
 			<var name="eventTitle" value="${eventTitle}" />
 			<var name="eventTitleEdit" value="${eventTitleEdit}" />
+			<var name="mbCategoryName" value="${mbCategoryName}" />
+			<var name="mbCategoryNameEdit" value="${mbCategoryNameEdit}" />
 			<var name="siteName" value="${siteName}" />
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadBodyEdit" value="${threadBodyEdit}" />
@@ -2278,7 +2278,7 @@
 			<var name="bookmarksEntryName" value="${bookmarksEntryNameEdit}" />
 			<var name="calendarAction" value="Added a new calendar event." />
 			<var name="calendarEditAction" value="Updated a calendar event." />
-			<var name="categoryName" value="${categoryNameEdit}" />
+			<var name="categoryName" value="${mbCategoryNameEdit}" />
 			<var name="dashboardView" value="true" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescriptionEdit}" />
 			<var name="dmDocumentFile" value="${dmDocumentFileEdit}" />
@@ -2313,7 +2313,7 @@
 			<var name="bookmarksEntryName" value="${bookmarksEntryNameEdit}" />
 			<var name="calendarAction" value="Added a new calendar event." />
 			<var name="calendarEditAction" value="Updated a calendar event." />
-			<var name="categoryName" value="${categoryNameEdit}" />
+			<var name="categoryName" value="${mbCategoryNameEdit}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescriptionEdit}" />
 			<var name="dmDocumentFile" value="${dmDocumentFileEdit}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitleEdit}" />
@@ -2344,7 +2344,7 @@
 			<var name="bookmarksEntryName" value="${bookmarksEntryNameEdit}" />
 			<var name="calendarAction" value="Added a new calendar event." />
 			<var name="calendarEditAction" value="Updated a calendar event." />
-			<var name="categoryName" value="${categoryNameEdit}" />
+			<var name="categoryName" value="${mbCategoryNameEdit}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescriptionEdit}" />
 			<var name="dmDocumentFile" value="${dmDocumentFileEdit}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitleEdit}" />
@@ -2374,7 +2374,6 @@
 		<var name="bookmarksEntryDescription" value="Bookmarks Entry Description" />
 		<var name="bookmarksEntryName" value="Bookmarks Entry Name" />
 		<var name="bookmarksEntryUrl" value="http://www.google.com" />
-		<var name="categoryName" value="MB Category Name" />
 		<var name="dmDocumentDescription" value="DM Folder Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
 		<var name="dmDocumentTitle" value="DM Folder Document Title" />
@@ -2384,6 +2383,7 @@
 		<var name="entryTitle" value="Blogs Entry Title" />
 		<var name="eventDescription" value="Calendar Event Description" />
 		<var name="eventTitle" value="Calendar Event Title" />
+		<var name="mbCategoryName" value="MB Category Name" />
 		<var name="password" value="test" />
 		<var name="roleName" value="Social Office" />
 		<var name="siteDescription" value="Private Restricted Site Description" />
@@ -2429,7 +2429,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl}" />
-			<var name="categoryName" value="${categoryName}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
@@ -2439,6 +2438,7 @@
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="eventDescription" value="${eventDescription}" />
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="mbCategoryName" value="${mbCategoryName}" />
 			<var name="pageAccess" value="Private" />
 			<var name="siteName" value="${siteName}" />
 			<var name="threadBody" value="${threadBody}" />
@@ -2466,7 +2466,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle}" />
@@ -2489,7 +2489,6 @@
 		<var name="bookmarksEntryDescription" value="Bookmarks Entry Description" />
 		<var name="bookmarksEntryName" value="Bookmarks Entry Name" />
 		<var name="bookmarksEntryUrl" value="http://www.google.com" />
-		<var name="categoryName" value="MB Category Name" />
 		<var name="dmDocumentDescription" value="DM Folder Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
 		<var name="dmDocumentTitle" value="DM Folder Document Title" />
@@ -2499,6 +2498,7 @@
 		<var name="entryTitle" value="Blogs Entry Title" />
 		<var name="eventDescription" value="Calendar Event Description" />
 		<var name="eventTitle" value="Calendar Event Title" />
+		<var name="mbCategoryName" value="MB Category Name" />
 		<var name="password" value="test" />
 		<var name="roleName" value="Social Office" />
 		<var name="siteDescription" value="Private Site Description" />
@@ -2544,7 +2544,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl}" />
-			<var name="categoryName" value="${categoryName}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
@@ -2554,6 +2553,7 @@
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="eventDescription" value="${eventDescription}" />
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="mbCategoryName" value="${mbCategoryName}" />
 			<var name="pageAccess" value="Private" />
 			<var name="siteName" value="${siteName}" />
 			<var name="threadBody" value="${threadBody}" />
@@ -2581,7 +2581,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle}" />
@@ -3171,7 +3171,6 @@
 		<var name="bookmarksEntryDescription" value="Bookmarks Entry Description" />
 		<var name="bookmarksEntryName" value="Bookmarks Entry Name" />
 		<var name="bookmarksEntryUrl" value="http://www.google.com" />
-		<var name="categoryName" value="MB Category Name" />
 		<var name="dmDocumentDescription" value="DM Folder Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
 		<var name="dmDocumentTitle" value="DM Folder Document Title" />
@@ -3181,6 +3180,7 @@
 		<var name="entryTitle" value="Blogs Entry Title" />
 		<var name="eventDescription" value="Calendar Event Description" />
 		<var name="eventTitle" value="Calendar Event Title" />
+		<var name="mbCategoryName" value="MB Category Name" />
 		<var name="password" value="test" />
 		<var name="roleName" value="Social Office" />
 		<var name="siteDescription" value="Open Site Description" />
@@ -3203,7 +3203,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl}" />
-			<var name="categoryName" value="${categoryName}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
@@ -3213,6 +3212,7 @@
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="eventDescription" value="${eventDescription}" />
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="mbCategoryName" value="${mbCategoryName}" />
 			<var name="siteName" value="${siteName}" />
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
@@ -3278,7 +3278,6 @@
 		<var name="bookmarksEntryDescription" value="Bookmarks Entry Description" />
 		<var name="bookmarksEntryName" value="Bookmarks Entry Name" />
 		<var name="bookmarksEntryUrl" value="http://www.google.com" />
-		<var name="categoryName" value="MB Category Name" />
 		<var name="dmDocumentDescription" value="DM Folder Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
 		<var name="dmDocumentTitle" value="DM Folder Document Title" />
@@ -3288,6 +3287,7 @@
 		<var name="entryTitle" value="Blogs Entry Title" />
 		<var name="eventDescription" value="Calendar Event Description" />
 		<var name="eventTitle" value="Calendar Event Title" />
+		<var name="mbCategoryName" value="MB Category Name" />
 		<var name="password" value="test" />
 		<var name="roleName" value="Social Office" />
 		<var name="siteDescription" value="Open Site Description" />
@@ -3309,7 +3309,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl}" />
-			<var name="categoryName" value="${categoryName}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
@@ -3319,6 +3318,7 @@
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="eventDescription" value="${eventDescription}" />
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="mbCategoryName" value="${mbCategoryName}" />
 			<var name="pageName" value="${pageName}" />
 			<var name="siteName" value="${siteName}" />
 			<var name="threadBody" value="${threadBody}" />
@@ -3350,7 +3350,6 @@
 		<var name="bookmarksEntryDescription" value="Bookmarks Entry Description" />
 		<var name="bookmarksEntryName" value="Bookmarks Entry Name" />
 		<var name="bookmarksEntryUrl" value="http://www.google.com" />
-		<var name="categoryName" value="MB Category Name" />
 		<var name="dmDocumentDescription" value="DM Folder Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
 		<var name="dmDocumentTitle" value="DM Folder Document Title" />
@@ -3360,6 +3359,7 @@
 		<var name="entryTitle" value="Blogs Entry Title" />
 		<var name="eventDescription" value="Calendar Event Description" />
 		<var name="eventTitle" value="Calendar Event Title" />
+		<var name="mbCategoryName" value="MB Category Name" />
 		<var name="password" value="test" />
 		<var name="roleName" value="Social Office" />
 		<var name="siteDescription" value="Open Site Description" />
@@ -3433,7 +3433,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl}" />
-			<var name="categoryName" value="${categoryName}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
@@ -3443,6 +3442,7 @@
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="eventDescription" value="${eventDescription}" />
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="mbCategoryName" value="${mbCategoryName}" />
 			<var name="pageName" value="${pageName}" />
 			<var name="siteName" value="${siteName}" />
 			<var name="threadBody" value="${threadBody}" />
@@ -3499,7 +3499,6 @@
 		<var name="bookmarksEntryName" value="Bookmarks Entry Name" />
 		<var name="bookmarksEntryUrl1" value="http://www.google.com" />
 		<var name="bookmarksEntryUrl2" value="http://www.bing.com" />
-		<var name="categoryName" value="MB Category Name" />
 		<var name="dmDocumentDescription" value="DM Folder Document Description" />
 		<var name="dmDocumentFile1" value="Document_1.doc" />
 		<var name="dmDocumentFile2" value="Document_2.doc" />
@@ -3510,6 +3509,7 @@
 		<var name="entryTitle" value="Blogs Entry Title" />
 		<var name="eventDescription" value="Calendar Event Description" />
 		<var name="eventTitle" value="Calendar Event Title" />
+		<var name="mbCategoryName" value="MB Category Name" />
 		<var name="password" value="test" />
 		<var name="roleName" value="Social Office" />
 		<var name="roleName2" value="Site Administrator" />
@@ -3578,7 +3578,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}01" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}01" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl1}" />
-			<var name="categoryName" value="${categoryName}01" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}01" />
 			<var name="dmDocumentFile" value="${dmDocumentFile1}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}01" />
@@ -3588,6 +3587,7 @@
 			<var name="entryTitle" value="${entryTitle}01" />
 			<var name="eventDescription" value="${eventDescription}01" />
 			<var name="eventTitle" value="${eventTitle}01" />
+			<var name="mbCategoryName" value="${mbCategoryName}01" />
 			<var name="siteName" value="${siteName}" />
 			<var name="threadBody" value="${threadBody}01" />
 			<var name="threadSubject" value="${threadSubject}01" />
@@ -3608,7 +3608,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}02" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}02" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl2}" />
-			<var name="categoryName" value="${categoryName}02" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}02" />
 			<var name="dmDocumentFile" value="${dmDocumentFile2}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}02" />
@@ -3618,6 +3617,7 @@
 			<var name="entryTitle" value="${entryTitle}02" />
 			<var name="eventDescription" value="${eventDescription}02" />
 			<var name="eventTitle" value="${eventTitle}02" />
+			<var name="mbCategoryName" value="${mbCategoryName}02" />
 			<var name="siteName" value="${siteName}" />
 			<var name="threadBody" value="${threadBody}02" />
 			<var name="threadSubject" value="${threadSubject}02" />
@@ -3633,7 +3633,7 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}02" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}02" />
 			<var name="calendarAction" value="Added a new calendar event." />
-			<var name="categoryName" value="${categoryName}02" />
+			<var name="categoryName" value="${mbCategoryName}02" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}02" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}02" />
 			<var name="dmDocumentVersionNumber" value="1.0" />
@@ -3665,7 +3665,7 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}01" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}01" />
 			<var name="calendarAction" value="Added a new calendar event." />
-			<var name="categoryName" value="${categoryName}01" />
+			<var name="categoryName" value="${mbCategoryName}01" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}01" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}01" />
 			<var name="dmDocumentVersionNumber" value="1.0" />
@@ -3689,7 +3689,6 @@
 		<var name="bookmarksEntryDescription" value="Bookmarks Entry Description" />
 		<var name="bookmarksEntryName" value="Bookmarks Entry Name" />
 		<var name="bookmarksEntryUrl" value="http://www.google.com" />
-		<var name="categoryName" value="MB Category Name" />
 		<var name="dmDocumentDescription" value="DM Folder Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
 		<var name="dmDocumentTitle" value="DM Folder Document Title" />
@@ -3699,6 +3698,7 @@
 		<var name="entryTitle" value="Blogs Entry Title" />
 		<var name="eventDescription" value="Calendar Event Description" />
 		<var name="eventTitle" value="Calendar Event Title" />
+		<var name="mbCategoryName" value="MB Category Name" />
 		<var name="password" value="test" />
 		<var name="roleName" value="Social Office" />
 		<var name="siteDescription" value="Open Site Description" />
@@ -3721,7 +3721,6 @@
 			<var name="bookmarksEntryDescription" value="${bookmarksEntryDescription}" />
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl}" />
-			<var name="categoryName" value="${categoryName}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
@@ -3731,6 +3730,7 @@
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="eventDescription" value="${eventDescription}" />
 			<var name="eventTitle" value="${eventTitle}" />
+			<var name="mbCategoryName" value="${mbCategoryName}" />
 			<var name="siteName" value="${siteName}" />
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
