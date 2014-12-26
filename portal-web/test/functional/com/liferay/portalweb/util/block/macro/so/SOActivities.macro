@@ -92,7 +92,7 @@
 		</execute>
 
 		<execute macro="MessageboardsCategory#addPG">
-			<var name="categoryName" value="${categoryName}" />
+			<var name="categoryName" value="${mbCategoryName}" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -102,7 +102,7 @@
 		</execute>
 
 		<execute macro="MessageboardsCategory#gotoPG">
-			<var name="categoryName" value="${categoryName}" />
+			<var name="categoryName" value="${mbCategoryName}" />
 		</execute>
 
 		<execute macro="MessageboardsThread#addPG" />
@@ -211,7 +211,7 @@
 		</execute>
 
 		<execute macro="MessageboardsCategory#deletePG">
-			<var name="categoryName" value="${categoryName}" />
+			<var name="categoryName" value="${mbCategoryName}" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -334,8 +334,8 @@
 		</execute>
 
 		<execute macro="MessageboardsCategory#editPG">
-			<var name="categoryName" value="${categoryName}" />
-			<var name="categoryNameEdit" value="${categoryNameEdit}" />
+			<var name="categoryName" value="${mbCategoryName}" />
+			<var name="categoryNameEdit" value="${mbCategoryNameEdit}" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -345,7 +345,7 @@
 		</execute>
 
 		<execute macro="MessageboardsCategory#gotoPG">
-			<var name="categoryName" value="${categoryNameEdit}" />
+			<var name="categoryName" value="${mbCategoryNameEdit}" />
 		</execute>
 
 		<execute macro="MessageboardsThread#editPG">
