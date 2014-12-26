@@ -2418,7 +2418,6 @@
 		<var name="bookmarksEntryDescription" value="Bookmarks Entry Description" />
 		<var name="bookmarksEntryName" value="Bookmarks Entry Name" />
 		<var name="bookmarksEntryUrl" value="http://www.google.com" />
-		<var name="categoryName" value="MB Category Name" />
 		<var name="dmDocumentDescription" value="DM Folder Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
 		<var name="dmDocumentTitle" value="DM Folder Document Title" />
@@ -2428,6 +2427,7 @@
 		<var name="entryTitle" value="Blogs Entry Title" />
 		<var name="eventDescription" value="Calendar Event Description" />
 		<var name="eventTitle" value="Calendar Event Title" />
+		<var name="mbCategoryName" value="MB Category Name" />
 		<var name="siteDescription" value="Private Site Description" />
 		<var name="siteName" value="Private Site Name" />
 		<var name="siteType" value="Private" />
@@ -2514,7 +2514,7 @@
 		</execute>
 
 		<execute macro="MessageboardsCategory#addPG">
-			<var name="categoryName" value="${categoryName}" />
+			<var name="categoryName" value="${mbCategoryName}" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -2525,7 +2525,7 @@
 		</execute>
 
 		<execute macro="MessageboardsCategory#gotoPG">
-			<var name="categoryName" value="${categoryName}" />
+			<var name="categoryName" value="${mbCategoryName}" />
 		</execute>
 
 		<execute macro="MessageboardsThread#addPG" />
@@ -2588,7 +2588,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle}" />
@@ -2814,7 +2814,6 @@
 		<var name="bookmarksEntryDescription" value="Bookmarks Entry Description" />
 		<var name="bookmarksEntryName" value="Bookmarks Entry Name" />
 		<var name="bookmarksEntryUrl" value="http://www.google.com" />
-		<var name="categoryName" value="MB Category Name" />
 		<var name="dmDocumentDescription" value="DM Folder Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
 		<var name="dmDocumentTitle" value="DM Folder Document Title" />
@@ -2824,6 +2823,7 @@
 		<var name="entryTitle" value="Blogs Entry Title" />
 		<var name="eventDescription" value="Calendar Event Description" />
 		<var name="eventTitle" value="Calendar Event Title" />
+		<var name="mbCategoryName" value="MB Category Name" />
 		<var name="siteDescription" value="Private Restricted Site Description" />
 		<var name="siteName" value="Private Restricted Site Name" />
 		<var name="siteType" value="Private Restricted" />
@@ -2910,7 +2910,7 @@
 		</execute>
 
 		<execute macro="MessageboardsCategory#addPG">
-			<var name="categoryName" value="${categoryName}" />
+			<var name="categoryName" value="${mbCategoryName}" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -2921,7 +2921,7 @@
 		</execute>
 
 		<execute macro="MessageboardsCategory#gotoPG">
-			<var name="categoryName" value="${categoryName}" />
+			<var name="categoryName" value="${mbCategoryName}" />
 		</execute>
 
 		<execute macro="MessageboardsThread#addPG" />
@@ -2984,7 +2984,7 @@
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryName}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${bookmarksEntryUrl}" />
-		<execute action="SOActivities#assertTextNotPresent" value1="${categoryName}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${mbCategoryName}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentFile}" />
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle}" />
