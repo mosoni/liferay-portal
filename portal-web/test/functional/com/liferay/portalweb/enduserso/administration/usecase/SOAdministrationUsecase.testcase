@@ -710,7 +710,6 @@
 		<var name="bookmarksEntryDescription" value="Bookmarks Entry Description" />
 		<var name="bookmarksEntryName" value="Bookmarks Entry Name" />
 		<var name="bookmarksEntryUrl" value="http://www.google.com" />
-		<var name="categoryName" value="MB Category Name" />
 		<var name="dmDocumentDescription" value="DM Folder Document Description" />
 		<var name="dmDocumentFile" value="Document_1.doc" />
 		<var name="dmDocumentTitle" value="DM Folder Document Title" />
@@ -728,6 +727,7 @@
 		<var name="expandedEntriesPerFeed" value="1" />
 		<var name="feedTitle" value="CNET" />
 		<var name="feedUrl" value="http://feeds.feedburner.com/cnet/tcoc" />
+		<var name="mbCategoryName" value="MB Category Name" />
 		<var name="siteDescription1" value="Open Site1 Description" />
 		<var name="siteDescription2" value="Open Site2 Description" />
 		<var name="siteName1" value="Open Site1 Name" />
@@ -891,7 +891,7 @@
 		</execute>
 
 		<execute macro="MessageboardsCategory#addPG">
-			<var name="categoryName" value="${categoryName}" />
+			<var name="categoryName" value="${mbCategoryName}" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -902,7 +902,7 @@
 		</execute>
 
 		<execute macro="MessageboardsCategory#gotoPG">
-			<var name="categoryName" value="${categoryName}" />
+			<var name="categoryName" value="${mbCategoryName}" />
 		</execute>
 
 		<execute macro="MessageboardsThread#addPG">
@@ -918,7 +918,7 @@
 		</execute>
 
 		<execute macro="SOForumsCategoryThread#viewPG">
-			<var name="categoryName" value="${categoryName}" />
+			<var name="categoryName" value="${mbCategoryName}" />
 			<var name="pageName" value="Forums" />
 			<var name="siteName" value="${siteName1}" />
 			<var name="threadBody" value="${threadBody}" />
@@ -1194,7 +1194,7 @@
 			<var name="bookmarksEntryName" value="${bookmarksEntryName}" />
 			<var name="bookmarksEntryUrl" value="${bookmarksEntryUrl}" />
 			<var name="calendarAction" value="Added a new calendar event." />
-			<var name="categoryName" value="${categoryName}" />
+			<var name="categoryName" value="${mbCategoryName}" />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
 			<var name="dmDocumentFile" value="${dmDocumentFile}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
@@ -1206,7 +1206,7 @@
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="eventDescription" value="${eventDescription1}" />
 			<var name="eventTitle" value="${eventTitle1}" />
-			<var name="forumsAction" value="Wrote a new forum post in ${categoryName}." />
+			<var name="forumsAction" value="Wrote a new forum post in ${mbCategoryName}." />
 			<var name="siteName" value="${siteName1}" />
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
