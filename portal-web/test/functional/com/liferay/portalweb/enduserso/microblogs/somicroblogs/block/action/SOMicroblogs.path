@@ -100,6 +100,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>MICROBLOGS_ENTRY_CONTENT_GENERIC_LINK</td>
+	<td>//div[contains(@class,'microblogs-entry') and contains(.,'${key_microblogsEntryContent}')]//div[@class='content']/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>MICROBLOGS_ENTRY_COMMENT_LINK</td>
 	<td>//div[contains(@class,'microblogs-entry') and contains(.,'${key_microblogsEntryContent}')]//span[@class='action comment']/a</td>
 	<td></td>
