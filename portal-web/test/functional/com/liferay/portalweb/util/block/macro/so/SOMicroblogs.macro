@@ -925,6 +925,12 @@
 		<execute action="SOMicroblogs#assertTextNotPresent" value1="${microblogsEntryContent}" />
 	</command>
 
+	<command name="viewMicroblogsEntryNoTagLink">
+		<var name="key_microblogsEntryContent" value="${microblogsEntryContent}" />
+
+		<execute action="SOMicroblogs#assertElementNotPresent" locator-key1="MICROBLOGS_ENTRY_CONTENT_GENERIC_LINK" />
+	</command>
+
 	<command name="viewMicroblogsEntryNotViewableByEveryone">
 		<var name="key_microblogsEntryContent" value="${microblogsEntryContent}" />
 
