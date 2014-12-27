@@ -2305,14 +2305,14 @@
 		</execute>
 
 		<execute macro="SOActivities#viewDocumentsActivityEntry">
-			<var name="action" value="Uploaded a new document in ${dmFolderName} folder." />
+			<var name="action" value="Uploaded a new document in the ${dmFolderName} folder." />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription1}" />
 			<var name="dmDocumentSize" value="${dmDocumentSize1}" />
 			<var name="dmDocumentSizeSO" value="${dmDocumentSizeSO1}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle1}" />
 			<var name="dmDocumentUploader" value="${adminName}" />
 			<var name="dmDocumentVersionNumber" value="1.0" />
-			<var name="userName" value="Test" />
+			<var name="userName" value="${adminName}" />
 		</execute>
 
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription2}" />
@@ -2431,14 +2431,132 @@
 		</execute>
 
 		<execute macro="SOActivities#viewDocumentsActivityEntry">
-			<var name="action" value="Uploaded a new document in ${dmFolderName1} folder." />
+			<var name="action" value="Uploaded a new document in the ${dmFolderName1} folder." />
 			<var name="dmDocumentDescription" value="${dmDocumentDescription1}" />
 			<var name="dmDocumentSize" value="${dmDocumentSize1}" />
 			<var name="dmDocumentSizeSO" value="${dmDocumentSizeSO1}" />
 			<var name="dmDocumentTitle" value="${dmDocumentTitle1}" />
 			<var name="dmDocumentUploader" value="${adminName}" />
 			<var name="dmDocumentVersionNumber" value="1.0" />
-			<var name="userName" value="Test" />
+			<var name="userName" value="${adminName}" />
+		</execute>
+
+		<execute action="SOActivities#assertTextNotPresent" value1="${dmFolderName2}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentDescription2}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentSize2}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentSizeSO2}" />
+		<execute action="SOActivities#assertTextNotPresent" value1="${dmDocumentTitle2}" />
+	</command>
+
+	<command name="ViewRemoveFolderViewPermissionsViaAddFolderActivities" priority="3">
+		<var name="dmDocumentDescription1" value="DM Folder Document 1 Description" />
+		<var name="dmDocumentDescription2" value="DM Folder Document 2 Description" />
+		<var name="dmDocumentFile1" value="Document_1.doc" />
+		<var name="dmDocumentFile2" value="Document_2.doc" />
+		<var name="dmDocumentTitle1" value="DM Folder Document 1 Title" />
+		<var name="dmDocumentTitle2" value="DM Folder Document 2 Title" />
+		<var name="dmDocumentUploader" value="Test Test" />
+		<var name="dmDocumentVersionNumber" value="1.0" />
+		<var name="dmFolderDescription1" value="DM Folder 1 Description" />
+		<var name="dmFolderDescription2" value="DM Folder 2 Description" />
+		<var name="dmFolderName1" value="DM Folder 1 Name" />
+		<var name="dmFolderName2" value="DM Folder 2 Name" />
+		<var name="pageName" value="Documents" />
+		<var name="siteDescription" value="Open Site Description" />
+		<var name="siteName" value="Open Site Name" />
+		<var name="siteType" value="Open" />
+		<var name="soPage" value="true" />
+		<var name="userEmailAddress" value="socialoffice01@liferay.com" />
+		<var name="userFirstName" value="Social01" />
+		<var name="userLastName" value="User01" />
+		<var name="userMiddleName" value="Office01" />
+		<var name="userName" value="Social01 Office01 User01" />
+		<var name="userScreenName" value="socialoffice01" />
+
+		<execute macro="SOUser#addUserWithSORole">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userMiddleName" value="${userMiddleName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="SOUserBar#addSOSite">
+			<var name="siteDescription" value="${siteDescription}" />
+			<var name="siteName" value="${siteName}" />
+			<var name="siteType" value="${siteType}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMFolder#addPG">
+			<var name="dmFolderDescription" value="${dmFolderDescription1}" />
+			<var name="dmFolderName" value="${dmFolderName1}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMFolder#gotoPG">
+			<var name="dmFolderName" value="${dmFolderName1}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescription1}" />
+			<var name="dmDocumentFile" value="${dmDocumentFile1}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle1}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMFolder#addPG">
+			<var name="dmFolderDescription" value="${dmFolderDescription2}" />
+			<var name="dmFolderName" value="${dmFolderName2}" />
+			<var name="viewableBy" value="Owner" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="DMFolder#gotoPG">
+			<var name="dmFolderName" value="${dmFolderName2}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescription2}" />
+			<var name="dmDocumentFile" value="${dmDocumentFile2}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle2}" />
+		</execute>
+
+		<execute macro="User#logoutAndLoginPG">
+			<var name="userLoginEmailAddress" value="${userEmailAddress}" />
+			<var name="userLoginFullName" value="${userName}" />
+		</execute>
+
+		<execute macro="Page#openURL">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOActivities#viewDocumentsActivityEntry">
+			<var name="action" value="Uploaded a new document in the ${dmFolderName1} folder." />
+			<var name="dmDocumentDescription" value="${dmDocumentDescription1}" />
+			<var name="dmDocumentSize" value="${dmDocumentSize1}" />
+			<var name="dmDocumentSizeSO" value="${dmDocumentSizeSO1}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle1}" />
+			<var name="dmDocumentUploader" value="${adminName}" />
+			<var name="dmDocumentVersionNumber" value="1.0" />
+			<var name="userName" value="${adminName}" />
 		</execute>
 
 		<execute action="SOActivities#assertTextNotPresent" value1="${dmFolderName2}" />
