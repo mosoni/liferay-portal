@@ -308,11 +308,17 @@ public class ChannelHubManagerImpl implements ChannelHubManager {
 	}
 
 	@Override
-	public void sendClusterNotificationEvent(
+	public void sendNotificationEvent(
 			long companyId, long userId, NotificationEvent notificationEvent)
 		throws ChannelException {
 
-		sendNotificationEvent(companyId, userId, notificationEvent);
+		ChannelHub channelHub = getChannelHub(companyId);
+
+		channelHub.sendNotificationEvent(userId, notificationEvent);
+
+		if (!ClusterInvokeThreadLocal.isEnabled()) {
+			return;
+		}
 
 		MethodHandler methodHandler = new MethodHandler(
 			_storeNotificationEventMethodKey, companyId, userId,
@@ -327,16 +333,6 @@ public class ChannelHubManagerImpl implements ChannelHubManager {
 		catch (Exception e) {
 			throw new ChannelException("Unable to notify cluster of event", e);
 		}
-	}
-
-	@Override
-	public void sendNotificationEvent(
-			long companyId, long userId, NotificationEvent notificationEvent)
-		throws ChannelException {
-
-		ChannelHub channelHub = getChannelHub(companyId);
-
-		channelHub.sendNotificationEvent(userId, notificationEvent);
 	}
 
 	@Override
