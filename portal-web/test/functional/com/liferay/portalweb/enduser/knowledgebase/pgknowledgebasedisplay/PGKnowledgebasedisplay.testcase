@@ -521,6 +521,10 @@
 			<var name="pageName" value="Knowledge Base Display Page" />
 		</execute>
 
+		<execute macro="KBArticle#gotoViaKBDisplayPG">
+			<var name="kbArticleTitle" value="Knowledge Base Article1 Title" />
+		</execute>
+
 		<execute macro="KBArticle#viewViaKBDisplayPG">
 			<var name="kbArticleContent" value="Knowledge Base Article1 Content" />
 			<var name="kbArticleTitle" value="Knowledge Base Article1 Title" />
@@ -569,6 +573,10 @@
 		<execute macro="KBArticle#viewHierarchyViaKBDisplayPG">
 			<var name="kbArticle1ChildArticleTitle1" value="Knowledge Base Child Article1 Title" />
 			<var name="kbArticleTitle1" value="Knowledge Base Article1 Title" />
+		</execute>
+
+		<execute macro="KBArticle#gotoViaKBDisplayPG">
+			<var name="kbArticleTitle" value="Knowledge Base Article1 Title" />
 		</execute>
 
 		<execute macro="KBArticle#viewViaReadMoreLinkPG">
