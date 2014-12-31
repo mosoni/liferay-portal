@@ -382,6 +382,8 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 
 				_ddmStructureIds.put(
 					groupId + "#" + structureId, ddmStructureId);
+
+				return ddmStructureId;
 			}
 
 			return 0;
