@@ -403,6 +403,22 @@
 	<td>//div[contains(@class,'contacts-count contacts')]/div/a</td>
 	<td></td>
 </tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SCREENSHOTS-->
+<tr>
+	<td>SCREENSHOTS_CONTACTS_CENTER_VIEW_CONTACT_PNG</td>
+	<td>so/screenshots/contacts/contacts_center_view_contact.png</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>
