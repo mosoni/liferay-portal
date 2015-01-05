@@ -91,8 +91,8 @@ for (Layout scopeGroupLayout : LayoutLocalServiceUtil.getScopeGroupLayouts(layou
 					id='<%= "scope" + availableGroup.getGroupId() %>'
 					message="<%= HtmlUtil.escape(availableGroup.getDescriptiveName(locale)) %>"
 					method="post"
-					src="<%= availableGroup.getIconURL(themeDisplay) %>"
 					onClick='<%= renderResponse.getNamespace() + "changeScope();" %>'
+					src="<%= availableGroup.getIconURL(themeDisplay) %>"
 					url="<%= setScopeURL %>"
 				/>
 
