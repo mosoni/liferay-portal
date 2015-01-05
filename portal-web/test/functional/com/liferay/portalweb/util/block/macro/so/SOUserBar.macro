@@ -186,6 +186,13 @@
 		</if>
 
 		<if>
+			<equals arg1="sikuliViewRequestToConnect" arg2="true" />
+			<then>
+				<execute action="SOUserBar#sikuliAssertElementPresent" locator-key1="SCREENSHOTS_USERBAR_NOTIFICATION_MENU_CONNECTION_REQUEST_PNG" />
+			</then>
+		</if>
+
+		<if>
 			<isset var="senderNameList" />
 			<then>
 				<for list="${senderNameList}" param="senderName">
