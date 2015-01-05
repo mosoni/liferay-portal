@@ -38,6 +38,7 @@
 		<execute macro="SOContactsCenter#addConnection">
 			<var name="adminEmailAddress" value="${adminEmailAddress}" />
 			<var name="senderName" value="${adminName}" />
+			<var name="sikuliViewRequestToConnect" value="true" />
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 			<var name="userFirstName" value="${userFirstName}" />
 			<var name="userLastName" value="${userLastName}" />
@@ -853,6 +854,53 @@
 
 		<execute macro="SOContactsCenter#viewContact">
 			<var name="contactEmailAddress" value="${contactEmailAddress}" />
+			<var name="contactName" value="${contactName}" />
+			<var name="sikuliViewContact" value="true" />
+		</execute>
+	</command>
+
+	<command name="AddContactInvalidEmailAddress" priority="4">
+		<var name="contactEmailAddress" value="socialofficecontact01" />
+		<var name="contactInvalidEmailAddress" value="true" />
+		<var name="contactName" value="Social01 Office01 Contact01" />
+
+		<execute macro="SOContactsCenter#addContact">
+			<var name="contactEmailAddress" value="${contactEmailAddress}" />
+			<var name="contactInvalidEmailAddress" value="true" />
+			<var name="contactName" value="${contactName}" />
+		</execute>
+
+		<execute macro="SOContactsCenter#viewNoContact">
+			<var name="contactName" value="${contactName}" />
+		</execute>
+	</command>
+
+	<command name="AddContactNullEmailAddress" priority="4">
+		<var name="contactEmailAddress" value="" />
+		<var name="contactName" value="Social01 Office01 Contact01" />
+		<var name="contactNullEmailAddress" value="true" />
+
+		<execute macro="SOContactsCenter#addContact">
+			<var name="contactEmailAddress" value="${contactEmailAddress}" />
+			<var name="contactName" value="${contactName}" />
+		</execute>
+
+		<execute macro="SOContactsCenter#viewNoContact">
+			<var name="contactName" value="${contactName}" />
+		</execute>
+	</command>
+
+	<command name="AddContactNullName" priority="4">
+		<var name="contactEmailAddress" value="socialofficecontact01@liferay.com" />
+		<var name="contactName" value="" />
+
+		<execute macro="SOContactsCenter#addContact">
+			<var name="contactEmailAddress" value="${contactEmailAddress}" />
+			<var name="contactName" value="${contactName}" />
+			<var name="contactNullName" value="true" />
+		</execute>
+
+		<execute macro="SOContactsCenter#viewNoContact">
 			<var name="contactName" value="${contactName}" />
 		</execute>
 	</command>
