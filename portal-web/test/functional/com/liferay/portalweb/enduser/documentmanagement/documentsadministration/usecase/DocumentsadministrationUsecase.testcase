@@ -416,6 +416,7 @@
 		<execute macro="Category#addCP">
 			<var name="categoryDescription" value="${categoryDescription}" />
 			<var name="categoryName" value="Category Name" />
+			<var name="vocabularyName" value="Topic" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -447,13 +448,13 @@
 		</execute>
 
 		<execute macro="Portlet#addPG">
-			<var name="portletName" value="Documents and Media Display" />
+			<var name="portletName" value="Documents and Media" />
 		</execute>
 
 		<execute macro="Portlet#dragAndDropPortletToColumnPG">
 			<var name="columnNumberFrom" value="1" />
 			<var name="columnNumberTo" value="2" />
-			<var name="portletName" value="Documents and Media Display" />
+			<var name="portletName" value="Documents and Media" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -461,13 +462,13 @@
 		</execute>
 
 		<execute macro="Portlet#addPG">
-			<var name="portletName" value="Documents and Media" />
+			<var name="portletName" value="Documents and Media Display" />
 		</execute>
 
 		<execute macro="Portlet#dragAndDropPortletToColumnPG">
 			<var name="columnNumberFrom" value="1" />
 			<var name="columnNumberTo" value="2" />
-			<var name="portletName" value="Documents and Media" />
+			<var name="portletName" value="Documents and Media Display" />
 		</execute>
 
 		<execute macro="DMDocument#addPGViaFlashUploader">
