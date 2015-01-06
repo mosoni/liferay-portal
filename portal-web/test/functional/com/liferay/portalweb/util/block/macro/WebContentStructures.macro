@@ -19,7 +19,7 @@
 			<execute macro="DynamicDataMapping#addField">
 				<var name="field" value="${structureFieldName}" />
 				<var name="fieldFieldLabel" value="${structureFieldName}" />
-				<var name="fieldName" value="${structureFieldName}" />
+				<var name="fieldName" value="${structureFieldName?replace(' ', '_')}" />
 			</execute>
 		</for>
 
