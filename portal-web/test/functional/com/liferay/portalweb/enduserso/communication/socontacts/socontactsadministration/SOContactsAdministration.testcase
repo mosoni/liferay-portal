@@ -38,7 +38,6 @@
 		<execute macro="SOContactsCenter#addConnection">
 			<var name="adminEmailAddress" value="${adminEmailAddress}" />
 			<var name="senderName" value="${adminName}" />
-			<var name="sikuliViewRequestToConnect" value="true" />
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 			<var name="userFirstName" value="${userFirstName}" />
 			<var name="userLastName" value="${userLastName}" />
@@ -855,7 +854,6 @@
 		<execute macro="SOContactsCenter#viewContact">
 			<var name="contactEmailAddress" value="${contactEmailAddress}" />
 			<var name="contactName" value="${contactName}" />
-			<var name="sikuliViewContact" value="true" />
 		</execute>
 	</command>
 
@@ -878,7 +876,6 @@
 	<command name="AddContactNullEmailAddress" priority="4">
 		<var name="contactEmailAddress" value="" />
 		<var name="contactName" value="Social01 Office01 Contact01" />
-		<var name="contactNullEmailAddress" value="true" />
 
 		<execute macro="SOContactsCenter#addContact">
 			<var name="contactEmailAddress" value="${contactEmailAddress}" />
@@ -897,7 +894,6 @@
 		<execute macro="SOContactsCenter#addContact">
 			<var name="contactEmailAddress" value="${contactEmailAddress}" />
 			<var name="contactName" value="${contactName}" />
-			<var name="contactNullName" value="true" />
 		</execute>
 
 		<execute macro="SOContactsCenter#viewNoContact">

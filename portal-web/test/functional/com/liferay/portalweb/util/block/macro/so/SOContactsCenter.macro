@@ -33,6 +33,8 @@
 			<var name="senderName" value="${adminName}" />
 			<var name="userName" value="${userName}" />
 		</execute>
+
+		<execute action="SOUserBar#assertElementPresent" locator-key1="USER_BAR" />
 	</command>
 
 	<command name="addContact">
@@ -50,13 +52,13 @@
 		<execute action="SOContactscenterAddcontact#click" locator-key1="SAVE_BUTTON" />
 
 		<if>
-			<equals arg1="${contactNullName}" arg2="true" />
+			<equals arg1="${contactName}" arg2="" />
 			<then>
 				<execute action="SOContactscenterAddcontact#assertTextEquals" locator-key1="ERROR_MESSAGE" value1="Full name cannot be empty." />
 				<execute action="SOContactscenterAddcontact#sikuliAssertElementPresent" locator-key1="SCREENSHOTS_ADD_CONTACT_NULL_NAME_ERROR_PNG" />
 			</then>
 			<elseif>
-				<equals arg1="${contactNullEmailAddress}" arg2="true" />
+				<equals arg1="${contactEmailAddress}" arg2="" />
 				<then>
 					<execute action="SOContactscenterAddcontact#assertTextEquals" locator-key1="ERROR_MESSAGE" value1="An error occurred while processing the requested resource." />
 					<execute action="SOContactscenterAddcontact#sikuliAssertElementPresent" locator-key1="SCREENSHOTS_ADD_CONTACT_NULL_EMAIL_ADDRESS_ERROR_PNG" />
@@ -691,7 +693,10 @@
 		<execute action="SOContactscenter#assertTextEquals" locator-key1="CONTACT_DETAILS_COMMENTS" value1="${contactName} Comments" />
 
 		<if>
-			<equals arg1="sikuliViewContact" arg2="true" />
+			<and>
+				<equals arg1="${contactName}" arg2="Social01 Office01 Contact01" />
+				<equals arg1="${contactEmailAddress}" arg2="socialofficecontact01@liferay.com" />
+			</and>
 			<then>
 				<execute action="SOContactscenter#sikuliAssertElementPresent" locator-key1="SCREENSHOTS_CONTACTS_CENTER_VIEW_CONTACT_PNG" />
 			</then>
