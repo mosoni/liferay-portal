@@ -1,4 +1,10 @@
 <definition>
+	<command name="assertTextEquals">
+		<case locator-key1="ASSET_ENTRY_TABLE_TYPE">
+			<execute function="AssertTextEquals#assertPartialText" />
+		</case>
+	</command>
+
 	<command name="click">
 		<case locator-key1="SEARCH_ICON">
 			<execute function="Click#clickAtAndWait" />
