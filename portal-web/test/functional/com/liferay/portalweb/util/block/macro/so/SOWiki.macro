@@ -8,11 +8,6 @@
 
 		<execute action="PGWiki#assertTextEquals" locator-key1="WIKI_PAGE_TITLE" value1="${wikiPageTitle}" />
 
-		<if>
-			<equals arg1="${soPage}" arg2="true" />
-			<then>
-				<execute action="PGWikiWikipage#sikuliAssertElementPresent" locator-key1="SCREENSHOTS_SOCIAL_OFFICE_WIKI_WIKI_PAGE_TABLE_OF_CONTENTS_PNG" />
-			</then>
-		</if>
+		<execute action="PGWikiWikipage#sikuliAssertElementPresent" locator-key1="SCREENSHOTS_SOCIAL_OFFICE_WIKI_WIKI_PAGE_TABLE_OF_CONTENTS_PNG" />
 	</command>
 </definition>
