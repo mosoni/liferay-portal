@@ -24,20 +24,12 @@ int firstDayOfWeek = localeCal.getFirstDayOfWeek() - 1;
 	AUI.add(
 		'liferay-portlet-dynamic-data-mapping-custom-fields',
 		function(A) {
-			var AArray = A.Array;
-
 			var FormBuilderTextField = A.FormBuilderTextField;
 			var FormBuilderTypes = A.FormBuilder.types;
 
 			var booleanParse = A.DataType.Boolean.parse;
 			var camelize = Liferay.Util.camelize;
 			var trim = A.Lang.trim;
-
-			var DEFAULTS_FORM_VALIDATOR = A.config.FormValidator;
-
-			DEFAULTS_FORM_VALIDATOR.RULES.structureFieldName = function(value) {
-				return (/^[\w\-]+$/).test(value);
-			};
 
 			var STR_BLANK = '';
 
@@ -140,41 +132,6 @@ int firstDayOfWeek = localeCal.getFirstDayOfWeek() - 1;
 					'false': '<liferay-ui:message key="no" />',
 					'true': '<liferay-ui:message key="yes" />'
 				};
-
-				var nameValidator = {
-					fieldStrings: {
-						name: {
-							required: '<liferay-ui:message key="this-field-is-required" />',
-							structureFieldName: '<liferay-ui:message key="please-enter-only-alphanumeric-characters" />'
-						}
-					},
-					rules: {
-						name: {
-							required: true,
-							structureFieldName: true
-						}
-					}
-				};
-
-				AArray.some(
-					model,
-					function(item, index, collection) {
-						var foundNameAttribute = item.attributeName === 'name';
-
-						var nameEditor = item.editor;
-
-						if (foundNameAttribute && nameEditor) {
-							nameEditor.setAttrs(
-								{
-									elementName: 'name',
-									validator: nameValidator
-								}
-							);
-						}
-
-						return foundNameAttribute;
-					}
-				);
 
 				return model.concat(
 					[
