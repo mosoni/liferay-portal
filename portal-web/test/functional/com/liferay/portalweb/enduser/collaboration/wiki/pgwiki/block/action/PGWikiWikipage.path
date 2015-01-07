@@ -95,6 +95,22 @@
 	<td>//div[contains(@class,'page-actions') and contains(@class,'top-actions')]/span/a[contains(.,'Print')]</td>
 	<td></td>
 </tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SCREENSHOTS-->
+<tr>
+	<td>SCREENSHOTS_SOCIAL_OFFICE_WIKI_WIKI_PAGE_TABLE_OF_CONTENTS_PNG</td>
+	<td>so/screenshots/wiki/social_office_wiki_wiki_page_table_of_contents.png</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>
