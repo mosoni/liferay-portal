@@ -849,6 +849,35 @@
 		</execute>
 	</command>
 
+	<command name="AddSOWikiPageWithTableOfContents" priority="4">
+		<var name="wikiPageCreoleSource">
+			<![CDATA[
+				<<TableOfContents>>
+				==Days of the Week==
+				Sunday, Monday
+				{{{Tuesday
+				Wednesday}}}
+				Thursday, Friday
+			]]>
+		</var>
+		<var name="wikiPageTitle" value="Wiki Page Title" />
+
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="WikiPage#addPG">
+			<var name="creoleSource" value="true" />
+			<var name="wikiPageContent" value="${wikiPageCreoleSource}" />
+			<var name="wikiPageTitle" value="${wikiPageTitle}" />
+		</execute>
+
+		<execute macro="SOWiki#viewTableOfContentsPG">
+			<var name="wikiPageTitle" value="${wikiPageTitle}" />
+		</execute>
+	</command>
+
 	<command name="CompareSOWikiFrontPage" priority="4">
 		<var name="wikiPageContent" value="Wiki Front Page Content" />
 		<var name="wikiPageContentCompareAdded" value="Edited" />
