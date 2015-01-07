@@ -36,7 +36,7 @@ int firstDayOfWeek = localeCal.getFirstDayOfWeek() - 1;
 			var DEFAULTS_FORM_VALIDATOR = A.config.FormValidator;
 
 			DEFAULTS_FORM_VALIDATOR.RULES.structureFieldName = function(value) {
-				return (/^[\w]+$/).test(value);
+				return (/^[\w\-]+$/).test(value);
 			};
 
 			var STR_BLANK = '';
