@@ -50,7 +50,7 @@
 		</execute>
 	</command>
 
-	<command known-issues="LPS-43420" name="AddWebContentRemoveGuestViewPermission" priority="5">
+	<command name="AddWebContentRemoveGuestViewPermission" priority="5">
 		<var name="portletOption" value="Configuration" />
 		<var name="roleName" value="Guest" />
 
