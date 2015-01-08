@@ -53,10 +53,12 @@
 	var form = field.get('form');
 
 	if (form) {
-		form.on(
-			'submit',
+		Liferay.on(
+			'submitForm',
 			function(event) {
-				field.val(window['${portletNamespace}${namespacedFieldName}Editor'].getHTML());
+				if (event.form.compareTo(form)) {
+					field.val(window.${portletNamespace}${namespacedFieldName}Editor.getHTML());
+				}
 			}
 		);
 	}
