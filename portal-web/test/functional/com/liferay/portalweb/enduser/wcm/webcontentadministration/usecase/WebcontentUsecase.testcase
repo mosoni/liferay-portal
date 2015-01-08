@@ -51,6 +51,8 @@
 	</command>
 
 	<command name="AddWebContentRemoveGuestViewPermission" priority="5">
+		<property name="custom.properties" value="journal.article.view.permission.check.enabled=true" />
+
 		<var name="portletOption" value="Configuration" />
 		<var name="roleName" value="Guest" />
 
@@ -73,11 +75,11 @@
 		</execute>
 
 		<execute macro="Page#addPG">
-			<var name="pageName" value="Web Content Display Page" />
+			<var name="pageName" value="WCD Page" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Web Content Display Page" />
+			<var name="pageName" value="WCD Page" />
 		</execute>
 
 		<execute macro="Portlet#addPG">
@@ -89,7 +91,7 @@
 		</execute>
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Web Content Display Page" />
+			<var name="pageName" value="WCD Page" />
 		</execute>
 
 		<execute macro="PermissionsInline#gotoConfigurationPG" />
@@ -108,7 +110,7 @@
 		<execute macro="User#logoutPG" />
 
 		<execute macro="Page#gotoPG">
-			<var name="pageName" value="Web Content Display Page" />
+			<var name="pageName" value="WCD Page" />
 		</execute>
 
 		<execute action="BasePortlet#assertTextNotPresent" locator-key1="TITLE" value1="Web Content Display" />
