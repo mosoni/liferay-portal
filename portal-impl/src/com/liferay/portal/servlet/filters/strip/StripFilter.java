@@ -500,9 +500,9 @@ public class StripFilter extends BasePortalFilter {
 		if (JavaDetector.isJDK6()) {
 			CharBuffer duplicateCharBuffer = charBuffer.duplicate();
 
-			int position = duplicateCharBuffer.position() + endPos;
+			int limit = duplicateCharBuffer.position() + endPos;
 
-			writer.append((CharSequence)duplicateCharBuffer.limit(position));
+			writer.append((CharSequence)duplicateCharBuffer.limit(limit));
 		}
 		else {
 			writer.append(charBuffer, 0, endPos);
