@@ -1764,7 +1764,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 	}
 
 	protected FileEntry getFileEntry(Map<String, String[]> map) {
-		if (MapUtil.isEmpty(map)) {
+		if ((map == null) || map.isEmpty()) {
 			return null;
 		}
 
