@@ -42,15 +42,10 @@
 		<execute action="PGMessageboardsPostthread#type" locator-key1="SUBJECT_FIELD" value1="${threadSubject}" />
 
 		<if>
-			<isset var="source" />
+			<equals arg1="${anonymous}" arg2="true" />
 			<then>
-				<execute action="PGMessageboardsPostthread#click" locator-key1="SOURCE_BUTTON" />
-				<execute action="PGMessageboardsPostthread#type" locator-key1="BODY_FIELD_SOURCE_ON" value1="${threadBody}" />
-				<execute action="PGMessageboardsPostthread#click" locator-key1="SOURCE_BUTTON" />
+				<execute action="PGMessageboardsPostthread#check" locator-key1="ANONYMOUS_CHECKBOX" />
 			</then>
-			<else>
-				<execute action="PGMessageboardsPostthread#type" locator-key1="BODY_FIELD" value1="${threadBody}" />
-			</else>
 		</if>
 
 		<if>
@@ -61,17 +56,32 @@
 		</if>
 
 		<if>
-			<equals arg1="${anonymous}" arg2="true" />
-			<then>
-				<execute action="PGMessageboardsPostthread#check" locator-key1="ANONYMOUS_CHECKBOX" />
-			</then>
-		</if>
-
-		<if>
 			<equals arg1="${priority}" arg2="true" />
 			<then>
 				<execute action="PGMessageboardsPostthread#select" locator-key1="PRIORITY_SELECT" value1="${threadPriority}" />
 			</then>
+		</if>
+		
+		<if>
+			<equals arg1="${source}" arg2="true" />
+			<then>
+				<execute action="PGMessageboardsPostthread#click" locator-key1="SOURCE_BUTTON" />
+				<execute action="PGMessageboardsPostthread#type" locator-key1="BODY_FIELD_SOURCE_ON" value1="${threadBody}" />
+				<execute action="PGMessageboardsPostthread#click" locator-key1="SOURCE_BUTTON" />
+				
+				<if>
+					<isset var="fontSize" />
+					<then>
+						<var name="key_fontSize" value="${fontSize}" />
+
+						<execute action="PGMessageboardsPostthread#assertClick" locator-key1="FONT_SIZE_DROPDOWN" value1="Size" />
+						<execute action="PGMessageboardsPostthread#assertTextEquals" locator-key1="FONT_SIZE_DROPDOWN_SELECT" value1="${key_fontSize}" />
+					</then>
+				</if>
+			</then>
+			<else>
+				<execute action="PGMessageboardsPostthread#type" locator-key1="BODY_FIELD" value1="${threadBody}" />
+			</else>
 		</if>
 
 		<if>
@@ -177,6 +187,10 @@
 		<execute action="PGMessageboardsPostthread#click" locator-key1="SUBMIT_FOR_PUBLICATION_BUTTON" />
 
 		<execute action="PGMessageboards#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+	</command>
+
+	<command name="assertAlertNotPresent">
+		<execute action="PGMessageboards#assertAlertNotPresent" />
 	</command>
 
 	<command name="banUser">
@@ -484,6 +498,14 @@
 
 	<command name="replyPG">
 		<if>
+			<equals arg1="${markAsQuestion}" arg2="true" />
+			<then>
+				<var name="key_threadSubject" value="${threadSubject}" />
+				<execute action="PGMessageboards#assertTextEquals" locator-key1="THREAD_TABLE_FLAG" value1="Waiting for an Answer" />
+			</then>
+		</if>
+
+		<if>
 			<equals arg1="${displayStyle}" arg2="Question" />
 			<then>
 				<var name="key_threadSubject" value="${threadSubject}" />
@@ -641,6 +663,15 @@
 		<execute macro="RecycleBin#emptyCP" />
 	</command>
 
+	<command name="viewAnswerPG">
+		<var name="key_threadSubject" value="${threadSubject}" />
+
+		<execute action="PGMessageboards#assertTextEquals" locator-key1="THREAD_TABLE_FLAG" value1="Resolved" />
+		<execute action="PGMessageboards#assertClick" locator-key1="THREAD_TABLE_THREAD" value1="${threadSubject}" />
+		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_ANSWER_1" value1="Answer" />
+		<execute action="PGMessageboardsThread#assertClick" locator-key1="THREAD_CONTROLS_BACK" value1="Back" />
+	</command>
+
 	<command name="viewCP">
 		<var name="key_threadSubject" value="${threadSubject}" />
 
@@ -706,6 +737,25 @@
 		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_ANSWER_1" value1="Answer" />
 	</command>
 
+	<command name="viewMarkAsQuestionConfiguredPG">
+		<execute action="PGMessageboards#assertClick" locator-key1="POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
+
+		<if>
+			<equals arg1="${markAsQuestion}" arg2="false" />
+			<then>
+				<execute action="PGMessageboardsPostthread#assertNotChecked" locator-key1="MARK_AS_A_QUESTION_CHECKBOX" />
+			</then>
+			<elseif>
+				<equals arg1="${markAsQuestion}" arg2="true" />
+				<then>
+					<execute action="PGMessageboardsPostthread#assertChecked" locator-key1="MARK_AS_A_QUESTION_CHECKBOX" />
+				</then>
+			</elseif>
+		</if>
+
+		<execute action="PGMessageboardsPostthread#assertClick" locator-key1="CANCEL_BUTTON" value1="Cancel" />
+	</command>
+
 	<command name="viewNoPG">
 		<var name="key_threadSubject" value="${threadSubject}" />
 
@@ -740,6 +790,15 @@
 		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_USERNAME_1" value1="${userName}" />
 		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_SUBJECT_1" value1="${threadSubject}" />
 		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_BODY_1" value1="${threadBody}" />
+
+		<if>
+			<isset var="fontSize" />
+			<then>
+				<var name="key_fontSize" value="${fontSize}" />
+
+				<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_BODY_STYLE_1" value1="${threadBody}" />
+			</then>
+		</if>
 
 		<if>
 			<isset var="threadSubject2" />
@@ -795,7 +854,17 @@
 		<execute action="PGMessageboards#assertTextEquals" locator-key1="THREAD_TABLE_THREAD" value1="${threadSubject}" />
 		<execute action="PGMessageboards#assertTextEquals" locator-key1="THREAD_TABLE_STARTED_BY" value1="${userName}" />
 		<execute action="PGMessageboards#assertTextEquals" locator-key1="THREAD_TABLE_POSTS" value1="${postCount}" />
-		<execute action="PGMessageboards#assertTextEquals" locator-key1="THREAD_TABLE_LAST_POST" value1="By: ${userName}" />
+
+		<if>
+			<equals arg1="${guestReply}" arg2="true"/>
+			<then>
+				<execute action="PGMessageboards#assertTextEquals" locator-key1="THREAD_TABLE_LAST_POST" value1="Date: " />
+			</then>
+			<else>
+				<execute action="PGMessageboards#assertTextEquals" locator-key1="THREAD_TABLE_LAST_POST" value1="By: ${userName}" />
+			</else>
+		</if>
+		
 		<execute action="PGMessageboards#click" locator-key1="THREAD_TABLE_THREAD" value1="${threadSubject}" />
 
 		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="THREAD_TABLE_SUBJECT_1" value1="${threadSubject}" />
@@ -806,7 +875,14 @@
 		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_RATING_1" value1="0 (0 Votes)" />
 		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_SUBJECT_2" value1="RE: ${threadSubject}" />
 		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_BODY_2" value1="${threadReplyBody}" />
-		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_USERNAME_2" value1="${userName}" />
+
+		<if>
+			<equals arg1="${guestReply}" arg2="false"/>
+			<then>
+				<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_USERNAME_2" value1="${userName}" />
+			</then>
+		</if>
+
 		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_RATING_2" value1="0 (0 Votes)" />
 	</command>
 
