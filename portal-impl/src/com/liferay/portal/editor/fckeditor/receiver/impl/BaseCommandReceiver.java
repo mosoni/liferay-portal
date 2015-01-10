@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.security.xml.SecureXMLFactoryProviderUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -403,7 +404,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 	private Document _createDocument() {
 		try {
 			DocumentBuilderFactory documentBuilderFactory =
-				DocumentBuilderFactory.newInstance();
+				SecureXMLFactoryProviderUtil.newDocumentBuilderFactory();
 
 			DocumentBuilder documentBuilder =
 				documentBuilderFactory.newDocumentBuilder();
