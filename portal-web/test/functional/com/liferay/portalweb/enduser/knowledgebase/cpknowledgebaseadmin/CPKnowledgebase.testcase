@@ -220,4 +220,29 @@
 			<var name="kbArticleTitle" value="Knowledge Base Article Title" />
 		</execute>
 	</command>
+
+	<command name="ViewKBArticlePriority" priority="5">
+		<var name="kbArticleCounterList" value="1,2" />
+
+		<execute macro="Page#gotoContentCP">
+			<var name="portletName" value="Knowledge Base" />
+		</execute>
+
+		<for list="${kbArticleCounterList}" param="kbCount">
+			<execute macro="KBArticle#addCP">
+				<var name="kbArticleContent" value="Knowledge Base Article Content ${kbCount}" />
+				<var name="kbArticleTitle" value="Knowledge Base Article Title ${kbCount}" />
+			</execute>
+		</for>
+
+		<execute macro="KBArticle#viewKBArticlePriorityViaAdmin">
+			<var name="kbArticleTitle" value="Knowledge Base Article Title 1" />
+			<var name="kbPriority" value="1.0" />
+		</execute>
+
+		<execute macro="KBArticle#viewKBArticlePriorityViaAdmin">
+			<var name="kbArticleTitle" value="Knowledge Base Article Title 2" />
+			<var name="kbPriority" value="2.0" />
+		</execute>
+	</command>
 </definition>
