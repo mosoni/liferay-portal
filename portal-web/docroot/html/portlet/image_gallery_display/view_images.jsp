@@ -302,6 +302,9 @@ embeddedPlayerURL.setWindowState(LiferayWindowState.POP_UP);
 			links: '#<portlet:namespace />imageGalleryAssetInfo .image-link.preview',
 			maxHeight: maxHeight,
 			maxWidth: maxWidth,
+			pagination: {
+				total: <%= results.size() %>
+			},
 			playingLabel: '(<liferay-ui:message key="playing" />)',
 			plugins: [
 				{
