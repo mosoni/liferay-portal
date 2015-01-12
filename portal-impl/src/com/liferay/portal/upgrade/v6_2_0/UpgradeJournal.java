@@ -438,8 +438,11 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 					companyId, JournalStructure.class.getName(),
 					DDMStructure.class.getName(), id_, ddmStructureId);
 
-				_ddmStructureIds.put(
-					groupId + "#" + structureId, ddmStructureId);
+				if (_ddmStructureIds.get(groupId + "#" + structureId) == null) {
+					_ddmStructureIds.put(
+						groupId + "#" + structureId, ddmStructureId);
+				}
+
 				_ddmStructurePKs.put(id_, ddmStructureId);
 			}
 		}
