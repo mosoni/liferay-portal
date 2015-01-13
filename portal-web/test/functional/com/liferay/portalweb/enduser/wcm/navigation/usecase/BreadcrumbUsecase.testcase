@@ -90,8 +90,8 @@
 		</execute>
 
 		<execute macro="Breadcrumb#configureBreadcrumb">
-			<var name="checkSetupName" value="Show Current Site,Show Current Application,Show Guest Site,Show Application Breadcrumb" />
-			<var name="uncheckSetupName" value="Show Page,Show Parent Sites" />
+			<var name="checkSetupName" value="Show Current Application,Show Guest Site,Show Application Breadcrumb" />
+			<var name="uncheckSetupName" value="Show Page,Show Current Site,Show Parent Sites" />
 		</execute>
 
 		<execute macro="Breadcrumb#viewConfigurationPreview">
@@ -116,8 +116,8 @@
 		</execute>
 
 		<execute macro="Breadcrumb#configureBreadcrumb">
-			<var name="checkSetupName" value="Show Current Site,Show Current Application,Show Application Breadcrumb" />
-			<var name="uncheckSetupName" value="Show Guest Site,Show Page,Show Parent Sites" />
+			<var name="checkSetupName" value="Show Current Application,Show Application Breadcrumb" />
+			<var name="uncheckSetupName" value="Show Current Site,Show Guest Site,Show Page,Show Parent Sites" />
 		</execute>
 
 		<execute macro="Breadcrumb#viewConfigurationPreview">
@@ -141,29 +141,6 @@
 
 		<execute macro="Breadcrumb#configureBreadcrumb">
 			<var name="checkSetupName" value="Show Current Site,Show Current Application,Show Guest Site,Show Page,Show Parent Sites,Show Application Breadcrumb" />
-		</execute>
-
-		<execute macro="Breadcrumb#viewConfigurationPreview">
-			<var name="breadcrumbListVisible" value="Liferay,Site Name,Parent Page Name,Child Page Name" />
-		</execute>
-
-		<execute macro="Page#gotoChildPagePG">
-			<var name="childPageName" value="Child Page Name" />
-			<var name="pageName" value="Parent Page Name" />
-			<var name="siteName" value="Site Name" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="Breadcrumb#viewPG">
-			<var name="breadcrumbListVisible" value="Liferay,Site Name,Parent Page Name,Child Page Name" />
-		</execute>
-
-		<execute macro="Portlet#gotoPortletOptions">
-			<var name="portletOption" value="Configuration" />
-		</execute>
-
-		<execute macro="Breadcrumb#configureBreadcrumb">
-			<var name="checkSetupName" value="Show Current Site,Show Current Application,Show Application Breadcrumb" />
 		</execute>
 
 		<execute macro="Breadcrumb#viewConfigurationPreview">
