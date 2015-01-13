@@ -62,10 +62,8 @@
 			return data;
 		},
 
-		toHtml: function(data, fixForBody) {
+		toHtml: function(data, config) {
 			var instance = this;
-
-			var div = document.createElement('div');
 
 			if (!instance._creoleParser) {
 				instance._creoleParser = new CKEDITOR.CreoleParser(
@@ -75,9 +73,22 @@
 				);
 			}
 
-			instance._creoleParser.parse(div, data);
+			if (config) {
+				var fragment = CKEDITOR.htmlParser.fragment.fromHtml(data);
 
-			data = div.innerHTML;
+				var writer = new CKEDITOR.htmlParser.basicWriter();
+
+				fragment.writeHtml(writer);
+
+				data = writer.getHtml();
+			}
+			else {
+				var div = document.createElement('div');
+
+				instance._creoleParser.parse(div, data);
+
+				data = div.innerHTML;
+			}
 
 			return data;
 		},
@@ -572,20 +583,6 @@
 				attachmentURLPrefix = editor.config.attachmentURLPrefix;
 
 				editor.dataProcessor = new CreoleDataProcessor(editor);
-
-				editor.on(
-					'paste',
-					function(event) {
-						var data = event.data;
-
-						var htmlData = data.dataValue;
-
-						htmlData = editor.dataProcessor.toDataFormat(htmlData);
-
-						data.dataValue = htmlData;
-					},
-					editor.element.$
-				);
 
 				editor.fire('customDataProcessorLoaded');
 			}
