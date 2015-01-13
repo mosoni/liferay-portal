@@ -79,7 +79,16 @@ public class RSSAction extends com.liferay.portal.struts.RSSAction {
 		syndFeed.setEntries(syndEntries);
 
 		for (AssetEntry assetEntry : assetEntries) {
+			String link = getEntryURL(
+				portletRequest, portletResponse, linkBehavior, assetEntry);
+
+			if (Validator.isBlank(link)) {
+				continue;
+			}
+
 			SyndEntry syndEntry = new SyndEntryImpl();
+
+			syndEntry.setLink(link);
 
 			String author = PortalUtil.getUserName(assetEntry);
 
@@ -103,15 +112,6 @@ public class RSSAction extends com.liferay.portal.struts.RSSAction {
 			syndContent.setValue(value);
 
 			syndEntry.setDescription(syndContent);
-
-			String link = getEntryURL(
-				portletRequest, portletResponse, linkBehavior, assetEntry);
-
-			if (Validator.isBlank(link)) {
-				continue;
-			}
-
-			syndEntry.setLink(link);
 
 			syndEntry.setPublishedDate(assetEntry.getPublishDate());
 			syndEntry.setTitle(assetEntry.getTitle(languageId, true));
