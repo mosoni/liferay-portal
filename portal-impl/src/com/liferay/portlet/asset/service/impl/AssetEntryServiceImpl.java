@@ -250,7 +250,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		}
 
 		if (returnEntriesCountOnly && !entryQuery.isEnablePermissions() &&
-			!PropsValues.ASSET_PUBLISHER_FILTER_NONLISTABLE_ENTRIES) {
+			!PropsValues.ASSET_PUBLISHER_FILTER_UNLISTABLE_ENTRIES) {
 
 			int entriesCount = assetEntryLocalService.getEntriesCount(
 				entryQuery);
@@ -266,7 +266,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		int start = entryQuery.getStart();
 
 		if (entryQuery.isEnablePermissions() ||
-			PropsValues.ASSET_PUBLISHER_FILTER_NONLISTABLE_ENTRIES) {
+			PropsValues.ASSET_PUBLISHER_FILTER_UNLISTABLE_ENTRIES) {
 
 			entryQuery.setEnd(end + PropsValues.ASSET_FILTER_SEARCH_LIMIT);
 			entryQuery.setStart(0);
@@ -279,7 +279,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		int filteredEntriesCount = 0;
 
 		if (entryQuery.isEnablePermissions() ||
-			PropsValues.ASSET_PUBLISHER_FILTER_NONLISTABLE_ENTRIES) {
+			PropsValues.ASSET_PUBLISHER_FILTER_UNLISTABLE_ENTRIES) {
 
 			PermissionChecker permissionChecker = getPermissionChecker();
 
@@ -298,7 +298,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 						 assetRendererFactory.hasPermission(
 							permissionChecker, classPK, ActionKeys.VIEW)) &&
 						(!PropsValues.
-							ASSET_PUBLISHER_FILTER_NONLISTABLE_ENTRIES ||
+							ASSET_PUBLISHER_FILTER_UNLISTABLE_ENTRIES ||
 						 assetRendererFactory.isListable(classPK))) {
 
 						filteredEntries.add(entry);
