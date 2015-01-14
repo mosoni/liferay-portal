@@ -271,7 +271,7 @@ public abstract class BaseMobileDriverImpl
 
 	@Override
 	public String getDependenciesDirName() {
-		return _dependenciesDirName;
+		return _DEPENDENCIES_DIR_NAME;
 	}
 
 	@Override
@@ -306,7 +306,7 @@ public abstract class BaseMobileDriverImpl
 
 	@Override
 	public String getOutputDirName() {
-		return _outputDirName;
+		return _OUTPUT_DIR_NAME;
 	}
 
 	@Override
@@ -321,7 +321,7 @@ public abstract class BaseMobileDriverImpl
 
 	@Override
 	public String getSikuliImagesDirName() {
-		return _sikuliImagesDirName;
+		return _SIKULI_IMAGES_DIR_NAME;
 	}
 
 	@Override
@@ -765,12 +765,16 @@ public abstract class BaseMobileDriverImpl
 		throw new UnsupportedOperationException();
 	}
 
-	private String _dependenciesDirName =
+	private static final String _DEPENDENCIES_DIR_NAME =
 		"portal-web//test//functional//com//liferay//portalweb//dependencies//";
-	private String _outputDirName = TestPropsValues.OUTPUT_DIR_NAME;
+
+	private static final String _OUTPUT_DIR_NAME =
+		TestPropsValues.OUTPUT_DIR_NAME;
+
+	private static final String _SIKULI_IMAGES_DIR_NAME =
+		_DEPENDENCIES_DIR_NAME + "sikuli//linux//";
+
 	private String _primaryTestSuiteName;
-	private String _projectDirName;
-	private String _sikuliImagesDirName =
-		_dependenciesDirName + "sikuli//linux//";
+	private final String _projectDirName;
 
 }
