@@ -43,6 +43,11 @@ public class GroupPagesControlPanelEntry extends BaseControlPanelEntry {
 			PermissionChecker permissionChecker, Group group, Portlet portlet)
 		throws Exception {
 
+		if (group.isUser()) {
+			return super.hasAccessPermissionExplicitlyGranted(
+				permissionChecker, group, portlet);
+		}
+
 		return GroupPermissionUtil.contains(
 			permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS);
 	}
