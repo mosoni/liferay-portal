@@ -16,9 +16,12 @@ package com.liferay.portlet.grouppages;
 
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.BaseControlPanelEntry;
 
 /**
@@ -42,6 +45,30 @@ public class GroupPagesControlPanelEntry extends BaseControlPanelEntry {
 
 		return GroupPermissionUtil.contains(
 			permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS);
+	}
+
+	protected boolean hasUserLayoutsAccesPermissionDenied(
+			PermissionChecker permissionChecker)
+		throws Exception {
+
+		if (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED &&
+			!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
+
+			return true;
+		}
+
+		boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(
+			permissionChecker.getUserId(), permissionChecker.getCompanyId(),
+			RoleConstants.POWER_USER, true);
+
+		if ((PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED ||
+			 PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED) &&
+			!hasPowerUserRole) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 }
