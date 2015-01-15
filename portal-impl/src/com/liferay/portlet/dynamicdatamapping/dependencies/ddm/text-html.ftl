@@ -53,7 +53,7 @@
 	var form = field.get('form');
 
 	if (form) {
-		Liferay.on(
+		var handler = Liferay.on(
 			'submitForm',
 			function(event) {
 				if (event.form.compareTo(form)) {
@@ -61,5 +61,7 @@
 				}
 			}
 		);
+
+		Liferay.DDM.RepeatableFields.eventHandlers['${portletNamespace}${namespacedFieldName}'] = [handler];
 	}
 </@>

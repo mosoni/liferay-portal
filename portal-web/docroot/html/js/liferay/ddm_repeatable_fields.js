@@ -48,6 +48,8 @@ AUI.add(
 
 				NAME: 'liferay-ddm-repeatable-fields',
 
+				eventHandlers: {},
+
 				prototype: {
 					initializer: function() {
 						var instance = this;
@@ -236,6 +238,10 @@ AUI.add(
 						);
 
 						fieldNode.remove();
+
+						var eventHandlers = RepeatableFields.eventHandlers[instance.getFieldInputName(fieldNode)];
+
+						A.Array.invoke(eventHandlers, 'detach');
 
 						instance.syncFieldsTreeUI();
 					},
