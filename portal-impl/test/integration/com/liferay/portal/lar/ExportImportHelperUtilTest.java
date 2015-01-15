@@ -272,9 +272,12 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 
 	@Test
 	public void testExportDLReferencesInvalidReference() throws Exception {
-		_portletDataContextExport.setZipWriter(new TestReaderWriter());
+		_portletDataContextExport.setZipWriter(new TestZipWriter());
 
 		StringBundler sb = new StringBundler(9);
+
+		Element rootElement =
+			_portletDataContextExport.getExportDataRootElement();
 
 		sb.append("{{/documents/}}");
 		sb.append(StringPool.NEW_LINE);
@@ -287,8 +290,8 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 		sb.append("<a href='/documents/'>Link</a>");
 
 		ExportImportHelperUtil.replaceExportDLReferences(
-			_portletDataContextExport, _referrerStagedModel, sb.toString(),
-			true);
+			_portletDataContextExport, _referrerStagedModel,
+			rootElement.element("entry"), sb.toString(), true);
 	}
 
 	@Test
