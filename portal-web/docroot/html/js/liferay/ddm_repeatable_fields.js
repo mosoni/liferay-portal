@@ -82,7 +82,11 @@ AUI.add(
 									var validatorRules = liferayForm.formValidator.get('rules');
 
 									if (event.type === 'liferay-ddm-repeatable-fields:repeat') {
-										validatorRules[fieldInputName] = validatorRules[instance.getFieldInputName(event.originalFieldNode)];
+										var originalFieldRules = validatorRules[instance.getFieldInputName(event.originalFieldNode)];
+
+										if (originalFieldRules) {
+											validatorRules[fieldInputName] = originalFieldRules;
+										}
 									}
 									else if (event.type === 'liferay-ddm-repeatable-fields:remove') {
 										delete validatorRules[fieldInputName];
