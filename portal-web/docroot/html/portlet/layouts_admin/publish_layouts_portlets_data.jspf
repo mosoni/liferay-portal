@@ -221,19 +221,19 @@ ManifestSummary manifestSummary = portletDataContext.getManifestSummary();
 						try {
 							dateRange = ExportImportHelperUtil.getDateRange(renderRequest, stagingGroupId, privateLayout, 0, portlet.getPortletId(), "fromLastPublishDate");
 
-							portletDataContext.setStartDate(dateRange.getStartDate());
 							portletDataContext.setEndDate(dateRange.getEndDate());
+							portletDataContext.setStartDate(dateRange.getStartDate());
 
 							portletDataHandler.prepareManifestSummary(portletDataContext);
 						}
 						finally {
 							if (originalDateRange != null) {
-								portletDataContext.setStartDate(originalDateRange.getStartDate());
 								portletDataContext.setEndDate(originalDateRange.getEndDate());
+								portletDataContext.setStartDate(originalDateRange.getStartDate());
 							}
 							else {
-								portletDataContext.setStartDate(null);
 								portletDataContext.setEndDate(null);
+								portletDataContext.setStartDate(null);
 							}
 						}
 
