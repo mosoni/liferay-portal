@@ -756,16 +756,19 @@ public class JournalTestUtil {
 
 		serviceContext.setCommand(Constants.UPDATE);
 
+		if (!Validator.isXml(content)) {
+			content = createLocalizedContent(
+				content, PortalUtil.getSiteDefaultLocale(article.getGroupId()));
+		}
+
 		return JournalArticleLocalServiceUtil.updateArticle(
 			article.getUserId(), article.getGroupId(), article.getFolderId(),
 			article.getArticleId(), article.getVersion(), titleMap,
-			article.getDescriptionMap(),
-			createLocalizedContent(
-				content, PortalUtil.getSiteDefaultLocale(article.getGroupId())),
-			article.getType(), article.getStructureId(),
-			article.getTemplateId(), article.getLayoutUuid(), displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			0, 0, 0, 0, 0, true, 0, 0, 0, 0, 0, true, article.getIndexable(),
+			article.getDescriptionMap(), content, article.getType(), 
+			article.getStructureId(), article.getTemplateId(),
+			article.getLayoutUuid(), displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute, 0, 0, 0, 0, 0,
+			true, 0, 0, 0, 0, 0, true, article.getIndexable(), 
 			article.isSmallImage(), article.getSmallImageURL(), null, null,
 			null, serviceContext);
 	}
