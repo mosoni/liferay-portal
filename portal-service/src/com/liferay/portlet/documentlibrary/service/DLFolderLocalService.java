@@ -725,6 +725,7 @@ public interface DLFolderLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@com.liferay.portal.kernel.increment.BufferedIncrement(configuration = "DLFolderEntry", incrementClass = com.liferay.portal.kernel.increment.DateOverrideIncrement.class)
 	public void updateLastPostDate(long folderId, java.util.Date lastPostDate)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
