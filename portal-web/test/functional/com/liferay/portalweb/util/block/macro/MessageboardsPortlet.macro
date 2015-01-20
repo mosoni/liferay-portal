@@ -1,4 +1,31 @@
 <definition>
+	<command name="configureGeneralPG">
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletOption" value="Configuration" />
+		</execute>
+
+		<execute action="PGMessageboardsConfiguration#selectFrame" locator-key1="MESSAGE_BOARDS_IFRAME" />
+
+		<if>
+			<equals arg1="${threadAsQuestionByDefaultEnabled}" arg2="true" />
+			<then>
+				<execute action="PGMessageboardsConfigurationGeneral#check" locator-key1="THREAD_AS_QUESTION_BY_DEFAULT_CHECKBOX" />
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${messageFormatBBCodeEnabled}" arg2="true" />
+			<then>
+				<var name="key_messageFormat" value="${messageFormat}" />
+
+				<execute action="PGMessageboardsConfigurationGeneral#select" locator-key1="MESSAGE_FORMAT_DROPDOWN_OPTION" value1="${key_messageFormat}" />
+			</then>
+		</if>
+
+		<execute action="PGMessageboardsConfigurationGeneral#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
+		<execute action="PGMessageboardsConfiguration#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="You have successfully updated the setup." />
+	</command>
+
 	<command name="configureMessageAddedEmailPG">
 		<execute macro="Portlet#gotoPortletOptions">
 			<var name="portletOption" value="Configuration" />
@@ -56,33 +83,6 @@
 		<execute action="PGMessageboardsConfigurationScope#click" locator-key1="SCOPE_DROPDOWN" />
 		<execute action="PGMessageboardsConfigurationScope#assertClick" locator-key1="SCOPE_MENULIST" value1="${scopeName}" />
 		<execute action="PGMessageboardsConfigurationScope#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="You have successfully updated the setup." />
-	</command>
-
-	<command name="configureGeneralPG">
-		<execute macro="Portlet#gotoPortletOptions">
-			<var name="portletOption" value="Configuration" />
-		</execute>
-
-		<execute action="PGMessageboardsConfiguration#selectFrame" locator-key1="MESSAGE_BOARDS_IFRAME" />
-
-		<if>
-			<equals arg1="${threadAsQuestionByDefaultEnabled}" arg2="true" />
-			<then>
-				<execute action="PGMessageboardsConfigurationGeneral#check" locator-key1="THREAD_AS_QUESTION_BY_DEFAULT_CHECKBOX" />
-			</then> 
-		</if>
-
-		<if>
-			<equals arg1="${messageFormatBBCodeEnabled}" arg2="true" />
-			<then>
-				<var name="key_messageFormat" value="${messageFormat}" />
-
-				<execute action="PGMessageboardsConfigurationGeneral#select" locator-key1="MESSAGE_FORMAT_DROPDOWN_OPTION" value1="${key_messageFormat}" />
-			</then>
-		</if>
-
-		<execute action="PGMessageboardsConfigurationGeneral#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
-		<execute action="PGMessageboardsConfiguration#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="You have successfully updated the setup." />
 	</command>
 
 	<command name="tearDownConfigurationEmailPG">

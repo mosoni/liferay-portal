@@ -332,6 +332,60 @@
 		</execute>
 	</command>
 
+	<command name="AddMBThreadGuestReply" priority="3">
+		<var name="threadBody" value="MB Thread Message Body" />
+		<var name="threadReplyBody" value="MB Thread Reply Body As Guest" />
+		<var name="threadSubject" value="MB Thread Message Subject" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="MessageboardsThread#addPG">
+			<var name="threadBody" value="${threadBody}" />
+			<var name="threadSubject" value="${threadSubject}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="MessageboardsThread#viewPG">
+			<var name="postCount" value="1" />
+			<var name="threadBody" value="${threadBody}" />
+			<var name="threadSubject" value="${threadSubject}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="MessageboardsPermissions#checkReplyToMessageForGuestPG" />
+
+		<execute macro="User#logoutPG" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="MessageboardsThread#replyPG">
+			<var name="threadReplyBody" value="${threadReplyBody}" />
+			<var name="threadSubject" value="${threadSubject}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="MessageboardsThread#viewReplyPG">
+			<var name="guestReply" value="true" />
+			<var name="postCount" value="2" />
+			<var name="threadBody" value="${threadBody}" />
+			<var name="threadReplyBody" value="${threadReplyBody}" />
+			<var name="threadSubject" value="${threadSubject}" />
+		</execute>
+	</command>
+
 	<command name="AddMBThreadNullBody" priority="5">
 		<var name="threadBody" value="" />
 		<var name="threadSubject" value="MB Thread Message Subject" />
@@ -353,63 +407,6 @@
 			<var name="postCount" value="1" />
 			<var name="threadBody" value="${threadSubject}" />
 			<var name="threadSubject" value="${threadSubject}" />
-		</execute>
-	</command>
-
-	<command name="AddMBThreadGuestReply" priority="3">
-		<var name="threadBody" value="MB Thread Message Body" />
-		<var name="threadReplyBody" value="MB Thread Reply Body As Guest" />
-		<var name="threadSubject" value="MB Thread Message Subject" />
-		<var name="replytoMessage" value="guest" />
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="MessageboardsThread#addPG">
-			<var name="threadBody" value="${threadBody}" />
-			<var name="threadSubject" value="${threadSubject}" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="MessageboardsThread#viewPG">
-			<var name="threadBody" value="${threadBody}" />
-			<var name="threadSubject" value="${threadSubject}" />
-			<var name="postCount" value="1" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="MessageboardsPermissions#configureGuestPermissions">
-			<var name="replytoMessage" value="${replytoMessage}" />
-		</execute>
-
-		<execute macro="User#logoutPG" />
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="MessageboardsThread#replyPG">
-			<var name="threadSubject" value="${threadSubject}" />
-			<var name="threadReplyBody" value="${threadReplyBody}" />		
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="MessageboardsThread#viewReplyPG">
-			<var name="postCount" value="2" />
-			<var name="threadBody" value="${threadBody}" />
-			<var name="threadReplyBody" value="${threadReplyBody}" />
-			<var name="threadSubject" value="${threadSubject}" />
-			<var name="guestReply" value="true" />
 		</execute>
 	</command>
 
@@ -687,6 +684,60 @@
 		</execute>
 	</command>
 
+	<command name="ViewBBCodeNoXSS" priority="5">
+
+		<var name="font" value="5" />
+
+		<execute macro="MessageboardsPortlet#configureGeneralPG">
+			<var name="messageFormat" value="BBCode" />
+			<var name="messageFormatBBCodeEnabled" value="true" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="MessageboardsThread#addPG">
+			<var name="source" value="true" />
+			<var name="threadBody" value="[img]Not An Image[font= onerror=alert(/XSS/.source)//]FF[/font][/img]" />
+			<var name="threadSubject" value="New Thread Subject" />
+		</execute>
+
+		<execute macro="MessageboardsThread#assertAlertNotPresent" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="MessageboardsThread#viewPG">
+			<var name="postCount" value="1" />
+			<var name="threadBody" value="" />
+			<var name="threadSubject" value="New Thread Subject" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="MessageboardsThread#addPG">
+			<var name="fontSize" value="24" />
+			<var name="source" value="true" />
+			<var name="threadBody" value="[size=${font}]Thread Body[/size]" />
+			<var name="threadSubject" value="New Thread Subject 2" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="MessageboardsThread#viewPG">
+			<var name="fontSize" value="24" />
+			<var name="postCount" value="1" />
+			<var name="threadBody" value="Thread Body" />
+			<var name="threadSubject" value="New Thread Subject 2" />
+		</execute>
+	</command>
+
 	<command name="ViewSubcategorySubscriptionViaMySubscriptionsPage" priority="5">
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Message Boards Page" />
@@ -754,68 +805,12 @@
 			<var name="subscribedThread" value="MB Subcategory Name 2" />
 		</execute>
 	</command>
-	
-	<command name="ViewBBCodeNoXSS" priority="5">
 
-		<var name="font" value="5" />
-
-		<execute macro="MessageboardsPortlet#configureGeneralPG">
-			<var name="messageFormatBBCodeEnabled" value="true" />
-			<var name="messageFormat" value="BBCode" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="MessageboardsThread#addPG">
-			<var name="source" value="true" />
-			<var name="threadBody" value="[img]Not An Image[font= onerror=alert(/XSS/.source)//]FF[/font][/img]" />
-			<var name="threadSubject" value="New Thread Subject" />
-		</execute>
-
-		<execute macro="MessageboardsThread#assertAlertNotPresent" />
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="MessageboardsThread#viewPG">
-			<var name="threadSubject" value="New Thread Subject" />
-			<var name="threadBody" value="" />
-			<var name="postCount" value="1" />
-		</execute>		
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="MessageboardsThread#addPG">
-			<var name="fontSize" value="24" />
-			<var name="source" value="true" />
-			<var name="threadBody" value="[size=${font}]Thread Body[/size]" />
-			<var name="threadSubject" value="New Thread Subject 2" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-		</execute>
-
-		<execute macro="MessageboardsThread#viewPG">
-			<var name="threadSubject" value="New Thread Subject 2" />
-			<var name="threadBody" value="Thread Body" />
-			<var name="fontSize" value="24" />
-			<var name="postCount" value="1" />
-		</execute>
-	</command>
-	
 	<command name="ViewThreadDefaultQuestion" priority="3">
-		<var name="threadSubject" value="New Thread Subject" />
 		<var name="threadReplyBody" value="Thread Reply Body" />
+		<var name="threadSubject" value="New Thread Subject" />
 
-		<execute macro="MessageboardsThread#viewMarkAsQuestionConfiguredPG">
-			<var name="markAsQuestion" value="false" />
-		</execute>
+		<execute macro="MessageboardsThread#viewMarkAsQuestionNotCheckedPG" />
 
 		<execute macro="MessageboardsPortlet#configureGeneralPG">
 			<var name="threadAsQuestionByDefaultEnabled" value="true" />
@@ -825,9 +820,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="MessageboardsThread#viewMarkAsQuestionConfiguredPG">
-			<var name="markAsQuestion" value="true" />
-		</execute>
+		<execute macro="MessageboardsThread#viewMarkAsQuestionCheckedPG" />
 
 		<execute macro="MessageboardsThread#addPG">
 			<var name="threadBody" value="Thread Body" />
