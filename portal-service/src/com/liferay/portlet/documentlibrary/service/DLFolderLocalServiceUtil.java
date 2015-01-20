@@ -879,9 +879,6 @@ public class DLFolderLocalServiceUtil {
 			fileEntryTypeIds, overrideFileEntryTypes, serviceContext);
 	}
 
-	/**
-	* @deprecated As of 6.2.0
-	*/
 	public static void updateLastPostDate(long folderId,
 		java.util.Date lastPostDate)
 		throws com.liferay.portal.kernel.exception.PortalException,
