@@ -448,13 +448,7 @@
 		</execute>
 
 		<execute macro="Portlet#addPG">
-			<var name="portletName" value="Documents and Media" />
-		</execute>
-
-		<execute macro="Portlet#dragAndDropPortletToColumnPG">
-			<var name="columnNumberFrom" value="1" />
-			<var name="columnNumberTo" value="2" />
-			<var name="portletName" value="Documents and Media" />
+			<var name="portletName" value="Documents and Media Display" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -462,13 +456,7 @@
 		</execute>
 
 		<execute macro="Portlet#addPG">
-			<var name="portletName" value="Documents and Media Display" />
-		</execute>
-
-		<execute macro="Portlet#dragAndDropPortletToColumnPG">
-			<var name="columnNumberFrom" value="1" />
-			<var name="columnNumberTo" value="2" />
-			<var name="portletName" value="Documents and Media Display" />
+			<var name="portletName" value="Documents and Media" />
 		</execute>
 
 		<execute macro="DMDocument#addPGViaFlashUploader">
@@ -511,6 +499,10 @@
 
 		<execute macro="DMDisplayPortlet#configureDocumentListingsDocumentsPerPage">
 			<var name="documentsPerPage" value="5" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="DMPortlet#viewPaginationControlsPG" />
