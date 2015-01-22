@@ -764,11 +764,11 @@ public class JournalTestUtil {
 		return JournalArticleLocalServiceUtil.updateArticle(
 			article.getUserId(), article.getGroupId(), article.getFolderId(),
 			article.getArticleId(), article.getVersion(), titleMap,
-			article.getDescriptionMap(), content, article.getType(), 
+			article.getDescriptionMap(), content, article.getType(),
 			article.getStructureId(), article.getTemplateId(),
 			article.getLayoutUuid(), displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute, 0, 0, 0, 0, 0,
-			true, 0, 0, 0, 0, 0, true, article.getIndexable(), 
+			true, 0, 0, 0, 0, 0, true, article.getIndexable(),
 			article.isSmallImage(), article.getSmallImageURL(), null, null,
 			null, serviceContext);
 	}
