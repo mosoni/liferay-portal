@@ -45,7 +45,7 @@
 </tr>
 <tr>
 	<td>SCOPE_MENU</td>
-	<td>//ul[contains(@class,'dropdown-menu')]/li/a/span[contains(.,'${key_kbPageScope}')]</td>
+	<td>//ul[contains(@class,'dropdown-menu')]//span[contains(.,'${key_kbPageScope}')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -112,7 +112,7 @@
 </tr>
 <tr>
 	<td>ADD_MENULIST_IMPORT</td>
-	<td>//li[3]//span[contains(.,'Import')]</td>
+	<td>//ul[contains(@class,'dropdown-menu')]/li[3]/a[contains(.,'Import')]</td>
 	<td></td>
 </tr>
 <tr>
