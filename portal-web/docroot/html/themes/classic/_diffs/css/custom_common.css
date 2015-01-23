@@ -431,10 +431,6 @@
 		.navbar-inner {
 			min-height: 47px;
 		}
-
-		.taglib-search-toggle {
-			padding-right: 0;
-		}
 	}
 
 	/* ---------- Nav#Navigation ---------- */
@@ -451,16 +447,6 @@
 
 		&:hover {
 			@include box-shadow(0 1px 1px -1px #000)
-		}
-	}
-
-	/* ---------- Search Toggle ---------- */
-
-	.taglib-search-toggle {
-		padding-right: 57px;
-
-		div {
-			max-width: 100%;
 		}
 	}
 

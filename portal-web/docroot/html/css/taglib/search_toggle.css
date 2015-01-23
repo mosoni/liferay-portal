@@ -1,3 +1,4 @@
+@import "compass";
 @import "mixins";
 
 .taglib-search-toggle .popover .arrow {
@@ -8,6 +9,27 @@
 	@include respond-to(phone, tablet) {
 		.taglib-search-toggle {
 			margin: 0 10px;
+		}
+	}
+}
+
+@include respond-to(phone) {
+	.taglib-search-toggle {
+		.form-search .input-append {
+			display: block;
+
+			.advanced-search {
+				button[type="submit"] {
+					clip: rect(0, 0, 0, 0);
+					position: absolute;
+				}
+			}
+
+			.search-query {
+				@include border-radius(14px);
+
+				width: 100%;
+			}
 		}
 	}
 }
