@@ -957,9 +957,6 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 		return _group.hasStagingGroup();
 	}
 
-	/**
-	* @deprecated As of 7.0.0, replaced by {@link #hasAncestor}
-	*/
 	@Override
 	public boolean isChild(long groupId) {
 		return _group.isChild(groupId);
