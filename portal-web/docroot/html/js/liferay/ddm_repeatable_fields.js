@@ -89,10 +89,6 @@ AUI.add(
 										}
 									}
 									else if (event.type === 'liferay-ddm-repeatable-fields:remove') {
-										if(validatorRules[fieldInputName] == null) {
-											fieldInputName = fieldInputName + "File";
-										}
-										
 										delete validatorRules[fieldInputName];
 
 										var validatorField = liferayForm.formValidator.getField(fieldInputName);
