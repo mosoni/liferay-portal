@@ -1,7 +1,7 @@
 <#include "../init.ftl">
 
 <@aui["field-wrapper"] data=data>
-	<@aui.input cssClass=cssClass helpMessage=escape(fieldStructure.tip) label=escape(label) name="${namespacedFieldName}File" type="file">
+	<@aui.input cssClass=cssClass helpMessage=escape(fieldStructure.tip) label=escape(label) name="${namespacedFieldName}" type="file">
 		<@aui.validator name="acceptFiles">'.gif,.jpeg,.jpg,.png'</@aui.validator>
 
 		<#if required && !(fields??)>
@@ -59,7 +59,7 @@
 			var disabled = true;
 
 			var imageAltInputNode = A.one('#${portletNamespace}${namespacedFieldName}Alt');
-			var imageFileInputNode = A.one('#${portletNamespace}${namespacedFieldName}File');
+			var imageFileInputNode = A.one('#${portletNamespace}${namespacedFieldName}');
 			var imageURLInputNode = A.one('#${portletNamespace}${namespacedFieldName}URL');
 
 			if (imageFileInputNode.get('disabled')) {

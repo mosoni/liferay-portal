@@ -558,7 +558,7 @@ public class DDMImpl implements DDM {
 			UploadRequest uploadRequest, String fieldNameValue)
 		throws Exception {
 
-		File file = uploadRequest.getFile(fieldNameValue + "File");
+		File file = uploadRequest.getFile(fieldNameValue);
 
 		byte[] bytes = FileUtil.getBytes(file);
 
