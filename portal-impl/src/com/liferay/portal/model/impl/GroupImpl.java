@@ -591,16 +591,7 @@ public class GroupImpl extends GroupBaseImpl {
 
 	@Override
 	public boolean isChild(long groupId) {
-		Group group = null;
-
-		if (isStagingGroup()) {
-			group = getLiveGroup();
-		}
-		else {
-			group = this;
-		}
-
-		String treePath = group.getTreePath();
+		String treePath = getTreePath();
 
 		if (treePath.contains(StringPool.SLASH + groupId + StringPool.SLASH)) {
 			return true;
