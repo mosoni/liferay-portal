@@ -1266,7 +1266,7 @@ public class SeleniumBuilderFileUtil {
 				validateBlockElement(
 					fileName, element, new String[] {"execute", "if"},
 					new String[] {"function", "selenium"}, new String[0],
-					new String[] {"condition"});
+					new String[] {"condition", "contains"});
 			}
 			else {
 				throwValidationException(1002, fileName, element, elementName);
@@ -1317,6 +1317,26 @@ public class SeleniumBuilderFileUtil {
 			else if (elementName.equals("contains")) {
 				validateSimpleElement(
 					fileName, element, new String[] {"string", "substring"});
+
+				if (fileName.endsWith(".function")) {
+					Pattern pattern = Pattern.compile(
+						"\\$\\{(locator|value)[0-9]+\\}");
+
+					List<Attribute> attributes = element.attributes();
+
+					for (Attribute attribute : attributes) {
+						String attributeValue = attribute.getValue();
+
+						Matcher matcher = pattern.matcher(attributeValue);
+
+						if (attributeValue.contains("${") &&
+							attributeValue.contains("}") && !matcher.find()) {
+
+							throwValidationException(
+								1006, fileName, element, attribute.getName());
+						}
+					}
+				}
 			}
 			else if (elementName.equals("else")) {
 				if (ifElementName.equals("while")) {
