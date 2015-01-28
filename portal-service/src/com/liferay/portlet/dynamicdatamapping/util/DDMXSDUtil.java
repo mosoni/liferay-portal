@@ -114,14 +114,6 @@ public class DDMXSDUtil {
 			readOnly, locale);
 	}
 
-	public static String getHTML(
-			PageContext pageContext, String xml, String portletNamespace,
-			Locale locale)
-		throws Exception {
-
-		return getDDMXSD().getHTML(pageContext, xml, portletNamespace, locale);
-	}
-
 	public static JSONArray getJSONArray(DDMStructure structure, String xsd)
 		throws PortalException, SystemException {
 

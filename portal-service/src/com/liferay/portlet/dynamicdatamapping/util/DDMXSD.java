@@ -80,11 +80,6 @@ public interface DDMXSD {
 			boolean readOnly, Locale locale)
 		throws Exception;
 
-	public String getHTML(
-			PageContext pageContext, String xml, String portletNamespace,
-			Locale locale)
-		throws Exception;
-
 	public JSONArray getJSONArray(DDMStructure structure, String xsd)
 		throws PortalException, SystemException;
 
