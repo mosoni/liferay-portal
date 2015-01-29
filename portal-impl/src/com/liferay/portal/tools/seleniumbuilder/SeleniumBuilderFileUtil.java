@@ -1319,18 +1319,19 @@ public class SeleniumBuilderFileUtil {
 					fileName, element, new String[] {"string", "substring"});
 
 				if (fileName.endsWith(".function")) {
-					Pattern pattern = Pattern.compile(
-						"\\$\\{(locator|value)[0-9]+\\}");
-
 					List<Attribute> attributes = element.attributes();
 
 					for (Attribute attribute : attributes) {
 						String attributeValue = attribute.getValue();
 
-						Matcher matcher = pattern.matcher(attributeValue);
+						Matcher varElementMatcher = _varElementPattern.matcher(
+							attributeValue);
 
-						if (attributeValue.contains("${") &&
-							attributeValue.contains("}") && !matcher.find()) {
+						Matcher varElementFunctionMatcher =
+							_varElementFunctionPattern.matcher(attributeValue);
+
+						if (varElementMatcher.find() &&
+							!varElementFunctionMatcher.find()) {
 
 							throwValidationException(
 								1006, fileName, element, attribute.getName());
@@ -2083,6 +2084,11 @@ public class SeleniumBuilderFileUtil {
 		});
 	private static List<String> _testcaseAvailablePropertyNames;
 	private static List<String> _testrayAvailableComponentNames;
+
+	private final Pattern _varElementFunctionPattern = Pattern.compile(
+		"\\$\\{(locator|value)[0-9]+\\}");
+	private final Pattern _varElementPattern = Pattern.compile(
+		"\\$\\{([^\\}]*?)\\}");
 
 	private String _baseDirName;
 
