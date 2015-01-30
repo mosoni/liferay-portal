@@ -1,4 +1,4 @@
-<definition default="assertText">
+<definition default="assertTextEquals">
 	<command name="assertPartialText">
 		<execute selenium="waitForVisible" />
 
@@ -21,6 +21,18 @@
 		<execute selenium="assertJavaScriptErrors" />
 
 		<execute selenium="assertLiferayErrors" />
+	</command>
+
+	<command name="assertTextEquals">
+		<if>
+			<contains string="${locator1}" substring="/input" />
+			<then>
+				<execute function="AssertTextEquals#assertValue" />
+			</then>
+			<else>
+				<execute function="AssertTextEquals#assertText" />
+			</else>
+		</if>
 	</command>
 
 	<command name="assertTextWaitForCKEditor">
