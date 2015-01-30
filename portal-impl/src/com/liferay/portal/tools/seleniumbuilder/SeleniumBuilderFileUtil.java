@@ -2085,11 +2085,10 @@ public class SeleniumBuilderFileUtil {
 	private static List<String> _testcaseAvailablePropertyNames;
 	private static List<String> _testrayAvailableComponentNames;
 
+	private String _baseDirName;
 	private final Pattern _varElementFunctionPattern = Pattern.compile(
 		"\\$\\{(locator|value)[0-9]+\\}");
 	private final Pattern _varElementPattern = Pattern.compile(
 		"\\$\\{([^\\}]*?)\\}");
-
-	private String _baseDirName;
 
 }
