@@ -1240,7 +1240,7 @@
 		<execute macro="Page#openURL" />
 
 		<if>
-			<condition function="IsElementPresent#isElementPresent" locator1="Dockbar#USER_NAME" />
+			<condition function="IsElementPresent" locator1="Dockbar#USER_NAME" />
 			<then>
 				<execute macro="User#logoutPG" />
 				<execute macro="User#loginPG" />
@@ -1275,7 +1275,7 @@
 		<if>
 			<isset var="nodePort" />
 			<then>
-				<execute function="Open#open" locator1="http://localhost:${nodePort}" />
+				<execute function="Open" locator1="http://localhost:${nodePort}" />
 			</then>
 			<else>
 				<execute macro="Page#openURL" />
@@ -1285,40 +1285,40 @@
 		<if>
 			<equals arg1="${authenticationMethod}" arg2="By Screen Name" />
 			<then>
-				<execute function="Type#type" locator1="PGLogin#SCREEN_NAME_FIELD" value1="${userScreenName}" />
+				<execute function="Type" locator1="PGLogin#SCREEN_NAME_FIELD" value1="${userScreenName}" />
 			</then>
 			<else>
-				<execute function="Type#type" locator1="PGLogin#EMAIL_ADDRESS_FIELD" value1="${userEmailAddress}" />
+				<execute function="Type" locator1="PGLogin#EMAIL_ADDRESS_FIELD" value1="${userEmailAddress}" />
 			</else>
 		</if>
 
-		<execute function="Type#type" locator1="PGLogin#PASSWORD_FIELD" value1="${password}" />
+		<execute function="Type" locator1="PGLogin#PASSWORD_FIELD" value1="${password}" />
 
 		<take-screenshot />
 
-		<execute function="Click#click" locator1="PGLogin#SIGN_IN_BUTTON" value1="Sign In" />
+		<execute function="Click" locator1="PGLogin#SIGN_IN_BUTTON" value1="Sign In" />
 
 		<if>
-			<condition function="IsElementPresent#isElementPresent" locator1="PGLoginTermsofservice#I_AGREE_BUTTON" value1="I Agree" />
+			<condition function="IsElementPresent" locator1="PGLoginTermsofservice#I_AGREE_BUTTON" value1="I Agree" />
 			<then>
-				<execute function="AssertClick#assertTextClick" locator1="PGLoginTermsofservice#I_AGREE_BUTTON" value1="I Agree" />
+				<execute function="AssertClick" locator1="PGLoginTermsofservice#I_AGREE_BUTTON" value1="I Agree" />
 			</then>
 		</if>
 
 		<if>
-			<condition function="IsElementPresent#isElementPresent" locator1="PGLoginNewpassword#PASSWORD_FIELD" />
+			<condition function="IsElementPresent" locator1="PGLoginNewpassword#PASSWORD_FIELD" />
 			<then>
-				<execute function="Type#type" locator1="PGLoginNewpassword#PASSWORD_FIELD" value1="test" />
-				<execute function="Type#type" locator1="PGLoginNewpassword#ENTER_AGAIN_FIELD" value1="test" />
-				<execute function="AssertClick#assertTextClick" locator1="PGLoginNewpassword#SAVE_BUTTON" value1="Save" />
+				<execute function="Type" locator1="PGLoginNewpassword#PASSWORD_FIELD" value1="test" />
+				<execute function="Type" locator1="PGLoginNewpassword#ENTER_AGAIN_FIELD" value1="test" />
+				<execute function="AssertClick" locator1="PGLoginNewpassword#SAVE_BUTTON" value1="Save" />
 			</then>
 		</if>
 
 		<if>
-			<condition function="IsElementPresent#isElementPresent" locator1="PGLoginPasswordreminder#ANSWER_FIELD" />
+			<condition function="IsElementPresent" locator1="PGLoginPasswordreminder#ANSWER_FIELD" />
 			<then>
-				<execute function="Type#type" locator1="PGLoginPasswordreminder#ANSWER_FIELD" value1="test" />
-				<execute function="AssertClick#assertTextClick" locator1="PGLoginPasswordreminder#SAVE_BUTTON" value1="Save" />
+				<execute function="Type" locator1="PGLoginPasswordreminder#ANSWER_FIELD" value1="test" />
+				<execute function="AssertClick" locator1="PGLoginPasswordreminder#SAVE_BUTTON" value1="Save" />
 			</then>
 		</if>
 	</command>
@@ -1365,7 +1365,7 @@
 		<if>
 			<isset var="nodePort" />
 			<then>
-				<execute function="Open#open" locator1="http://localhost:${nodePort}" />
+				<execute function="Open" locator1="http://localhost:${nodePort}" />
 			</then>
 			<else>
 				<execute macro="Page#openURL" />
@@ -1373,10 +1373,10 @@
 		</if>
 
 		<if>
-			<condition function="IsElementPresent#isElementPresent" locator1="Dockbar#USER_NAME" />
+			<condition function="IsElementPresent" locator1="Dockbar#USER_NAME" />
 			<then>
-				<execute function="Click#click" locator1="Dockbar#USER_NAME" />
-				<execute function="Click#click" locator1="Dockbar#USER_SIGN_OUT" />
+				<execute function="Click" locator1="Dockbar#USER_NAME" />
+				<execute function="Click" locator1="Dockbar#USER_SIGN_OUT" />
 			</then>
 		</if>
 	</command>
