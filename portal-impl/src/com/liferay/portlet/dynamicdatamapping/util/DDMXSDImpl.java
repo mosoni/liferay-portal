@@ -340,6 +340,15 @@ public class DDMXSDImpl implements DDMXSD {
 	}
 
 	@Override
+	public String getHTML(
+			PageContext pageContext, String xml, String portletNamespace,
+			Locale locale)
+		throws Exception {
+
+		return getHTML(pageContext, xml, null, locale);
+	}
+
+	@Override
 	public JSONArray getJSONArray(DDMStructure structure, String xsd)
 		throws PortalException, SystemException {
 
