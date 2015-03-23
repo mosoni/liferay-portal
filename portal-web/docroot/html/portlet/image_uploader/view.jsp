@@ -24,7 +24,7 @@ String randomNamespace = ParamUtil.getString(request, "randomNamespace");
 
 long uploaderMaxSize = PrefsPropsUtil.getLong(PropsKeys.IMAGE_UPLOADER_MAX_SIZE);
 
-if (maxFileSize > uploaderMaxSize) {
+if ((uploaderMaxSize > 0) && (maxFileSize > uploaderMaxSize)) {
 	maxFileSize = uploaderMaxSize;
 }
 %>
