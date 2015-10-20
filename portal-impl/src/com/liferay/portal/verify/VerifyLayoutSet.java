@@ -50,18 +50,16 @@ public class VerifyLayoutSet extends VerifyProcess {
 
 				@Override
 				public void addCriteria(DynamicQuery dynamicQuery) {
-					Property layoutSetPrototypeUuidProperty =
+					Property property =
 						PropertyFactoryUtil.forName("layoutSetPrototypeUuid");
 
 					dynamicQuery.add(
 						RestrictionsFactoryUtil.and(
-							layoutSetPrototypeUuidProperty.isNotNull(),
-							layoutSetPrototypeUuidProperty.ne(
-								StringPool.BLANK)));
+							property.isNotNull(),
+							property.ne(StringPool.BLANK)));
 				}
 
 			});
-
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod() {
 
@@ -71,23 +69,23 @@ public class VerifyLayoutSet extends VerifyProcess {
 
 					LayoutSet layoutSet = (LayoutSet)object;
 
-					Group layoutSetGroup = layoutSet.getGroup();
+					Group group = layoutSet.getGroup();
 
 					boolean updateLayoutSet = false;
 
-					if (layoutSetGroup.isSite()) {
+					if (group.isSite()) {
 						List<Layout> layouts =
 							LayoutLocalServiceUtil.getLayouts(
-								layoutSetGroup.getGroupId(),
+								group.getGroupId(),
 								layoutSet.isPrivateLayout());
 
 						if (layouts.isEmpty() &&
-							layoutSetGroup.isOrganization()) {
+							group.isOrganization()) {
 
 							updateLayoutSet = true;
 						}
 					}
-					else if (layoutSetGroup.isOrganization()) {
+					else if (group.isOrganization()) {
 						updateLayoutSet = true;
 					}
 
@@ -101,7 +99,7 @@ public class VerifyLayoutSet extends VerifyProcess {
 						LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
 
 						GroupLocalServiceUtil.updateSite(
-							layoutSetGroup.getGroupId(), false);
+							group.getGroupId(), false);
 					}
 				}
 
