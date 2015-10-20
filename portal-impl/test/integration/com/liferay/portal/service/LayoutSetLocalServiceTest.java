@@ -73,20 +73,19 @@ public class LayoutSetLocalServiceTest {
 
 		GroupLocalServiceUtil.deleteGroup(group);
 
+		LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+			_organization.getGroupId(), true);
 		LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 			_organization.getGroupId(), false);
 
-		LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-			_organization.getGroupId(), true);
-
-		Assert.assertEquals(
-			StringPool.BLANK, publicLayoutSet.getLayoutSetPrototypeUuid());
 		Assert.assertEquals(
 			StringPool.BLANK, privateLayoutSet.getLayoutSetPrototypeUuid());
-		Assert.assertFalse(publicLayoutSet.getLayoutSetPrototypeLinkEnabled());
+		Assert.assertEquals(
+			StringPool.BLANK, publicLayoutSet.getLayoutSetPrototypeUuid());
 		Assert.assertFalse(privateLayoutSet.getLayoutSetPrototypeLinkEnabled());
-		Assert.assertEquals(0, _organization.getPublicLayoutsPageCount());
+		Assert.assertFalse(publicLayoutSet.getLayoutSetPrototypeLinkEnabled());
 		Assert.assertEquals(0, _organization.getPrivateLayoutsPageCount());
+		Assert.assertEquals(0, _organization.getPublicLayoutsPageCount());
 		Assert.assertFalse(group.getSite());
 	}
 
