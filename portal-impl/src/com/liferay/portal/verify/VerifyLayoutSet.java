@@ -90,11 +90,11 @@ public class VerifyLayoutSet extends VerifyProcess {
 					}
 
 					if (updateLayoutSet) {
-						layoutSet.setLayoutSetPrototypeLinkEnabled(
-							Boolean.FALSE);
-						layoutSet.setLayoutSetPrototypeUuid(StringPool.BLANK);
 						layoutSet.setModifiedDate(new Date());
 						layoutSet.setPageCount(0);
+						layoutSet.setLayoutSetPrototypeUuid(StringPool.BLANK);
+						layoutSet.setLayoutSetPrototypeLinkEnabled(
+							Boolean.FALSE);
 
 						LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
 
